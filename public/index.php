@@ -48,6 +48,7 @@ $extendedPdo = new ExtendedPdo(
 // dispatch based on the core routes
 $dispatcher = new Dispatcher;
 
+$dispatcher->setObjectParam('object');
 $dispatcher->setMethodParam('action');
 
 $dispatcher->setObject('comment', new CommentFactory($extendedPdo));

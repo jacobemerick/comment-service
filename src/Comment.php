@@ -34,8 +34,29 @@ class Comment
      */
     public function read()
     {
-        // do a query or whatever
-        return [];
+        $query = '
+            SELECT
+                commenter.name,
+                commenter.url,
+                comment_body.body
+            FROM
+                comment
+                    INNER JOIN
+                        commenter ON
+                            commenter.id = comment.commenter
+                    INNER JOIN
+                        comment_body ON
+                            comment_body.id = comment.comment_body
+            WHERE
+                comment.id = :comment_id
+            LIMIT 1';
+
+        $params = [
+            'comment_id' => $this->id,
+        ];
+
+        $result = $this->extendedPdo->fetchOne($query, $params);
+        return $result;
     }
 
 }

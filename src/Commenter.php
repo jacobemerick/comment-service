@@ -34,8 +34,22 @@ class Commenter
      */
     public function read()
     {
-        // do a query or whatever
-        return [];
+         $query = '
+            SELECT
+                commenter.name,
+                commenter.url
+            FROM
+                commenter
+            WHERE
+                commenter.id = :commenter_id
+            LIMIT 1';
+
+        $params = [
+            'commenter_id' => $this->id,
+        ];
+
+        $result = $this->extendedPdo->fetchOne($query, $params);
+        return $result;
     }
 
 }
