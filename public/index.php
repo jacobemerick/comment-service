@@ -3,7 +3,13 @@
 require_once __DIR__ . '/../vendor/autoload.php';
 
 use Aura\Router\RouterFactory;
+use Aura\Dispatcher\Dispatcher;
+use Aura\Sql\ExtendedPdo;
 
+use Jacobemerick\CommentService\CommentFactory;
+use Jacobemerick\CommentService\CommenterFactory;
+
+// define the routes
 $router_factory = new RouterFactory;
 $router = $router_factory->newInstance();
 
@@ -28,20 +34,24 @@ $router->attach('commenter', '/commenter', function($router) {
 
 });
 
+// parse path and pass to router
 $path = parse_url($_SERVER['REQUEST_URL'], PHP_URL_PATH);
 $route = $router->match($path, $_SERVER);
 
+// define the database connection
+$extendedPdo = new ExtendedPdo(
+    'mysql:host=localhost;dbname=test',
+    'username',
+    'password'
+);
 
-use Aura\Dispatcher\Dispatcher;
-use Jacobemerick\CommentService\Comment;
-use Jacobemerick\CommentService\Commenter;
-
+// dispatch based on the core routes
 $dispatcher = new Dispatcher;
 
 $dispatcher->setMethodParam('action');
 
-$dispatcher->setObject('comment', new Comment);
-$dispatcher->setObject('commenter', new Commenter);
+$dispatcher->setObject('comment', new CommentFactory($extendedPdo));
+$dispatcher->setObject('commenter', new CommenterFactory($extendedPdo));
 
 $dispatcher->__invoke($route);
 
