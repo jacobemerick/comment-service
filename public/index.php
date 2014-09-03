@@ -33,6 +33,8 @@ $route = $router->match($path, $_SERVER);
 
 
 use Aura\Dispatcher\Dispatcher;
+use Jacobemerick\CommentService\Comment;
+use Jacobemerick\CommentService\Commenter;
 
 $dispatcher = new Dispatcher;
 

@@ -10,8 +10,9 @@
     ],
     "require": {
         "php": ">=5.4",
+        "aura/dispatcher": "2.0.*",
         "aura/router": "2.0.*",
-        "aura/dispatcher": "2.0.*"
+        "aura/sql": "2.0.*"
     },
     "autoload": {
         "psr-4": {
