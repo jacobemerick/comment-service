@@ -10,19 +10,14 @@ class Commenter
     // holder for instance of Aura\Sql\ExtendedPdo
     private $extendedPdo;
 
-    // holder for commenter id (primary key)
-    private $id;
-
     /**
      * basic construct
      *
      * @param   object   $extendedPdo  instance of Aura\Sql\ExtendedPdo
-     * @param   integer  $id           primary key of desired commenter
      */
-    public function __construct(ExtendedPdo $extendedPdo, $id)
+    public function __construct(ExtendedPdo $extendedPdo)
     {
         $this->extendedPdo = $extendedPdo;
-        $this->id = $id;
     }
 
     /**
@@ -30,9 +25,10 @@ class Commenter
      * returns a basic commenter object based on id
      * on failure, returns an empty array
      *
-     * @return  array  representation of the Commenter object
+     * @param   integer  $id  primary key to fetch on
+     * @return  array         representation of the Commenter object
      */
-    public function read()
+    public function read($id)
     {
          $query = '
             SELECT
@@ -45,12 +41,78 @@ class Commenter
             LIMIT 1';
 
         $params = [
-            'commenter_id' => $this->id,
+            'commenter_id' => $id,
         ];
 
         $result = $this->extendedPdo->fetchOne($query, $params);
         return $result;
     }
+
+    /**
+     * create request for commenter
+     * on fail, returns null
+     *
+     * @param   array    $data  data passed in from front end
+     * @return  integer         primary key that represents the commenter entry
+     */
+    public function create(array $data)
+    {
+        $query = '
+            INSERT INTO
+                commenter (name, email, url, `key`)
+            VALUES
+                (:name, :email, :url, :key)';
+
+        $params = [
+            'name'   => $data['commenter']['name'],
+            'email'  => $data['commenter']['email'],
+            'url'    => $data['commenter']['url'],
+            'key'    => $data['commenter']['key'],
+        ];
+
+        try {
+            $this->extendedPdo->perform($query, $params);
+        } catch (PDOException $e) {
+            var_dump($e);
+        }
+
+        return $this->extendedPdo->insert_id;
+    }
+
+    /**
+     * more complex fetch to return a commenter by significant params
+     *
+     * @param   array   $data  list of params passed in by frontend
+     * @return  object         instance of Jacobemerick\CommentService\Commenter
+     */
+    public function getByParams(array $data)
+    {
+        $query = '
+            SELECT
+                id
+            FROM
+                commenter
+            WHERE
+                commenter.name = :name &&
+                commenter.email = :email &&
+                commenter.url = :url
+            LIMIT 1';
+
+        $params = [
+            'name'   => $data['commenter']['name'],
+            'email'  => $data['commenter']['email'],
+            'url'    => $data['commenter']['url'],
+        ];
+
+        $id = $this->extendedPdo->fetchValue($query, $params);
+        if (!$id) {
+            return;
+        }
+
+        return new Commenter($this->extendedPdo, $id);
+    }
+
+
 
 }
 

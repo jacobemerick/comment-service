@@ -10,19 +10,14 @@ class Comment
     // holder for instance of Aura\Sql\ExtendedPdo
     private $extendedPdo;
 
-    // holder for comment id (primary key)
-    private $id;
-
     /**
      * basic construct
      *
      * @param   object   $extendedPdo  instance of Aura\Sql\ExtendedPdo
-     * @param   integer  $id           primary key of desired comment
      */
-    public function __construct(ExtendedPdo $extendedPdo, $id)
+    public function __construct(ExtendedPdo $extendedPdo)
     {
         $this->extendedPdo = $extendedPdo;
-        $this->id = $id;
     }
 
     /**
@@ -30,7 +25,8 @@ class Comment
      * returns a basic comment object based on id
      * on failure, returns an empty array
      *
-     * @return  array  representation of the Comment object
+     * @param   integer  $id  primary key to fetch comment on
+     * @return  array         representation of the Comment object
      */
     public function read()
     {
@@ -52,11 +48,32 @@ class Comment
             LIMIT 1';
 
         $params = [
-            'comment_id' => $this->id,
+            'comment_id' => $id,
         ];
 
         $result = $this->extendedPdo->fetchOne($query, $params);
         return $result;
+    }
+
+    /**
+     * write request for comment
+     * fairly complex - hits multiple areas and leans on Commenter object
+     * leans on transactions to make sure everything sparkles
+     *
+     * @param
+     * @return  boolean  whether or not the write request was successful
+     */
+    public function create(array $data, Commenter $commenter)
+    {
+        $commenter_id = $commenter->getByParams($data);
+        if (is_null($commenter_id)) {
+            $commenter_id = $commenter->create($data);
+        }
+
+        $query = 'INSERT INTO comment_body (body) VALUES (:comment_body)';
+        $params = ['comment_body' => $data['body']];
+        $this->extendedPdo->perform($query, $params);
+        $comment_body_id = $this->extendedPdo->insert_id;
     }
 
 }

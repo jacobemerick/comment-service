@@ -6,8 +6,8 @@ use Aura\Router\RouterFactory;
 use Aura\Dispatcher\Dispatcher;
 use Aura\Sql\ExtendedPdo;
 
-use Jacobemerick\CommentService\CommentFactory;
-use Jacobemerick\CommentService\CommenterFactory;
+use Jacobemerick\CommentService\Comment;
+use Jacobemerick\CommentService\Commenter;
 
 // define the routes
 $router_factory = new RouterFactory;
@@ -15,7 +15,7 @@ $router = $router_factory->newInstance();
 
 $router->attach('comment', '/comment', function($router) {
 
-    $router->addPost('create', '/');
+    $router->addGet('create', '');
 
     $router->addGet('view', '/{id}')
         ->addTokens([
@@ -53,15 +53,19 @@ $extendedPdo = new ExtendedPdo(
     'password'
 );
 
-// define the main factories for the object classes
-$commentFactory = new CommentFactory($extendedPdo);
+// define the main objects for the service
+$comment = new Comment($extendedPdo);
+$commenter = new Commenter($extendedPdo);
 
 // dispatch based on the core routes
 $dispatcher = new Dispatcher;
 $dispatcher->setObjectParam('action');
 
-$dispatcher->setObject('comment.view', function($id) use ($commentFactory) {
-    $comment = $commentFactory->getCommentByID($id);
+$dispatcher->setObject('comment.create', function() use ($comment, $commenter) {
+    return $comment->create($_POST, $commenter);
+});
+
+$dispatcher->setObject('comment.view', function($id) use ($comment) {
     return $comment->read($id);
 });
 
