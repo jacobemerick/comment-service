@@ -35,7 +35,7 @@ $router->attach('commenter', '/commenter', function($router) {
 });
 
 // parse path and pass to router
-$path = parse_url($_SERVER['REQUEST_URL'], PHP_URL_PATH);
+$path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $route = $router->match($path, $_SERVER);
 
 // define the database connection
@@ -48,11 +48,10 @@ $extendedPdo = new ExtendedPdo(
 // dispatch based on the core routes
 $dispatcher = new Dispatcher;
 
-$dispatcher->setObjectParam('object');
 $dispatcher->setMethodParam('action');
 
 $dispatcher->setObject('comment', new CommentFactory($extendedPdo));
 $dispatcher->setObject('commenter', new CommenterFactory($extendedPdo));
 
-$dispatcher->__invoke($route);
+$dispatcher->__invoke($route->params);
 
