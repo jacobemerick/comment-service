@@ -16,7 +16,15 @@ $router = $router_factory->newInstance();
 $router->attach('comment', '/comment', function($router) {
 
     $router->addPost('create', '/');
-    $router->addGet('view', '/{id}');
+
+    $router->addGet('view', '/{id}')
+        ->addTokens([
+            'id' => '\d+',
+        ])
+        ->addAccept([
+            'application/json',
+        ]);
+
     $router->addPatch('update', '/{id}');
     $router->addPut('replace', '/{id}');
     $router->addDelete('delete', '/{id}');
@@ -45,13 +53,18 @@ $extendedPdo = new ExtendedPdo(
     'password'
 );
 
+// define the main factories for the object classes
+$commentFactory = new CommentFactory($extendedPdo);
+
 // dispatch based on the core routes
 $dispatcher = new Dispatcher;
+$dispatcher->setObjectParam('action');
 
-$dispatcher->setMethodParam('action');
+$dispatcher->setObject('comment.view', function($id) use ($commentFactory) {
+    $comment = $commentFactory->getCommentByID($id);
+    return $comment->read($id);
+});
 
-$dispatcher->setObject('comment', new CommentFactory($extendedPdo));
-$dispatcher->setObject('commenter', new CommenterFactory($extendedPdo));
-
-$dispatcher->__invoke($route->params);
+$result = $dispatcher->__invoke($route->params);
+var_dump($result);
 

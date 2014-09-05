@@ -21,15 +21,13 @@ class CommentFactory
     }
 
     /**
-     * read request for a comment
-     * returns a basic comment object based on id
+     * basic fetch to return a comment by id
      *
-     * @return  array  representation of the Comment object
+     * @return  object  instance of Jacobemerick\CommentService\Comment
      */
-    public function read($id)
+    public function getCommentByID($id)
     {
-        $comment = new Comment($this->extendedPdo, $id);
-        return $comment->read();
+        return new Comment($this->extendedPdo, $id);
     }
 
 }
