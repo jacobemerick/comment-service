@@ -70,10 +70,33 @@ class Comment
             $commenter_id = $commenter->create($data);
         }
 
-        $query = 'INSERT INTO comment_body (body) VALUES (:comment_body)';
-        $params = ['comment_body' => $data['body']];
+        $query = '
+            INSERT INTO
+                comment_body (body)
+            VALUES
+                (:comment_body)';
+
+        $params = [
+            'comment_body' => $data['body'],
+        ];
+
         $this->extendedPdo->perform($query, $params);
-        $comment_body_id = $this->extendedPdo->insert_id;
+        $comment_body_id = $this->extendedPdo->lastInsertId();
+
+        $query = '
+            INSERT INTO
+                comment (commenter, comment_body)
+            VALUES
+                (:commenter, :comment_body)';
+
+        $params = [
+            'commenter'     => $commenter_id,
+            'comment_body'  => $comment_body_id,
+        ];
+
+        $this->extendedPdo->perform($query, $params);
+
+        return true;
     }
 
 }

@@ -76,7 +76,7 @@ class Commenter
             var_dump($e);
         }
 
-        return $this->extendedPdo->insert_id;
+        return $this->extendedPdo->lastInsertId();
     }
 
     /**
@@ -109,7 +109,7 @@ class Commenter
             return;
         }
 
-        return new Commenter($this->extendedPdo, $id);
+        return $id;
     }
 
 
