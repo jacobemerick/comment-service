@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "7eabb8f32a8670f02589a51ceb5f1248",
+    "hash": "9207ba5e03d9af8ba80c6901078312c0",
     "packages": [
         {
             "name": "aura/dispatcher",
@@ -55,6 +55,62 @@
                 "factory"
             ],
             "time": "2014-08-28 20:54:38"
+        },
+        {
+            "name": "aura/filter",
+            "version": "dev-develop-2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/auraphp/Aura.Filter.git",
+                "reference": "88edebea38cd652c1b2ab7ed053aae2c2723eda3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/auraphp/Aura.Filter/zipball/88edebea38cd652c1b2ab7ed053aae2c2723eda3",
+                "reference": "88edebea38cd652c1b2ab7ed053aae2c2723eda3",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "extra": {
+                "aura": {
+                    "type": "library",
+                    "config": {
+                        "common": "Aura\\Filter\\_Config\\Common"
+                    }
+                },
+                "branch-alias": {
+                    "dev-develop-2": "2.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Aura\\Filter\\_Config\\": "config/",
+                    "Aura\\Filter\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-2-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Aura Contributors",
+                    "homepage": "https://github.com/auraphp/Aura.Filter/contributors"
+                }
+            ],
+            "description": "Provides validators and sanitizers for user data.",
+            "homepage": "http://auraphp.github.com/Aura.Filter",
+            "keywords": [
+                "filter",
+                "sanitize",
+                "validate",
+                "validation",
+                "validator"
+            ],
+            "time": "2014-09-05 16:12:02"
         },
         {
             "name": "aura/router",
@@ -171,9 +227,9 @@
 
     ],
     "minimum-stability": "stable",
-    "stability-flags": [
-
-    ],
+    "stability-flags": {
+        "aura/filter": 20
+    },
     "prefer-stable": false,
     "platform": {
         "php": ">=5.4"

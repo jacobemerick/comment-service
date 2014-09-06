@@ -12,7 +12,8 @@
         "php": ">=5.4",
         "aura/dispatcher": "2.0.*",
         "aura/router": "2.0.*",
-        "aura/sql": "2.0.*"
+        "aura/sql": "2.0.*",
+        "aura/filter": "dev-develop-2"
     },
     "autoload": {
         "psr-4": {
