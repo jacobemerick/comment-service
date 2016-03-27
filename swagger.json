@@ -1,0 +1,231 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "0.0.0",
+        "title": "Comment Service"
+    },
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/comments": {
+            "get": {
+                "description": "Gets Comment resources.",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Results page to return",
+                        "type": "integer"
+                    },
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "description": "Results per response",
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of Comment resources.",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Comment"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Create a new Comment resource.",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created Comment resource.",
+                        "schema": {
+                            "$ref": "#/definitions/Comment"
+                        }
+                    },
+                    "default": {
+                        "description": "Error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/comments/{comment_id}": {
+            "parameters": [
+                {
+                    "name": "comment_id",
+                    "in": "path",
+                    "description": "Comment identifier.",
+                    "required": true,
+                    "type": "string"
+                }
+            ],
+            "get": {
+                "description": "Gets a single Comment resource.",
+                "responses": {
+                    "200": {
+                        "description": "Single Comment resource.",
+                        "schema": {
+                            "$ref": "#/definitions/Comment"
+                        }
+                    },
+                    "default": {
+                        "description": "Error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "description": "Updates a single Comment resource.",
+                "responses": {
+                    "200": {
+                        "description": "Updated Comment resource.",
+                        "schema": {
+                            "$ref": "#/definitions/Comment"
+                        }
+                    },
+                    "default": {
+                        "description": "Error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "Replaces a single Comment resource.",
+                "responses": {
+                    "200": {
+                        "description": "Updated Comment resource.",
+                        "schema": {
+                            "$ref": "#/definitions/Comment"
+                        }
+                    },
+                    "default": {
+                        "description": "Error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Removes a single Comment resource.",
+                "responses": {
+                    "204": {
+                        "description": "Successfully deleted Comment."
+                    },
+                    "default": {
+                        "description": "Error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/commenter": {
+            "get": {
+                "description": "Gets Commenter resources.",
+                "responses": {
+                    "200": {
+                        "description": "List of Commenter resources.",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Commenter"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Creates a new Commenter resource.",
+                "responses": {
+                    "201": {
+                        "description": "Created Commenter resource.",
+                        "schema": {
+                            "$ref": "#/definitions/Commenter"
+                        }
+                    },
+                    "default": {
+                        "description": "Error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/commenter/{commenter_id}": {
+            "parameters": [
+                {
+                    "name": "commenter_id",
+                    "in": "path",
+                    "description": "Commenter identifier.",
+                    "required": true,
+                    "type": "string"
+                }
+            ],
+            "get": {
+                "description": "Gets a Commenter resource.",
+                "responses": {
+                    "200": {
+                        "description": "Single Commenter resources.",
+                        "schema": {
+                            "$ref": "#/definitions/Commenter"
+                        }
+                    },
+                    "default": {
+                        "description": "Error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Comment": {
+            "type": "object"
+        },
+        "Commenter": {
+            "type": "object"
+        },
+        "Error": {
+            "type": "object"
+        }
+    }
+}
