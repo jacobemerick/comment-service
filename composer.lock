@@ -1,23 +1,24 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "cc46ddf4eb4732bb5124fa4d3ffee618",
+    "hash": "be7abcde269ec9b7cb6db23adb612836",
+    "content-hash": "1686d0d89b0c9c1534c65a721c3a1995",
     "packages": [
         {
             "name": "aura/dispatcher",
-            "version": "2.0.0",
+            "version": "2.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/auraphp/Aura.Dispatcher.git",
-                "reference": "e4d02125a516feb65545dd1c7ff6417733cc9699"
+                "reference": "cd28755a86f7a016a97022d2078e15e743c2a48d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/auraphp/Aura.Dispatcher/zipball/e4d02125a516feb65545dd1c7ff6417733cc9699",
-                "reference": "e4d02125a516feb65545dd1c7ff6417733cc9699",
+                "url": "https://api.github.com/repos/auraphp/Aura.Dispatcher/zipball/cd28755a86f7a016a97022d2078e15e743c2a48d",
+                "reference": "cd28755a86f7a016a97022d2078e15e743c2a48d",
                 "shasum": ""
             },
             "require": {
@@ -54,7 +55,7 @@
                 "dispatcher",
                 "factory"
             ],
-            "time": "2014-08-28 20:54:38"
+            "time": "2015-03-27 19:36:51"
         },
         {
             "name": "aura/filter",
@@ -271,24 +272,243 @@
                 "response"
             ],
             "time": "2014-09-06 23:03:33"
+        },
+        {
+            "name": "jacobemerick/talus",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "../talus",
+                "reference": "59af04f3332c53b56b47c80a01f8ea73b55e8b27"
+            },
+            "require": {
+                "php": ">=5.6.0",
+                "psr/log": "^1.0",
+                "thefrozenfire/swagger": "^2.0",
+                "zendframework/zend-diactoros": "^1.3"
+            },
+            "require-dev": {
+                "codeclimate/php-test-reporter": "dev-master",
+                "phpunit/phpunit": "^5.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Jacobemerick\\Talus\\": "src/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Jacobemerick\\Talus\\": "tests/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "jacobemerick",
+                    "email": "jpemeric@gmail.com"
+                }
+            ],
+            "time": "2016-04-13 04:21:32"
+        },
+        {
+            "name": "psr/http-message",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-fig/http-message.git",
+                "reference": "85d63699f0dbedb190bbd4b0d2b9dc707ea4c298"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-fig/http-message/zipball/85d63699f0dbedb190bbd4b0d2b9dc707ea4c298",
+                "reference": "85d63699f0dbedb190bbd4b0d2b9dc707ea4c298",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Psr\\Http\\Message\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PHP-FIG",
+                    "homepage": "http://www.php-fig.org/"
+                }
+            ],
+            "description": "Common interface for HTTP messages",
+            "keywords": [
+                "http",
+                "http-message",
+                "psr",
+                "psr-7",
+                "request",
+                "response"
+            ],
+            "time": "2015-05-04 20:22:00"
+        },
+        {
+            "name": "psr/log",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-fig/log.git",
+                "reference": "d8e60a5619fff77f9669da8997697443ef1a1d7e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-fig/log/zipball/d8e60a5619fff77f9669da8997697443ef1a1d7e",
+                "reference": "d8e60a5619fff77f9669da8997697443ef1a1d7e",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Psr\\Log\\": "Psr/Log/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PHP-FIG",
+                    "homepage": "http://www.php-fig.org/"
+                }
+            ],
+            "description": "Common interface for logging libraries",
+            "homepage": "https://github.com/php-fig/log",
+            "keywords": [
+                "log",
+                "psr",
+                "psr-3"
+            ],
+            "time": "2016-01-06 21:40:42"
+        },
+        {
+            "name": "thefrozenfire/swagger",
+            "version": "2.0.x-dev",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/TheFrozenFire/PHP-Swagger-Parser.git",
+                "reference": "e03c90e879db801f6e2902a2e28525b60bd8f219"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/TheFrozenFire/PHP-Swagger-Parser/zipball/e03c90e879db801f6e2902a2e28525b60bd8f219",
+                "reference": "e03c90e879db801f6e2902a2e28525b60bd8f219",
+                "shasum": ""
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~3.7.22",
+                "satooshi/php-coveralls": "~0.6"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Swagger": "src/"
+                },
+                "classmap": [
+                    "tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Justin Martin",
+                    "email": "frozenfire@thefrozenfire.com"
+                }
+            ],
+            "description": "Swagger parser for PHP",
+            "time": "2015-10-02 01:33:18"
+        },
+        {
+            "name": "zendframework/zend-diactoros",
+            "version": "dev-develop",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zendframework/zend-diactoros.git",
+                "reference": "18182f681370cbd23fec64dbec8275a376bf4b66"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zendframework/zend-diactoros/zipball/18182f681370cbd23fec64dbec8275a376bf4b66",
+                "reference": "18182f681370cbd23fec64dbec8275a376bf4b66",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.4 || ^7.0",
+                "psr/http-message": "~1.0"
+            },
+            "provide": {
+                "psr/http-message-implementation": "~1.0.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.6",
+                "squizlabs/php_codesniffer": "^2.3.1"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.3-dev",
+                    "dev-develop": "1.4-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Zend\\Diactoros\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-2-Clause"
+            ],
+            "description": "PSR HTTP Message implementations",
+            "homepage": "https://github.com/zendframework/zend-diactoros",
+            "keywords": [
+                "http",
+                "psr",
+                "psr-7"
+            ],
+            "time": "2016-03-17 18:05:07"
         }
     ],
-    "packages-dev": [
-
-    ],
-    "aliases": [
-
-    ],
-    "minimum-stability": "stable",
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "dev",
     "stability-flags": {
+        "jacobemerick/talus": 20,
         "aura/filter": 20,
         "aura/web": 20
     },
     "prefer-stable": false,
+    "prefer-lowest": false,
     "platform": {
         "php": ">=5.4"
     },
-    "platform-dev": [
-
-    ]
+    "platform-dev": []
 }

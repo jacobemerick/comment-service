@@ -8,8 +8,10 @@
             "name": "Jacob Emerick"
         }
     ],
+    "minimum-stability": "dev",
     "require": {
         "php": ">=5.4",
+        "jacobemerick/talus": "dev-master",
         "aura/dispatcher": "2.0.*",
         "aura/filter": "dev-develop-2",
         "aura/router": "2.0.*",
@@ -20,6 +22,11 @@
         "psr-4": {
             "Jacobemerick\\CommentService\\": "src/"
         }
-    }
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "../talus"
+        }
+    ]
 }
-
