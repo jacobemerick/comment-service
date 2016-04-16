@@ -12,7 +12,9 @@
     ],
     "paths": {
         "/comments": {
+            "x-swagger-router-controller": "Jacobemerick\\CommentService\\Comments",
             "get": {
+                "operationId": "getComments",
                 "description": "Gets Comment resources.",
                 "parameters": [
                     {
@@ -47,6 +49,7 @@
                 }
             },
             "post": {
+                "operationId": "createComment",
                 "description": "Create a new Comment resource.",
                 "parameters": [
                     {
