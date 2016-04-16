@@ -4,282 +4,17 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "be7abcde269ec9b7cb6db23adb612836",
-    "content-hash": "1686d0d89b0c9c1534c65a721c3a1995",
+    "hash": "d0f205d62f87f013e6afe28e0caa81dc",
+    "content-hash": "1b4efbe7d7a0343a1bfdb83d7c36b438",
     "packages": [
-        {
-            "name": "aura/dispatcher",
-            "version": "2.0.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/auraphp/Aura.Dispatcher.git",
-                "reference": "cd28755a86f7a016a97022d2078e15e743c2a48d"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/auraphp/Aura.Dispatcher/zipball/cd28755a86f7a016a97022d2078e15e743c2a48d",
-                "reference": "cd28755a86f7a016a97022d2078e15e743c2a48d",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.4.0"
-            },
-            "type": "library",
-            "extra": {
-                "aura": {
-                    "type": "library"
-                },
-                "branch-alias": {
-                    "dev-develop-2": "2.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Aura\\Dispatcher\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-2-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Aura.Dispatcher Contributors",
-                    "homepage": "https://github.com/auraphp/Aura.Dispatcher/contributors"
-                }
-            ],
-            "description": "Creates objects from a factory and invokes methods using named parameters; also provides a trait for invoking closures and object methods with named parameters.",
-            "homepage": "https://github.com/auraphp/Aura.Dispatcher",
-            "keywords": [
-                "controller",
-                "dispatcher",
-                "factory"
-            ],
-            "time": "2015-03-27 19:36:51"
-        },
-        {
-            "name": "aura/filter",
-            "version": "dev-develop-2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/auraphp/Aura.Filter.git",
-                "reference": "88edebea38cd652c1b2ab7ed053aae2c2723eda3"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/auraphp/Aura.Filter/zipball/88edebea38cd652c1b2ab7ed053aae2c2723eda3",
-                "reference": "88edebea38cd652c1b2ab7ed053aae2c2723eda3",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.4.0"
-            },
-            "type": "library",
-            "extra": {
-                "aura": {
-                    "type": "library",
-                    "config": {
-                        "common": "Aura\\Filter\\_Config\\Common"
-                    }
-                },
-                "branch-alias": {
-                    "dev-develop-2": "2.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Aura\\Filter\\_Config\\": "config/",
-                    "Aura\\Filter\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-2-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Aura Contributors",
-                    "homepage": "https://github.com/auraphp/Aura.Filter/contributors"
-                }
-            ],
-            "description": "Provides validators and sanitizers for user data.",
-            "homepage": "http://auraphp.github.com/Aura.Filter",
-            "keywords": [
-                "filter",
-                "sanitize",
-                "validate",
-                "validation",
-                "validator"
-            ],
-            "time": "2014-09-05 16:12:02"
-        },
-        {
-            "name": "aura/router",
-            "version": "2.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/auraphp/Aura.Router.git",
-                "reference": "df890a9f2da9be049fc1ede9c4813a037800de99"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/auraphp/Aura.Router/zipball/df890a9f2da9be049fc1ede9c4813a037800de99",
-                "reference": "df890a9f2da9be049fc1ede9c4813a037800de99",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0"
-            },
-            "type": "library",
-            "extra": {
-                "aura": {
-                    "type": "library",
-                    "config": {
-                        "common": "Aura\\Router\\_Config\\Common"
-                    }
-                },
-                "branch-alias": {
-                    "dev-develop-2": "2.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Aura\\Router\\": "src/",
-                    "Aura\\Router\\_Config\\": "config/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-2-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Aura.Router Contributors",
-                    "homepage": "https://github.com/auraphp/Aura.Router/contributors"
-                }
-            ],
-            "description": "A web router implementation; given a URI path and a copy of $_SERVER, it will extract path-info parameter values for a specific route.",
-            "homepage": "https://github.com/auraphp/Aura.Router",
-            "keywords": [
-                "route",
-                "router",
-                "routing"
-            ],
-            "time": "2014-08-29 21:16:03"
-        },
-        {
-            "name": "aura/sql",
-            "version": "2.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/auraphp/Aura.Sql.git",
-                "reference": "92fefa64dcfb5c2acf168e5632d4af5746e3637e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/auraphp/Aura.Sql/zipball/92fefa64dcfb5c2acf168e5632d4af5746e3637e",
-                "reference": "92fefa64dcfb5c2acf168e5632d4af5746e3637e",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0"
-            },
-            "type": "library",
-            "extra": {
-                "aura": {
-                    "type": "library"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Aura\\Sql\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-2-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Aura.Sql Contributors",
-                    "homepage": "https://github.com/auraphp/Aura.Sql/contributors"
-                }
-            ],
-            "description": "A PDO extension that provides lazy connections, array quoting, identifier quoting, query profiling, value binding, and convenience methods for common fetch styles. Because it extends PDO, existing code that uses PDO can use this without any changes to the existing code.",
-            "homepage": "https://github.com/auraphp/Aura.Sql/releases",
-            "keywords": [
-                "mysql",
-                "pdo",
-                "pgsql",
-                "postgres",
-                "postgresql",
-                "sql server",
-                "sqlite",
-                "sqlserver",
-                "sqlsrv"
-            ],
-            "time": "2014-04-08 14:17:53"
-        },
-        {
-            "name": "aura/web",
-            "version": "dev-develop-2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/auraphp/Aura.Web.git",
-                "reference": "1798ef63023b299ff93d3145d84b823637dd53d7"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/auraphp/Aura.Web/zipball/1798ef63023b299ff93d3145d84b823637dd53d7",
-                "reference": "1798ef63023b299ff93d3145d84b823637dd53d7",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0"
-            },
-            "type": "library",
-            "extra": {
-                "aura": {
-                    "type": "library",
-                    "config": {
-                        "common": "Aura\\Web\\_Config\\Common"
-                    }
-                },
-                "branch-alias": {
-                    "dev-develop-2": "2.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Aura\\Web\\": "src/",
-                    "Aura\\Web\\_Config\\": "config/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-2-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Aura.Web Contributors",
-                    "homepage": "https://github.com/auraphp/Aura.Web/contributors"
-                }
-            ],
-            "description": "Provides web Request and Response objects for use by web controllers. These are representations of the PHP web environment, not HTTP request and response objects proper.",
-            "homepage": "https://github.com/auraphp/Aura.Web/releases",
-            "keywords": [
-                "request",
-                "response"
-            ],
-            "time": "2014-09-06 23:03:33"
-        },
         {
             "name": "jacobemerick/talus",
             "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "../talus",
-                "reference": "59af04f3332c53b56b47c80a01f8ea73b55e8b27"
+            "dist": {
+                "type": "path",
+                "url": "../talus/",
+                "reference": "08c31722572070182a1a14cde7bb773d1376b38c",
+                "shasum": null
             },
             "require": {
                 "php": ">=5.6.0",
@@ -310,8 +45,7 @@
                     "name": "jacobemerick",
                     "email": "jpemeric@gmail.com"
                 }
-            ],
-            "time": "2016-04-13 04:21:32"
+            ]
         },
         {
             "name": "psr/http-message",
@@ -501,9 +235,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "jacobemerick/talus": 20,
-        "aura/filter": 20,
-        "aura/web": 20
+        "jacobemerick/talus": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

@@ -12,11 +12,7 @@
     "require": {
         "php": ">=5.4",
         "jacobemerick/talus": "dev-master",
-        "aura/dispatcher": "2.0.*",
-        "aura/filter": "dev-develop-2",
-        "aura/router": "2.0.*",
-        "aura/sql": "2.0.*",
-        "aura/web": "dev-develop-2"
+        "psr/http-message": "^1.0"
     },
     "autoload": {
         "psr-4": {
@@ -25,8 +21,11 @@
     },
     "repositories": [
         {
-            "type": "vcs",
-            "url": "../talus"
+            "type": "path",
+            "url": "../talus",
+            "options": {
+                "symlink": true
+            }
         }
     ]
 }
