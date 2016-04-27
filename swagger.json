@@ -1,7 +1,7 @@
 {
     "swagger": "2.0",
     "info": {
-        "version": "0.0.0",
+        "version": "0.1.0",
         "title": "Comment Service"
     },
     "consumes": [
@@ -32,21 +32,12 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "List of Comment resources.",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/Comment"
-                            }
-                        }
+                        "$ref": "#/responses/CommentList"
                     },
                     "default": {
-                        "description": "Error",
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
+                        "$ref": "#/responses/Error"
                     }
-                }
+               }
             },
             "post": {
                 "operationId": "createComment",
@@ -62,16 +53,10 @@
                 ],
                 "responses": {
                     "201": {
-                        "description": "Created Comment resource.",
-                        "schema": {
-                            "$ref": "#/definitions/Comment"
-                        }
+                        "$ref": "#/responses/Comment"
                     },
                     "default": {
-                        "description": "Error",
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
+                        "$ref": "#/responses/Error"
                     }
                 }
             }
@@ -90,16 +75,10 @@
                 "description": "Gets a single Comment resource.",
                 "responses": {
                     "200": {
-                        "description": "Single Comment resource.",
-                        "schema": {
-                            "$ref": "#/definitions/Comment"
-                        }
+                        "$ref": "#/responses/Comment"
                     },
                     "default": {
-                        "description": "Error",
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
+                        "$ref": "#/responses/Error"
                     }
                 }
             },
@@ -107,16 +86,10 @@
                 "description": "Updates a single Comment resource.",
                 "responses": {
                     "200": {
-                        "description": "Updated Comment resource.",
-                        "schema": {
-                            "$ref": "#/definitions/Comment"
-                        }
+                        "$ref": "#/responses/Comment"
                     },
                     "default": {
-                        "description": "Error",
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
+                        "$ref": "#/responses/Error"
                     }
                 }
             },
@@ -124,16 +97,10 @@
                 "description": "Replaces a single Comment resource.",
                 "responses": {
                     "200": {
-                        "description": "Updated Comment resource.",
-                        "schema": {
-                            "$ref": "#/definitions/Comment"
-                        }
+                        "$ref": "#/responses/Comment"
                     },
                     "default": {
-                        "description": "Error",
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
+                        "$ref": "#/responses/Error"
                     }
                 }
             },
@@ -144,10 +111,7 @@
                         "description": "Successfully deleted Comment."
                     },
                     "default": {
-                        "description": "Error",
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
+                        "$ref": "#/responses/Error"
                     }
                 }
             }
@@ -157,19 +121,10 @@
                 "description": "Gets Commenter resources.",
                 "responses": {
                     "200": {
-                        "description": "List of Commenter resources.",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/Commenter"
-                            }
-                        }
+                        "$ref": "#/responses/CommenterList"
                     },
                     "default": {
-                        "description": "Error",
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
+                        "$ref": "#/responses/Error"
                     }
                 }
             },
@@ -177,16 +132,10 @@
                 "description": "Creates a new Commenter resource.",
                 "responses": {
                     "201": {
-                        "description": "Created Commenter resource.",
-                        "schema": {
-                            "$ref": "#/definitions/Commenter"
-                        }
+                        "$ref": "#/responses/Commenter"
                     },
                     "default": {
-                        "description": "Error",
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
+                        "$ref": "#/responses/Error"
                     }
                 }
             }
@@ -205,16 +154,10 @@
                 "description": "Gets a Commenter resource.",
                 "responses": {
                     "200": {
-                        "description": "Single Commenter resources.",
-                        "schema": {
-                            "$ref": "#/definitions/Commenter"
-                        }
+                        "$ref": "#/responses/Commenter"
                     },
                     "default": {
-                        "description": "Error",
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
+                        "$ref": "#/responses/Error"
                     }
                 }
             }
@@ -229,6 +172,44 @@
         },
         "Error": {
             "type": "object"
+        }
+    },
+    "responses": {
+        "Comment": {
+            "description": "Single Comment resource.",
+            "schema": {
+                "$ref": "#/definitions/Comment"
+            }
+        },
+        "Commenter": {
+            "description": "Single Commenter resource.",
+            "schema": {
+                "$ref": "#/definitions/Commenter"
+            }
+        },
+        "CommenterList": {
+            "description": "List of Commenter resources.",
+            "schema": {
+                "type": "array",
+                "items": {
+                    "$ref": "#/definitions/Commenter"
+                }
+            }
+        },
+        "CommentList": {
+            "description": "List of Comment resources.",
+            "schema": {
+                "type": "array",
+                "items": {
+                    "$ref": "#/definitions/Comment"
+                }
+            }
+        },
+        "Error": {
+            "description": "Error",
+            "schema": {
+                "$ref": "#/definitions/Error"
+            }
         }
     }
 }
