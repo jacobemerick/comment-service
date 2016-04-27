@@ -13,4 +13,8 @@ $talus = new Talus([
     'container' => $di,
     'swagger' => $swagger,
 ]);
+
+// todo add middleware as needed
+// todo add error handler
+
 $talus->run();
