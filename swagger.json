@@ -12,22 +12,16 @@
     ],
     "paths": {
         "/comments": {
-            "x-swagger-router-controller": "Jacobemerick\\CommentService\\Comments",
+            "x-swagger-router-controller": "Jacobemerick\\CommentService\\Comment",
             "get": {
                 "operationId": "getComments",
                 "description": "Gets Comment resources.",
                 "parameters": [
                     {
-                        "name": "page",
-                        "in": "query",
-                        "description": "Results page to return",
-                        "type": "integer"
+                        "$ref": "#/parameters/Page"
                     },
                     {
-                        "name": "per_page",
-                        "in": "query",
-                        "description": "Results per response",
-                        "type": "integer"
+                        "$ref": "#/parameters/PerPage"
                     }
                 ],
                 "responses": {
@@ -37,18 +31,14 @@
                     "default": {
                         "$ref": "#/responses/Error"
                     }
-               }
+                }
             },
             "post": {
                 "operationId": "createComment",
                 "description": "Create a new Comment resource.",
                 "parameters": [
                     {
-                        "name": "body",
-                        "in": "body",
-                        "schema": {
-                            "type": "object"
-                        }
+                        "$ref": "#/parameters/Comment"
                     }
                 ],
                 "responses": {
@@ -62,16 +52,14 @@
             }
         },
         "/comments/{comment_id}": {
+            "x-swagger-router-controller": "Jacobemerick\\CommentService\\Comment",
             "parameters": [
                 {
-                    "name": "comment_id",
-                    "in": "path",
-                    "description": "Comment identifier.",
-                    "required": true,
-                    "type": "string"
+                    "$ref": "#/parameters/CommentIdentifier"
                 }
             ],
             "get": {
+                "operationId": "getComment",
                 "description": "Gets a single Comment resource.",
                 "responses": {
                     "200": {
@@ -83,6 +71,7 @@
                 }
             },
             "patch": {
+                "operationId": "updateComment",
                 "description": "Updates a single Comment resource.",
                 "responses": {
                     "200": {
@@ -94,6 +83,7 @@
                 }
             },
             "put": {
+                "operationId": "replaceComment",
                 "description": "Replaces a single Comment resource.",
                 "responses": {
                     "200": {
@@ -105,6 +95,7 @@
                 }
             },
             "delete": {
+                "operationId": "deleteComment",
                 "description": "Removes a single Comment resource.",
                 "responses": {
                     "204": {
@@ -117,8 +108,18 @@
             }
         },
         "/commenter": {
+            "x-swagger-router-controller": "Jacobemerick\\CommentService\\Commenter",
             "get": {
+                "operationId": "getCommenters",
                 "description": "Gets Commenter resources.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/Page"
+                    },
+                    {
+                        "$ref": "#/parameters/PerPage"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "$ref": "#/responses/CommenterList"
@@ -129,7 +130,13 @@
                 }
             },
             "post": {
+                "operationId": "createCommenter",
                 "description": "Creates a new Commenter resource.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/Commenter"
+                    }
+                ],
                 "responses": {
                     "201": {
                         "$ref": "#/responses/Commenter"
@@ -141,16 +148,14 @@
             }
         },
         "/commenter/{commenter_id}": {
+            "x-swagger-router-controller": "Jacobemerick\\CommentService\\Commenter",
             "parameters": [
                 {
-                    "name": "commenter_id",
-                    "in": "path",
-                    "description": "Commenter identifier.",
-                    "required": true,
-                    "type": "string"
+                    "$ref": "#/parameters/CommenterIdentifier"
                 }
             ],
             "get": {
+                "operationId": "getCommenter",
                 "description": "Gets a Commenter resource.",
                 "responses": {
                     "200": {
@@ -172,6 +177,48 @@
         },
         "Error": {
             "type": "object"
+        }
+    },
+    "parameters": {
+        "Comment": {
+            "name": "body",
+            "in": "body",
+            "schema": {
+                "type": "object"
+            }
+        },
+        "Commenter": {
+            "name": "body",
+            "in": "body",
+            "schema": {
+                "type": "object"
+            }
+        },
+        "CommenterIdentifier": {
+            "name": "commenter_id",
+            "in": "path",
+            "description": "Commenter identifier.",
+            "required": true,
+            "type": "string"
+        },
+        "CommentIdentifier": {
+            "name": "comment_id",
+            "in": "path",
+            "description": "Comment identifier.",
+            "required": true,
+            "type": "string"
+        },
+        "Page": {
+            "name": "page",
+            "in": "query",
+            "description": "Results page to return",
+            "type": "integer"
+        },
+        "PerPage": {
+            "name": "per_page",
+            "in": "query",
+            "description": "Results per response",
+            "type": "integer"
         }
     },
     "responses": {
