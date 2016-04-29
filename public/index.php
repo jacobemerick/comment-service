@@ -15,6 +15,25 @@ $talus = new Talus([
 ]);
 
 // todo add middleware as needed
+$talus->addMiddleware(function ($req, $res, $next) {
+    if (!$req->getBody()->isReadable()) {
+        return;
+    }
+
+    $body = (string) $req->getBody();
+    if (empty($body)) {
+        return;
+    }
+
+    $body = json_decode($body, true);
+    if (json_last_error() !== JSON_ERROR_NONE) {
+        return;
+    }
+
+    $req = $req->withParsedBody($body);
+    $next($req, $res);
+});
+
 // todo add error handler
 
 $talus->run();
