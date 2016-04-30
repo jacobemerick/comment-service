@@ -31,7 +31,7 @@ $talus->addMiddleware(function ($req, $res, $next) {
     }
 
     $req = $req->withParsedBody($body);
-    $next($req, $res);
+    return $next($req, $res);
 });
 
 // todo add error handler

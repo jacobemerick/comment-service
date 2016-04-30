@@ -51,7 +51,7 @@ class Comment
             'url' => $request->getParsedBody()['commenter']['url'],
         ];
         var_dump($params);
-        return;
+        return $response;
         $commenter = $this->container->db->selectOne($query, $params);
     }
 }
