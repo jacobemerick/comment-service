@@ -14,7 +14,8 @@
         "jacobemerick/talus": "dev-master",
         "psr/http-message": "^1.0",
         "container-interop/container-interop": "^1.1",
-        "aura/di": "^3.1"
+        "aura/di": "^3.1",
+        "aura/sql": "^2.5"
     },
     "autoload": {
         "psr-4": {

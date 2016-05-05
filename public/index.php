@@ -3,10 +3,31 @@
 require_once __DIR__ . '/../vendor/autoload.php';
 
 use Aura\Di\ContainerBuilder;
+use Aura\Sql\ExtendedPdo;
 use Jacobemerick\Talus\Talus;
+
+// load the config for the application
+$config_path = __DIR__ . '/../config.json';
+
+$handle = @fopen($config_path, 'r');
+if ($handle === false) {
+    throw new RuntimeException("Could not load config");
+}
+$config = fread($handle, filesize($config_path));
+fclose($handle);
+
+$config = json_decode($config);
+$last_json_error = json_last_error();
+if ($last_json_error !== JSON_ERROR_NONE) {
+    throw new RuntimeException("Could not parse config - JSON error detected");
+}
 
 $builder = new ContainerBuilder();
 $di = $builder->newInstance();
+
+$di->params['Aura\Sql\ExtendedPdo'] = (array) $config->database;
+$di->set('dbal', $di->lazyNew('Aura\Sql\ExtendedPdo'));
+
 $swagger = fopen('../swagger.json', 'r');
 
 $talus = new Talus([
