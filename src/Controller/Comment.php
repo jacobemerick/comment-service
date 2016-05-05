@@ -3,6 +3,8 @@
 namespace Jacobemerick\CommentService\Controller;
 
 use Interop\Container\ContainerInterface as Container;
+use Jacobemerick\CommentService\Model\Comment as CommentModel;
+use Jacobemerick\CommentService\Model\Commenter as CommenterModel;
 use Psr\Http\Message\RequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 
@@ -36,22 +38,22 @@ class Comment
     public function createComment(Request $request, Response $response)
     {
         // todo something something validation
-        // todo something something data layers
 
-        $query = "
-            SELECT `id`
-            FROM `commenter`
-            WHERE `name` = :name AND
-                  `email` = :email AND
-                  `url` = :url
-            LIMIT 1";
-        $params = [
-            'name' => $request->getParsedBody()['commenter']['name'],
-            'email' => $request->getParsedBody()['commenter']['email'],
-            'url' => $request->getParsedBody()['commenter']['url'],
-        ];
-        var_dump($params);
+        $commenterModel = new CommenterModel($this->container->get('dbal'));
+        $commenter = $commenterModel->findByFields($request->getParsedBody()['commenter']);
+        var_dump($commenter);
         return $response;
-        $commenter = $this->container->db->selectOne($query, $params);
+    }
+
+    /**
+     * @param Request $request
+     * @param Response $response
+     */
+    public function getComment(Request $request, Response $response)
+    {
+        $commentModel = new CommentModel($this->container->get('dbal'));
+        $comment = $commentModel->findById(1);
+        var_dump($comment);
+        return $response;
     }
 }
