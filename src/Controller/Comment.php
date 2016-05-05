@@ -1,6 +1,6 @@
 <?php
 
-namespace Jacobemerick\CommentService;
+namespace Jacobemerick\CommentService\Controller;
 
 use Interop\Container\ContainerInterface as Container;
 use Psr\Http\Message\RequestInterface as Request;
