@@ -70,7 +70,7 @@ DROP TABLE IF EXISTS `comment_location`;
 CREATE TABLE `comment_location` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `domain` int(11) unsigned NOT NULL,
-  `page` int(11) unsigned DEFAULT NULL,
+  `path` int(11) unsigned DEFAULT NULL,
   `thread` int(11) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
