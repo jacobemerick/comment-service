@@ -4,7 +4,7 @@ namespace Jacobemerick\CommentService\Model;
 
 use Aura\Sql\ExtendedPdo;
 
-class Commenter
+class CommentLocation
 {
 
     /** @var ExtendedPdo */
@@ -19,23 +19,23 @@ class Commenter
     }
 
     /**
-     * @param string $name
-     * @param string $email
-     * @param string $website
+     * @param string $domain
+     * @param string $path
+     * @param string $thread
      * @returns integer
      */
-    public function create($name, $email, $website)
+    public function create($domain, $path, $thread)
     {
         $query = "
             INSERT INTO
-                `commenter` (`name`, `email`, `website`)
+                `comment_location` (`domain`, `path`, `thread`)
             VALUES
-                (:name, :email, :website)";
+                (:domain, :path, :thread)";
 
         $bindings = [
-            'name' => $name,
-            'email' => $email,
-            'website' => $website,
+            'domain' => $domain,
+            'path' => $path,
+            'thread' => $thread,
         ];
 
         $this->extendedPdo->perform($query, $bindings);
@@ -43,25 +43,25 @@ class Commenter
     }
 
     /**
-     * @param string $name
-     * @param string $email
-     * @param string $website
+     * @param string $domain
+     * @param string $path
+     * @param string $thread
      * @returns integer
      */
-    public function findByFields($name, $email, $website)
+    public function findByFields($domain, $path, $thread)
     {
         $query = "
             SELECT `id`
-            FROM `commenter`
-            WHERE `name` = :name AND
-                  `email` = :email AND
-                  `website` = :website
+            FROM `comment_location`
+            WHERE `domain` = :domain AND
+                  `path` = :path AND
+                  `thread` = :thread
             LIMIT 1";
 
         $bindings = [
-            'name' => $name,
-            'email' => $email,
-            'website' => $website,
+            'domain' => $domain,
+            'path' => $path,
+            'thread' => $thread,
         ];
 
         return $this->extendedPdo->fetchValue($query, $bindings);
