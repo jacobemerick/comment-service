@@ -40,8 +40,19 @@ class Comment
         // todo something something validation
 
         $commenterModel = new CommenterModel($this->container->get('dbal'));
-        $commenter = $commenterModel->findByFields($request->getParsedBody()['commenter']);
-        var_dump($commenter);
+        $commenterId = $commenterModel->findByFields(
+            $request->getParsedBody()['commenter']['name'],
+            $request->getParsedBody()['commenter']['email'],
+            $request->getParsedBody()['commenter']['website']
+        );
+        if (!$commenterId) {
+            $commenterId = $commenterModel->create(
+                $request->getParsedBody()['commenter']['name'],
+                $request->getParsedBody()['commenter']['email'],
+                $request->getParsedBody()['commenter']['website']
+            );
+        }
+        var_dump($commenterId);
         return $response;
     }
 
