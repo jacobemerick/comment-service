@@ -127,7 +127,7 @@ CREATE TABLE `commenter` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL DEFAULT '',
   `email` varchar(100) NOT NULL DEFAULT '',
-  `url` varchar(100) DEFAULT NULL,
+  `website` varchar(100) DEFAULT NULL,
   `key` char(10) NOT NULL DEFAULT '',
   `is_trusted` tinyint(1) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)

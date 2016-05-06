@@ -19,7 +19,7 @@ class Commenter
     {
         $query = "
             INSERT INTO
-                `commenter` (`name`, `email`, `url`)
+                `commenter` (`name`, `email`, `website`)
             VALUES
                 (:name, :email, :website)";
 
@@ -40,7 +40,7 @@ class Commenter
             FROM `commenter`
             WHERE `name` = :name AND
                   `email` = :email AND
-                  `url` = :website
+                  `website` = :website
             LIMIT 1";
 
         $bindings = [
