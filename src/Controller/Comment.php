@@ -64,21 +64,38 @@ class Comment
         $bodyModel = new CommentBodyModel($this->container->get('dbal'));
         $bodyId = $bodyModel->create($body['body']);
 
-        // todo location is broken into three separate models... do it here
+        $domainModel = new CommentDomainModel($this->container->get('dbal'));
+        $domainId = $domainModel->findByFields($body['domain']);
+        if (!$domainId) {
+            $domainId = $domainModel->create($body['domain']);
+        }
+
+        $pathModel = new CommentPathModel($this->container->get('dbal'));
+        $pathId = $pathModel->findByFields($body['path']);
+        if (!$pathId) {
+            $pathId = $pathModel->create($body['path']);
+        }
+
+        $threadModel = new CommentThreadModel($this->container->get('dbal'));
+        $threadId = $threadModel->findByFields($body['thread']);
+        if (!$threadId) {
+            $threadId = $threadModel->create($body['thread']);
+        }
+
         $locationModel = new CommentLocationModel($this->container->get('dbal'));
         $locationId = $locationModel->findByFields(
-            $body['domain'],
-            $body['path'],
-            $body['thread']
+            $domainId,
+            $pathId,
+            $threadId
         );
         if (!$locationId) {
             $locationId = $locationModel->create(
-                $body['domain'],
-                $body['path'],
-                $body['thread']
+                $domainId,
+                $pathId,
+                $threadId
             );
         }
-            
+
         var_dump($commenterId);
         return $res;
     }
