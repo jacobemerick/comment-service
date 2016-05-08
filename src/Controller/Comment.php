@@ -111,6 +111,17 @@ class Comment
             );
         }
 
+        $commentModel = new CommentModel($this->container->get('dbal'));
+        $commentModel->create(
+            $commenterId,
+            $bodyId,
+            $locationId,
+            $commentRequestId,
+            (int) $body['should_notify'],
+            (int) $body['should_display'],
+            time()
+        );
+
         return $res;
     }
 
