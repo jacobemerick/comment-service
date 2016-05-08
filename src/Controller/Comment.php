@@ -8,6 +8,7 @@ use Jacobemerick\CommentService\Model\CommentBody as CommentBodyModel;
 use Jacobemerick\CommentService\Model\CommentDomain as CommentDomainModel;
 use Jacobemerick\CommentService\Model\CommentLocation as CommentLocationModel;
 use Jacobemerick\CommentService\Model\CommentPath as CommentPathModel;
+use Jacobemerick\CommentService\Model\CommentRequest as CommentRequestModel;
 use Jacobemerick\CommentService\Model\CommentThread as CommentThreadModel;
 use Jacobemerick\CommentService\Model\Commenter as CommenterModel;
 use Psr\Http\Message\RequestInterface as Request;
@@ -96,7 +97,20 @@ class Comment
             );
         }
 
-        var_dump($commenterId);
+        $commentRequestModel = new CommentRequestModel($this->container->get('dbal'));
+        $commentRequestId = $commentRequestModel->findByFields(
+            $body['ip_address'],
+            $body['user_agent'],
+            $body['referrer']
+        );
+        if (!$commentRequestId) {
+            $commentRequestId = $commentRequestModel->create(
+                $body['ip_address'],
+                $body['user_agent'],
+                $body['referrer']
+            );
+        }
+
         return $res;
     }
 
