@@ -4,9 +4,12 @@ namespace Jacobemerick\CommentService\Controller;
 
 use Interop\Container\ContainerInterface as Container;
 use Jacobemerick\CommentService\Model\Comment as CommentModel;
-use Jacobemerick\CommentService\Model\Commenter as CommenterModel;
 use Jacobemerick\CommentService\Model\CommentBody as CommentBodyModel;
+use Jacobemerick\CommentService\Model\CommentDomain as CommentDomainModel;
 use Jacobemerick\CommentService\Model\CommentLocation as CommentLocationModel;
+use Jacobemerick\CommentService\Model\CommentPath as CommentPathModel;
+use Jacobemerick\CommentService\Model\CommentThread as CommentThreadModel;
+use Jacobemerick\CommentService\Model\Commenter as CommenterModel;
 use Psr\Http\Message\RequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 
@@ -61,6 +64,7 @@ class Comment
         $bodyModel = new CommentBodyModel($this->container->get('dbal'));
         $bodyId = $bodyModel->create($body['body']);
 
+        // todo location is broken into three separate models... do it here
         $locationModel = new CommentLocationModel($this->container->get('dbal'));
         $locationId = $locationModel->findByFields(
             $body['domain'],

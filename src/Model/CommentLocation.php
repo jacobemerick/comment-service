@@ -19,9 +19,9 @@ class CommentLocation
     }
 
     /**
-     * @param string $domain
-     * @param string $path
-     * @param string $thread
+     * @param integer $domain
+     * @param integer $path
+     * @param integer $thread
      * @returns integer
      */
     public function create($domain, $path, $thread)
@@ -43,9 +43,9 @@ class CommentLocation
     }
 
     /**
-     * @param string $domain
-     * @param string $path
-     * @param string $thread
+     * @param integer $domain
+     * @param integer $path
+     * @param integer $thread
      * @returns integer
      */
     public function findByFields($domain, $path, $thread)
