@@ -77,14 +77,14 @@ CREATE TABLE `comment_location` (
 
 
 
-# Dump of table comment_page
+# Dump of table comment_path
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `comment_page`;
+DROP TABLE IF EXISTS `comment_path`;
 
-CREATE TABLE `comment_page` (
+CREATE TABLE `comment_path` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `page` varchar(100) NOT NULL DEFAULT '',
+  `path` varchar(255) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
