@@ -36,6 +36,19 @@ class Comment
     {
         $commentModel = new CommentModel($this->container->get('dbal'));
         $comments = $commentModel->getComments();
+        $comments = array_map(function ($comment) {
+            return [
+                'id' => $comment['id'],
+                'commenter' => [
+                    'id' => $comment['commenter_id'],
+                    'name' => $comment['commenter_name'],
+                    'website' => $comment['commenter_website'],
+                ],
+                'body' => $comment['body'],
+                'url' => "{$comment['domain']}{$comment['path']}",
+                'thread' => $comment['thread'],
+            ];
+        }, $comments);
         $comments = json_encode($comments);
 
         $res->getBody()->write($comments);
