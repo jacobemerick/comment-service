@@ -36,6 +36,8 @@ $talus = new Talus([
 ]);
 
 // todo add middleware as needed
+
+// todo add check so this only toggles when needed
 $talus->addMiddleware(function ($req, $res, $next) {
     if (!$req->getBody()->isReadable()) {
         return;
@@ -43,7 +45,7 @@ $talus->addMiddleware(function ($req, $res, $next) {
 
     $body = (string) $req->getBody();
     if (empty($body)) {
-        return;
+        return $next($req, $res);
     }
 
     $body = json_decode($body, true);

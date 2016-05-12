@@ -29,12 +29,13 @@ class Comment
     }
 
     /**
-     * @param Request $request
-     * @param Response $response
+     * @param Request $req
+     * @param Response $res
      */
-    public function getComments(Request $request, Response $response)
+    public function getComments(Request $req, Response $res)
     {
         echo 'yay get comments called';
+        return $res;
     }
 
     /**
@@ -112,7 +113,7 @@ class Comment
         }
 
         $commentModel = new CommentModel($this->container->get('dbal'));
-        $commentModel->create(
+        $commentId = $commentModel->create(
             $commenterId,
             $bodyId,
             $locationId,
