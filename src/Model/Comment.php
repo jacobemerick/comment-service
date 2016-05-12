@@ -75,4 +75,16 @@ class Comment
 
         return $this->extendedPdo->fetchOne($query, $bindings);
     }
+
+    /**
+     * @returns array
+     */
+    public function getComments()
+    {
+        $query = "
+            SELECT *
+            FROM `comment`";
+
+        return $this->extendedPdo->fetchAll($query);
+    }
 }

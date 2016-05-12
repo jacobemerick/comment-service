@@ -34,7 +34,11 @@ class Comment
      */
     public function getComments(Request $req, Response $res)
     {
-        echo 'yay get comments called';
+        $commentModel = new CommentModel($this->container->get('dbal'));
+        $comments = $commentModel->getComments();
+        $comments = json_encode($comments);
+
+        $res->getBody()->write($comments);
         return $res;
     }
 
