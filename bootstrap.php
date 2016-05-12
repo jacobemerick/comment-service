@@ -37,6 +37,12 @@ $talus = new Talus([
 
 // todo add middleware as needed
 
+// todo does this belong in talus?
+$talus->addMiddleware(function ($req, $res, $next) {
+    $res = $res->withAddedHeader('Content-Type', 'application/json');
+    return $next($req, $res);
+});
+
 // todo add check so this only toggles when needed
 $talus->addMiddleware(function ($req, $res, $next) {
     if (!$req->getBody()->isReadable()) {
