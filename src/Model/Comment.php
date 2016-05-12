@@ -82,8 +82,22 @@ class Comment
     public function getComments()
     {
         $query = "
-            SELECT *
-            FROM `comment`";
+            SELECT
+                `comment`.`id`,
+                `commenter`.`id` AS `commenter_id`,
+                `commenter`.`name` AS `commenter_name`,
+                `commenter`.`website` AS `commenter_website`,
+                `comment_body`.`body`,
+                `comment_domain`.`domain`,
+                `comment_path`.`path`,
+                `comment_thread`.`thread`
+            FROM `comment`
+            INNER JOIN `commenter` ON `commenter`.`id` = `comment`.`commenter`
+            INNER JOIN `comment_body` ON `comment_body`.`id` = `comment`.`comment_body`
+            INNER JOIN `comment_location` ON `comment_location`.`id` = `comment`.`comment_location`
+            INNER JOIN `comment_domain` ON `comment_domain`.`id` = `comment_location`.`domain`
+            INNER JOIN `comment_path` ON `comment_path`.`id` = `comment_location`.`path`
+            INNER JOIN `comment_thread` ON `comment_thread`.`id` = `comment_location`.`thread`";
 
         return $this->extendedPdo->fetchAll($query);
     }
