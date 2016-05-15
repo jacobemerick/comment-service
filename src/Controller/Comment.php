@@ -129,10 +129,14 @@ class Comment
      */
     public function getComment(Request $req, Response $res)
     {
+        $commentSerializer = new CommentSerializer;
         $commentModel = new CommentModel($this->container->get('dbal'));
         $comment = $commentModel->findById(1);
-        var_dump($comment);
-        return $response;
+        $comment = $commentSerializer($comment);
+        $comment = json_encode($comment);
+
+        $res->getBody()->write($comment);
+        return $res;
     }
 
     /**
