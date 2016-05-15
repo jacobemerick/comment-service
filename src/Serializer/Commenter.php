@@ -14,9 +14,9 @@ class Commenter
     public function __invoke(array $commenter)
     {
         return [
-            'id' => $commenter['commenter_id'],
-            'name' => $commenter['commenter_name'],
-            'website' => $commenter['commenter_website'],
+            'id' => $commenter['id'],
+            'name' => $commenter['name'],
+            'website' => $commenter['website'],
         ];
     }
 }

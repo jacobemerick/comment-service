@@ -74,9 +74,9 @@ class Commenter
     {
         $query = "
             SELECT
-                `commenter`.`id` AS `commenter_id`,
-                `commenter`.`name` AS `commenter_name`,
-                `commenter`.`website` AS `commenter_website`
+                `commenter`.`id`,
+                `commenter`.`name`,
+                `commenter`.`website`
             FROM `commenter`";
 
         return $this->extendedPdo->fetchAll($query);
