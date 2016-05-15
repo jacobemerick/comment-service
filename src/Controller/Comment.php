@@ -32,33 +32,6 @@ class Comment
      * @param Request $req
      * @param Response $res
      */
-    public function getComments(Request $req, Response $res)
-    {
-        $commentModel = new CommentModel($this->container->get('dbal'));
-        $comments = $commentModel->getComments();
-        $comments = array_map(function ($comment) {
-            return [
-                'id' => $comment['id'],
-                'commenter' => [
-                    'id' => $comment['commenter_id'],
-                    'name' => $comment['commenter_name'],
-                    'website' => $comment['commenter_website'],
-                ],
-                'body' => $comment['body'],
-                'url' => "{$comment['domain']}{$comment['path']}",
-                'thread' => $comment['thread'],
-            ];
-        }, $comments);
-        $comments = json_encode($comments);
-
-        $res->getBody()->write($comments);
-        return $res;
-    }
-
-    /**
-     * @param Request $request
-     * @param Response $response
-     */
     public function createComment(Request $req, Response $res)
     {
         // todo something something validation
@@ -144,14 +117,41 @@ class Comment
     }
 
     /**
-     * @param Request $request
-     * @param Response $response
+     * @param Request $req
+     * @param Response $res
      */
-    public function getComment(Request $request, Response $response)
+    public function getComment(Request $req, Response $res)
     {
         $commentModel = new CommentModel($this->container->get('dbal'));
         $comment = $commentModel->findById(1);
         var_dump($comment);
         return $response;
+    }
+
+    /**
+     * @param Request $req
+     * @param Response $res
+     */
+    public function getComments(Request $req, Response $res)
+    {
+        $commentModel = new CommentModel($this->container->get('dbal'));
+        $comments = $commentModel->getComments();
+        $comments = array_map(function ($comment) {
+            return [
+                'id' => $comment['id'],
+                'commenter' => [
+                    'id' => $comment['commenter_id'],
+                    'name' => $comment['commenter_name'],
+                    'website' => $comment['commenter_website'],
+                ],
+                'body' => $comment['body'],
+                'url' => "{$comment['domain']}{$comment['path']}",
+                'thread' => $comment['thread'],
+            ];
+        }, $comments);
+        $comments = json_encode($comments);
+
+        $res->getBody()->write($comments);
+        return $res;
     }
 }
