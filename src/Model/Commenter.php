@@ -66,4 +66,19 @@ class Commenter
 
         return $this->extendedPdo->fetchValue($query, $bindings);
     }
+
+    /**
+     * @returns array
+     */
+    public function getCommenters()
+    {
+        $query = "
+            SELECT
+                `commenter`.`id` AS `commenter_id`,
+                `commenter`.`name` AS `commenter_name`,
+                `commenter`.`website` AS `commenter_website`
+            FROM `commenter`";
+
+        return $this->extendedPdo->fetchAll($query);
+    }
 }

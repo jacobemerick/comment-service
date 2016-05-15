@@ -7,7 +7,7 @@ use Jacobemerick\CommentService\Model\Commenter as CommenterModel;
 use Psr\Http\Message\RequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 
-class Comment
+class Commenter
 {
 
     /** @var Container */
@@ -22,8 +22,8 @@ class Comment
     }
 
     /**
-     * @param Request $request
-     * @param Response $response
+     * @param Request $req
+     * @param Response $res
      */
     public function createCommenter(Request $req, Response $res)
     {
@@ -44,5 +44,26 @@ class Comment
                 $body['commenter']['website']
             );
         }
+    }
+
+    /**
+     * @param Request $req
+     * @param Response $res
+     */
+    public function getCommenters(Request $req, Response $res)
+    {
+        $commenterModel = new CommenterModel($this->container->get('dbal'));
+        $commenters = $commenterModel->getCommenters();
+        $commenters = array_map(function ($commenter) {
+            return [
+                'id' => $commenter['commenter_id'],
+                'name' => $commenter['commenter_name'],
+                'website' => $commenter['commenter_website'],
+            ];
+        }, $commenters);
+        $commenters = json_encode($commenters);
+
+        $res->getBody()->write($commenters);
+        return $res;
     }
 }
