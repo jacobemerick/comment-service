@@ -107,7 +107,7 @@
                 }
             }
         },
-        "/commenter": {
+        "/commenters": {
             "x-swagger-router-controller": "Jacobemerick\\CommentService\\Controller\\Commenter",
             "get": {
                 "operationId": "getCommenters",
@@ -147,7 +147,7 @@
                 }
             }
         },
-        "/commenter/{commenter_id}": {
+        "/commenters/{commenter_id}": {
             "x-swagger-router-controller": "Jacobemerick\\CommentService\\Controller\\Commenter",
             "parameters": [
                 {
