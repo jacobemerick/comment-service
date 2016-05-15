@@ -11,6 +11,7 @@ use Jacobemerick\CommentService\Model\CommentPath as CommentPathModel;
 use Jacobemerick\CommentService\Model\CommentRequest as CommentRequestModel;
 use Jacobemerick\CommentService\Model\CommentThread as CommentThreadModel;
 use Jacobemerick\CommentService\Model\Commenter as CommenterModel;
+use Jacobemerick\CommentService\Serializer\Comment as CommentSerializer;
 use Psr\Http\Message\RequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 
@@ -134,21 +135,10 @@ class Comment
      */
     public function getComments(Request $req, Response $res)
     {
+        $commentSerializer = new CommentSerializer;
         $commentModel = new CommentModel($this->container->get('dbal'));
         $comments = $commentModel->getComments();
-        $comments = array_map(function ($comment) {
-            return [
-                'id' => $comment['id'],
-                'commenter' => [
-                    'id' => $comment['commenter_id'],
-                    'name' => $comment['commenter_name'],
-                    'website' => $comment['commenter_website'],
-                ],
-                'body' => $comment['body'],
-                'url' => "{$comment['domain']}{$comment['path']}",
-                'thread' => $comment['thread'],
-            ];
-        }, $comments);
+        $comments = array_map($commentSerializer, $comments);
         $comments = json_encode($comments);
 
         $res->getBody()->write($comments);
