@@ -80,11 +80,13 @@ class Comment
             INNER JOIN `comment_domain` ON `comment_domain`.`id` = `comment_location`.`domain`
             INNER JOIN `comment_path` ON `comment_path`.`id` = `comment_location`.`path`
             INNER JOIN `comment_thread` ON `comment_thread`.`id` = `comment_location`.`thread`
-            WHERE `comment`.`id` = :id
+            WHERE `comment`.`id` = :id AND
+                  `comment`.`is_deleted` = :not_deleted
             LIMIT 1";
 
         $bindings = [
             'id' => $id,
+            'not_deleted' => 0,
         ];
 
         return $this->extendedPdo->fetchOne($query, $bindings);
@@ -130,8 +132,13 @@ class Comment
             INNER JOIN `comment_location` ON `comment_location`.`id` = `comment`.`comment_location`
             INNER JOIN `comment_domain` ON `comment_domain`.`id` = `comment_location`.`domain`
             INNER JOIN `comment_path` ON `comment_path`.`id` = `comment_location`.`path`
-            INNER JOIN `comment_thread` ON `comment_thread`.`id` = `comment_location`.`thread`";
+            INNER JOIN `comment_thread` ON `comment_thread`.`id` = `comment_location`.`thread`
+            WHERE `is_deleted` = :not_deleted";
 
-        return $this->extendedPdo->fetchAll($query);
+        $bindings = [
+            'not_deleted' => 0,
+        ];
+
+        return $this->extendedPdo->fetchAll($query, $bindings);
     }
 }
