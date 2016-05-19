@@ -91,6 +91,25 @@ class Comment
     }
 
     /**
+     * @param integer $id
+     */
+    public function deleteById($id)
+    {
+        $query = "
+            UPDATE `comment`
+            SET `is_deleted` = :deleted
+            WHERE `id` = :id
+            LIMIT 1";
+
+        $bindings = [
+            'deleted' => 1,
+            'id' => $id,
+        ];
+
+        return $this->extendedPdo->perform($query, $bindings);
+    }
+
+    /**
      * @returns array
      */
     public function getComments()

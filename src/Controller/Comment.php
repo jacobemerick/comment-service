@@ -143,6 +143,18 @@ class Comment
      * @param Request $req
      * @param Response $res
      */
+    public function deleteComment(Request $req, Response $res)
+    {
+        $commentModel = new CommentModel($this->container->get('dbal'));
+        $commentModel->deleteById($req->getAttribute('comment_id'));
+
+        return $res;
+    }
+
+    /**
+     * @param Request $req
+     * @param Response $res
+     */
     public function getComments(Request $req, Response $res)
     {
         $commentSerializer = new CommentSerializer;

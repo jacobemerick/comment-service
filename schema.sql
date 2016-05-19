@@ -29,6 +29,7 @@ CREATE TABLE `comment` (
   `comment_request` int(11) DEFAULT '0',
   `notify` tinyint(1) NOT NULL DEFAULT '0',
   `display` tinyint(1) NOT NULL DEFAULT '0',
+  `is_deleted` tinyint(1) NOT NULL DEFAULT '0',
   `create_time` datetime NOT NULL,
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
