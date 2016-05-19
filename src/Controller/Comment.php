@@ -131,7 +131,7 @@ class Comment
     {
         $commentSerializer = new CommentSerializer;
         $commentModel = new CommentModel($this->container->get('dbal'));
-        $comment = $commentModel->findById(1);
+        $comment = $commentModel->findById($req->getAttribute('comment_id'));
         $comment = $commentSerializer($comment);
         $comment = json_encode($comment);
 

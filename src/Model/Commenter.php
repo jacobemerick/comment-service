@@ -38,15 +38,37 @@ class Commenter
             'website' => $website,
         ];
 
-        $this->extendedPdo->perform($query, $bindings);
+        if (!$this->extendedPdo->perform($query, $bindings)) {
+            return false;
+        }
+
         return $this->extendedPdo->lastInsertId();
+    }
+
+    /**
+     * @param integer $id
+     * @returns array
+     */
+    public function findById($id)
+    {
+        $query = "
+            SELECT *
+            FROM `commenter`
+            WHERE `id` = :id
+            LIMIT 1";
+
+        $bindings = [
+            'id' => $id,
+        ];
+
+        return $this->extendedPdo->fetchOne($query, $bindings);
     }
 
     /**
      * @param string $name
      * @param string $email
      * @param string $website
-     * @returns integer
+     * @returns array
      */
     public function findByFields($name, $email, $website)
     {
@@ -73,10 +95,7 @@ class Commenter
     public function getCommenters()
     {
         $query = "
-            SELECT
-                `commenter`.`id`,
-                `commenter`.`name`,
-                `commenter`.`website`
+            SELECT *
             FROM `commenter`";
 
         return $this->extendedPdo->fetchAll($query);
