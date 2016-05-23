@@ -35,12 +35,23 @@ $talus = new Talus([
     'swagger' => $swagger,
 ]);
 
-// todo add middleware as needed
+$auth = $config->auth;
+$talus->addMiddleware(function ($req, $res, $next) use ($auth) {
+    $authHeader = base64_encode("{$auth->username}:{$auth->password}");
+    $authHeader = "Basic {$authHeader}";
+    if ($authHeader != current($req->getHeader('Authorization'))) {
+        $res = $res->withStatus(403);
+        return $res;
+    }
+
+    return $next($req, $res);
+});
 
 // todo does this belong in talus?
 $talus->addMiddleware(function ($req, $res, $next) {
+    $res = $next($req, $res);
     $res = $res->withAddedHeader('Content-Type', 'application/json');
-    return $next($req, $res);
+    return $res; 
 });
 
 // todo add check so this only toggles when needed
