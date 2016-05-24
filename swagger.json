@@ -170,13 +170,79 @@
     },
     "definitions": {
         "Comment": {
-            "type": "object"
+            "type": "object",
+            "required": [
+                "id",
+                "commenter",
+                "body",
+                "url",
+                "thread"
+            ],
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "commenter": {
+                    "$ref": "#/definitions/Commenter"
+                },
+                "body": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                },
+                "thread": {
+                    "type": "string"
+                }
+            }
         },
         "Commenter": {
-            "type": "object"
+            "type": "object",
+            "required": [
+                "id",
+                "name",
+                "website"
+            ],
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "website": {
+                    "type": "string"
+                }
+            }
         },
         "Error": {
-            "type": "object"
+            "type": "object",
+            "required": [
+                "type",
+                "status",
+                "code",
+                "message"
+            ],
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "error"
+                    ]
+                },
+                "status": {
+                    "type": "integer"
+                },
+                "code": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "context": {
+                    "type": "object"
+                }
+            }
         }
     },
     "parameters": {
