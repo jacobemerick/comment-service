@@ -22,6 +22,12 @@
                     },
                     {
                         "$ref": "#/parameters/PerPage"
+                    },
+                    {
+                        "$ref": "#/parameters/Domain"
+                    },
+                    {
+                        "$ref": "#/parameters/Path"
                     }
                 ],
                 "responses": {
@@ -274,11 +280,23 @@
             "required": true,
             "type": "string"
         },
+        "Domain": {
+            "name": "domain",
+            "in": "query",
+            "description": "Domain to restrict comments to",
+            "type": "string"
+        },
         "Page": {
             "name": "page",
             "in": "query",
             "description": "Results page to return",
             "type": "integer"
+        },
+        "Path": {
+            "name": "path",
+            "in": "query",
+            "description": "Path to restrict comments to",
+            "type": "string"
         },
         "PerPage": {
             "name": "per_page",
