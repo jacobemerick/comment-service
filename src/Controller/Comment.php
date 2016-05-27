@@ -160,6 +160,8 @@ class Comment
     {
         $limit = 0;
         $offset = 0;
+        $domain = '';
+        $path = '';
 
         $query = $req->getQueryParams();
         if (array_key_exists('per_page', $query)) {
@@ -168,14 +170,20 @@ class Comment
         if (array_key_exists('page', $query)) {
             $offset = $query['page'] * $query['per_page'];
         }
+        if (array_key_exists('domain', $query)) {
+            $domain = $query['domain'];
+        }
+        if (array_key_exists('path', $query)) {
+            $path = $query['path'];
+        }
 
         $commentSerializer = new CommentSerializer;
         $commentModel = new CommentModel($this->container->get('dbal'));
 
         if ($limit > 0) {
-            $comments = $commentModel->getComments($limit, $offset);
+            $comments = $commentModel->getComments($domain, $path, $limit, $offset);
         } else {
-            $comments = $commentModel->getComments();
+            $comments = $commentModel->getComments($domain, $path);
         }
 
         $comments = array_map($commentSerializer, $comments);

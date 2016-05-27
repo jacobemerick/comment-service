@@ -112,11 +112,13 @@ class Comment
     }
 
     /**
+     * @param string $domain
+     * @param string $path
      * @param integer $limit
      * @param integer $offset
      * @returns array
      */
-    public function getComments($limit = 0, $offset = 0)
+    public function getComments($domain = '', $path = '', $limit = 0, $offset = 0)
     {
         $query = "
             SELECT
@@ -137,6 +139,15 @@ class Comment
             INNER JOIN `comment_thread` ON `comment_thread`.`id` = `comment_location`.`thread`
             WHERE `is_deleted` = :not_deleted";
 
+        if ($domain != '') {
+            $query .= " AND
+                `comment_domain`.`domain` = :domain";
+        }
+        if ($path != '') {
+            $query .= " AND
+                `comment_path`.`path` = :path";
+        }
+
         if ($limit > 0) {
             $query .= "
                 LIMIT {$offset}, {$limit}";
@@ -145,6 +156,12 @@ class Comment
         $bindings = [
             'not_deleted' => 0,
         ];
+        if ($domain != '') {
+            $bindings['domain'] = $domain;
+        }
+        if ($path != '') {
+            $bindings['path'] = $path;
+        }
 
         return $this->extendedPdo->fetchAll($query, $bindings);
     }
