@@ -158,9 +158,26 @@ class Comment
      */
     public function getComments(Request $req, Response $res)
     {
+        $limit = 0;
+        $offset = 0;
+
+        $query = $req->getQueryParams();
+        if (array_key_exists('per_page', $query)) {
+            $limit = $query['per_page'];
+        }
+        if (array_key_exists('page', $query)) {
+            $offset = $query['page'] * $query['per_page'];
+        }
+
         $commentSerializer = new CommentSerializer;
         $commentModel = new CommentModel($this->container->get('dbal'));
-        $comments = $commentModel->getComments();
+
+        if ($limit > 0) {
+            $comments = $commentModel->getComments($limit, $offset);
+        } else {
+            $comments = $commentModel->getComments();
+        }
+
         $comments = array_map($commentSerializer, $comments);
         $comments = json_encode($comments);
 

@@ -112,9 +112,11 @@ class Comment
     }
 
     /**
+     * @param integer $limit
+     * @param integer $offset
      * @returns array
      */
-    public function getComments()
+    public function getComments($limit = 0, $offset = 0)
     {
         $query = "
             SELECT
@@ -134,6 +136,11 @@ class Comment
             INNER JOIN `comment_path` ON `comment_path`.`id` = `comment_location`.`path`
             INNER JOIN `comment_thread` ON `comment_thread`.`id` = `comment_location`.`thread`
             WHERE `is_deleted` = :not_deleted";
+
+        if ($limit > 0) {
+            $query .= "
+                LIMIT {$offset}, {$limit}";
+        }
 
         $bindings = [
             'not_deleted' => 0,
