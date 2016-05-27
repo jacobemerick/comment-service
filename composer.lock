@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "0a937a354e7829a0226af37411f05140",
-    "content-hash": "0341857eace7e242ee59f452e82c698e",
+    "hash": "06283ebe65529f3ec4be5a8a674f7ddb",
+    "content-hash": "70f513e8bf64222e1532a6e053cfecfa",
     "packages": [
         {
             "name": "aura/di",
@@ -138,12 +138,17 @@
         },
         {
             "name": "jacobemerick/talus",
-            "version": "dev-master",
+            "version": "0.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jacobemerick/talus.git",
+                "reference": "19a0614016fe4edc391d496b9515ce2d504a5bd4"
+            },
             "dist": {
-                "type": "path",
-                "url": "../talus",
-                "reference": "34e0d0e78b6485520eeccc1f7cee60f6fad667e2",
-                "shasum": null
+                "type": "zip",
+                "url": "https://api.github.com/repos/jacobemerick/talus/zipball/19a0614016fe4edc391d496b9515ce2d504a5bd4",
+                "reference": "19a0614016fe4edc391d496b9515ce2d504a5bd4",
+                "shasum": ""
             },
             "require": {
                 "container-interop/container-interop": "^1.1",
@@ -163,11 +168,7 @@
                     "Jacobemerick\\Talus\\": "src/"
                 }
             },
-            "autoload-dev": {
-                "psr-4": {
-                    "Jacobemerick\\Talus\\": "tests/"
-                }
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -177,9 +178,8 @@
                     "email": "jpemeric@gmail.com"
                 }
             ],
-            "transport-options": {
-                "symlink": true
-            }
+            "description": "Microframework with Swagger routing",
+            "time": "2016-05-27 11:57:43"
         },
         {
             "name": "psr/http-message",
@@ -283,13 +283,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/TheFrozenFire/PHP-Swagger-Parser.git",
-                "reference": "e03c90e879db801f6e2902a2e28525b60bd8f219"
+                "reference": "7aa99c269fddd253562f901f9194d81f64721c6c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/TheFrozenFire/PHP-Swagger-Parser/zipball/e03c90e879db801f6e2902a2e28525b60bd8f219",
-                "reference": "e03c90e879db801f6e2902a2e28525b60bd8f219",
+                "url": "https://api.github.com/repos/TheFrozenFire/PHP-Swagger-Parser/zipball/7aa99c269fddd253562f901f9194d81f64721c6c",
+                "reference": "7aa99c269fddd253562f901f9194d81f64721c6c",
                 "shasum": ""
+            },
+            "require": {
+                "php": "^5.5"
             },
             "require-dev": {
                 "phpunit/phpunit": "~3.7.22",
@@ -312,7 +315,7 @@
                 }
             ],
             "description": "Swagger parser for PHP",
-            "time": "2015-10-02 01:33:18"
+            "time": "2016-05-26 15:16:53"
         },
         {
             "name": "zendframework/zend-diactoros",
@@ -368,9 +371,7 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "jacobemerick/talus": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
