@@ -39,6 +39,11 @@ $auth = $config->auth;
 $talus->addMiddleware(function ($req, $res, $next) use ($auth) {
     $authHeader = base64_encode("{$auth->username}:{$auth->password}");
     $authHeader = "Basic {$authHeader}";
+
+    if ($_SERVER['REDIRECT_X_HTTP_AUTHORIZATION']) {
+        $req = $req->withHeader('Authorization', $_SERVER['REDIRECT_X_HTTP_AUTHORIZATION']);
+    }
+
     if ($authHeader != current($req->getHeader('Authorization'))) {
         $res = $res->withStatus(403);
         return $res;
