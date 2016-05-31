@@ -25,7 +25,7 @@ class Comment
                 'website' => $comment['commenter_website'],
             ]),
             'body' => $comment['body'],
-            'url' => "{$comment['domain']}{$comment['path']}",
+            'url' => $comment['url'],
             'thread' => $comment['thread'],
         ];
     }

@@ -109,7 +109,7 @@ class Comment
             $bodyId,
             $locationId,
             $commentRequestId,
-            '',
+            $body['url'],
             (int) $body['should_notify'],
             (int) $body['should_display'],
             time()
