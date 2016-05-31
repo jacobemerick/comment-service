@@ -27,6 +27,7 @@ CREATE TABLE `comment` (
   `comment_body` int(11) unsigned NOT NULL DEFAULT '0',
   `comment_location` int(11) unsigned NOT NULL DEFAULT '0',
   `comment_request` int(11) DEFAULT '0',
+  `url` varchar(255) NOT NULL DEFAULT '',
   `notify` tinyint(1) NOT NULL DEFAULT '0',
   `display` tinyint(1) NOT NULL DEFAULT '0',
   `is_deleted` tinyint(1) NOT NULL DEFAULT '0',
