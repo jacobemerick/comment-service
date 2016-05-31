@@ -23,6 +23,7 @@ class Comment
      * @param integer $body
      * @param integer $location
      * @param integer $request
+     * @param string $url
      * @param integer $notify
      * @param integer $display
      * @param integer $create_time
@@ -33,6 +34,7 @@ class Comment
         $body,
         $location,
         $request,
+        $url,
         $notify,
         $display,
         $create_time
@@ -40,15 +42,16 @@ class Comment
         $query = "
             INSERT INTO
                 `comment` (`commenter`, `comment_body`, `comment_location`, `comment_request`,
-                           `notify`, `display`, `create_time`)
+                           `url`, `notify`, `display`, `create_time`)
             VALUES
-                (:commenter, :body, :location, :request, :notify, :display, :create_time)";
+                (:commenter, :body, :location, :request, :url, :notify, :display, :create_time)";
 
         $bindings = [
             'commenter' => $commenter,
             'body' => $body,
             'location' => $location,
             'request' => $request,
+            'url' => $url,
             'notify' => $notify,
             'display' => $display,
             'create_time' => date('Y-m-d H:i:s', $create_time),
@@ -66,6 +69,7 @@ class Comment
         $query = "
             SELECT
                 `comment`.`id`,
+                `comment`.`url`,
                 `commenter`.`id` AS `commenter_id`,
                 `commenter`.`name` AS `commenter_name`,
                 `commenter`.`website` AS `commenter_website`,
@@ -123,6 +127,7 @@ class Comment
         $query = "
             SELECT
                 `comment`.`id`,
+                `comment`.`url`,
                 `commenter`.`id` AS `commenter_id`,
                 `commenter`.`name` AS `commenter_name`,
                 `commenter`.`website` AS `commenter_website`,
