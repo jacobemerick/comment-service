@@ -37,6 +37,10 @@ $talus = new Talus([
 
 $auth = $config->auth;
 $talus->addMiddleware(function ($req, $res, $next) use ($auth) {
+    if ($req->getUri()->getPath() == '/api-docs') {
+        return $next($req, $res);
+    }
+
     $authHeader = base64_encode("{$auth->username}:{$auth->password}");
     $authHeader = "Basic {$authHeader}";
 
