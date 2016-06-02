@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "06283ebe65529f3ec4be5a8a674f7ddb",
-    "content-hash": "70f513e8bf64222e1532a6e053cfecfa",
+    "hash": "ff56c51c84cc306f7c5cc57bcc158b34",
+    "content-hash": "53962a0adcfa644013ae1b070ea9987a",
     "packages": [
         {
             "name": "aura/di",
@@ -138,16 +138,16 @@
         },
         {
             "name": "jacobemerick/talus",
-            "version": "0.1.0",
+            "version": "0.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jacobemerick/talus.git",
-                "reference": "19a0614016fe4edc391d496b9515ce2d504a5bd4"
+                "reference": "b12d36363b85e69c3f2b8d82b9ad469d3f89375f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jacobemerick/talus/zipball/19a0614016fe4edc391d496b9515ce2d504a5bd4",
-                "reference": "19a0614016fe4edc391d496b9515ce2d504a5bd4",
+                "url": "https://api.github.com/repos/jacobemerick/talus/zipball/b12d36363b85e69c3f2b8d82b9ad469d3f89375f",
+                "reference": "b12d36363b85e69c3f2b8d82b9ad469d3f89375f",
                 "shasum": ""
             },
             "require": {
@@ -179,7 +179,7 @@
                 }
             ],
             "description": "Microframework with Swagger routing",
-            "time": "2016-05-27 11:57:43"
+            "time": "2016-06-01 23:55:22"
         },
         {
             "name": "psr/http-message",
