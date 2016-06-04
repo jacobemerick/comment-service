@@ -10,6 +10,14 @@
     "produces": [
         "application/json"
     ],
+    "schemes": [
+        "https"
+    ],
+    "securityDefinitions": {
+        "basicAuth": {
+            "type": "basic"
+        }
+    },
     "paths": {
         "/comments": {
             "x-swagger-router-controller": "Jacobemerick\\CommentService\\Controller\\Comment",
