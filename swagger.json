@@ -18,6 +18,11 @@
             "type": "basic"
         }
     },
+    "security": [
+        {
+            "basicAuth": []
+        }
+    ],
     "paths": {
         "/comments": {
             "x-swagger-router-controller": "Jacobemerick\\CommentService\\Controller\\Comment",
