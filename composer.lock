@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ff56c51c84cc306f7c5cc57bcc158b34",
-    "content-hash": "53962a0adcfa644013ae1b070ea9987a",
+    "hash": "7c16fa3c2638aaa5ccc379edf37d37c4",
+    "content-hash": "641038da131034ba12f940c670d5d312",
     "packages": [
         {
             "name": "aura/di",
@@ -13,17 +13,20 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/auraphp/Aura.Di.git",
-                "reference": "d90895fcfde276e7ead7bca05f4e211ea301d8a1"
+                "reference": "006ec973057b99d66c9b420999dfe1bee6def98a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/auraphp/Aura.Di/zipball/d90895fcfde276e7ead7bca05f4e211ea301d8a1",
-                "reference": "d90895fcfde276e7ead7bca05f4e211ea301d8a1",
+                "url": "https://api.github.com/repos/auraphp/Aura.Di/zipball/006ec973057b99d66c9b420999dfe1bee6def98a",
+                "reference": "006ec973057b99d66c9b420999dfe1bee6def98a",
                 "shasum": ""
             },
             "require": {
                 "container-interop/container-interop": "~1.0",
                 "php": ">=5.5.0"
+            },
+            "provide": {
+                "container-interop/container-interop-implementation": "^1.0"
             },
             "require-dev": {
                 "acclimate/container": "~1.0",
@@ -54,7 +57,7 @@
                 "di",
                 "di container"
             ],
-            "time": "2016-05-09 11:55:13"
+            "time": "2016-06-02 01:45:35"
         },
         {
             "name": "aura/sql",
@@ -110,6 +113,51 @@
             "time": "2016-05-01 14:56:48"
         },
         {
+            "name": "avalanche-development/talus",
+            "version": "0.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/avalanche-development/talus.git",
+                "reference": "2cd593127f08654c9f1189e085ca1ab078831d8e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/avalanche-development/talus/zipball/2cd593127f08654c9f1189e085ca1ab078831d8e",
+                "reference": "2cd593127f08654c9f1189e085ca1ab078831d8e",
+                "shasum": ""
+            },
+            "require": {
+                "container-interop/container-interop": "^1.1",
+                "php": ">=5.6.0",
+                "psr/http-message": "^1.0",
+                "psr/log": "^1.0",
+                "thefrozenfire/swagger": "2.0.x-dev#ef27c84532a8d0b98d76fa40381b12b3703d1bfc as 2.0.9",
+                "zendframework/zend-diactoros": "^1.3"
+            },
+            "require-dev": {
+                "codeclimate/php-test-reporter": "dev-master",
+                "phpunit/phpunit": "^5.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "AvalancheDevelopment\\Talus\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "jacobemerick",
+                    "email": "jpemeric@gmail.com"
+                }
+            ],
+            "description": "Microframework with Swagger routing",
+            "time": "2016-06-08 02:33:18"
+        },
+        {
             "name": "container-interop/container-interop",
             "version": "1.1.0",
             "source": {
@@ -135,51 +183,6 @@
             ],
             "description": "Promoting the interoperability of container objects (DIC, SL, etc.)",
             "time": "2014-12-30 15:22:37"
-        },
-        {
-            "name": "jacobemerick/talus",
-            "version": "0.1.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/jacobemerick/talus.git",
-                "reference": "b12d36363b85e69c3f2b8d82b9ad469d3f89375f"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/jacobemerick/talus/zipball/b12d36363b85e69c3f2b8d82b9ad469d3f89375f",
-                "reference": "b12d36363b85e69c3f2b8d82b9ad469d3f89375f",
-                "shasum": ""
-            },
-            "require": {
-                "container-interop/container-interop": "^1.1",
-                "php": ">=5.6.0",
-                "psr/http-message": "^1.0",
-                "psr/log": "^1.0",
-                "thefrozenfire/swagger": "2.0.x-dev#ef27c84532a8d0b98d76fa40381b12b3703d1bfc as 2.0.8",
-                "zendframework/zend-diactoros": "^1.3"
-            },
-            "require-dev": {
-                "codeclimate/php-test-reporter": "dev-master",
-                "phpunit/phpunit": "^5.3"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Jacobemerick\\Talus\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "jacobemerick",
-                    "email": "jpemeric@gmail.com"
-                }
-            ],
-            "description": "Microframework with Swagger routing",
-            "time": "2016-06-01 23:55:22"
         },
         {
             "name": "psr/http-message",

@@ -4,7 +4,7 @@ require_once __DIR__ . '/vendor/autoload.php';
 
 use Aura\Di\ContainerBuilder;
 use Aura\Sql\ExtendedPdo;
-use Jacobemerick\Talus\Talus;
+use AvalancheDevelopment\Talus\Talus;
 
 // load the config for the application
 $config_path = __DIR__ . '/config.json';
