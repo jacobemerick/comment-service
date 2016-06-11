@@ -37,6 +37,9 @@
                         "$ref": "#/parameters/PerPage"
                     },
                     {
+                        "$ref": "#/parameters/Order"
+                    },
+                    {
                         "$ref": "#/parameters/Domain"
                     },
                     {
@@ -297,6 +300,12 @@
             "name": "domain",
             "in": "query",
             "description": "Domain to restrict comments to",
+            "type": "string"
+        },
+        "Order": {
+            "name": "order",
+            "in": "query",
+            "description": "Comma-separated list of order options",
             "type": "string"
         },
         "Page": {
