@@ -163,6 +163,8 @@ class Comment
         $offset = 0;
         $domain = '';
         $path = '';
+        $order = 'date';
+        $is_ascending = true;
 
         $query = $req->getQueryParams();
         if (array_key_exists('per_page', $query)) {
@@ -177,14 +179,21 @@ class Comment
         if (array_key_exists('path', $query)) {
             $path = $query['path'];
         }
+        if (array_key_exists('order', $query)) {
+            $order = $query['order'];
+            if (substr($order, 0, 1) == '-') {
+                $is_ascending = false;
+                $order = substr($order, 1);
+            }
+        }
 
         $commentSerializer = new CommentSerializer;
         $commentModel = new CommentModel($this->container->get('dbal'));
 
         if ($limit > 0) {
-            $comments = $commentModel->getComments($domain, $path, $limit, $offset);
+            $comments = $commentModel->getComments($domain, $path, $order, $is_ascending, $limit, $offset);
         } else {
-            $comments = $commentModel->getComments($domain, $path);
+            $comments = $commentModel->getComments($domain, $path, $order, $is_ascending);
         }
 
         $comments = array_map($commentSerializer, $comments);

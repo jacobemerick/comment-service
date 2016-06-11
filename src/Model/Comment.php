@@ -120,14 +120,23 @@ class Comment
      * @param string $path
      * @param integer $limit
      * @param integer $offset
+     * @param string $order
+     * @param boolean $is_ascending
      * @returns array
      */
-    public function getComments($domain = '', $path = '', $limit = 0, $offset = 0)
-    {
+    public function getComments(
+        $domain = '',
+        $path = '',
+        $order = '',
+        $is_ascending = true,
+        $limit = 0,
+        $offset = 0
+    ) {
         $query = "
             SELECT
                 `comment`.`id`,
                 `comment`.`url`,
+                `comment`.`create_time` AS `date`,
                 `commenter`.`id` AS `commenter_id`,
                 `commenter`.`name` AS `commenter_name`,
                 `commenter`.`website` AS `commenter_website`,
@@ -151,6 +160,11 @@ class Comment
         if ($path != '') {
             $query .= " AND
                 `comment_path`.`path` = :path";
+        }
+        if ($order != '') {
+            $direction = ($is_ascending) ? 'ASC' : 'DESC';
+            $query .= "
+                ORDER BY {$order} {$direction}";
         }
 
         if ($limit > 0) {
