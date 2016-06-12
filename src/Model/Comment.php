@@ -118,10 +118,11 @@ class Comment
     /**
      * @param string $domain
      * @param string $path
-     * @param integer $limit
-     * @param integer $offset
      * @param string $order
      * @param boolean $is_ascending
+     * @param boolean $only_displayable
+     * @param integer $limit
+     * @param integer $offset
      * @returns array
      */
     public function getComments(
@@ -129,6 +130,7 @@ class Comment
         $path = '',
         $order = '',
         $is_ascending = true,
+        $only_displayable = true,
         $limit = 0,
         $offset = 0
     ) {
@@ -161,6 +163,10 @@ class Comment
             $query .= " AND
                 `comment_path`.`path` = :path";
         }
+        if ($only_displayable) {
+            $query .= " AND
+                `comment`.`display` = :displayable";
+        }
         if ($order != '') {
             $direction = ($is_ascending) ? 'ASC' : 'DESC';
             $query .= "
@@ -180,6 +186,9 @@ class Comment
         }
         if ($path != '') {
             $bindings['path'] = $path;
+        }
+        if ($only_displayable) {
+            $bindings['displayable'] = 1;
         }
 
         return $this->extendedPdo->fetchAll($query, $bindings);

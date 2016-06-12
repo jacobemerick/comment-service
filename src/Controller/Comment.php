@@ -197,7 +197,7 @@ class Comment
         $commentModel = new CommentModel($this->container->get('dbal'));
 
         if ($limit > 0) {
-            $comments = $commentModel->getComments($domain, $path, $order, $is_ascending, $limit, $offset);
+            $comments = $commentModel->getComments($domain, $path, $order, $is_ascending, true, $limit, $offset);
         } else {
             $comments = $commentModel->getComments($domain, $path, $order, $is_ascending);
         }
