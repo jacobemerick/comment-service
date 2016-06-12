@@ -73,7 +73,7 @@ class Commenter
     public function findByFields($name, $email, $website)
     {
         $query = "
-            SELECT `id`
+            SELECT *
             FROM `commenter`
             WHERE `name` = :name AND
                   `email` = :email AND
@@ -86,7 +86,7 @@ class Commenter
             'website' => $website,
         ];
 
-        return $this->extendedPdo->fetchValue($query, $bindings);
+        return $this->extendedPdo->fetchOne($query, $bindings);
     }
 
     /**

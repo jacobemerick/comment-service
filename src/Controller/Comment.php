@@ -41,17 +41,18 @@ class Comment
 
         // todo option to pass in by commenter id
         $commenterModel = new CommenterModel($this->container->get('dbal'));
-        $commenterId = $commenterModel->findByFields(
+        $commenter = $commenterModel->findByFields(
             $body['commenter']['name'],
             $body['commenter']['email'],
             $body['commenter']['website']
         );
-        if (!$commenterId) {
+        if (!$commenter) {
             $commenterId = $commenterModel->create(
                 $body['commenter']['name'],
                 $body['commenter']['email'],
                 $body['commenter']['website']
             );
+            $commenter = $commenterModel->findById($commenterId);
         }
 
         $bodyModel = new CommentBodyModel($this->container->get('dbal'));
@@ -103,15 +104,20 @@ class Comment
             );
         }
 
+        $shouldDisplay = $commenter['is_trusted'];
+        if (!empty($body['should_display'])) {
+            $shouldDisplay = (int) $body['should_display'];
+        }
+
         $commentModel = new CommentModel($this->container->get('dbal'));
         $commentId = $commentModel->create(
-            $commenterId,
+            $commenter['id'],
             $bodyId,
             $locationId,
             $commentRequestId,
             $body['url'],
             (int) $body['should_notify'],
-            (int) $body['should_display'],
+            $shouldDisplay,
             time()
         );
 
