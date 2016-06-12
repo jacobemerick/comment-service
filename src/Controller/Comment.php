@@ -177,7 +177,7 @@ class Comment
             $limit = $query['per_page'];
         }
         if (array_key_exists('page', $query)) {
-            $offset = $query['page'] * $query['per_page'];
+            $offset = ($query['page'] - 1) * $query['per_page'];
         }
         if (array_key_exists('domain', $query)) {
             $domain = $query['domain'];
