@@ -2,6 +2,7 @@
 
 namespace Jacobemerick\CommentService\Serializer;
 
+use DateTime;
 use Jacobemerick\CommentService\Serializer\Commenter as CommenterSerializer;
 
 class Comment
@@ -25,6 +26,7 @@ class Comment
                 'website' => $comment['commenter_website'],
             ]),
             'body' => $comment['body'],
+            'date' => (new DateTime($comment['date']))->format('c'),
             'url' => $comment['url'],
             'thread' => $comment['thread'],
         ];
