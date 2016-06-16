@@ -8,14 +8,14 @@
             "name": "Jacob Emerick"
         }
     ],
-    "minimum-stability": "dev",
     "require": {
         "php": ">=5.4",
-        "avalanche-development/talus": "^0.2.0",
+        "avalanche-development/talus": "^0.2",
         "psr/http-message": "^1.0",
         "container-interop/container-interop": "^1.1",
         "aura/di": "^3.1",
-        "aura/sql": "^2.5"
+        "aura/sql": "^2.5",
+        "monolog/monolog": "^1.19"
     },
     "autoload": {
         "psr-4": {
