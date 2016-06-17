@@ -1,5 +1,8 @@
 <?php
 
+$startTime = microtime(true);
+$startMemory = memory_get_usage();
+
 require_once __DIR__ . '/vendor/autoload.php';
 
 use Aura\Di\ContainerBuilder;
@@ -27,6 +30,19 @@ $di = $builder->newInstance();
 
 $di->params['Aura\Sql\ExtendedPdo'] = (array) $config->database;
 $di->set('dbal', $di->lazyNew('Aura\Sql\ExtendedPdo'));
+
+$di->set('logger', $di->lazyNew(
+    'Monolog\Logger',
+    [
+        'name' => 'default'
+    ],
+    [
+        'pushHandler' => (new Monolog\Handler\StreamHandler(
+            __DIR__ . '/logs/default.log',
+            Monolog\Logger::INFO
+        ))
+    ]
+));
 
 $swagger = fopen(__DIR__ . '/swagger.json', 'r');
 
@@ -86,3 +102,9 @@ $talus->addMiddleware(function ($req, $res, $next) {
 // todo add error handler
 
 $talus->run();
+
+$di->get('logger')->addInfo('Runtime stats', [
+    'request' => $_SERVER['REQUEST_URI'],
+    'time' => (microtime(true) - $startTime),
+    'memory' => (memory_get_usage() - $startMemory),
+]);
