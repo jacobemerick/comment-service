@@ -197,7 +197,9 @@
                 "id",
                 "commenter",
                 "body",
+                "date",
                 "url",
+                "reply_to",
                 "thread"
             ],
             "properties": {
@@ -215,6 +217,9 @@
                     "format": "date-time"
                 },
                 "url": {
+                    "type": "string"
+                },
+                "reply_to": {
                     "type": "string"
                 },
                 "thread": {

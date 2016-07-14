@@ -114,6 +114,7 @@ class Comment
             $commenter['id'],
             $bodyId,
             $locationId,
+            $body['reply_to'],
             $commentRequestId,
             $body['url'],
             (int) $body['should_notify'],

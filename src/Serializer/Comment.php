@@ -27,7 +27,8 @@ class Comment
             ]),
             'body' => $comment['body'],
             'date' => (new DateTime($comment['date']))->format('c'),
-            'url' => $comment['url'],
+            'url' => $comment['url'], // todo magic replacement
+            'reply_to' => $comment['reply_to'],
             'thread' => $comment['thread'],
         ];
     }

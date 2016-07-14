@@ -22,6 +22,7 @@ class Comment
      * @param integer $commenter
      * @param integer $body
      * @param integer $location
+     * @param integer $reply_to
      * @param integer $request
      * @param string $url
      * @param integer $notify
@@ -33,6 +34,7 @@ class Comment
         $commenter,
         $body,
         $location,
+        $reply_to,
         $request,
         $url,
         $notify,
@@ -41,7 +43,7 @@ class Comment
     ) {
         $query = "
             INSERT INTO
-                `comment` (`commenter`, `comment_body`, `comment_location`, `comment_request`,
+                `comment` (`commenter`, `comment_body`, `comment_location`, `reply_to`, `comment_request`,
                            `url`, `notify`, `display`, `create_time`)
             VALUES
                 (:commenter, :body, :location, :request, :url, :notify, :display, :create_time)";
@@ -50,6 +52,7 @@ class Comment
             'commenter' => $commenter,
             'body' => $body,
             'location' => $location,
+            'reply_to' => $reply_to,
             'request' => $request,
             'url' => $url,
             'notify' => $notify,
@@ -76,7 +79,8 @@ class Comment
                 `comment_body`.`body`,
                 `comment_domain`.`domain`,
                 `comment_path`.`path`,
-                `comment_thread`.`thread`
+                `comment_thread`.`thread`,
+                `comment`.`reply_to`
             FROM `comment`
             INNER JOIN `commenter` ON `commenter`.`id` = `comment`.`commenter`
             INNER JOIN `comment_body` ON `comment_body`.`id` = `comment`.`comment_body`
@@ -145,7 +149,8 @@ class Comment
                 `comment_body`.`body`,
                 `comment_domain`.`domain`,
                 `comment_path`.`path`,
-                `comment_thread`.`thread`
+                `comment_thread`.`thread`,
+                `comment`.`reply_to`
             FROM `comment`
             INNER JOIN `commenter` ON `commenter`.`id` = `comment`.`commenter`
             INNER JOIN `comment_body` ON `comment_body`.`id` = `comment`.`comment_body`
