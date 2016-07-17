@@ -46,7 +46,7 @@ class Comment
                 `comment` (`commenter`, `comment_body`, `comment_location`, `reply_to`, `comment_request`,
                            `url`, `notify`, `display`, `create_time`)
             VALUES
-                (:commenter, :body, :location, :request, :url, :notify, :display, :create_time)";
+                (:commenter, :body, :location, :reply_to, :request, :url, :notify, :display, :create_time)";
 
         $bindings = [
             'commenter' => $commenter,

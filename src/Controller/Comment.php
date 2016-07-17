@@ -108,13 +108,17 @@ class Comment
         if (!empty($body['should_display'])) {
             $shouldDisplay = (int) $body['should_display'];
         }
+        $replyTo = 0;
+        if (!empty($body['reply_to'])) {
+            $replyTo = (int) $body['reply_to'];
+        }
 
         $commentModel = new CommentModel($this->container->get('dbal'));
         $commentId = $commentModel->create(
             $commenter['id'],
             $bodyId,
             $locationId,
-            $body['reply_to'],
+            $replyTo,
             $commentRequestId,
             $body['url'],
             (int) $body['should_notify'],
