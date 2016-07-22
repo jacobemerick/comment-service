@@ -27,9 +27,14 @@ class Comment
             ]),
             'body' => $comment['body'],
             'date' => (new DateTime($comment['date']))->format('c'),
-            'url' => $comment['url'], // todo magic replacement
+            'url' => $this->prepareUrl($comment['url'], $comment),
             'reply_to' => $comment['reply_to'],
             'thread' => $comment['thread'],
         ];
+    }
+
+    protected function prepareUrl($url, array $comment)
+    {
+        return str_replace('{{id}}}', $comment['id'], $url);
     }
 }
