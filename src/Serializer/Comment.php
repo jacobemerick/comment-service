@@ -35,6 +35,6 @@ class Comment
 
     protected function prepareUrl($url, array $comment)
     {
-        return str_replace('{{id}}}', $comment['id'], $url);
+        return str_replace('{{id}}', $comment['id'], $url);
     }
 }
