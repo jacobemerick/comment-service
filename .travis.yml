@@ -5,7 +5,7 @@ php:
 
 install:
   - composer self-update
-  - composer install --dev --no-interaction --ignore-requirements
+  - composer install --dev --no-interaction --ignore-dependencies
 
 script:
   - echo "No tests"
