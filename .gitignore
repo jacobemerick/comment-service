@@ -4,3 +4,7 @@ vendor/
 
 # Configuration management
 config.json
+
+# Test information
+codeclimate.json
+coverage.xml
