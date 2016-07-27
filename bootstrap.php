@@ -1,5 +1,7 @@
 <?php
 
+date_default_timezone_set('America/Phoenix');
+
 $startTime = microtime(true);
 $startMemory = memory_get_usage();
 
