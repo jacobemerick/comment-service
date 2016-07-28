@@ -56,7 +56,7 @@ class CommentBodyTest extends PHPUnit_Framework_TestCase
             ->willReturn($lastInsertId);
 
         $model = new CommentBody($mockPdo);
-        $result = $model->create('this is a comment');
+        $result = $model->create('');
 
         $this->assertSame($lastInsertId, $result);
     }
