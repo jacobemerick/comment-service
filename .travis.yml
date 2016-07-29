@@ -1,14 +1,19 @@
 language: php
-
 php:
-  - 7
-
+- 7
 install:
-  - composer self-update
-  - composer install --dev --no-interaction --ignore-platform-reqs
-
+- composer self-update
+- composer install --dev --no-interaction --ignore-platform-reqs
 script:
-  - phpunit --tap --coverage-clover build/logs/clover.xml
-
+- phpunit --tap --coverage-clover build/logs/clover.xml
+before_install:
+- openssl aes-256-cbc -K $encrypted_a9d53792e855_key -iv $encrypted_a9d53792e855_iv
+  -in deploy_key.pem.enc -out deploy_key.pem -d
 after_script:
-  - bash bin/codeclimate.sh
+- bash bin/codeclimate.sh
+after_success:
+- eval "$(ssh-agent -s)"
+- chmod 600 deploy_key.pem
+- ssh-add deploy_key.pem
+- git remote add deploy $DEPLOY_URI
+- git push deploy
