@@ -9,6 +9,8 @@ script:
 before_install:
 - openssl aes-256-cbc -K $encrypted_a9d53792e855_key -iv $encrypted_a9d53792e855_iv
   -in deploy_key.pem.enc -out deploy_key.pem -d
+before_script:
+- echo -e "Host comments.reynrick.com\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
 after_script:
 - bash bin/codeclimate.sh
 after_success:
