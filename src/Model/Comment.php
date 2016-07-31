@@ -73,6 +73,7 @@ class Comment
             SELECT
                 `comment`.`id`,
                 `comment`.`url`,
+                `comment`.`create_time` AS `date`,
                 `commenter`.`id` AS `commenter_id`,
                 `commenter`.`name` AS `commenter_name`,
                 `commenter`.`website` AS `commenter_website`,
