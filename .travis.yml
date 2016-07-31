@@ -18,4 +18,4 @@ after_success:
 - chmod 600 deploy_key.pem
 - ssh-add deploy_key.pem
 - git remote add deploy $DEPLOY_URI
-- git push deploy master
+- git push -f deploy master
