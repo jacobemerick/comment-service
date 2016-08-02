@@ -74,9 +74,7 @@ class CreateCommenterTest extends PHPUnit_Framework_TestCase
 
         $dbal = self::$container->get('dbal');
         $verifyResponse = function ($response) use ($dbal, $commenterData) {
-            $query = "SELECT `id` FROM `commenter` ORDER BY `id` DESC LIMIT 1";
-            $id = $dbal->fetchValue($query);
-
+            $id = $dbal->fetchValue('SELECT `id` FROM `commenter` ORDER BY `id` DESC LIMIT 1');
             $expectedResponse = [
                 'id' => $id,
                 'name' => $commenterData['name'],
@@ -99,6 +97,15 @@ class CreateCommenterTest extends PHPUnit_Framework_TestCase
         $response = $commenter->createCommenter($mockRequest, $mockResponse);
 
         $this->assertInstanceOf(Response::class, $mockResponse);
+
+        $commenter = self::$container->get('dbal')
+                                     ->fetchOne('SELECT * FROM `commenter` ORDER BY `id` DESC LIMIT 1');
+
+        $this->assertEquals($commenterData['name'], $commenter['name']);
+        $this->assertEquals($commenterData['email'], $commenter['email']);
+        $this->assertEquals($commenterData['website'], $commenter['website']);
+        $this->assertEquals('', $commenter['key']);
+        $this->assertEquals('0', $commenter['is_trusted']);
     }
 
     public function testDuplicateRecord()
@@ -108,12 +115,60 @@ class CreateCommenterTest extends PHPUnit_Framework_TestCase
 
     public function testValidRequest()
     {
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        $commenterData = [
+            'name' => 'Jack Black',
+            'email' => 'jack@black.tld',
+            'website' => 'http://black.tld',
+        ];
+
+        $mockRequest = $this->createMock(Request::class);
+        $mockRequest->method('getParsedBody')
+                    ->willReturn($commenterData);
+
+        $dbal = self::$container->get('dbal');
+        $verifyResponse = function ($response) use ($dbal, $commenterData) {
+            $id = $dbal->fetchValue('SELECT `id` FROM `commenter` ORDER BY `id` DESC LIMIT 1');
+            $expectedResponse = [
+                'id' => $id,
+                'name' => $commenterData['name'],
+                'website' => $commenterData['website'],
+            ];
+            $expectedResponse = json_encode($expectedResponse);
+
+            return $expectedResponse === $response;
+        };
+
+        $mockResponseStream = $this->createMock(Stream::class);
+        $mockResponseStream->method('write')
+                           ->with($this->callback($verifyResponse));
+
+        $mockResponse = $this->createMock(Response::class);
+        $mockResponse->method('getBody')
+                     ->willReturn($mockResponseStream);
+
+        $commenter = new Commenter(self::$container);
+        $response = $commenter->createCommenter($mockRequest, $mockResponse);
+
+        $this->assertInstanceOf(Response::class, $mockResponse);
+
+        $commenter = self::$container->get('dbal')
+                                     ->fetchOne('SELECT * FROM `commenter` ORDER BY `id` DESC LIMIT 1');
+
+        $this->assertEquals($commenterData['name'], $commenter['name']);
+        $this->assertEquals($commenterData['email'], $commenter['email']);
+        $this->assertEquals($commenterData['website'], $commenter['website']);
+        $this->assertEquals('', $commenter['key']);
+        $this->assertEquals('0', $commenter['is_trusted']);
     }
 
     public function testErrorResponse()
     {
         $this->markTestIncomplete('This test has not been implemented yet.');
+    }
+
+    protected function tearDown()
+    {
+        self::$container->get('dbal')->perform('DELETE FROM `commenter`');
     }
 
     public static function tearDownAfterClass()
