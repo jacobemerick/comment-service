@@ -5,11 +5,16 @@ if [ "${TRAVIS_PULL_REQUEST}" == "false" ] && [ "${TRAVIS_BRANCH}" == "master" ]
   echo "Clears git information"
   rm -rf .git
 
+  echo "Rebuilds dependencies"
+  rm -rf vendor
+  composer install --no-dev --no-interaction --ignore-platform-reqs
+
   echo "Writing custom gitignore for build"
   echo "# Build Ignores" > .gitignore
   echo "composer.phar" >> .gitignore
   echo "config.json" >> .gitignore
   echo "deploy_key.*" >> .gitignore
+  echo "build/" >> .gitignore
   echo "codeclimate.json" >> .gitignore
   echo "coverage.xml" >> .gitignore
 

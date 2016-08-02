@@ -9,5 +9,6 @@ config.json
 deploy_key.pem
 
 # Test information
+build/
 codeclimate.json
 coverage.xml
