@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-if [ "${TRAVIS_PULL_REQUEST}" == "false" ] && [ "${TRAVIS_BRANCH}" == "master" ]
+if [ "${TRAVIS_PULL_REQUEST}" == "false" ] && [ "${TRAVIS_BRANCH}" == "master" ]; then
 
   echo "Clears git information\n"
   rm -rf .git
