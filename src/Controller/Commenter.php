@@ -5,7 +5,7 @@ namespace Jacobemerick\CommentService\Controller;
 use Interop\Container\ContainerInterface as Container;
 use Jacobemerick\CommentService\Model\Commenter as CommenterModel;
 use Jacobemerick\CommentService\Serializer\Commenter as CommenterSerializer;
-use Psr\Http\Message\RequestInterface as Request;
+use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 
 class Commenter
