@@ -24,7 +24,7 @@ if [ "${TRAVIS_PULL_REQUEST}" == "false" ] && [ "${TRAVIS_BRANCH}" == "master" ]
   git config user.name $DEPLOY_USER
   git config user.email $DEPLOY_EMAIL
   git add --all .
-  git commit -m "Deply from Travis - build {$TRAVIS_BUILD_NUMBER}"
+  git commit -m "Deploy from Travis - build {$TRAVIS_BUILD_NUMBER}"
 
   echo "Sets up permissions"
   echo -e "Host comments.reynrick.com\n\tStrictHostKeyChecking no" >> ~/.ssh/config
