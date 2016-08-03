@@ -33,7 +33,7 @@ if [ "${TRAVIS_PULL_REQUEST}" == "false" ] && [ "${TRAVIS_BRANCH}" == "master" ]
   chmod 600 deploy_key.pem
   ssh-add deploy_key.pem
 
-  echo "Sends build\n"
+  echo "Sends build"
   git push -f deploy master
 
 fi
