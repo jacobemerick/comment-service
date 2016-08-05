@@ -155,19 +155,6 @@ class Comment
      * @param Request $req
      * @param Response $res
      */
-    public function deleteComment(Request $req, Response $res)
-    {
-        $commentModel = new CommentModel($this->container->get('dbal'));
-        $commentModel->deleteById($req->getAttribute('comment_id'));
-
-        $res = $res->withStatus('204');
-        return $res;
-    }
-
-    /**
-     * @param Request $req
-     * @param Response $res
-     */
     public function getComments(Request $req, Response $res)
     {
         $limit = 0;

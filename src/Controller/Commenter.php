@@ -27,31 +27,6 @@ class Commenter
      * @param Response $res
      * @return Response
      */
-    public function createCommenter(Request $req, Response $res)
-    {
-        $body = $req->getParsedBody();
-
-        $commenterModel = new CommenterModel($this->container->get('dbal'));
-        $commenterId = $commenterModel->create(
-            $body['name'],
-            $body['email'],
-            $body['website']
-        );
-
-        $commenterSerializer = new CommenterSerializer;
-        $commenter = $commenterModel->findById($commenterId);
-        $commenter = $commenterSerializer($commenter);
-        $commenter = json_encode($commenter);
-
-        $res->getBody()->write($commenter);
-        return $res;
-    }
-
-    /**
-     * @param Request $req
-     * @param Response $res
-     * @return Response
-     */
     public function getCommenter(Request $req, Response $res)
     {
         $commenterModel = new CommenterModel($this->container->get('dbal'));
