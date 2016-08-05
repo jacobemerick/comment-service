@@ -91,42 +91,6 @@
                         "$ref": "#/responses/Error"
                     }
                 }
-            },
-            "patch": {
-                "operationId": "updateComment",
-                "description": "Updates a single Comment resource.",
-                "responses": {
-                    "200": {
-                        "$ref": "#/responses/Comment"
-                    },
-                    "default": {
-                        "$ref": "#/responses/Error"
-                    }
-                }
-            },
-            "put": {
-                "operationId": "replaceComment",
-                "description": "Replaces a single Comment resource.",
-                "responses": {
-                    "200": {
-                        "$ref": "#/responses/Comment"
-                    },
-                    "default": {
-                        "$ref": "#/responses/Error"
-                    }
-                }
-            },
-            "delete": {
-                "operationId": "deleteComment",
-                "description": "Removes a single Comment resource.",
-                "responses": {
-                    "204": {
-                        "description": "Successfully deleted Comment."
-                    },
-                    "default": {
-                        "$ref": "#/responses/Error"
-                    }
-                }
             }
         },
         "/commenters": {
@@ -145,23 +109,6 @@
                 "responses": {
                     "200": {
                         "$ref": "#/responses/CommenterList"
-                    },
-                    "default": {
-                        "$ref": "#/responses/Error"
-                    }
-                }
-            },
-            "post": {
-                "operationId": "createCommenter",
-                "description": "Creates a new Commenter resource.",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/Commenter"
-                    }
-                ],
-                "responses": {
-                    "201": {
-                        "$ref": "#/responses/Commenter"
                     },
                     "default": {
                         "$ref": "#/responses/Error"
@@ -278,13 +225,6 @@
     },
     "parameters": {
         "Comment": {
-            "name": "body",
-            "in": "body",
-            "schema": {
-                "type": "object"
-            }
-        },
-        "Commenter": {
             "name": "body",
             "in": "body",
             "schema": {
