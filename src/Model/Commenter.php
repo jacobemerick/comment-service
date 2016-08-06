@@ -108,12 +108,13 @@ class Commenter
     public function getNotificationRecipients($locationId)
     {
         $query = "
-            SELECT `name`, `email`
+            SELECT `commenter`.`id`, `name`, `email`
             FROM `commenter`
             INNER JOIN `comment` ON `comment`.`commenter` = `commenter`.`id` AND
                                     `comment`.`comment_location` = :location AND
                                     `comment`.`notify` = :should_notify AND
-                                    `comment`.`display` = :is_displayed";
+                                    `comment`.`display` = :is_displayed
+            GROUP BY `commenter`.`id`";
 
         $bindings = [
             'location' => $locationId,
