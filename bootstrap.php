@@ -47,6 +47,7 @@ $di->set('logger', $di->lazyNew(
 ));
 
 $di->set('mail', $di->lazyNew('Jacobemerick\Archangel\Archangel'));
+$di->params['Jacobemerick\Archangel\Archangel']['setLogger'] = $di->lazyGet('logger');
 
 $swagger = fopen(__DIR__ . '/swagger.json', 'r');
 
