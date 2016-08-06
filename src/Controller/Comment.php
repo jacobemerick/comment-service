@@ -131,6 +131,10 @@ class Comment
         $comment = $commentSerializer($comment);
         $comment = json_encode($comment);
 
+        if ($shouldDisplay) {
+            $this->sendNotifications($locationId, $comment);
+        }
+
         $res->getBody()->write($comment);
         return $res;
     }
@@ -199,5 +203,67 @@ class Comment
 
         $res->getBody()->write($comments);
         return $res;
+    }
+
+    /**
+     * @param integer $locationId
+     * @param Comment $comment
+     */
+    protected function sendNotifications($locationId, Comment $comment)
+    {
+        // collect people to send notification to
+        // filter out current user
+        // if no one, eject
+
+        switch ($domain) {
+            case 'blog.jacobemerick.com':
+                $pageType = 'post';
+                $domainTitle = "Jacob Emerick's Blog";
+                break;
+            case 'waterfallsofthekeweenaw.com':
+                $pageType = 'page';
+                $domainTitle = 'Waterfalls of the Keweenaw';
+                break;
+            default:
+                $pageType = 'page';
+                $domainTitle = $domain;
+                break;
+        }
+        $subject = sprintf('New Comment on %s', $domainTitle);
+        $message = sprintf(
+            $this->getMessageTemplate(),
+            $pageType,
+            $domainTitle,
+            $commentDate,
+            $commenterName,
+            $comment,
+            $commentUrl,
+            $pageType
+        );
+
+        $mailer = $this->container->get('mail');
+        $mailer->setFrom('email', 'name'); // save in config?
+        $mailer->setReplyTo('email', 'name'); // also save in config?
+        foreach ($subscriberList as $subscriber) {
+            $mailer->addTo($subscriber['email'], $subscriber['name']);
+        }
+        $mailer->setSubject($subject);
+        $mailer->setMessage($message);
+        $mailer->send();
+    }
+
+    // this should probably just return the message
+    protected function getMessageTemplate()
+    {
+        return <<<MESSAGE
+Hello!
+
+There has been a new comment on the %s at %s. You have chosen to be notified of new comments - please reply to this email if you would like to be removed from future notifications.
+
+On %s, %s commented...
+%s
+
+Visit %s to view and reply to any comments on this %s. Have a good one!
+MESSAGE;
     }
 }

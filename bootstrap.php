@@ -46,6 +46,8 @@ $di->set('logger', $di->lazyNew(
     ]
 ));
 
+$di->set('mail', $di->lazyNew('Jacobemerick\Archangel\Archangel'));
+
 $swagger = fopen(__DIR__ . '/swagger.json', 'r');
 
 $talus = new Talus([
