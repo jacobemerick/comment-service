@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "3c026b4fb442b9eddda9d4336deea1e0",
-    "content-hash": "6f4d8b60bf59ce65c0a09bb01c08ee0f",
+    "hash": "39031cfb5d23c4a6da0d0e987d0bb5c4",
+    "content-hash": "9695aeff53b01b421beddce37e1b6934",
     "packages": [
         {
             "name": "aura/di",
@@ -180,6 +180,52 @@
             ],
             "description": "Promoting the interoperability of container objects (DIC, SL, etc.)",
             "time": "2014-12-30 15:22:37"
+        },
+        {
+            "name": "jacobemerick/archangel",
+            "version": "2.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jacobemerick/archangel.git",
+                "reference": "a0acb17f2de01f1bea45d47bc856d57dfd28b7f9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jacobemerick/archangel/zipball/a0acb17f2de01f1bea45d47bc856d57dfd28b7f9",
+                "reference": "a0acb17f2de01f1bea45d47bc856d57dfd28b7f9",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0",
+                "psr/log": "^1.0"
+            },
+            "require-dev": {
+                "codeclimate/php-test-reporter": "dev-master",
+                "phpunit/phpunit": "^4.7",
+                "symfony/config": "<3.0",
+                "symfony/console": "<3.0",
+                "symfony/filesystem": "<3.0",
+                "symfony/stopwatch": "<3.0",
+                "symfony/yaml": "<3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Jacobemerick\\Archangel\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "jacobemerick",
+                    "email": "jpemeric@gmail.com"
+                }
+            ],
+            "description": "Another PHP mailing script, this time with method chaining",
+            "time": "2016-02-07 22:13:10"
         },
         {
             "name": "monolog/monolog",
@@ -440,16 +486,16 @@
     "packages-dev": [
         {
             "name": "codeclimate/php-test-reporter",
-            "version": "dev-master",
+            "version": "v0.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/codeclimate/php-test-reporter.git",
-                "reference": "9217abf84d74a6a4b7b21f2a3cf88a96118db53a"
+                "reference": "3a2d3ebdc1df5acf372458c15041af240a6fc016"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/codeclimate/php-test-reporter/zipball/9217abf84d74a6a4b7b21f2a3cf88a96118db53a",
-                "reference": "9217abf84d74a6a4b7b21f2a3cf88a96118db53a",
+                "url": "https://api.github.com/repos/codeclimate/php-test-reporter/zipball/3a2d3ebdc1df5acf372458c15041af240a6fc016",
+                "reference": "3a2d3ebdc1df5acf372458c15041af240a6fc016",
                 "shasum": ""
             },
             "require": {
@@ -494,7 +540,7 @@
                 "codeclimate",
                 "coverage"
             ],
-            "time": "2016-06-07 17:55:59"
+            "time": "2016-04-19 16:54:33"
         },
         {
             "name": "doctrine/instantiator",
@@ -2279,9 +2325,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "codeclimate/php-test-reporter": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

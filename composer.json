@@ -15,10 +15,11 @@
         "container-interop/container-interop": "^1.1",
         "aura/di": "^3.1",
         "aura/sql": "^2.5",
-        "monolog/monolog": "^1.19"
+        "monolog/monolog": "^1.19",
+        "jacobemerick/archangel": "^2.1"
     },
     "require-dev": {
-        "codeclimate/php-test-reporter": "dev-master",
+        "codeclimate/php-test-reporter": "^0.3.2",
         "phpunit/phpunit": "^5.4"
     },
     "autoload": {
