@@ -211,4 +211,59 @@ class CommenterTest extends PHPUnit_Framework_TestCase
 
         $this->assertSame($commenters, $result);
     }
+
+    public function testGetNotificationRecipients()
+    {
+        $locationId = 101;
+
+        $query = "
+            SELECT `name`, `email`
+            FROM `commenter`
+            INNER JOIN `comment` ON `comment`.`commenter` = `commenter`.`id` AND
+                                    `comment`.`comment_location` = :location AND
+                                    `comment`.`notify` = :should_notify AND
+                                    `comment`.`display` = :is_displayed";
+
+        $bindings = [
+            'location' => $locationId,
+            'should_notify' => 1,
+            'is_displayed' => 1,
+        ];
+
+        $mockPdo = $this->createMock(ExtendedPdo::class);
+        $mockPdo->method('fetchAll')
+            ->with(
+                $this->equalTo($query),
+                $this->equalTo($bindings)
+            )
+            ->willReturn(true);
+
+        $model = new Commenter($mockPdo);
+        $result = $model->getNotificationRecipients($locationId);
+
+        $this->assertNotEquals(null, $result);
+    }
+
+    public function testGetNotificationRecipientsReturnsList()
+    {
+        $commenters = [
+            [
+                'id' => 98,
+                'name' => 'Jane Black',
+            ],
+            [
+                'id' => 106,
+                'name' => 'Joe Schmoe',
+            ],
+        ];
+
+        $mockPdo = $this->createMock(ExtendedPdo::class);
+        $mockPdo->method('fetchAll')
+            ->willReturn($commenters);
+
+        $model = new Commenter($mockPdo);
+        $result = $model->getNotificationRecipients(0);
+
+        $this->assertSame($commenters, $result);
+    }
 }
