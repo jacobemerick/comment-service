@@ -129,8 +129,6 @@ class Comment
 
         $commentSerializer = new CommentSerializer;
         $comment = $commentModel->findById($commentId);
-        $comment = $commentSerializer($comment);
-        $comment = json_encode($comment);
 
         if ($shouldDisplay) {
             $notificationHandler = new NotificationHandler(
@@ -139,6 +137,9 @@ class Comment
             );
             $notificationHandler($locationId, $comment);
         }
+
+        $comment = $commentSerializer($comment);
+        $comment = json_encode($comment);
 
         $res->getBody()->write($comment);
         return $res;

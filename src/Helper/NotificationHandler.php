@@ -5,6 +5,7 @@ namespace Jacobemerick\CommentService\Helper;
 use Aura\Sql\ExtendedPdo;
 use DateTime;
 use Jacobemerick\Archangel\Archangel;
+use Jacobemerick\CommentService\Model\Commenter;
 
 class NotificationHandler
 {
@@ -14,6 +15,18 @@ class NotificationHandler
 
     /** @var Archangel */
     protected $archangel;
+
+    /** @var array */
+    protected static $from = [
+        'name' => 'Comment Notifier 3000',
+        'email' => 'comments@jacobemerick.com',
+    ];
+
+    /** @var array */
+    protected static $replyTo = [
+        'name' => 'Jacob Emerick',
+        'email' => 'jpemeric@gmail.com',
+    ];
 
     /** @var string */
     protected static $subjectTemplate = 'New comment on %s';
@@ -27,7 +40,7 @@ There has been a new comment on the %s at %s. You have chosen to be notified of 
 On %s, %s commented...
 %s
 
-Visit %s to view and reply to any comments on this %s. Have a good one!
+Visit %s to view and reply. Have a good one!
 MESSAGE;
 
     /**
@@ -42,28 +55,44 @@ MESSAGE;
 
     /**
      * @param integer $locationId
-     * @param Comment $comment
+     * @param array $comment
+     * @return null
      */
-    protected function __invoke($locationId, Comment $comment)
+    public function __invoke($locationId, array $comment)
     {
-        // collect people to send notification to
-        // filter out current user
-        // if no one, eject
+        $commenter = new Commenter($this->dbal);
+        $recipientList = $commenter->getNotificationRecipients($locationId);
 
-        $templateParameters = $this->getTemplateParameters($domain);
+        $recipientList = array_filter($recipientList, function ($recipient) use ($comment) {
+            return $recipient['id'] !== $comment['commenter_id'];
+        });
+
+        if (empty($recipientList)) {
+            return;
+        }
+
+        $templateParameters = $this->getTemplateParameters($comment['domain']);
         extract($templateParameters);
         $subject = $this->getSubject($domainTitle);
-        $message = $this->getMessage($pageType, $domainTitle, DATE, NAME, COMMENT, URL);
+        $message = $this->getMessage(
+            $pageType,
+            $domainTitle,
+            new DateTime($comment['date']),
+            $comment['commenter_name'],
+            $comment['body'],
+            str_replace('{{id}}', $comment['id'], $comment['url'])
+        );
 
-        $this->mailer->setFrom('email', 'name'); // save in config?
-        $this->mailer->setReplyTo('email', 'name'); // also save in config?
-        foreach ($subscriberList as $subscriber) {
-            // should this send separate emails or all in one?
-            $this->mailer->addTo($subscriber['email'], $subscriber['name']);
+        $this->mailer->setFrom(self::$from['email'], self::$from['name'])
+            ->setReplyTo(self::$replyTo['email'], self::$replyTo['name'])
+            ->setSubject($subject)
+            ->setPlainMessage($message);
+
+        foreach ($recipientList as $recipient) {
+            $singleMailer = clone $this->mailer;
+            $result = $singleMailer->addTo($recipient['email'], $recipient['name'])->send();
+            unset($singleMailer);
         }
-        $this->mailer->setSubject($subject);
-        $this->mailer->setMessage($message);
-        $this->mailer->send();
     }
 
     /**
@@ -87,7 +116,7 @@ MESSAGE;
                 break;
         }
 
-        return compact($pageType, $domainTitle);
+        return compact('pageType', 'domainTitle');
     }
 
     /**
@@ -96,7 +125,7 @@ MESSAGE;
      */
     protected function getSubject($domainTitle)
     {
-        return sprintf(self::subjectTemplate, $domainTitle);
+        return sprintf(self::$subjectTemplate, $domainTitle);
     }
 
     /**
@@ -123,8 +152,7 @@ MESSAGE;
             $commentDate->format('F j, Y g:i a'),
             $commenterName,
             $comment,
-            $commentUrl,
-            $pageType
+            $commentUrl
         );
     }
 }
