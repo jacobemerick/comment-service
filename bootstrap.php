@@ -41,10 +41,13 @@ $di->set('logger', $di->lazyNew(
     [
         'pushHandler' => (new Monolog\Handler\StreamHandler(
             __DIR__ . '/logs/default.log',
-            Monolog\Logger::INFO
+            Monolog\Logger::DEBUG
         ))
     ]
 ));
+
+$di->set('mail', $di->lazyNew('Jacobemerick\Archangel\Archangel'));
+$di->setters['Jacobemerick\Archangel\Archangel']['setLogger'] = $di->lazyGet('logger');
 
 $swagger = fopen(__DIR__ . '/swagger.json', 'r');
 

@@ -3,6 +3,7 @@
 namespace Jacobemerick\CommentService\Controller;
 
 use Interop\Container\ContainerInterface as Container;
+use Jacobemerick\CommentService\Helper\NotificationHandler;
 use Jacobemerick\CommentService\Model\Comment as CommentModel;
 use Jacobemerick\CommentService\Model\CommentBody as CommentBodyModel;
 use Jacobemerick\CommentService\Model\CommentDomain as CommentDomainModel;
@@ -128,6 +129,15 @@ class Comment
 
         $commentSerializer = new CommentSerializer;
         $comment = $commentModel->findById($commentId);
+
+        if ($shouldDisplay) {
+            $notificationHandler = new NotificationHandler(
+                $this->container->get('dbal'),
+                $this->container->get('mail')
+            );
+            $notificationHandler($locationId, $comment);
+        }
+
         $comment = $commentSerializer($comment);
         $comment = json_encode($comment);
 

@@ -22,7 +22,7 @@ class Commenter
      * @param string $name
      * @param string $email
      * @param string $website
-     * @returns integer
+     * @return integer
      */
     public function create($name, $email, $website)
     {
@@ -47,7 +47,7 @@ class Commenter
 
     /**
      * @param integer $id
-     * @returns array
+     * @return array
      */
     public function findById($id)
     {
@@ -68,7 +68,7 @@ class Commenter
      * @param string $name
      * @param string $email
      * @param string $website
-     * @returns array
+     * @return array
      */
     public function findByFields($name, $email, $website)
     {
@@ -90,7 +90,7 @@ class Commenter
     }
 
     /**
-     * @returns array
+     * @return array
      */
     public function getCommenters()
     {
@@ -99,5 +99,29 @@ class Commenter
             FROM `commenter`";
 
         return $this->extendedPdo->fetchAll($query);
+    }
+
+    /**
+     * @param integer $locationId
+     * @return array
+     */
+    public function getNotificationRecipients($locationId)
+    {
+        $query = "
+            SELECT `commenter`.`id`, `name`, `email`
+            FROM `commenter`
+            INNER JOIN `comment` ON `comment`.`commenter` = `commenter`.`id` AND
+                                    `comment`.`comment_location` = :location AND
+                                    `comment`.`notify` = :should_notify AND
+                                    `comment`.`display` = :is_displayed
+            GROUP BY `commenter`.`id`";
+
+        $bindings = [
+            'location' => $locationId,
+            'should_notify' => 1,
+            'is_displayed' => 1,
+        ];
+
+        return $this->extendedPdo->fetchAll($query, $bindings);
     }
 }
