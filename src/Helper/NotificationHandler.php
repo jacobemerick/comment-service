@@ -97,7 +97,7 @@ MESSAGE;
 
     /**
      * @param string $domain
-     * @returns array
+     * @return array
      */
     protected function getTemplateParameters($domain)
     {
@@ -121,7 +121,7 @@ MESSAGE;
 
     /**
      * @param string $domainTitle
-     * @returns string
+     * @return string
      */
     protected function getSubject($domainTitle)
     {
