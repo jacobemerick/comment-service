@@ -49,7 +49,18 @@ $di->set('logger', $di->lazyNew(
 $di->set('mail', $di->lazyNew('Jacobemerick\Archangel\Archangel'));
 $di->setters['Jacobemerick\Archangel\Archangel']['setLogger'] = $di->lazyGet('logger');
 
-$swagger = fopen(__DIR__ . '/swagger.json', 'r');
+$handle = fopen(__DIR__ . '/swagger.json', 'r');
+$swagger = '';
+while (!feof($handle)) {
+    $swagger .= fread($handle, 8192);
+}
+fclose($handle);
+
+$swagger = json_decode($swagger);
+if (json_last_error() !== JSON_ERROR_NONE) {
+    var_dump('oh noes the swagz is badz');
+    exit;
+}
 
 $talus = new Talus([
     'container' => $di,
