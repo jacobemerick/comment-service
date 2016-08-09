@@ -115,7 +115,14 @@ $talus->addMiddleware(function ($req, $res, $next) {
     return $next($req, $res);
 });
 
-// todo add error handler
+$talus->setErrorHandler(function ($req, $res, $e) {
+    $body = json_encode([
+        'error' => $e->getMessage(),
+    ]);
+
+    $res->getBody()->write($body);
+    return $res;
+});
 
 $talus->run();
 
