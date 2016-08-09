@@ -175,7 +175,7 @@ class CommentTest extends PHPUnit_Framework_TestCase
         $this->assertNotEquals(null, $result);
     }
 
-    public function testGetCommentersSendsParams()
+    public function testGetCommentsSendsParams()
     {
         $query = "
             SELECT
@@ -217,7 +217,7 @@ class CommentTest extends PHPUnit_Framework_TestCase
         $this->assertNotEquals(null, $result);
     }
 
-    public function testGetCommentersHandlesDomainFilter()
+    public function testGetCommentsHandlesDomainFilter()
     {
         $query = "
             SELECT
@@ -262,7 +262,7 @@ class CommentTest extends PHPUnit_Framework_TestCase
         $this->assertNotEquals(null, $result);
     }
 
-    public function testGetCommentersHandlesPathFilter()
+    public function testGetCommentsHandlesPathFilter()
     {
         $query = "
             SELECT
@@ -307,7 +307,7 @@ class CommentTest extends PHPUnit_Framework_TestCase
         $this->assertNotEquals(null, $result);
     }
 
-    public function testGetCommentersHandlesDefaultSort()
+    public function testGetCommentsHandlesDefaultSort()
     {
         $order = 'date';
         $query = "
@@ -351,7 +351,7 @@ class CommentTest extends PHPUnit_Framework_TestCase
         $this->assertNotEquals(null, $result);
     }
 
-    public function testGetCommentersHandlesDescSort()
+    public function testGetCommentsHandlesDescSort()
     {
         $order = 'commenter_id';
         $query = "
@@ -395,7 +395,7 @@ class CommentTest extends PHPUnit_Framework_TestCase
         $this->assertNotEquals(null, $result);
     }
 
-    public function testGetCommentersHandlesDisplayableFilter()
+    public function testGetCommentsHandlesDisplayableFilter()
     {
         $query = "
             SELECT
@@ -435,7 +435,7 @@ class CommentTest extends PHPUnit_Framework_TestCase
         $this->assertNotEquals(null, $result);
     }
 
-    public function testGetCommentersHandlesLimit()
+    public function testGetCommentsHandlesLimit()
     {
         $limit = 10;
         $query = "
@@ -479,7 +479,7 @@ class CommentTest extends PHPUnit_Framework_TestCase
         $this->assertNotEquals(null, $result);
     }
 
-    public function testGetCommentersHandlesLimitAndOffset()
+    public function testGetCommentsHandlesLimitAndOffset()
     {
         $offset = 20;
         $limit = 5;
