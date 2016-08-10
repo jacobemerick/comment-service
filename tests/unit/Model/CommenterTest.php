@@ -174,7 +174,8 @@ class CommenterTest extends PHPUnit_Framework_TestCase
     {
         $query = "
             SELECT *
-            FROM `commenter`";
+            FROM `commenter`
+            WHERE `is_trusted` = :trusted";
 
         $mockPdo = $this->createMock(ExtendedPdo::class);
         $mockPdo->method('fetchAll')

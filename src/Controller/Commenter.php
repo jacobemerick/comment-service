@@ -46,9 +46,20 @@ class Commenter
      */
     public function getCommenters(Request $req, Response $res)
     {
+        $limit = 0;
+        $offset = 0;
+
+        $query = $req->getQueryParams();
+        if (array_key_exists('per_page', $query)) {
+            $limit = $query['per_page'];
+        }
+        if (array_key_exists('page', $query)) {
+            $offset = ($query['page'] - 1) * $query['per_page'];
+        }
+
         $commenterSerializer = new CommenterSerializer();
         $commenterModel = new CommenterModel($this->container->get('dbal'));
-        $commenters = $commenterModel->getCommenters();
+        $commenters = $commenterModel->getCommenters($limit, $offset);
         $commenters = array_map($commenterSerializer, $commenters);
         $commenters = json_encode($commenters);
 

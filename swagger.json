@@ -31,19 +31,34 @@
                 "description": "Gets Comment resources.",
                 "parameters": [
                     {
-                        "$ref": "#/parameters/Page"
+                        "name": "page",
+                        "in": "query",
+                        "description": "Results page to return",
+                        "type": "integer"
                     },
                     {
-                        "$ref": "#/parameters/PerPage"
+                        "name": "per_page",
+                        "in": "query",
+                        "description": "Results per response",
+                        "type": "integer"
                     },
                     {
-                        "$ref": "#/parameters/Order"
+                        "name": "order",
+                        "in": "query",
+                        "description": "Comma-separated list of order options",
+                        "type": "string"
                     },
                     {
-                        "$ref": "#/parameters/Domain"
+                        "name": "domain",
+                        "in": "query",
+                        "description": "Domain to restrict comments to",
+                        "type": "string"
                     },
                     {
-                        "$ref": "#/parameters/Path"
+                        "name": "path",
+                        "in": "query",
+                        "description": "Path to restrict comments to",
+                        "type": "string"
                     }
                 ],
                 "responses": {
@@ -60,7 +75,11 @@
                 "description": "Create a new Comment resource.",
                 "parameters": [
                     {
-                        "$ref": "#/parameters/Comment"
+                        "name": "body",
+                        "in": "body",
+                        "schema": {
+                            "type": "object"
+                        }
                     }
                 ],
                 "responses": {
@@ -75,14 +94,18 @@
         },
         "/comments/{comment_id}": {
             "x-swagger-router-controller": "Jacobemerick\\CommentService\\Controller\\Comment",
-            "parameters": [
-                {
-                    "$ref": "#/parameters/CommentIdentifier"
-                }
-            ],
             "get": {
                 "operationId": "getComment",
                 "description": "Gets a single Comment resource.",
+                "parameters": [
+                    {
+                        "name": "comment_id",
+                        "in": "path",
+                        "description": "Comment identifier.",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "$ref": "#/responses/Comment"
@@ -100,10 +123,16 @@
                 "description": "Gets Commenter resources.",
                 "parameters": [
                     {
-                        "$ref": "#/parameters/Page"
+                        "name": "page",
+                        "in": "query",
+                        "description": "Results page to return",
+                        "type": "integer"
                     },
                     {
-                        "$ref": "#/parameters/PerPage"
+                        "name": "per_page",
+                        "in": "query",
+                        "description": "Results per response",
+                        "type": "integer"
                     }
                 ],
                 "responses": {
@@ -118,14 +147,18 @@
         },
         "/commenters/{commenter_id}": {
             "x-swagger-router-controller": "Jacobemerick\\CommentService\\Controller\\Commenter",
-            "parameters": [
-                {
-                    "$ref": "#/parameters/CommenterIdentifier"
-                }
-            ],
             "get": {
                 "operationId": "getCommenter",
                 "description": "Gets a Commenter resource.",
+                "parameters": [
+                    {
+                        "name": "commenter_id",
+                        "in": "path",
+                        "description": "Commenter identifier.",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "$ref": "#/responses/Commenter"
@@ -221,59 +254,6 @@
                     "type": "object"
                 }
             }
-        }
-    },
-    "parameters": {
-        "Comment": {
-            "name": "body",
-            "in": "body",
-            "schema": {
-                "type": "object"
-            }
-        },
-        "CommenterIdentifier": {
-            "name": "commenter_id",
-            "in": "path",
-            "description": "Commenter identifier.",
-            "required": true,
-            "type": "string"
-        },
-        "CommentIdentifier": {
-            "name": "comment_id",
-            "in": "path",
-            "description": "Comment identifier.",
-            "required": true,
-            "type": "string"
-        },
-        "Domain": {
-            "name": "domain",
-            "in": "query",
-            "description": "Domain to restrict comments to",
-            "type": "string"
-        },
-        "Order": {
-            "name": "order",
-            "in": "query",
-            "description": "Comma-separated list of order options",
-            "type": "string"
-        },
-        "Page": {
-            "name": "page",
-            "in": "query",
-            "description": "Results page to return",
-            "type": "integer"
-        },
-        "Path": {
-            "name": "path",
-            "in": "query",
-            "description": "Path to restrict comments to",
-            "type": "string"
-        },
-        "PerPage": {
-            "name": "per_page",
-            "in": "query",
-            "description": "Results per response",
-            "type": "integer"
         }
     },
     "responses": {

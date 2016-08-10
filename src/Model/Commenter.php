@@ -90,15 +90,27 @@ class Commenter
     }
 
     /**
+     * @param integer $limit
+     * @param integer $offset
      * @return array
      */
-    public function getCommenters()
+    public function getCommenters($limit = 0, $offset = 0)
     {
         $query = "
             SELECT *
-            FROM `commenter`";
+            FROM `commenter`
+            WHERE `is_trusted` = :trusted";
 
-        return $this->extendedPdo->fetchAll($query);
+        if ($limit > 0) {
+            $query .= "
+                LIMIT {$offset}, {$limit}";
+        }
+
+        $bindings = [
+            'trusted' => 1,
+        ];
+
+        return $this->extendedPdo->fetchAll($query, $bindings);
     }
 
     /**
