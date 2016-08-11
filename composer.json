@@ -17,7 +17,7 @@
         "aura/sql": "^2.5",
         "monolog/monolog": "^1.19",
         "jacobemerick/archangel": "^2.1",
-        "gossi/swagger": "dev-fix/extension-parsing as 0.2.3"
+        "gossi/swagger": "dev-master as 0.2.3"
     },
     "require-dev": {
         "codeclimate/php-test-reporter": "^0.3.2",
