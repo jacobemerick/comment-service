@@ -111,16 +111,16 @@
         },
         {
             "name": "avalanche-development/talus",
-            "version": "0.3.1",
+            "version": "0.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/avalanche-development/talus.git",
-                "reference": "9bc70614f1ee2c9412d4b6d7298cc020612e8509"
+                "reference": "04c3f3340627e5d3dc1fc84c22f62d97da87eb88"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/avalanche-development/talus/zipball/9bc70614f1ee2c9412d4b6d7298cc020612e8509",
-                "reference": "9bc70614f1ee2c9412d4b6d7298cc020612e8509",
+                "url": "https://api.github.com/repos/avalanche-development/talus/zipball/04c3f3340627e5d3dc1fc84c22f62d97da87eb88",
+                "reference": "04c3f3340627e5d3dc1fc84c22f62d97da87eb88",
                 "shasum": ""
             },
             "require": {
@@ -152,7 +152,7 @@
                 }
             ],
             "description": "Microframework with Swagger routing",
-            "time": "2016-08-11 12:23:31"
+            "time": "2016-08-12 12:30:28"
         },
         {
             "name": "container-interop/container-interop",
@@ -187,12 +187,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jacobemerick/swagger.git",
-                "reference": "48358fa37ead826a33ddf83f93433e297771ab52"
+                "reference": "4b34711ec546e0071e0039566b8377cd3ab70a8c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jacobemerick/swagger/zipball/48358fa37ead826a33ddf83f93433e297771ab52",
-                "reference": "48358fa37ead826a33ddf83f93433e297771ab52",
+                "url": "https://api.github.com/repos/jacobemerick/swagger/zipball/4b34711ec546e0071e0039566b8377cd3ab70a8c",
+                "reference": "4b34711ec546e0071e0039566b8377cd3ab70a8c",
                 "shasum": ""
             },
             "require": {
@@ -232,7 +232,7 @@
             "support": {
                 "source": "https://github.com/jacobemerick/swagger/tree/master"
             },
-            "time": "2016-08-11 12:13:05"
+            "time": "2016-08-12 12:27:45"
         },
         {
             "name": "jacobemerick/archangel",
