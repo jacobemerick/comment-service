@@ -30,11 +30,27 @@ if ($last_json_error !== JSON_ERROR_NONE) {
 $builder = new ContainerBuilder();
 $di = $builder->newInstance();
 
+// set up db and models
 $di->set('dbal', $di->lazyNew(
     'Aura\Sql\ExtendedPdo',
     (array) $config->database
 ));
 
+$di->set('commentModel', $di->lazyNew(
+    'Jacobemerick\CommentService\Model\Comment',
+    [
+        $di->lazyGet('dbal'),
+    ]
+));
+
+$di->set('commenterModel', $di->lazyNew(
+    'Jacobemerick\CommentService\Model\Commenter',
+    [
+        $di->lazyGet('dbal'),
+    ]
+));
+
+// set up logger
 $di->set('logger', $di->lazyNew(
     'Monolog\Logger',
     [
@@ -48,6 +64,7 @@ $di->set('logger', $di->lazyNew(
     ]
 ));
 
+// set up mailer
 $di->set('mail', $di->lazyNew(
     'Jacobemerick\Archangel\Archangel',
     [],
@@ -56,6 +73,7 @@ $di->set('mail', $di->lazyNew(
     ]
 ));
 
+// set up swagger
 $handle = fopen(__DIR__ . '/swagger.json', 'r');
 $swagger = '';
 while (!feof($handle)) {
