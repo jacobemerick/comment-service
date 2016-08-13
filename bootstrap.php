@@ -28,27 +28,17 @@ if ($last_json_error !== JSON_ERROR_NONE) {
 }
 
 $builder = new ContainerBuilder();
-$di = $builder->newInstance();
+$di = $builder->newInstance($builder::AUTO_RESOLVE);
 
 // set up db and models
 $di->set('dbal', $di->lazyNew(
     'Aura\Sql\ExtendedPdo',
     (array) $config->database
 ));
+$di->types['Aura\Sql\ExtendedPdo'] = $di->lazyGet('dbal');
 
-$di->set('commentModel', $di->lazyNew(
-    'Jacobemerick\CommentService\Model\Comment',
-    [
-        $di->lazyGet('dbal'),
-    ]
-));
-
-$di->set('commenterModel', $di->lazyNew(
-    'Jacobemerick\CommentService\Model\Commenter',
-    [
-        $di->lazyGet('dbal'),
-    ]
-));
+$di->set('commentModel', $di->lazyNew('Jacobemerick\CommentService\Model\Comment'));
+$di->set('commenterModel', $di->lazyNew('Jacobemerick\CommentService\Model\Commenter'));
 
 // set up logger
 $di->set('logger', $di->lazyNew(
