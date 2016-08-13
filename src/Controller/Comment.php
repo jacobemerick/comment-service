@@ -4,14 +4,6 @@ namespace Jacobemerick\CommentService\Controller;
 
 use Interop\Container\ContainerInterface as Container;
 use Jacobemerick\CommentService\Helper\NotificationHandler;
-use Jacobemerick\CommentService\Model\Comment as CommentModel;
-use Jacobemerick\CommentService\Model\CommentBody as CommentBodyModel;
-use Jacobemerick\CommentService\Model\CommentDomain as CommentDomainModel;
-use Jacobemerick\CommentService\Model\CommentLocation as CommentLocationModel;
-use Jacobemerick\CommentService\Model\CommentPath as CommentPathModel;
-use Jacobemerick\CommentService\Model\CommentRequest as CommentRequestModel;
-use Jacobemerick\CommentService\Model\CommentThread as CommentThreadModel;
-use Jacobemerick\CommentService\Model\Commenter as CommenterModel;
 use Jacobemerick\CommentService\Serializer\Comment as CommentSerializer;
 use Psr\Http\Message\RequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
@@ -41,68 +33,89 @@ class Comment
         $body = $req->getParsedBody();
 
         // todo option to pass in by commenter id
-        $commenterModel = new CommenterModel($this->container->get('dbal'));
-        $commenter = $commenterModel->findByFields(
-            $body['commenter']['name'],
-            $body['commenter']['email'],
-            $body['commenter']['website']
-        );
-        if (!$commenter) {
-            $commenterId = $commenterModel->create(
+        $commenter = $this->container
+            ->get('commenterModel')
+            ->findByFields(
                 $body['commenter']['name'],
                 $body['commenter']['email'],
                 $body['commenter']['website']
             );
-            $commenter = $commenterModel->findById($commenterId);
+        if (!$commenter) {
+            $commenterId = $this->container
+                ->get('commenterModel')
+                ->create(
+                    $body['commenter']['name'],
+                    $body['commenter']['email'],
+                    $body['commenter']['website']
+                );
+            $commenter = $this->container
+                ->get('commenterModel')
+                ->findById($commenterId);
         }
 
-        $bodyModel = new CommentBodyModel($this->container->get('dbal'));
-        $bodyId = $bodyModel->create($body['body']);
+        $bodyId = $this->container
+            ->get('commentBodyModel')
+            ->create($body['body']);
 
-        $domainModel = new CommentDomainModel($this->container->get('dbal'));
-        $domainId = $domainModel->findByFields($body['domain']);
+        $domainId = $this->container
+            ->get('commentDomainModel')
+            ->findByFields($body['domain']);
         if (!$domainId) {
-            $domainId = $domainModel->create($body['domain']);
+            $domainId = $this->container
+                ->get('commentDomainModel')
+                ->create($body['domain']);
         }
 
-        $pathModel = new CommentPathModel($this->container->get('dbal'));
-        $pathId = $pathModel->findByFields($body['path']);
+        $pathId = $this->container
+            ->get('commentPathModel')
+            ->findByFields($body['path']);
         if (!$pathId) {
-            $pathId = $pathModel->create($body['path']);
+            $pathId = $this->container
+                ->get('commentPathModel')
+                ->create($body['path']);
         }
 
-        $threadModel = new CommentThreadModel($this->container->get('dbal'));
-        $threadId = $threadModel->findByFields($body['thread']);
+        $threadId = $this->container
+            ->get('commentThreadModel')
+            ->findByFields($body['thread']);
         if (!$threadId) {
-            $threadId = $threadModel->create($body['thread']);
+            $threadId = $this->container
+                ->get('commentThreadModel')
+                ->create($body['thread']);
         }
 
-        $locationModel = new CommentLocationModel($this->container->get('dbal'));
-        $locationId = $locationModel->findByFields(
-            $domainId,
-            $pathId,
-            $threadId
-        );
-        if (!$locationId) {
-            $locationId = $locationModel->create(
+        $locationId = $this->container
+            ->get('commentLocationModel')
+            ->findByFields(
                 $domainId,
                 $pathId,
                 $threadId
             );
+        if (!$locationId) {
+            $locationId = $this->container
+                ->get('commentLocationModel')
+                ->create(
+                    $domainId,
+                    $pathId,
+                    $threadId
+                );
         }
 
-        $commentRequestModel = new CommentRequestModel($this->container->get('dbal'));
-        $commentRequestId = $commentRequestModel->findByFields(
-            $body['ip_address'],
-            $body['user_agent'],
-            $body['referrer']
-        );
-        if (!$commentRequestId) {
-            $commentRequestId = $commentRequestModel->create(
+        $commentRequestId = $this->container
+            ->get('commentRequestModel')
+            ->findByFields(
                 $body['ip_address'],
                 $body['user_agent'],
                 $body['referrer']
             );
+        if (!$commentRequestId) {
+            $commentRequestId = $this->container
+                ->get('commentRequestModel')
+                ->create(
+                    $body['ip_address'],
+                    $body['user_agent'],
+                    $body['referrer']
+                );
         }
 
         $shouldDisplay = $commenter['is_trusted'];
@@ -114,22 +127,24 @@ class Comment
             $replyTo = (int) $body['reply_to'];
         }
 
-        $commentModel = new CommentModel($this->container->get('dbal'));
-        $commentId = $commentModel->create(
-            $commenter['id'],
-            $bodyId,
-            $locationId,
-            $replyTo,
-            $commentRequestId,
-            $body['url'],
-            (int) $body['should_notify'],
-            $shouldDisplay,
-            time()
-        );
+        $commentId = $this->container
+            ->get('commentModel')
+            ->create(
+                $commenter['id'],
+                $bodyId,
+                $locationId,
+                $replyTo,
+                $commentRequestId,
+                $body['url'],
+                (int) $body['should_notify'],
+                $shouldDisplay,
+                time()
+            );
+        $comment = $this->container
+            ->get('commentModel')
+            ->findById($commentId);
 
         $commentSerializer = new CommentSerializer;
-        $comment = $commentModel->findById($commentId);
-
         if ($shouldDisplay) {
             $notificationHandler = new NotificationHandler(
                 $this->container->get('dbal'),
@@ -151,9 +166,11 @@ class Comment
      */
     public function getComment(Request $req, Response $res)
     {
+        $comment = $this->container
+            ->get('commentModel')
+            ->findById($req->getAttribute('comment_id'));
+
         $commentSerializer = new CommentSerializer;
-        $commentModel = new CommentModel($this->container->get('dbal'));
-        $comment = $commentModel->findById($req->getAttribute('comment_id'));
         $comment = $commentSerializer($comment);
         $comment = json_encode($comment);
 
@@ -196,12 +213,28 @@ class Comment
         }
 
         $commentSerializer = new CommentSerializer;
-        $commentModel = new CommentModel($this->container->get('dbal'));
 
         if ($limit > 0) {
-            $comments = $commentModel->getComments($domain, $path, $order, $is_ascending, true, $limit, $offset);
+            $comments = $this->container
+                ->get('commentModel')
+                ->getComments(
+                    $domain,
+                    $path,
+                    $order,
+                    $is_ascending,
+                    true,
+                    $limit,
+                    $offset
+                );
         } else {
-            $comments = $commentModel->getComments($domain, $path, $order, $is_ascending);
+            $comments = $this->container
+                ->get('commentModel')
+                ->getComments(
+                    $domain,
+                    $path,
+                    $order,
+                    $is_ascending
+                );
         }
 
         $comments = array_map($commentSerializer, $comments);

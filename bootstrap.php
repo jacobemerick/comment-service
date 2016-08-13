@@ -38,6 +38,12 @@ $di->set('dbal', $di->lazyNew(
 $di->types['Aura\Sql\ExtendedPdo'] = $di->lazyGet('dbal');
 
 $di->set('commentModel', $di->lazyNew('Jacobemerick\CommentService\Model\Comment'));
+$di->set('commentBodyModel', $di->lazyNew('Jacobemerick\CommentService\Model\CommentBody'));
+$di->set('commentDomainModel', $di->lazyNew('Jacobemerick\CommentService\Model\CommentDomain'));
+$di->set('commentLocationModel', $di->lazyNew('Jacobemerick\CommentService\Model\CommentLocation'));
+$di->set('commentPathModel', $di->lazyNew('Jacobemerick\CommentService\Model\CommentPath'));
+$di->set('commentRequestModel', $di->lazyNew('Jacobemerick\CommentService\Model\CommentRequest'));
+$di->set('commentThreadModel', $di->lazyNew('Jacobemerick\CommentService\Model\CommentThread'));
 $di->set('commenterModel', $di->lazyNew('Jacobemerick\CommentService\Model\Commenter'));
 
 // set up logger
