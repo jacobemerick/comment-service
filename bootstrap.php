@@ -30,8 +30,10 @@ if ($last_json_error !== JSON_ERROR_NONE) {
 $builder = new ContainerBuilder();
 $di = $builder->newInstance();
 
-$di->params['Aura\Sql\ExtendedPdo'] = (array) $config->database;
-$di->set('dbal', $di->lazyNew('Aura\Sql\ExtendedPdo'));
+$di->set('dbal', $di->lazyNew(
+    'Aura\Sql\ExtendedPdo',
+    (array) $config->database
+));
 
 $di->set('logger', $di->lazyNew(
     'Monolog\Logger',
@@ -46,8 +48,13 @@ $di->set('logger', $di->lazyNew(
     ]
 ));
 
-$di->set('mail', $di->lazyNew('Jacobemerick\Archangel\Archangel'));
-$di->setters['Jacobemerick\Archangel\Archangel']['setLogger'] = $di->lazyGet('logger');
+$di->set('mail', $di->lazyNew(
+    'Jacobemerick\Archangel\Archangel',
+    [],
+    [
+        'setLogger' => $di->lazyGet('logger'),
+    ]
+));
 
 $handle = fopen(__DIR__ . '/swagger.json', 'r');
 $swagger = '';
