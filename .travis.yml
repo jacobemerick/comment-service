@@ -7,6 +7,5 @@ install:
 script:
 - phpunit --testsuite unit --tap --coverage-clover build/logs/clover.xml
 - bash bin/codeclimate.sh
-- phpunit --testsuite integration
 after_success:
 - bash bin/deploy.sh

@@ -28,11 +28,25 @@ if ($last_json_error !== JSON_ERROR_NONE) {
 }
 
 $builder = new ContainerBuilder();
-$di = $builder->newInstance();
+$di = $builder->newInstance($builder::AUTO_RESOLVE);
 
-$di->params['Aura\Sql\ExtendedPdo'] = (array) $config->database;
-$di->set('dbal', $di->lazyNew('Aura\Sql\ExtendedPdo'));
+// set up db and models
+$di->set('dbal', $di->lazyNew(
+    'Aura\Sql\ExtendedPdo',
+    (array) $config->database
+));
+$di->types['Aura\Sql\ExtendedPdo'] = $di->lazyGet('dbal');
 
+$di->set('commentModel', $di->lazyNew('Jacobemerick\CommentService\Model\Comment'));
+$di->set('commentBodyModel', $di->lazyNew('Jacobemerick\CommentService\Model\CommentBody'));
+$di->set('commentDomainModel', $di->lazyNew('Jacobemerick\CommentService\Model\CommentDomain'));
+$di->set('commentLocationModel', $di->lazyNew('Jacobemerick\CommentService\Model\CommentLocation'));
+$di->set('commentPathModel', $di->lazyNew('Jacobemerick\CommentService\Model\CommentPath'));
+$di->set('commentRequestModel', $di->lazyNew('Jacobemerick\CommentService\Model\CommentRequest'));
+$di->set('commentThreadModel', $di->lazyNew('Jacobemerick\CommentService\Model\CommentThread'));
+$di->set('commenterModel', $di->lazyNew('Jacobemerick\CommentService\Model\Commenter'));
+
+// set up logger
 $di->set('logger', $di->lazyNew(
     'Monolog\Logger',
     [
@@ -46,9 +60,16 @@ $di->set('logger', $di->lazyNew(
     ]
 ));
 
-$di->set('mail', $di->lazyNew('Jacobemerick\Archangel\Archangel'));
-$di->setters['Jacobemerick\Archangel\Archangel']['setLogger'] = $di->lazyGet('logger');
+// set up mailer
+$di->set('mail', $di->lazyNew(
+    'Jacobemerick\Archangel\Archangel',
+    [],
+    [
+        'setLogger' => $di->lazyGet('logger'),
+    ]
+));
 
+// set up swagger
 $handle = fopen(__DIR__ . '/swagger.json', 'r');
 $swagger = '';
 while (!feof($handle)) {

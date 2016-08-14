@@ -3,7 +3,6 @@
 namespace Jacobemerick\CommentService\Controller;
 
 use Interop\Container\ContainerInterface as Container;
-use Jacobemerick\CommentService\Model\Commenter as CommenterModel;
 use Jacobemerick\CommentService\Serializer\Commenter as CommenterSerializer;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
@@ -29,9 +28,11 @@ class Commenter
      */
     public function getCommenter(Request $req, Response $res)
     {
-        $commenterModel = new CommenterModel($this->container->get('dbal'));
+        $commenter = $this->container
+            ->get('commenterModel')
+            ->findById($req->getAttribute('commenter_id'));
+
         $commenterSerializer = new CommenterSerializer;
-        $commenter = $commenterModel->findById($req->getAttribute('commenter_id'));
         $commenter = $commenterSerializer($commenter);
         $commenter = json_encode($commenter);
 
@@ -57,9 +58,11 @@ class Commenter
             $offset = ($query['page'] - 1) * $query['per_page'];
         }
 
-        $commenterSerializer = new CommenterSerializer();
-        $commenterModel = new CommenterModel($this->container->get('dbal'));
-        $commenters = $commenterModel->getCommenters($limit, $offset);
+        $commenters = $this->container
+            ->get('commenterModel')
+            ->getCommenters($limit, $offset);
+
+        $commenterSerializer = new CommenterSerializer;
         $commenters = array_map($commenterSerializer, $commenters);
         $commenters = json_encode($commenters);
 
