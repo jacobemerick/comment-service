@@ -22,24 +22,24 @@ class Comment
      * @param integer $commenter
      * @param integer $body
      * @param integer $location
-     * @param integer $reply_to
+     * @param integer $replyTo
      * @param integer $request
      * @param string $url
      * @param integer $notify
      * @param integer $display
-     * @param integer $create_time
+     * @param integer $createTime
      * @returns integer
      */
     public function create(
         $commenter,
         $body,
         $location,
-        $reply_to,
+        $replyTo,
         $request,
         $url,
         $notify,
         $display,
-        $create_time
+        $createTime
     ) {
         $query = "
             INSERT INTO
@@ -52,12 +52,12 @@ class Comment
             'commenter' => $commenter,
             'body' => $body,
             'location' => $location,
-            'reply_to' => $reply_to,
+            'reply_to' => $replyTo,
             'request' => $request,
             'url' => $url,
             'notify' => $notify,
             'display' => $display,
-            'create_time' => date('Y-m-d H:i:s', $create_time),
+            'create_time' => date('Y-m-d H:i:s', $createTime),
         ];
 
         $this->extendedPdo->perform($query, $bindings);
@@ -65,9 +65,9 @@ class Comment
     }
 
     /**
-     * @param integer $id
+     * @param integer $commentId
      */
-    public function findById($id)
+    public function findById($commentId)
     {
         $query = "
             SELECT
@@ -94,7 +94,7 @@ class Comment
             LIMIT 1";
 
         $bindings = [
-            'id' => $id,
+            'id' => $commentId,
             'not_deleted' => 0,
         ];
 
@@ -102,9 +102,9 @@ class Comment
     }
 
     /**
-     * @param integer $id
+     * @param integer $commentId
      */
-    public function deleteById($id)
+    public function deleteById($commentId)
     {
         $query = "
             UPDATE `comment`
@@ -114,7 +114,7 @@ class Comment
 
         $bindings = [
             'deleted' => 1,
-            'id' => $id,
+            'id' => $commentId,
         ];
 
         return $this->extendedPdo->perform($query, $bindings);
@@ -124,8 +124,8 @@ class Comment
      * @param string $domain
      * @param string $path
      * @param string $order
-     * @param boolean $is_ascending
-     * @param boolean $only_displayable
+     * @param boolean $isAscending
+     * @param boolean $onlyDisplayable
      * @param integer $limit
      * @param integer $offset
      * @returns array
@@ -134,8 +134,8 @@ class Comment
         $domain = '',
         $path = '',
         $order = '',
-        $is_ascending = true,
-        $only_displayable = true,
+        $isAscending = true,
+        $onlyDisplayable = true,
         $limit = 0,
         $offset = 0
     ) {
@@ -169,12 +169,12 @@ class Comment
             $query .= " AND
                 `comment_path`.`path` = :path";
         }
-        if ($only_displayable) {
+        if ($onlyDisplayable) {
             $query .= " AND
                 `comment`.`display` = :displayable";
         }
         if ($order != '') {
-            $direction = ($is_ascending) ? 'ASC' : 'DESC';
+            $direction = ($isAscending) ? 'ASC' : 'DESC';
             $query .= "
                 ORDER BY {$order} {$direction}";
         }
@@ -193,7 +193,7 @@ class Comment
         if ($path != '') {
             $bindings['path'] = $path;
         }
-        if ($only_displayable) {
+        if ($onlyDisplayable) {
             $bindings['displayable'] = 1;
         }
 

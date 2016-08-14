@@ -189,7 +189,7 @@ class Comment
         $domain = '';
         $path = '';
         $order = 'date';
-        $is_ascending = true;
+        $isAscending = true;
 
         $query = $req->getQueryParams();
         if (array_key_exists('per_page', $query)) {
@@ -207,7 +207,7 @@ class Comment
         if (array_key_exists('order', $query)) {
             $order = $query['order'];
             if (substr($order, 0, 1) == '-') {
-                $is_ascending = false;
+                $isAscending = false;
                 $order = substr($order, 1);
             }
         }
@@ -221,7 +221,7 @@ class Comment
                     $domain,
                     $path,
                     $order,
-                    $is_ascending,
+                    $isAscending,
                     true,
                     $limit,
                     $offset
@@ -233,7 +233,7 @@ class Comment
                     $domain,
                     $path,
                     $order,
-                    $is_ascending
+                    $isAscending
                 );
         }
 

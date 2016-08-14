@@ -46,10 +46,10 @@ class Commenter
     }
 
     /**
-     * @param integer $id
+     * @param integer $commenterId
      * @return array
      */
-    public function findById($id)
+    public function findById($commenterId)
     {
         $query = "
             SELECT *
@@ -58,7 +58,7 @@ class Commenter
             LIMIT 1";
 
         $bindings = [
-            'id' => $id,
+            'id' => $commenterId,
         ];
 
         return $this->extendedPdo->fetchOne($query, $bindings);

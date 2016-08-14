@@ -19,12 +19,12 @@ class CommentRequest
     }
 
     /**
-     * @param string $ip_address
-     * @param string $user_agent
+     * @param string $ipAddress
+     * @param string $userAgent
      * @param string $referrer
      * @returns integer
      */
-    public function create($ip_address, $user_agent, $referrer)
+    public function create($ipAddress, $userAgent, $referrer)
     {
         $query = "
             INSERT INTO
@@ -33,8 +33,8 @@ class CommentRequest
                 (:ip_address, :user_agent, :referrer)";
 
         $bindings = [
-            'ip_address' => $ip_address,
-            'user_agent' => $user_agent,
+            'ip_address' => $ipAddress,
+            'user_agent' => $userAgent,
             'referrer' => $referrer,
         ];
 
@@ -43,12 +43,12 @@ class CommentRequest
     }
 
     /**
-     * @param string $ip_address
-     * @param string $user_agent
+     * @param string $ipAddress
+     * @param string $userAgent
      * @param string $referrer
      * @returns integer
      */
-    public function findByFields($ip_address, $user_agent, $referrer)
+    public function findByFields($ipAddress, $userAgent, $referrer)
     {
         $query = "
             SELECT `id`
@@ -59,8 +59,8 @@ class CommentRequest
             LIMIT 1";
 
         $bindings = [
-            'ip_address' => $ip_address,
-            'user_agent' => $user_agent,
+            'ip_address' => $ipAddress,
+            'user_agent' => $userAgent,
             'referrer' => $referrer,
         ];
 

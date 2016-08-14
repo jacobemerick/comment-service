@@ -5,8 +5,6 @@ namespace Jacobemerick\CommentService\Serializer;
 class Commenter
 {
 
-    public function __construct() {}
-
     /**
      * @param array $comment
      * @returns array

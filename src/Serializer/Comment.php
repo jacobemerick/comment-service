@@ -8,8 +8,6 @@ use Jacobemerick\CommentService\Serializer\Commenter as CommenterSerializer;
 class Comment
 {
 
-    public function __construct() {}
-
     /**
      * @param array $comment
      * @returns array

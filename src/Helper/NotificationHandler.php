@@ -71,8 +71,7 @@ MESSAGE;
             return;
         }
 
-        $templateParameters = $this->getTemplateParameters($comment['domain']);
-        extract($templateParameters);
+        list($pageType, $domainTitle) = $this->getTemplateParameters($comment['domain']);
         $subject = $this->getSubject($domainTitle);
         $message = $this->getMessage(
             $pageType,
@@ -90,7 +89,7 @@ MESSAGE;
 
         foreach ($recipientList as $recipient) {
             $singleMailer = clone $this->mailer;
-            $result = $singleMailer->addTo($recipient['email'], $recipient['name'])->send();
+            $singleMailer->addTo($recipient['email'], $recipient['name'])->send();
             unset($singleMailer);
         }
     }
