@@ -11,7 +11,7 @@ class Commenter
     protected $extendedPdo;
 
     /**
-     * @params ExtendedPdo $extendedPdo
+     * @param ExtendedPdo $extendedPdo
      */
     public function __construct(ExtendedPdo $extendedPdo)
     {

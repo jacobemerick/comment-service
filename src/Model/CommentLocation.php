@@ -11,7 +11,7 @@ class CommentLocation
     protected $extendedPdo;
 
     /**
-     * @params ExtendedPdo $extendedPdo
+     * @param ExtendedPdo $extendedPdo
      */
     public function __construct(ExtendedPdo $extendedPdo)
     {
@@ -22,7 +22,7 @@ class CommentLocation
      * @param integer $domain
      * @param integer $path
      * @param integer $thread
-     * @returns integer
+     * @return integer
      */
     public function create($domain, $path, $thread)
     {
@@ -46,7 +46,7 @@ class CommentLocation
      * @param integer $domain
      * @param integer $path
      * @param integer $thread
-     * @returns integer
+     * @return integer
      */
     public function findByFields($domain, $path, $thread)
     {

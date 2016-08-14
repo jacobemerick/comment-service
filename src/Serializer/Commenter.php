@@ -7,7 +7,7 @@ class Commenter
 
     /**
      * @param array $comment
-     * @returns array
+     * @return array
      */
     public function __invoke(array $commenter)
     {

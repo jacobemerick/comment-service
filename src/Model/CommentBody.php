@@ -11,7 +11,7 @@ class CommentBody
     protected $extendedPdo;
 
     /**
-     * @params ExtendedPdo $extendedPdo
+     * @param ExtendedPdo $extendedPdo
      */
     public function __construct(ExtendedPdo $extendedPdo)
     {
@@ -19,8 +19,8 @@ class CommentBody
     }
 
     /**
-     * @params string $body
-     * @returns integer
+     * @param string $body
+     * @return integer
      */
     public function create($body)
     {

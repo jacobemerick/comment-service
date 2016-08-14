@@ -28,7 +28,7 @@ class Comment
      * @param integer $notify
      * @param integer $display
      * @param integer $createTime
-     * @returns integer
+     * @return integer
      */
     public function create(
         $commenter,
@@ -128,7 +128,7 @@ class Comment
      * @param boolean $onlyDisplayable
      * @param integer $limit
      * @param integer $offset
-     * @returns array
+     * @return array
      */
     public function getComments(
         $domain = '',

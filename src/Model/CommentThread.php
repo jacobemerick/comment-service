@@ -11,7 +11,7 @@ class CommentThread
     protected $extendedPdo;
 
     /**
-     * @params ExtendedPdo $extendedPdo
+     * @param ExtendedPdo $extendedPdo
      */
     public function __construct(ExtendedPdo $extendedPdo)
     {
@@ -20,7 +20,7 @@ class CommentThread
 
     /**
      * @param string $thread
-     * @returns integer
+     * @return integer
      */
     public function create($thread)
     {
@@ -40,7 +40,7 @@ class CommentThread
 
     /**
      * @param string $thread
-     * @returns integer
+     * @return integer
      */
     public function findByFields($thread)
     {

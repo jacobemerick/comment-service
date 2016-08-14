@@ -11,7 +11,7 @@ class CommentPath
     protected $extendedPdo;
 
     /**
-     * @params ExtendedPdo $extendedPdo
+     * @param ExtendedPdo $extendedPdo
      */
     public function __construct(ExtendedPdo $extendedPdo)
     {
@@ -20,7 +20,7 @@ class CommentPath
 
     /**
      * @param string $path
-     * @returns integer
+     * @return integer
      */
     public function create($path)
     {
@@ -40,7 +40,7 @@ class CommentPath
 
     /**
      * @param string $path
-     * @returns integer
+     * @return integer
      */
     public function findByFields($path)
     {

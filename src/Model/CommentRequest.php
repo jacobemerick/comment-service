@@ -11,7 +11,7 @@ class CommentRequest
     protected $extendedPdo;
 
     /**
-     * @params ExtendedPdo $extendedPdo
+     * @param ExtendedPdo $extendedPdo
      */
     public function __construct(ExtendedPdo $extendedPdo)
     {
@@ -22,7 +22,7 @@ class CommentRequest
      * @param string $ipAddress
      * @param string $userAgent
      * @param string $referrer
-     * @returns integer
+     * @return integer
      */
     public function create($ipAddress, $userAgent, $referrer)
     {
@@ -46,7 +46,7 @@ class CommentRequest
      * @param string $ipAddress
      * @param string $userAgent
      * @param string $referrer
-     * @returns integer
+     * @return integer
      */
     public function findByFields($ipAddress, $userAgent, $referrer)
     {

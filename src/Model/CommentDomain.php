@@ -11,7 +11,7 @@ class CommentDomain
     protected $extendedPdo;
 
     /**
-     * @params ExtendedPdo $extendedPdo
+     * @param ExtendedPdo $extendedPdo
      */
     public function __construct(ExtendedPdo $extendedPdo)
     {
@@ -20,7 +20,7 @@ class CommentDomain
 
     /**
      * @param string $domain
-     * @returns integer
+     * @return integer
      */
     public function create($domain)
     {
@@ -40,7 +40,7 @@ class CommentDomain
 
     /**
      * @param string $domain
-     * @returns integer
+     * @return integer
      */
     public function findByFields($domain)
     {
