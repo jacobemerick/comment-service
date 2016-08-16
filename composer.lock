@@ -187,12 +187,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jacobemerick/swagger.git",
-                "reference": "4b34711ec546e0071e0039566b8377cd3ab70a8c"
+                "reference": "4403d5f5dde0b1a912dd606b5ebc44d89bc7941c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jacobemerick/swagger/zipball/4b34711ec546e0071e0039566b8377cd3ab70a8c",
-                "reference": "4b34711ec546e0071e0039566b8377cd3ab70a8c",
+                "url": "https://api.github.com/repos/jacobemerick/swagger/zipball/4403d5f5dde0b1a912dd606b5ebc44d89bc7941c",
+                "reference": "4403d5f5dde0b1a912dd606b5ebc44d89bc7941c",
                 "shasum": ""
             },
             "require": {
@@ -232,7 +232,7 @@
             "support": {
                 "source": "https://github.com/jacobemerick/swagger/tree/master"
             },
-            "time": "2016-08-12 12:27:45"
+            "time": "2016-08-16 01:15:58"
         },
         {
             "name": "jacobemerick/archangel",
