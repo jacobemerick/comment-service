@@ -270,6 +270,75 @@ class CommentTest extends PHPUnit_Framework_TestCase
         $controller->getComments($mockRequest, $mockResponse);
     }
 
+    public function testGetCommentsSendsPagination()
+    {
+        $comments = [
+            [
+                'id' => 1234,
+                'commenter_id' => 123,
+                'commenter_name' => 'John Black',
+                'commenter_website' => 'http://john.black',
+                'body' => 'this is a comment',
+                'date' => '2016-03-12 14:36:48',
+                'url' => 'http://blog.blog/path',
+                'reply_to' => 1232,
+                'thread' => 'comments',
+            ],
+            [
+                'id' => 1235,
+                'commenter_id' => 456,
+                'commenter_name' => 'Jane Black',
+                'commenter_website' => '',
+                'body' => 'this is another comment',
+                'date' => '2016-03-12 15:33:18',
+                'url' => 'http://blog.blog/path',
+                'reply_to' => 1234,
+                'thread' => 'comments',
+            ],
+        ];
+
+        $domain = 'blog.blog';
+        $path = 'path';
+        $order = '-name';
+        $page = 2;
+        $perPage = 5;
+
+        $mockCommentModel = $this->createMock(CommentModel::class);
+        $mockCommentModel->method('getComments')
+            ->with(
+                $this->equalTo($domain),
+                $this->equalTo($path),
+                $this->equalTo(substr($order, 1)),
+                $this->equalTo(false),
+                $this->equalTo(true),
+                $this->equalTo($perPage),
+                $this->equalTo(($page - 1) * $perPage)
+            )
+            ->willReturn($comments);
+
+        $mockContainer = $this->createMock(Container::class);
+        $mockContainer->method('get')
+            ->with('commentModel')
+            ->willReturn($mockCommentModel);
+
+        $mockRequest = $this->createMock(Request::class);
+        $mockRequest->method('getQueryParams')
+            ->willReturn([
+                'domain' => $domain,
+                'path' => $path,
+                'order' => $order,
+                'page' => $page,
+                'per_page' => $perPage,
+            ]);
+
+        $mockResponse = $this->createMock(Response::class);
+        $mockResponse->method('getBody')
+            ->willReturn($this->createMock(Stream::class));
+
+        $controller = new Comment($mockContainer);
+        $controller->getComments($mockRequest, $mockResponse);
+    }
+
     public function testGetCommentsPassesResultToSerializer()
     {
         $this->markTestIncomplete('Serializer is not injected yet');
