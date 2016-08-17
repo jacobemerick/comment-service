@@ -31,16 +31,12 @@ class CommenterTest extends PHPUnit_Framework_TestCase
 
     public function testGetCommenterSendsCommenterId()
     {
-        $commenter = [
-            'id' => 123,
-            'name' => 'Jane Black',
-            'website' => '',
-        ];
+        $commenterId = 125;
 
         $mockCommenterModel = $this->createMock(CommenterModel::class);
         $mockCommenterModel->method('findById')
-            ->with($this->equalTo($commenter['id']))
-            ->willReturn($commenter);
+            ->with($this->equalTo($commenterId))
+            ->willReturn([]);
 
         $mockCommenterSerializer = $this->createMock(CommenterSerializer::class);
 
@@ -53,7 +49,7 @@ class CommenterTest extends PHPUnit_Framework_TestCase
 
         $mockRequest = $this->createMock(Request::class);
         $mockRequest->method('getAttribute')
-            ->willReturn($commenter['id']);
+            ->willReturn($commenterId);
 
         $mockResponse = $this->createMock(Response::class);
         $mockResponse->method('getBody')
@@ -163,26 +159,13 @@ class CommenterTest extends PHPUnit_Framework_TestCase
 
     public function testGetCommentersDefaultParams()
     {
-        $commenters = [
-            [
-                'id' => 123,
-                'name' => 'Jane Black',
-                'website' => '',
-            ],
-            [
-                'id' => 456,
-                'name' => 'Jack Black',
-                'website' => 'http://jack.tld/black',
-            ],
-        ];
-
         $mockCommenterModel = $this->createMock(CommenterModel::class);
         $mockCommenterModel->method('getCommenters')
             ->with(
                 $this->equalTo(0),
                 $this->equalTo(0)
             )
-            ->willReturn($commenters);
+            ->willReturn([]);
 
         $mockCommenterSerializer = $this->createMock(CommenterSerializer::class);
 
@@ -207,19 +190,6 @@ class CommenterTest extends PHPUnit_Framework_TestCase
 
     public function testGetCommentersSendsParameters()
     {
-        $commenters = [
-            [
-                'id' => 123,
-                'name' => 'Jane Black',
-                'website' => '',
-            ],
-            [
-                'id' => 456,
-                'name' => 'Jack Black',
-                'website' => 'http://jack.tld/black',
-            ],
-        ];
-
         $page = 3;
         $per_page = 5;
 
@@ -229,7 +199,7 @@ class CommenterTest extends PHPUnit_Framework_TestCase
                 $this->equalTo(5),
                 $this->equalTo(10)
             )
-            ->willReturn($commenters);
+            ->willReturn([]);
 
         $mockCommenterSerializer = $this->createMock(CommenterSerializer::class);
 
