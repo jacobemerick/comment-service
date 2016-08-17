@@ -39,19 +39,20 @@ class CommenterTest extends PHPUnit_Framework_TestCase
 
         $mockCommenterModel = $this->createMock(CommenterModel::class);
         $mockCommenterModel->method('findById')
-            ->with(
-                $this->equalTo($commenter['id'])
-            )
+            ->with($this->equalTo($commenter['id']))
             ->willReturn($commenter);
+
+        $mockCommenterSerializer = $this->createMock(CommenterSerializer::class);
 
         $mockContainer = $this->createMock(Container::class);
         $mockContainer->method('get')
-            ->with('commenterModel')
-            ->willReturn($mockCommenterModel);
+            ->will($this->returnValueMap([
+                [ 'commenterModel', $mockCommenterModel ],
+                [ 'commenterSerializer', $mockCommenterSerializer ],
+            ]));
 
         $mockRequest = $this->createMock(Request::class);
         $mockRequest->method('getAttribute')
-            ->with('commenter_id')
             ->willReturn($commenter['id']);
 
         $mockResponse = $this->createMock(Response::class);
@@ -64,7 +65,35 @@ class CommenterTest extends PHPUnit_Framework_TestCase
 
     public function testGetCommenterPassesResultToSerializer()
     {
-        $this->markTestIncomplete('Serializer is not injected yet');
+        $commenter = [
+            'id' => 123,
+            'name' => 'Jane Black',
+            'website' => '',
+        ];
+
+        $mockCommenterModel = $this->createMock(CommenterModel::class);
+        $mockCommenterModel->method('findById')
+            ->willReturn($commenter);
+
+        $mockCommenterSerializer = $this->createMock(CommenterSerializer::class);
+        $mockCommenterSerializer->method('__invoke')
+            ->with($this->equalTo($commenter));
+
+        $mockContainer = $this->createMock(Container::class);
+        $mockContainer->method('get')
+            ->will($this->returnValueMap([
+                [ 'commenterModel', $mockCommenterModel ],
+                [ 'commenterSerializer', $mockCommenterSerializer ],
+            ]));
+
+        $mockRequest = $this->createMock(Request::class);
+
+        $mockResponse = $this->createMock(Response::class);
+        $mockResponse->method('getBody')
+            ->willReturn($this->createMock(Stream::class));
+
+        $controller = new Commenter($mockContainer);
+        $controller->getCommenter($mockRequest, $mockResponse);
     }
 
     public function testGetCommenterWritesToResponse()
@@ -75,27 +104,28 @@ class CommenterTest extends PHPUnit_Framework_TestCase
             'website' => '',
         ];
 
-        // todo mock the serializer
-        $serializedCommenter = (new CommenterSerializer)($commenter);
-        $serializedCommenter = json_encode($serializedCommenter);
+        $encodedCommenter = json_encode($commenter);
 
-        // todo shouldn't have to mock this method response
         $mockCommenterModel = $this->createMock(CommenterModel::class);
         $mockCommenterModel->method('findById')
+            ->willReturn([]);
+
+        $mockCommenterSerializer = $this->createMock(CommenterSerializer::class);
+        $mockCommenterSerializer->method('__invoke')
             ->willReturn($commenter);
 
         $mockContainer = $this->createMock(Container::class);
         $mockContainer->method('get')
-            ->with('commenterModel')
-            ->willReturn($mockCommenterModel);
+            ->will($this->returnValueMap([
+                [ 'commenterModel', $mockCommenterModel ],
+                [ 'commenterSerializer', $mockCommenterSerializer ],
+            ]));
 
         $mockRequest = $this->createMock(Request::class);
 
         $mockStream = $this->createMock(Stream::class);
         $mockStream->method('write')
-            ->with(
-                $this->equalTo($serializedCommenter)
-            );
+            ->with($this->equalTo($encodedCommenter));
 
         $mockResponse = $this->createMock(Response::class);
         $mockResponse->method('getBody')
@@ -105,23 +135,20 @@ class CommenterTest extends PHPUnit_Framework_TestCase
         $controller->getCommenter($mockRequest, $mockResponse);
     }
 
-    public function testGetCommentReturnsResponse()
+    public function testGetCommenterReturnsResponse()
     {
-        $commenter = [
-            'id' => 123,
-            'name' => 'Jane Black',
-            'website' => '',
-        ];
-
-        // todo shouldn't have to mock this method response
         $mockCommenterModel = $this->createMock(CommenterModel::class);
         $mockCommenterModel->method('findById')
-            ->willReturn($commenter);
+            ->willReturn([]);
+
+        $mockCommenterSerializer = $this->createMock(CommenterSerializer::class);
 
         $mockContainer = $this->createMock(Container::class);
         $mockContainer->method('get')
-            ->with('commenterModel')
-            ->willReturn($mockCommenterModel);
+            ->will($this->returnValueMap([
+                [ 'commenterModel', $mockCommenterModel ],
+                [ 'commenterSerializer', $mockCommenterSerializer ],
+            ]));
 
         $mockRequest = $this->createMock(Request::class);
         $mockResponse = $this->createMock(Response::class);
@@ -157,10 +184,14 @@ class CommenterTest extends PHPUnit_Framework_TestCase
             )
             ->willReturn($commenters);
 
+        $mockCommenterSerializer = $this->createMock(CommenterSerializer::class);
+
         $mockContainer = $this->createMock(Container::class);
         $mockContainer->method('get')
-            ->with('commenterModel')
-            ->willReturn($mockCommenterModel);
+            ->will($this->returnValueMap([
+                [ 'commenterModel', $mockCommenterModel ],
+                [ 'commenterSerializer', $mockCommenterSerializer ],
+            ]));
 
         $mockRequest = $this->createMock(Request::class);
         $mockRequest->method('getQueryParams')
@@ -200,10 +231,14 @@ class CommenterTest extends PHPUnit_Framework_TestCase
             )
             ->willReturn($commenters);
 
+        $mockCommenterSerializer = $this->createMock(CommenterSerializer::class);
+
         $mockContainer = $this->createMock(Container::class);
         $mockContainer->method('get')
-            ->with('commenterModel')
-            ->willReturn($mockCommenterModel);
+            ->will($this->returnValueMap([
+                [ 'commenterModel', $mockCommenterModel ],
+                [ 'commenterSerializer', $mockCommenterSerializer ],
+            ]));
 
         $mockRequest = $this->createMock(Request::class);
         $mockRequest->method('getQueryParams')
@@ -222,7 +257,48 @@ class CommenterTest extends PHPUnit_Framework_TestCase
 
     public function testGetCommentersPassesResultToSerializer()
     {
-        $this->markTestIncomplete('Serializer is not injected yet');
+        $commenters = [
+            [
+                'id' => 123,
+                'name' => 'Jane Black',
+                'website' => '',
+            ],
+            [
+                'id' => 456,
+                'name' => 'Jack Black',
+                'website' => 'http://jack.tld/black',
+            ],
+        ];
+
+        $mockCommenterModel = $this->createMock(CommenterModel::class);
+        $mockCommenterModel->method('getCommenters')
+            ->willReturn($commenters);
+
+        $mockCommenterSerializer = $this->createMock(CommenterSerializer::class);
+        $mockCommenterSerializer->expects($this->exactly(2))
+            ->method('__invoke')
+            ->withConsecutive(
+                [ $this->equalTo($commenters[0]) ],
+                [ $this->equalTo($commenters[1]) ]
+            );
+
+        $mockContainer = $this->createMock(Container::class);
+        $mockContainer->method('get')
+            ->will($this->returnValueMap([
+                [ 'commenterModel', $mockCommenterModel ],
+                [ 'commenterSerializer', $mockCommenterSerializer ],
+            ]));
+
+        $mockRequest = $this->createMock(Request::class);
+        $mockRequest->method('getQueryParams')
+            ->willReturn([]);
+
+        $mockResponse = $this->createMock(Response::class);
+        $mockResponse->method('getBody')
+            ->willReturn($this->createMock(Stream::class));
+
+        $controller = new Commenter($mockContainer);
+        $controller->getCommenters($mockRequest, $mockResponse);
     }
 
     public function testGetCommentersWritesToResponse()
@@ -240,20 +316,22 @@ class CommenterTest extends PHPUnit_Framework_TestCase
             ],
         ];
 
-        // todo this should be mocked
-        $commenterSerializer = new CommenterSerializer;
-        $serializedCommenters = array_map($commenterSerializer, $commenters);
-        $serializedCommenters = json_encode($serializedCommenters);
+        $encodedCommenters = json_encode($commenters);
 
-        // todo this method should have a mocked response
         $mockCommenterModel = $this->createMock(CommenterModel::class);
         $mockCommenterModel->method('getCommenters')
-            ->willReturn($commenters);
+            ->willReturn([[], []]);
+
+        $mockCommenterSerializer = $this->createMock(CommenterSerializer::class);
+        $mockCommenterSerializer->method('__invoke')
+            ->will($this->onConsecutiveCalls($commenters[0], $commenters[1]));
 
         $mockContainer = $this->createMock(Container::class);
         $mockContainer->method('get')
-            ->with('commenterModel')
-            ->willReturn($mockCommenterModel);
+            ->will($this->returnValueMap([
+                [ 'commenterModel', $mockCommenterModel ],
+                [ 'commenterSerializer', $mockCommenterSerializer ],
+            ]));
 
         $mockRequest = $this->createMock(Request::class);
         $mockRequest->method('getQueryParams')
@@ -262,7 +340,7 @@ class CommenterTest extends PHPUnit_Framework_TestCase
         $mockStream = $this->createMock(Stream::class);
         $mockStream->method('write')
             ->with(
-                $this->equalTo($serializedCommenters)
+                $this->equalTo($encodedCommenters)
             );
 
         $mockResponse = $this->createMock(Response::class);
@@ -275,27 +353,18 @@ class CommenterTest extends PHPUnit_Framework_TestCase
 
     public function testGetCommentersReturnsResponse()
     {
-        $commenters = [
-            [
-                'id' => 123,
-                'name' => 'Jane Black',
-                'website' => '',
-            ],
-            [
-                'id' => 456,
-                'name' => 'Jack Black',
-                'website' => 'http://jack.tld/black',
-            ],
-        ];
-
         $mockCommenterModel = $this->createMock(CommenterModel::class);
         $mockCommenterModel->method('getCommenters')
-            ->willReturn($commenters);
+            ->willReturn([]);
+
+        $mockCommenterSerializer = $this->createMock(CommenterSerializer::class);
 
         $mockContainer = $this->createMock(Container::class);
         $mockContainer->method('get')
-            ->with('commenterModel')
-            ->willReturn($mockCommenterModel);
+            ->will($this->returnValueMap([
+                [ 'commenterModel', $mockCommenterModel ],
+                [ 'commenterSerializer', $mockCommenterSerializer ],
+            ]));
 
         $mockRequest = $this->createMock(Request::class);
         $mockRequest->method('getQueryParams')
