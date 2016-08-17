@@ -4,7 +4,6 @@ namespace Jacobemerick\CommentService\Controller;
 
 use Interop\Container\ContainerInterface as Container;
 use Jacobemerick\CommentService\Helper\NotificationHandler;
-use Jacobemerick\CommentService\Serializer\Comment as CommentSerializer;
 use Psr\Http\Message\RequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 
@@ -144,7 +143,6 @@ class Comment
             ->get('commentModel')
             ->findById($commentId);
 
-        $commentSerializer = new CommentSerializer;
         if ($shouldDisplay) {
             $notificationHandler = new NotificationHandler(
                 $this->container->get('dbal'),
@@ -153,9 +151,11 @@ class Comment
             $notificationHandler($locationId, $comment);
         }
 
-        $comment = $commentSerializer($comment);
-        $comment = json_encode($comment);
+        $comment = $this->container
+            ->get('commentSerializer')
+            ->__invoke($comment);
 
+        $comment = json_encode($comment);
         $res->getBody()->write($comment);
         return $res;
     }
@@ -170,10 +170,11 @@ class Comment
             ->get('commentModel')
             ->findById($req->getAttribute('comment_id'));
 
-        $commentSerializer = new CommentSerializer;
-        $comment = $commentSerializer($comment);
-        $comment = json_encode($comment);
+        $comment = $this->container
+            ->get('commentSerializer')
+            ->__invoke($comment);
 
+        $comment = json_encode($comment);
         $res->getBody()->write($comment);
         return $res;
     }
@@ -212,8 +213,6 @@ class Comment
             }
         }
 
-        $commentSerializer = new CommentSerializer;
-
         if ($limit > 0) {
             $comments = $this->container
                 ->get('commentModel')
@@ -237,9 +236,12 @@ class Comment
                 );
         }
 
-        $comments = array_map($commentSerializer, $comments);
-        $comments = json_encode($comments);
+        $comments = array_map(
+            $this->container->get('commentSerializer'),
+            $comments
+        );
 
+        $comments = json_encode($comments);
         $res->getBody()->write($comments);
         return $res;
     }

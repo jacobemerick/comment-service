@@ -3,7 +3,6 @@
 namespace Jacobemerick\CommentService\Controller;
 
 use Interop\Container\ContainerInterface as Container;
-use Jacobemerick\CommentService\Serializer\Commenter as CommenterSerializer;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 
@@ -32,10 +31,11 @@ class Commenter
             ->get('commenterModel')
             ->findById($req->getAttribute('commenter_id'));
 
-        $commenterSerializer = new CommenterSerializer;
-        $commenter = $commenterSerializer($commenter);
-        $commenter = json_encode($commenter);
+        $commenter = $this->container
+            ->get('commenterSerializer')
+            ->__invoke($commenter);
 
+        $commenter = json_encode($commenter);
         $res->getBody()->write($commenter);
         return $res;
     }
@@ -62,10 +62,12 @@ class Commenter
             ->get('commenterModel')
             ->getCommenters($limit, $offset);
 
-        $commenterSerializer = new CommenterSerializer;
-        $commenters = array_map($commenterSerializer, $commenters);
-        $commenters = json_encode($commenters);
+        $commenters = array_map(
+            $this->container->get('commenterSerializer'),
+            $commenters
+        );
 
+        $commenters = json_encode($commenters);
         $res->getBody()->write($commenters);
         return $res;
     }
