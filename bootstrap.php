@@ -46,6 +46,10 @@ $di->set('commentRequestModel', $di->lazyNew('Jacobemerick\CommentService\Model\
 $di->set('commentThreadModel', $di->lazyNew('Jacobemerick\CommentService\Model\CommentThread'));
 $di->set('commenterModel', $di->lazyNew('Jacobemerick\CommentService\Model\Commenter'));
 
+// set up serializers
+$di->set('commentSerializer', $di->lazyNew('Jacobemerick\CommentService\Serializer\Comment'));
+$di->set('commenterSerializer', $di->lazyNew('Jacobemerick\CommentService\Serializer\Commenter'));
+
 // set up logger
 $di->set('logger', $di->lazyNew(
     'Monolog\Logger',
