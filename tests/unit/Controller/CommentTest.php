@@ -56,6 +56,8 @@ class CommentTest extends PHPUnit_Framework_TestCase
             'should_notify' => 0,
         ];
 
+        $commenterId = 1234;
+
         $mockCommenterModel = $this->createMock(CommenterModel::class);
         $mockCommenterModel->expects($this->once())
             ->method('findByFields')
@@ -65,7 +67,7 @@ class CommentTest extends PHPUnit_Framework_TestCase
                 $this->equalTo($body['commenter']['website'])
             )
             ->willReturn([
-                'id' => 123,
+                'id' => $commenterId,
                 'is_trusted' => false
             ]);
 
@@ -77,6 +79,11 @@ class CommentTest extends PHPUnit_Framework_TestCase
         $mockCommentThreadModel = $this->createMock(CommentThreadModel::class);
 
         $mockCommentModel = $this->createMock(CommentModel::class);
+        $mockCommentModel->method('create')
+            ->with(
+                $this->equalTo($commenterId)
+            );
+
         $mockCommentModel->method('findById')
             ->willReturn([]);
 
@@ -127,6 +134,8 @@ class CommentTest extends PHPUnit_Framework_TestCase
             'should_notify' => 0,
         ];
 
+        $commenterId = 12345;
+
         $mockCommenterModel = $this->createMock(CommenterModel::class);
         $mockCommenterModel->method('findByFields')
             ->willReturn(false);
@@ -139,7 +148,7 @@ class CommentTest extends PHPUnit_Framework_TestCase
             );
         $mockCommenterModel->method('findById')
             ->willReturn([
-                'id' => 123,
+                'id' => $commenterId,
                 'is_trusted' => false
             ]);
 
@@ -151,6 +160,10 @@ class CommentTest extends PHPUnit_Framework_TestCase
         $mockCommentThreadModel = $this->createMock(CommentThreadModel::class);
 
         $mockCommentModel = $this->createMock(CommentModel::class);
+        $mockCommentModel->method('create')
+            ->with(
+                $this->equalTo($commenterId)
+            );
         $mockCommentModel->method('findById')
             ->willReturn([]);
 
@@ -214,7 +227,7 @@ class CommentTest extends PHPUnit_Framework_TestCase
                 $this->equalTo($commenterId)
             )
             ->willReturn([
-                'id' => 123,
+                'id' => $commenterId,
                 'is_trusted' => false
             ]);
 
@@ -226,6 +239,10 @@ class CommentTest extends PHPUnit_Framework_TestCase
         $mockCommentThreadModel = $this->createMock(CommentThreadModel::class);
 
         $mockCommentModel = $this->createMock(CommentModel::class);
+        $mockCommentModel->method('create')
+            ->with(
+                $this->equalTo($commenterId)
+            );
         $mockCommentModel->method('findById')
             ->willReturn([]);
 
@@ -276,6 +293,8 @@ class CommentTest extends PHPUnit_Framework_TestCase
             'should_notify' => 0,
         ];
 
+        $bodyId = 56;
+
         $mockCommenterModel = $this->createMock(CommenterModel::class);
         $mockCommenterModel->method('findByFields')
             ->willReturn([
@@ -288,7 +307,8 @@ class CommentTest extends PHPUnit_Framework_TestCase
             ->method('create')
             ->with(
                 $this->equalTo($body['body'])
-            );
+            )
+            ->willReturn($bodyId);
 
         $mockCommentDomainModel = $this->createMock(CommentDomainModel::class);
         $mockCommentLocationModel = $this->createMock(CommentLocationModel::class);
@@ -297,6 +317,11 @@ class CommentTest extends PHPUnit_Framework_TestCase
         $mockCommentThreadModel = $this->createMock(CommentThreadModel::class);
 
         $mockCommentModel = $this->createMock(CommentModel::class);
+        $mockCommentModel->method('create')
+            ->with(
+                $this->anything(),
+                $this->equalTo($bodyId)
+            );
         $mockCommentModel->method('findById')
             ->willReturn([]);
 
@@ -347,6 +372,8 @@ class CommentTest extends PHPUnit_Framework_TestCase
             'should_notify' => 0,
         ];
 
+        $domainId = 34;
+
         $mockCommenterModel = $this->createMock(CommenterModel::class);
         $mockCommenterModel->method('findByFields')
             ->willReturn([
@@ -361,9 +388,15 @@ class CommentTest extends PHPUnit_Framework_TestCase
             ->method('findByFields')
             ->with(
                 $this->equalTo($body['domain'])
-            );
+            )
+            ->willReturn($domainId);
 
         $mockCommentLocationModel = $this->createMock(CommentLocationModel::class);
+        $mockCommentLocationModel->method('findByFields')
+            ->with(
+                $this->equalTo($domainId)
+            );
+
         $mockCommentPathModel = $this->createMock(CommentPathModel::class);
         $mockCommentRequestModel = $this->createMock(CommentRequestModel::class);
         $mockCommentThreadModel = $this->createMock(CommentThreadModel::class);
@@ -419,6 +452,8 @@ class CommentTest extends PHPUnit_Framework_TestCase
             'should_notify' => 0,
         ];
 
+        $domainId = 7;
+
         $mockCommenterModel = $this->createMock(CommenterModel::class);
         $mockCommenterModel->method('findByFields')
             ->willReturn([
@@ -435,9 +470,15 @@ class CommentTest extends PHPUnit_Framework_TestCase
             ->method('create')
             ->with(
                 $this->equalTo($body['domain'])
-            );
+            )
+            ->willReturn($domainId);
 
         $mockCommentLocationModel = $this->createMock(CommentLocationModel::class);
+        $mockCommentLocationModel->method('findByFields')
+            ->with(
+                $this->equalTo($domainId)
+            );
+
         $mockCommentPathModel = $this->createMock(CommentPathModel::class);
         $mockCommentRequestModel = $this->createMock(CommentRequestModel::class);
         $mockCommentThreadModel = $this->createMock(CommentThreadModel::class);
@@ -493,6 +534,8 @@ class CommentTest extends PHPUnit_Framework_TestCase
             'should_notify' => 0,
         ];
 
+        $pathId = 73;
+
         $mockCommenterModel = $this->createMock(CommenterModel::class);
         $mockCommenterModel->method('findByFields')
             ->willReturn([
@@ -502,14 +545,21 @@ class CommentTest extends PHPUnit_Framework_TestCase
 
         $mockCommentBodyModel = $this->createMock(CommentBodyModel::class);
         $mockCommentDomainModel = $this->createMock(CommentDomainModel::class);
+
         $mockCommentLocationModel = $this->createMock(CommentLocationModel::class);
+        $mockCommentLocationModel->method('findByFields')
+            ->with(
+                $this->anything(),
+                $this->equalTo($pathId)
+            );
 
         $mockCommentPathModel = $this->createMock(CommentPathModel::class);
         $mockCommentPathModel->expects($this->once())
             ->method('findByFields')
             ->with(
                 $this->equalTo($body['path'])
-            );
+            )
+            ->willReturn($pathId);
 
         $mockCommentRequestModel = $this->createMock(CommentRequestModel::class);
         $mockCommentThreadModel = $this->createMock(CommentThreadModel::class);
@@ -565,6 +615,8 @@ class CommentTest extends PHPUnit_Framework_TestCase
             'should_notify' => 0,
         ];
 
+        $pathId = 81;
+
         $mockCommenterModel = $this->createMock(CommenterModel::class);
         $mockCommenterModel->method('findByFields')
             ->willReturn([
@@ -574,7 +626,13 @@ class CommentTest extends PHPUnit_Framework_TestCase
 
         $mockCommentBodyModel = $this->createMock(CommentBodyModel::class);
         $mockCommentDomainModel = $this->createMock(CommentDomainModel::class);
+
         $mockCommentLocationModel = $this->createMock(CommentLocationModel::class);
+        $mockCommentLocationModel->method('findByFields')
+            ->with(
+                $this->anything(),
+                $this->equalTo($pathId)
+            );
 
         $mockCommentPathModel = $this->createMock(CommentPathModel::class);
         $mockCommentPathModel->method('findByFields')
@@ -583,7 +641,8 @@ class CommentTest extends PHPUnit_Framework_TestCase
             ->method('create')
             ->with(
                 $this->equalTo($body['path'])
-            );
+            )
+            ->willReturn($pathId);
 
         $mockCommentRequestModel = $this->createMock(CommentRequestModel::class);
         $mockCommentThreadModel = $this->createMock(CommentThreadModel::class);
@@ -639,6 +698,8 @@ class CommentTest extends PHPUnit_Framework_TestCase
             'should_notify' => 0,
         ];
 
+        $threadId = 6;
+
         $mockCommenterModel = $this->createMock(CommenterModel::class);
         $mockCommenterModel->method('findByFields')
             ->willReturn([
@@ -648,7 +709,15 @@ class CommentTest extends PHPUnit_Framework_TestCase
 
         $mockCommentBodyModel = $this->createMock(CommentBodyModel::class);
         $mockCommentDomainModel = $this->createMock(CommentDomainModel::class);
+
         $mockCommentLocationModel = $this->createMock(CommentLocationModel::class);
+        $mockCommentLocationModel->method('findByFields')
+            ->with(
+                $this->anything(),
+                $this->anything(),
+                $this->equalTo($threadId)
+            );
+
         $mockCommentPathModel = $this->createMock(CommentPathModel::class);
         $mockCommentRequestModel = $this->createMock(CommentRequestModel::class);
 
@@ -657,7 +726,8 @@ class CommentTest extends PHPUnit_Framework_TestCase
             ->method('findByFields')
             ->with(
                 $this->equalTo($body['thread'])
-            );
+            )
+            ->willReturn($threadId);
 
         $mockCommentModel = $this->createMock(CommentModel::class);
         $mockCommentModel->method('findById')
@@ -710,6 +780,8 @@ class CommentTest extends PHPUnit_Framework_TestCase
             'should_notify' => 0,
         ];
 
+        $threadId = 3;
+
         $mockCommenterModel = $this->createMock(CommenterModel::class);
         $mockCommenterModel->method('findByFields')
             ->willReturn([
@@ -719,7 +791,15 @@ class CommentTest extends PHPUnit_Framework_TestCase
 
         $mockCommentBodyModel = $this->createMock(CommentBodyModel::class);
         $mockCommentDomainModel = $this->createMock(CommentDomainModel::class);
+
         $mockCommentLocationModel = $this->createMock(CommentLocationModel::class);
+        $mockCommentLocationModel->method('findByFields')
+            ->with(
+                $this->anything(),
+                $this->anything(),
+                $this->equalTo($threadId)
+            );
+
         $mockCommentPathModel = $this->createMock(CommentPathModel::class);
         $mockCommentRequestModel = $this->createMock(CommentRequestModel::class);
 
@@ -730,7 +810,8 @@ class CommentTest extends PHPUnit_Framework_TestCase
             ->method('create')
             ->with(
                 $this->equalTo($body['thread'])
-            );
+            )
+            ->willReturn($threadId);
 
         $mockCommentModel = $this->createMock(CommentModel::class);
         $mockCommentModel->method('findById')
@@ -786,6 +867,7 @@ class CommentTest extends PHPUnit_Framework_TestCase
         $domainId = 4;
         $pathId = 32;
         $threadId = 2;
+        $locationId = 73;
 
         $mockCommenterModel = $this->createMock(CommenterModel::class);
         $mockCommenterModel->method('findByFields')
@@ -807,7 +889,8 @@ class CommentTest extends PHPUnit_Framework_TestCase
                 $this->equalTo($domainId),
                 $this->equalTo($pathId),
                 $this->equalTo($threadId)
-            );
+            )
+            ->willReturn($locationId);
 
         $mockCommentPathModel = $this->createMock(CommentPathModel::class);
         $mockCommentPathModel->method('findByFields')
@@ -820,6 +903,12 @@ class CommentTest extends PHPUnit_Framework_TestCase
             ->willReturn($threadId);
 
         $mockCommentModel = $this->createMock(CommentModel::class);
+        $mockCommentModel->method('create')
+            ->with(
+                $this->anything(),
+                $this->anything(),
+                $this->equalTo($locationId)
+            );
         $mockCommentModel->method('findById')
             ->willReturn([]);
 
@@ -873,6 +962,7 @@ class CommentTest extends PHPUnit_Framework_TestCase
         $domainId = 3;
         $pathId = 31;
         $threadId = 5;
+        $locationId = 97;
 
         $mockCommenterModel = $this->createMock(CommenterModel::class);
         $mockCommenterModel->method('findByFields')
@@ -896,7 +986,8 @@ class CommentTest extends PHPUnit_Framework_TestCase
                 $this->equalTo($domainId),
                 $this->equalTo($pathId),
                 $this->equalTo($threadId)
-            );
+            )
+            ->willReturn($locationId);
 
         $mockCommentPathModel = $this->createMock(CommentPathModel::class);
         $mockCommentPathModel->method('findByFields')
@@ -909,6 +1000,12 @@ class CommentTest extends PHPUnit_Framework_TestCase
             ->willReturn($threadId);
 
         $mockCommentModel = $this->createMock(CommentModel::class);
+        $mockCommentModel->method('create')
+            ->with(
+                $this->anything(),
+                $this->anything(),
+                $this->equalTo($locationId)
+            );
         $mockCommentModel->method('findById')
             ->willReturn([]);
 
