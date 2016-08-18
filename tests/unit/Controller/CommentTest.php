@@ -228,7 +228,8 @@ class CommentTest extends PHPUnit_Framework_TestCase
         $commentId = 4536;
 
         $mockCommentModel = $this->createMock(CommentModel::class);
-        $mockCommentModel->method('findById')
+        $mockCommentModel->expects($this->once())
+            ->method('findById')
             ->with(
                 $this->equalTo($commentId)
             )
@@ -245,7 +246,6 @@ class CommentTest extends PHPUnit_Framework_TestCase
 
         $mockRequest = $this->createMock(Request::class);
         $mockRequest->method('getAttribute')
-            ->with('comment_id')
             ->willReturn($commentId);
 
         $mockResponse = $this->createMock(Response::class);
@@ -275,7 +275,8 @@ class CommentTest extends PHPUnit_Framework_TestCase
             ->willReturn($comment);
 
         $mockCommentSerializer = $this->createMock(CommentSerializer::class);
-        $mockCommentSerializer->method('__invoke')
+        $mockCommentSerializer->expects($this->once())
+            ->method('__invoke')
             ->with($this->equalTo($comment));
 
         $mockContainer = $this->createMock(Container::class);
@@ -331,7 +332,8 @@ class CommentTest extends PHPUnit_Framework_TestCase
         $mockRequest = $this->createMock(Request::class);
 
         $mockStream = $this->createMock(Stream::class);
-        $mockStream->method('write')
+        $mockStream->expects($this->once())
+            ->method('write')
             ->with(
                 $this->equalTo($encodedComment)
             );
@@ -372,7 +374,8 @@ class CommentTest extends PHPUnit_Framework_TestCase
     public function testGetCommentsDefaultParams()
     {
         $mockCommentModel = $this->createMock(CommentModel::class);
-        $mockCommentModel->method('getComments')
+        $mockCommentModel->expects($this->once())
+            ->method('getComments')
             ->with(
                 $this->equalTo(''),
                 $this->equalTo(''),
@@ -409,7 +412,8 @@ class CommentTest extends PHPUnit_Framework_TestCase
         $order = '-name';
 
         $mockCommentModel = $this->createMock(CommentModel::class);
-        $mockCommentModel->method('getComments')
+        $mockCommentModel->expects($this->once())
+            ->method('getComments')
             ->with(
                 $this->equalTo($domain),
                 $this->equalTo($path),
@@ -452,7 +456,8 @@ class CommentTest extends PHPUnit_Framework_TestCase
         $perPage = 5;
 
         $mockCommentModel = $this->createMock(CommentModel::class);
-        $mockCommentModel->method('getComments')
+        $mockCommentModel->expects($this->once())
+            ->method('getComments')
             ->with(
                 $this->equalTo($domain),
                 $this->equalTo($path),
@@ -602,7 +607,8 @@ class CommentTest extends PHPUnit_Framework_TestCase
             ->willReturn([]);
 
         $mockStream = $this->createMock(Stream::class);
-        $mockStream->method('write')
+        $mockStream->expects($this->once())
+            ->method('write')
             ->with(
                 $this->equalTo($encodedComments)
             );

@@ -34,7 +34,8 @@ class CommenterTest extends PHPUnit_Framework_TestCase
         $commenterId = 125;
 
         $mockCommenterModel = $this->createMock(CommenterModel::class);
-        $mockCommenterModel->method('findById')
+        $mockCommenterModel->expects($this->once())
+            ->method('findById')
             ->with($this->equalTo($commenterId))
             ->willReturn([]);
 
@@ -72,7 +73,8 @@ class CommenterTest extends PHPUnit_Framework_TestCase
             ->willReturn($commenter);
 
         $mockCommenterSerializer = $this->createMock(CommenterSerializer::class);
-        $mockCommenterSerializer->method('__invoke')
+        $mockCommenterSerializer->expects($this->once())
+            ->method('__invoke')
             ->with($this->equalTo($commenter));
 
         $mockContainer = $this->createMock(Container::class);
@@ -120,7 +122,8 @@ class CommenterTest extends PHPUnit_Framework_TestCase
         $mockRequest = $this->createMock(Request::class);
 
         $mockStream = $this->createMock(Stream::class);
-        $mockStream->method('write')
+        $mockStream->expects($this->once())
+            ->method('write')
             ->with($this->equalTo($encodedCommenter));
 
         $mockResponse = $this->createMock(Response::class);
@@ -160,7 +163,8 @@ class CommenterTest extends PHPUnit_Framework_TestCase
     public function testGetCommentersDefaultParams()
     {
         $mockCommenterModel = $this->createMock(CommenterModel::class);
-        $mockCommenterModel->method('getCommenters')
+        $mockCommenterModel->expects($this->once())
+            ->method('getCommenters')
             ->with(
                 $this->equalTo(0),
                 $this->equalTo(0)
@@ -194,7 +198,8 @@ class CommenterTest extends PHPUnit_Framework_TestCase
         $per_page = 5;
 
         $mockCommenterModel = $this->createMock(CommenterModel::class);
-        $mockCommenterModel->method('getCommenters')
+        $mockCommenterModel->expects($this->once())
+            ->method('getCommenters')
             ->with(
                 $this->equalTo(5),
                 $this->equalTo(10)
@@ -308,7 +313,8 @@ class CommenterTest extends PHPUnit_Framework_TestCase
             ->willReturn([]);
 
         $mockStream = $this->createMock(Stream::class);
-        $mockStream->method('write')
+        $mockStream->expects($this->once())
+            ->method('write')
             ->with(
                 $this->equalTo($encodedCommenters)
             );
