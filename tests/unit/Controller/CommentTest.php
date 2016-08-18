@@ -31,6 +31,126 @@ class CommentTest extends PHPUnit_Framework_TestCase
         $this->assertAttributeSame($mockContainer, 'container', $controller);
     }
 
+    public function testCreateCommentSendsCommenterData()
+    {
+        $this->markTestIncomplete('');
+    }
+
+    public function testCreateCommentCreatesCommenterIfNotFound()
+    {
+        $this->markTestIncomplete('');
+    }
+
+    public function testCreateCommentPullsNewlyCreatedCommenter()
+    {
+        $this->markTestIncomplete('');
+    }
+
+    public function testCreateCommentSendsBodyData()
+    {
+        $this->markTestIncomplete('');
+    }
+
+    public function testCreateCommentSendsDomainData()
+    {
+        $this->markTestIncomplete('');
+    }
+
+    public function testCreateCommentCreatesDomainIfNotFound()
+    {
+        $this->markTestIncomplete('');
+    }
+
+    public function testCreateCommentSendsPathData()
+    {
+        $this->markTestIncomplete('');
+    }
+
+    public function testCreateCommentCreatesPathIfNotFound()
+    {
+        $this->markTestIncomplete('');
+    }
+
+    public function testCreateCommentSendsThreadData()
+    {
+        $this->markTestIncomplete('');
+    }
+
+    public function testCreateCommentCreatesThreadIfNotFound()
+    {
+        $this->markTestIncomplete('');
+    }
+
+    public function testCreateCommentSendsLocationData()
+    {
+        $this->markTestIncomplete('');
+    }
+
+    public function testCreateCommentCreatesLocationIfNotFound()
+    {
+        $this->markTestIncomplete('');
+    }
+
+    public function testCreateCommentSendsRequestData()
+    {
+        $this->markTestIncomplete('');
+    }
+
+    public function testCreateCommentCreatesRequestIfNotFound()
+    {
+        $this->markTestIncomplete('');
+    }
+
+    public function testCreateCommentUsesCommenterTrustToDetermineDisplay()
+    {
+        $this->markTestIncomplete('');
+    }
+
+    public function testCreateCommentOverridesDisplayWithInput()
+    {
+        $this->markTestIncomplete('');
+    }
+
+    public function testCreateCommentDefaultsReplyTo()
+    {
+        $this->markTestIncomplete('');
+    }
+
+    public function testCreateCommentOverridesReplyToWithInput()
+    {
+        $this->markTestIncomplete('');
+    }
+
+    public function testCreateCommentCreatesComment()
+    {
+        $this->markTestIncomplete('');
+    }
+
+    public function testCreateCommentSendsNotificationsIfDisplayable()
+    {
+        $this->markTestIncomplete('');
+    }
+
+    public function testCreateCommentDoesNotSendNotificationIfNotDisplayable()
+    {
+        $this->markTestIncomplete('');
+    }
+
+    public function testCreateCommentPassesResultToSerializer()
+    {
+        $this->markTestIncomplete('');
+    }
+
+    public function testCreateCommentWritesToResponse()
+    {
+        $this->markTestIncomplete('');
+    }
+
+    public function testCreateCommentReturnsResponse()
+    {
+        $this->markTestIncomplete('');
+    }
+
     public function testGetCommentSendsCommentId()
     {
         $commentId = 4536;
