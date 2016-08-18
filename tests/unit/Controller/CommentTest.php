@@ -4,6 +4,12 @@ namespace Jacobemerick\CommentService\Controller;
 
 use Interop\Container\ContainerInterface as Container;
 use Jacobemerick\CommentService\Model\Comment as CommentModel;
+use Jacobemerick\CommentService\Model\CommentBody as CommentBodyModel;
+use Jacobemerick\CommentService\Model\CommentDomain as CommentDomainModel;
+use Jacobemerick\CommentService\Model\CommentPath as CommentPathModel;
+use Jacobemerick\CommentService\Model\CommentLocation as CommentLocationModel;
+use Jacobemerick\CommentService\Model\CommentRequest as CommentRequestModel;
+use Jacobemerick\CommentService\Model\CommentThread as CommentThreadModel;
 use Jacobemerick\CommentService\Model\Commenter as CommenterModel;
 use Jacobemerick\CommentService\Serializer\Comment as CommentSerializer;
 use Jacobemerick\CommentService\Serializer\Commenter as CommenterSerializer;
@@ -33,7 +39,73 @@ class CommentTest extends PHPUnit_Framework_TestCase
 
     public function testCreateCommentSendsCommenterData()
     {
-        $this->markTestIncomplete('');
+        $body = [
+            'commenter' => [
+                'name' => 'Jack Black',
+                'email' => 'jack@black.tld',
+                'website' => 'black.tld',
+            ],
+            'body' => 'This is a comment',
+            'domain' => 'domain.tld',
+            'path' => 'directory/path',
+            'thread' => 'post_comments',
+            'ip_address' => '127.0.0.1',
+            'user_agent' => 'TARDIS',
+            'referrer' => 'http://the-google.com',
+            'url' => 'http://website.tld/path',
+            'should_notify' => 0,
+        ];
+
+        $mockCommenterModel = $this->createMock(CommenterModel::class);
+        $mockCommenterModel->expects($this->once())
+            ->method('findByFields')
+            ->with(
+                $this->equalTo($body['commenter']['name']),
+                $this->equalTo($body['commenter']['email']),
+                $this->equalTo($body['commenter']['website'])
+            )
+            ->willReturn([
+                'id' => 123,
+                'is_trusted' => false
+            ]);
+
+        $mockCommentModel = $this->createMock(CommentModel::class);
+        $mockCommentModel->method('findById')
+            ->willReturn([]);
+
+        $mockCommentBodyModel = $this->createMock(CommentBodyModel::class);
+        $mockCommentDomainModel = $this->createMock(CommentDomainModel::class);
+        $mockCommentLocationModel = $this->createMock(CommentLocationModel::class);
+        $mockCommentPathModel = $this->createMock(CommentPathModel::class);
+        $mockCommentRequestModel = $this->createMock(CommentRequestModel::class);
+        $mockCommentThreadModel = $this->createMock(CommentThreadModel::class);
+
+        $mockCommentSerializer = $this->createMock(CommentSerializer::class);
+
+        $mockContainer = $this->createMock(Container::class);
+        $mockContainer->method('get')
+            ->will($this->returnValueMap([
+                [ 'commenterModel', $mockCommenterModel ],
+                [ 'commentModel', $mockCommentModel ],
+                [ 'commentBodyModel', $mockCommentBodyModel ],
+                [ 'commentDomainModel', $mockCommentDomainModel ],
+                [ 'commentLocationModel', $mockCommentLocationModel ],
+                [ 'commentPathModel', $mockCommentPathModel ],
+                [ 'commentRequestModel', $mockCommentRequestModel ],
+                [ 'commentThreadModel', $mockCommentThreadModel ],
+                [ 'commentSerializer', $mockCommentSerializer ],
+            ]));
+
+        $mockRequest = $this->createMock(Request::class);
+        $mockRequest->method('getParsedBody')
+            ->willReturn($body);
+
+        $mockResponse = $this->createMock(Response::class);
+        $mockResponse->method('getBody')
+            ->willReturn($this->createMock(Stream::class));
+
+        $controller = new Comment($mockContainer);
+        $controller->createComment($mockRequest, $mockResponse);
     }
 
     public function testCreateCommentCreatesCommenterIfNotFound()
