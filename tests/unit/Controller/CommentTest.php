@@ -69,16 +69,16 @@ class CommentTest extends PHPUnit_Framework_TestCase
                 'is_trusted' => false
             ]);
 
-        $mockCommentModel = $this->createMock(CommentModel::class);
-        $mockCommentModel->method('findById')
-            ->willReturn([]);
-
         $mockCommentBodyModel = $this->createMock(CommentBodyModel::class);
         $mockCommentDomainModel = $this->createMock(CommentDomainModel::class);
         $mockCommentLocationModel = $this->createMock(CommentLocationModel::class);
         $mockCommentPathModel = $this->createMock(CommentPathModel::class);
         $mockCommentRequestModel = $this->createMock(CommentRequestModel::class);
         $mockCommentThreadModel = $this->createMock(CommentThreadModel::class);
+
+        $mockCommentModel = $this->createMock(CommentModel::class);
+        $mockCommentModel->method('findById')
+            ->willReturn([]);
 
         $mockCommentSerializer = $this->createMock(CommentSerializer::class);
 
@@ -110,57 +110,834 @@ class CommentTest extends PHPUnit_Framework_TestCase
 
     public function testCreateCommentCreatesCommenterIfNotFound()
     {
-        $this->markTestIncomplete('');
+        $body = [
+            'commenter' => [
+                'name' => 'Jack Black',
+                'email' => 'jack@black.tld',
+                'website' => 'black.tld',
+            ],
+            'body' => 'This is a comment',
+            'domain' => 'domain.tld',
+            'path' => 'directory/path',
+            'thread' => 'post_comments',
+            'ip_address' => '127.0.0.1',
+            'user_agent' => 'TARDIS',
+            'referrer' => 'http://the-google.com',
+            'url' => 'http://website.tld/path',
+            'should_notify' => 0,
+        ];
+
+        $mockCommenterModel = $this->createMock(CommenterModel::class);
+        $mockCommenterModel->method('findByFields')
+            ->willReturn(false);
+        $mockCommenterModel->expects($this->once())
+            ->method('create')
+            ->with(
+                $this->equalTo($body['commenter']['name']),
+                $this->equalTo($body['commenter']['email']),
+                $this->equalTo($body['commenter']['website'])
+            );
+        $mockCommenterModel->method('findById')
+            ->willReturn([
+                'id' => 123,
+                'is_trusted' => false
+            ]);
+
+        $mockCommentBodyModel = $this->createMock(CommentBodyModel::class);
+        $mockCommentDomainModel = $this->createMock(CommentDomainModel::class);
+        $mockCommentLocationModel = $this->createMock(CommentLocationModel::class);
+        $mockCommentPathModel = $this->createMock(CommentPathModel::class);
+        $mockCommentRequestModel = $this->createMock(CommentRequestModel::class);
+        $mockCommentThreadModel = $this->createMock(CommentThreadModel::class);
+
+        $mockCommentModel = $this->createMock(CommentModel::class);
+        $mockCommentModel->method('findById')
+            ->willReturn([]);
+
+        $mockCommentSerializer = $this->createMock(CommentSerializer::class);
+
+        $mockContainer = $this->createMock(Container::class);
+        $mockContainer->method('get')
+            ->will($this->returnValueMap([
+                [ 'commenterModel', $mockCommenterModel ],
+                [ 'commentModel', $mockCommentModel ],
+                [ 'commentBodyModel', $mockCommentBodyModel ],
+                [ 'commentDomainModel', $mockCommentDomainModel ],
+                [ 'commentLocationModel', $mockCommentLocationModel ],
+                [ 'commentPathModel', $mockCommentPathModel ],
+                [ 'commentRequestModel', $mockCommentRequestModel ],
+                [ 'commentThreadModel', $mockCommentThreadModel ],
+                [ 'commentSerializer', $mockCommentSerializer ],
+            ]));
+
+        $mockRequest = $this->createMock(Request::class);
+        $mockRequest->method('getParsedBody')
+            ->willReturn($body);
+
+        $mockResponse = $this->createMock(Response::class);
+        $mockResponse->method('getBody')
+            ->willReturn($this->createMock(Stream::class));
+
+        $controller = new Comment($mockContainer);
+        $controller->createComment($mockRequest, $mockResponse);
     }
 
     public function testCreateCommentPullsNewlyCreatedCommenter()
     {
-        $this->markTestIncomplete('');
+        $body = [
+            'commenter' => [
+                'name' => 'Jack Black',
+                'email' => 'jack@black.tld',
+                'website' => 'black.tld',
+            ],
+            'body' => 'This is a comment',
+            'domain' => 'domain.tld',
+            'path' => 'directory/path',
+            'thread' => 'post_comments',
+            'ip_address' => '127.0.0.1',
+            'user_agent' => 'TARDIS',
+            'referrer' => 'http://the-google.com',
+            'url' => 'http://website.tld/path',
+            'should_notify' => 0,
+        ];
+
+        $commenterId = 123;
+
+        $mockCommenterModel = $this->createMock(CommenterModel::class);
+        $mockCommenterModel->method('findByFields')
+            ->willReturn(false);
+        $mockCommenterModel->method('create')
+            ->willReturn($commenterId);
+        $mockCommenterModel->expects($this->once())
+            ->method('findById')
+            ->with(
+                $this->equalTo($commenterId)
+            )
+            ->willReturn([
+                'id' => 123,
+                'is_trusted' => false
+            ]);
+
+        $mockCommentBodyModel = $this->createMock(CommentBodyModel::class);
+        $mockCommentDomainModel = $this->createMock(CommentDomainModel::class);
+        $mockCommentLocationModel = $this->createMock(CommentLocationModel::class);
+        $mockCommentPathModel = $this->createMock(CommentPathModel::class);
+        $mockCommentRequestModel = $this->createMock(CommentRequestModel::class);
+        $mockCommentThreadModel = $this->createMock(CommentThreadModel::class);
+
+        $mockCommentModel = $this->createMock(CommentModel::class);
+        $mockCommentModel->method('findById')
+            ->willReturn([]);
+
+        $mockCommentSerializer = $this->createMock(CommentSerializer::class);
+
+        $mockContainer = $this->createMock(Container::class);
+        $mockContainer->method('get')
+            ->will($this->returnValueMap([
+                [ 'commenterModel', $mockCommenterModel ],
+                [ 'commentModel', $mockCommentModel ],
+                [ 'commentBodyModel', $mockCommentBodyModel ],
+                [ 'commentDomainModel', $mockCommentDomainModel ],
+                [ 'commentLocationModel', $mockCommentLocationModel ],
+                [ 'commentPathModel', $mockCommentPathModel ],
+                [ 'commentRequestModel', $mockCommentRequestModel ],
+                [ 'commentThreadModel', $mockCommentThreadModel ],
+                [ 'commentSerializer', $mockCommentSerializer ],
+            ]));
+
+        $mockRequest = $this->createMock(Request::class);
+        $mockRequest->method('getParsedBody')
+            ->willReturn($body);
+
+        $mockResponse = $this->createMock(Response::class);
+        $mockResponse->method('getBody')
+            ->willReturn($this->createMock(Stream::class));
+
+        $controller = new Comment($mockContainer);
+        $controller->createComment($mockRequest, $mockResponse);
     }
 
     public function testCreateCommentSendsBodyData()
     {
-        $this->markTestIncomplete('');
+        $body = [
+            'commenter' => [
+                'name' => 'Jack Black',
+                'email' => 'jack@black.tld',
+                'website' => 'black.tld',
+            ],
+            'body' => 'This is a comment',
+            'domain' => 'domain.tld',
+            'path' => 'directory/path',
+            'thread' => 'post_comments',
+            'ip_address' => '127.0.0.1',
+            'user_agent' => 'TARDIS',
+            'referrer' => 'http://the-google.com',
+            'url' => 'http://website.tld/path',
+            'should_notify' => 0,
+        ];
+
+        $mockCommenterModel = $this->createMock(CommenterModel::class);
+        $mockCommenterModel->method('findByFields')
+            ->willReturn([
+                'id' => 123,
+                'is_trusted' => false
+            ]);
+
+        $mockCommentBodyModel = $this->createMock(CommentBodyModel::class);
+        $mockCommentBodyModel->expects($this->once())
+            ->method('create')
+            ->with(
+                $this->equalTo($body['body'])
+            );
+
+        $mockCommentDomainModel = $this->createMock(CommentDomainModel::class);
+        $mockCommentLocationModel = $this->createMock(CommentLocationModel::class);
+        $mockCommentPathModel = $this->createMock(CommentPathModel::class);
+        $mockCommentRequestModel = $this->createMock(CommentRequestModel::class);
+        $mockCommentThreadModel = $this->createMock(CommentThreadModel::class);
+
+        $mockCommentModel = $this->createMock(CommentModel::class);
+        $mockCommentModel->method('findById')
+            ->willReturn([]);
+
+        $mockCommentSerializer = $this->createMock(CommentSerializer::class);
+
+        $mockContainer = $this->createMock(Container::class);
+        $mockContainer->method('get')
+            ->will($this->returnValueMap([
+                [ 'commenterModel', $mockCommenterModel ],
+                [ 'commentModel', $mockCommentModel ],
+                [ 'commentBodyModel', $mockCommentBodyModel ],
+                [ 'commentDomainModel', $mockCommentDomainModel ],
+                [ 'commentLocationModel', $mockCommentLocationModel ],
+                [ 'commentPathModel', $mockCommentPathModel ],
+                [ 'commentRequestModel', $mockCommentRequestModel ],
+                [ 'commentThreadModel', $mockCommentThreadModel ],
+                [ 'commentSerializer', $mockCommentSerializer ],
+            ]));
+
+        $mockRequest = $this->createMock(Request::class);
+        $mockRequest->method('getParsedBody')
+            ->willReturn($body);
+
+        $mockResponse = $this->createMock(Response::class);
+        $mockResponse->method('getBody')
+            ->willReturn($this->createMock(Stream::class));
+
+        $controller = new Comment($mockContainer);
+        $controller->createComment($mockRequest, $mockResponse);
     }
 
     public function testCreateCommentSendsDomainData()
     {
-        $this->markTestIncomplete('');
+        $body = [
+            'commenter' => [
+                'name' => 'Jack Black',
+                'email' => 'jack@black.tld',
+                'website' => 'black.tld',
+            ],
+            'body' => 'This is a comment',
+            'domain' => 'domain.tld',
+            'path' => 'directory/path',
+            'thread' => 'post_comments',
+            'ip_address' => '127.0.0.1',
+            'user_agent' => 'TARDIS',
+            'referrer' => 'http://the-google.com',
+            'url' => 'http://website.tld/path',
+            'should_notify' => 0,
+        ];
+
+        $mockCommenterModel = $this->createMock(CommenterModel::class);
+        $mockCommenterModel->method('findByFields')
+            ->willReturn([
+                'id' => 123,
+                'is_trusted' => false
+            ]);
+
+        $mockCommentBodyModel = $this->createMock(CommentBodyModel::class);
+
+        $mockCommentDomainModel = $this->createMock(CommentDomainModel::class);
+        $mockCommentDomainModel->expects($this->once())
+            ->method('findByFields')
+            ->with(
+                $this->equalTo($body['domain'])
+            );
+
+        $mockCommentLocationModel = $this->createMock(CommentLocationModel::class);
+        $mockCommentPathModel = $this->createMock(CommentPathModel::class);
+        $mockCommentRequestModel = $this->createMock(CommentRequestModel::class);
+        $mockCommentThreadModel = $this->createMock(CommentThreadModel::class);
+
+        $mockCommentModel = $this->createMock(CommentModel::class);
+        $mockCommentModel->method('findById')
+            ->willReturn([]);
+
+        $mockCommentSerializer = $this->createMock(CommentSerializer::class);
+
+        $mockContainer = $this->createMock(Container::class);
+        $mockContainer->method('get')
+            ->will($this->returnValueMap([
+                [ 'commenterModel', $mockCommenterModel ],
+                [ 'commentModel', $mockCommentModel ],
+                [ 'commentBodyModel', $mockCommentBodyModel ],
+                [ 'commentDomainModel', $mockCommentDomainModel ],
+                [ 'commentLocationModel', $mockCommentLocationModel ],
+                [ 'commentPathModel', $mockCommentPathModel ],
+                [ 'commentRequestModel', $mockCommentRequestModel ],
+                [ 'commentThreadModel', $mockCommentThreadModel ],
+                [ 'commentSerializer', $mockCommentSerializer ],
+            ]));
+
+        $mockRequest = $this->createMock(Request::class);
+        $mockRequest->method('getParsedBody')
+            ->willReturn($body);
+
+        $mockResponse = $this->createMock(Response::class);
+        $mockResponse->method('getBody')
+            ->willReturn($this->createMock(Stream::class));
+
+        $controller = new Comment($mockContainer);
+        $controller->createComment($mockRequest, $mockResponse);
     }
 
     public function testCreateCommentCreatesDomainIfNotFound()
     {
-        $this->markTestIncomplete('');
+        $body = [
+            'commenter' => [
+                'name' => 'Jack Black',
+                'email' => 'jack@black.tld',
+                'website' => 'black.tld',
+            ],
+            'body' => 'This is a comment',
+            'domain' => 'domain.tld',
+            'path' => 'directory/path',
+            'thread' => 'post_comments',
+            'ip_address' => '127.0.0.1',
+            'user_agent' => 'TARDIS',
+            'referrer' => 'http://the-google.com',
+            'url' => 'http://website.tld/path',
+            'should_notify' => 0,
+        ];
+
+        $mockCommenterModel = $this->createMock(CommenterModel::class);
+        $mockCommenterModel->method('findByFields')
+            ->willReturn([
+                'id' => 123,
+                'is_trusted' => false
+            ]);
+
+        $mockCommentBodyModel = $this->createMock(CommentBodyModel::class);
+
+        $mockCommentDomainModel = $this->createMock(CommentDomainModel::class);
+        $mockCommentDomainModel->method('findByFields')
+            ->willReturn(false);
+        $mockCommentDomainModel->expects($this->once())
+            ->method('create')
+            ->with(
+                $this->equalTo($body['domain'])
+            );
+
+        $mockCommentLocationModel = $this->createMock(CommentLocationModel::class);
+        $mockCommentPathModel = $this->createMock(CommentPathModel::class);
+        $mockCommentRequestModel = $this->createMock(CommentRequestModel::class);
+        $mockCommentThreadModel = $this->createMock(CommentThreadModel::class);
+
+        $mockCommentModel = $this->createMock(CommentModel::class);
+        $mockCommentModel->method('findById')
+            ->willReturn([]);
+
+        $mockCommentSerializer = $this->createMock(CommentSerializer::class);
+
+        $mockContainer = $this->createMock(Container::class);
+        $mockContainer->method('get')
+            ->will($this->returnValueMap([
+                [ 'commenterModel', $mockCommenterModel ],
+                [ 'commentModel', $mockCommentModel ],
+                [ 'commentBodyModel', $mockCommentBodyModel ],
+                [ 'commentDomainModel', $mockCommentDomainModel ],
+                [ 'commentLocationModel', $mockCommentLocationModel ],
+                [ 'commentPathModel', $mockCommentPathModel ],
+                [ 'commentRequestModel', $mockCommentRequestModel ],
+                [ 'commentThreadModel', $mockCommentThreadModel ],
+                [ 'commentSerializer', $mockCommentSerializer ],
+            ]));
+
+        $mockRequest = $this->createMock(Request::class);
+        $mockRequest->method('getParsedBody')
+            ->willReturn($body);
+
+        $mockResponse = $this->createMock(Response::class);
+        $mockResponse->method('getBody')
+            ->willReturn($this->createMock(Stream::class));
+
+        $controller = new Comment($mockContainer);
+        $controller->createComment($mockRequest, $mockResponse);
     }
 
     public function testCreateCommentSendsPathData()
     {
-        $this->markTestIncomplete('');
+        $body = [
+            'commenter' => [
+                'name' => 'Jack Black',
+                'email' => 'jack@black.tld',
+                'website' => 'black.tld',
+            ],
+            'body' => 'This is a comment',
+            'domain' => 'domain.tld',
+            'path' => 'directory/path',
+            'thread' => 'post_comments',
+            'ip_address' => '127.0.0.1',
+            'user_agent' => 'TARDIS',
+            'referrer' => 'http://the-google.com',
+            'url' => 'http://website.tld/path',
+            'should_notify' => 0,
+        ];
+
+        $mockCommenterModel = $this->createMock(CommenterModel::class);
+        $mockCommenterModel->method('findByFields')
+            ->willReturn([
+                'id' => 123,
+                'is_trusted' => false
+            ]);
+
+        $mockCommentBodyModel = $this->createMock(CommentBodyModel::class);
+        $mockCommentDomainModel = $this->createMock(CommentDomainModel::class);
+        $mockCommentLocationModel = $this->createMock(CommentLocationModel::class);
+
+        $mockCommentPathModel = $this->createMock(CommentPathModel::class);
+        $mockCommentPathModel->expects($this->once())
+            ->method('findByFields')
+            ->with(
+                $this->equalTo($body['path'])
+            );
+
+        $mockCommentRequestModel = $this->createMock(CommentRequestModel::class);
+        $mockCommentThreadModel = $this->createMock(CommentThreadModel::class);
+
+        $mockCommentModel = $this->createMock(CommentModel::class);
+        $mockCommentModel->method('findById')
+            ->willReturn([]);
+
+        $mockCommentSerializer = $this->createMock(CommentSerializer::class);
+
+        $mockContainer = $this->createMock(Container::class);
+        $mockContainer->method('get')
+            ->will($this->returnValueMap([
+                [ 'commenterModel', $mockCommenterModel ],
+                [ 'commentModel', $mockCommentModel ],
+                [ 'commentBodyModel', $mockCommentBodyModel ],
+                [ 'commentDomainModel', $mockCommentDomainModel ],
+                [ 'commentLocationModel', $mockCommentLocationModel ],
+                [ 'commentPathModel', $mockCommentPathModel ],
+                [ 'commentRequestModel', $mockCommentRequestModel ],
+                [ 'commentThreadModel', $mockCommentThreadModel ],
+                [ 'commentSerializer', $mockCommentSerializer ],
+            ]));
+
+        $mockRequest = $this->createMock(Request::class);
+        $mockRequest->method('getParsedBody')
+            ->willReturn($body);
+
+        $mockResponse = $this->createMock(Response::class);
+        $mockResponse->method('getBody')
+            ->willReturn($this->createMock(Stream::class));
+
+        $controller = new Comment($mockContainer);
+        $controller->createComment($mockRequest, $mockResponse);
     }
 
     public function testCreateCommentCreatesPathIfNotFound()
     {
-        $this->markTestIncomplete('');
+        $body = [
+            'commenter' => [
+                'name' => 'Jack Black',
+                'email' => 'jack@black.tld',
+                'website' => 'black.tld',
+            ],
+            'body' => 'This is a comment',
+            'domain' => 'domain.tld',
+            'path' => 'directory/path',
+            'thread' => 'post_comments',
+            'ip_address' => '127.0.0.1',
+            'user_agent' => 'TARDIS',
+            'referrer' => 'http://the-google.com',
+            'url' => 'http://website.tld/path',
+            'should_notify' => 0,
+        ];
+
+        $mockCommenterModel = $this->createMock(CommenterModel::class);
+        $mockCommenterModel->method('findByFields')
+            ->willReturn([
+                'id' => 123,
+                'is_trusted' => false
+            ]);
+
+        $mockCommentBodyModel = $this->createMock(CommentBodyModel::class);
+        $mockCommentDomainModel = $this->createMock(CommentDomainModel::class);
+        $mockCommentLocationModel = $this->createMock(CommentLocationModel::class);
+
+        $mockCommentPathModel = $this->createMock(CommentPathModel::class);
+        $mockCommentPathModel->method('findByFields')
+            ->willReturn(false);
+        $mockCommentPathModel->expects($this->once())
+            ->method('create')
+            ->with(
+                $this->equalTo($body['path'])
+            );
+
+        $mockCommentRequestModel = $this->createMock(CommentRequestModel::class);
+        $mockCommentThreadModel = $this->createMock(CommentThreadModel::class);
+
+        $mockCommentModel = $this->createMock(CommentModel::class);
+        $mockCommentModel->method('findById')
+            ->willReturn([]);
+
+        $mockCommentSerializer = $this->createMock(CommentSerializer::class);
+
+        $mockContainer = $this->createMock(Container::class);
+        $mockContainer->method('get')
+            ->will($this->returnValueMap([
+                [ 'commenterModel', $mockCommenterModel ],
+                [ 'commentModel', $mockCommentModel ],
+                [ 'commentBodyModel', $mockCommentBodyModel ],
+                [ 'commentDomainModel', $mockCommentDomainModel ],
+                [ 'commentLocationModel', $mockCommentLocationModel ],
+                [ 'commentPathModel', $mockCommentPathModel ],
+                [ 'commentRequestModel', $mockCommentRequestModel ],
+                [ 'commentThreadModel', $mockCommentThreadModel ],
+                [ 'commentSerializer', $mockCommentSerializer ],
+            ]));
+
+        $mockRequest = $this->createMock(Request::class);
+        $mockRequest->method('getParsedBody')
+            ->willReturn($body);
+
+        $mockResponse = $this->createMock(Response::class);
+        $mockResponse->method('getBody')
+            ->willReturn($this->createMock(Stream::class));
+
+        $controller = new Comment($mockContainer);
+        $controller->createComment($mockRequest, $mockResponse);
     }
 
     public function testCreateCommentSendsThreadData()
     {
-        $this->markTestIncomplete('');
+        $body = [
+            'commenter' => [
+                'name' => 'Jack Black',
+                'email' => 'jack@black.tld',
+                'website' => 'black.tld',
+            ],
+            'body' => 'This is a comment',
+            'domain' => 'domain.tld',
+            'path' => 'directory/path',
+            'thread' => 'post_comments',
+            'ip_address' => '127.0.0.1',
+            'user_agent' => 'TARDIS',
+            'referrer' => 'http://the-google.com',
+            'url' => 'http://website.tld/path',
+            'should_notify' => 0,
+        ];
+
+        $mockCommenterModel = $this->createMock(CommenterModel::class);
+        $mockCommenterModel->method('findByFields')
+            ->willReturn([
+                'id' => 123,
+                'is_trusted' => false
+            ]);
+
+        $mockCommentBodyModel = $this->createMock(CommentBodyModel::class);
+        $mockCommentDomainModel = $this->createMock(CommentDomainModel::class);
+        $mockCommentLocationModel = $this->createMock(CommentLocationModel::class);
+        $mockCommentPathModel = $this->createMock(CommentPathModel::class);
+        $mockCommentRequestModel = $this->createMock(CommentRequestModel::class);
+
+        $mockCommentThreadModel = $this->createMock(CommentThreadModel::class);
+        $mockCommentThreadModel->expects($this->once())
+            ->method('findByFields')
+            ->with(
+                $this->equalTo($body['thread'])
+            );
+
+        $mockCommentModel = $this->createMock(CommentModel::class);
+        $mockCommentModel->method('findById')
+            ->willReturn([]);
+
+        $mockCommentSerializer = $this->createMock(CommentSerializer::class);
+
+        $mockContainer = $this->createMock(Container::class);
+        $mockContainer->method('get')
+            ->will($this->returnValueMap([
+                [ 'commenterModel', $mockCommenterModel ],
+                [ 'commentModel', $mockCommentModel ],
+                [ 'commentBodyModel', $mockCommentBodyModel ],
+                [ 'commentDomainModel', $mockCommentDomainModel ],
+                [ 'commentLocationModel', $mockCommentLocationModel ],
+                [ 'commentPathModel', $mockCommentPathModel ],
+                [ 'commentRequestModel', $mockCommentRequestModel ],
+                [ 'commentThreadModel', $mockCommentThreadModel ],
+                [ 'commentSerializer', $mockCommentSerializer ],
+            ]));
+
+        $mockRequest = $this->createMock(Request::class);
+        $mockRequest->method('getParsedBody')
+            ->willReturn($body);
+
+        $mockResponse = $this->createMock(Response::class);
+        $mockResponse->method('getBody')
+            ->willReturn($this->createMock(Stream::class));
+
+        $controller = new Comment($mockContainer);
+        $controller->createComment($mockRequest, $mockResponse);
     }
 
     public function testCreateCommentCreatesThreadIfNotFound()
     {
-        $this->markTestIncomplete('');
+        $body = [
+            'commenter' => [
+                'name' => 'Jack Black',
+                'email' => 'jack@black.tld',
+                'website' => 'black.tld',
+            ],
+            'body' => 'This is a comment',
+            'domain' => 'domain.tld',
+            'path' => 'directory/path',
+            'thread' => 'post_comments',
+            'ip_address' => '127.0.0.1',
+            'user_agent' => 'TARDIS',
+            'referrer' => 'http://the-google.com',
+            'url' => 'http://website.tld/path',
+            'should_notify' => 0,
+        ];
+
+        $mockCommenterModel = $this->createMock(CommenterModel::class);
+        $mockCommenterModel->method('findByFields')
+            ->willReturn([
+                'id' => 123,
+                'is_trusted' => false
+            ]);
+
+        $mockCommentBodyModel = $this->createMock(CommentBodyModel::class);
+        $mockCommentDomainModel = $this->createMock(CommentDomainModel::class);
+        $mockCommentLocationModel = $this->createMock(CommentLocationModel::class);
+        $mockCommentPathModel = $this->createMock(CommentPathModel::class);
+        $mockCommentRequestModel = $this->createMock(CommentRequestModel::class);
+
+        $mockCommentThreadModel = $this->createMock(CommentThreadModel::class);
+        $mockCommentThreadModel->method('findByFields')
+            ->willReturn(false);
+        $mockCommentThreadModel->expects($this->once())
+            ->method('create')
+            ->with(
+                $this->equalTo($body['thread'])
+            );
+
+        $mockCommentModel = $this->createMock(CommentModel::class);
+        $mockCommentModel->method('findById')
+            ->willReturn([]);
+
+        $mockCommentSerializer = $this->createMock(CommentSerializer::class);
+
+        $mockContainer = $this->createMock(Container::class);
+        $mockContainer->method('get')
+            ->will($this->returnValueMap([
+                [ 'commenterModel', $mockCommenterModel ],
+                [ 'commentModel', $mockCommentModel ],
+                [ 'commentBodyModel', $mockCommentBodyModel ],
+                [ 'commentDomainModel', $mockCommentDomainModel ],
+                [ 'commentLocationModel', $mockCommentLocationModel ],
+                [ 'commentPathModel', $mockCommentPathModel ],
+                [ 'commentRequestModel', $mockCommentRequestModel ],
+                [ 'commentThreadModel', $mockCommentThreadModel ],
+                [ 'commentSerializer', $mockCommentSerializer ],
+            ]));
+
+        $mockRequest = $this->createMock(Request::class);
+        $mockRequest->method('getParsedBody')
+            ->willReturn($body);
+
+        $mockResponse = $this->createMock(Response::class);
+        $mockResponse->method('getBody')
+            ->willReturn($this->createMock(Stream::class));
+
+        $controller = new Comment($mockContainer);
+        $controller->createComment($mockRequest, $mockResponse);
     }
 
     public function testCreateCommentSendsLocationData()
     {
-        $this->markTestIncomplete('');
+        $body = [
+            'commenter' => [
+                'name' => 'Jack Black',
+                'email' => 'jack@black.tld',
+                'website' => 'black.tld',
+            ],
+            'body' => 'This is a comment',
+            'domain' => 'domain.tld',
+            'path' => 'directory/path',
+            'thread' => 'post_comments',
+            'ip_address' => '127.0.0.1',
+            'user_agent' => 'TARDIS',
+            'referrer' => 'http://the-google.com',
+            'url' => 'http://website.tld/path',
+            'should_notify' => 0,
+        ];
+
+        $domainId = 4;
+        $pathId = 32;
+        $threadId = 2;
+
+        $mockCommenterModel = $this->createMock(CommenterModel::class);
+        $mockCommenterModel->method('findByFields')
+            ->willReturn([
+                'id' => 123,
+                'is_trusted' => false
+            ]);
+
+        $mockCommentBodyModel = $this->createMock(CommentBodyModel::class);
+
+        $mockCommentDomainModel = $this->createMock(CommentDomainModel::class);
+        $mockCommentDomainModel->method('findByFields')
+            ->willReturn($domainId);
+
+        $mockCommentLocationModel = $this->createMock(CommentLocationModel::class);
+        $mockCommentLocationModel->expects($this->once())
+            ->method('findByFields')
+            ->with(
+                $this->equalTo($domainId),
+                $this->equalTo($pathId),
+                $this->equalTo($threadId)
+            );
+
+        $mockCommentPathModel = $this->createMock(CommentPathModel::class);
+        $mockCommentPathModel->method('findByFields')
+            ->willReturn($pathId);
+
+        $mockCommentRequestModel = $this->createMock(CommentRequestModel::class);
+
+        $mockCommentThreadModel = $this->createMock(CommentThreadModel::class);
+        $mockCommentThreadModel->method('findByFields')
+            ->willReturn($threadId);
+
+        $mockCommentModel = $this->createMock(CommentModel::class);
+        $mockCommentModel->method('findById')
+            ->willReturn([]);
+
+        $mockCommentSerializer = $this->createMock(CommentSerializer::class);
+
+        $mockContainer = $this->createMock(Container::class);
+        $mockContainer->method('get')
+            ->will($this->returnValueMap([
+                [ 'commenterModel', $mockCommenterModel ],
+                [ 'commentModel', $mockCommentModel ],
+                [ 'commentBodyModel', $mockCommentBodyModel ],
+                [ 'commentDomainModel', $mockCommentDomainModel ],
+                [ 'commentLocationModel', $mockCommentLocationModel ],
+                [ 'commentPathModel', $mockCommentPathModel ],
+                [ 'commentRequestModel', $mockCommentRequestModel ],
+                [ 'commentThreadModel', $mockCommentThreadModel ],
+                [ 'commentSerializer', $mockCommentSerializer ],
+            ]));
+
+        $mockRequest = $this->createMock(Request::class);
+        $mockRequest->method('getParsedBody')
+            ->willReturn($body);
+
+        $mockResponse = $this->createMock(Response::class);
+        $mockResponse->method('getBody')
+            ->willReturn($this->createMock(Stream::class));
+
+        $controller = new Comment($mockContainer);
+        $controller->createComment($mockRequest, $mockResponse);
     }
 
     public function testCreateCommentCreatesLocationIfNotFound()
     {
-        $this->markTestIncomplete('');
+        $body = [
+            'commenter' => [
+                'name' => 'Jack Black',
+                'email' => 'jack@black.tld',
+                'website' => 'black.tld',
+            ],
+            'body' => 'This is a comment',
+            'domain' => 'domain.tld',
+            'path' => 'directory/path',
+            'thread' => 'post_comments',
+            'ip_address' => '127.0.0.1',
+            'user_agent' => 'TARDIS',
+            'referrer' => 'http://the-google.com',
+            'url' => 'http://website.tld/path',
+            'should_notify' => 0,
+        ];
+
+        $domainId = 3;
+        $pathId = 31;
+        $threadId = 5;
+
+        $mockCommenterModel = $this->createMock(CommenterModel::class);
+        $mockCommenterModel->method('findByFields')
+            ->willReturn([
+                'id' => 123,
+                'is_trusted' => false
+            ]);
+
+        $mockCommentBodyModel = $this->createMock(CommentBodyModel::class);
+
+        $mockCommentDomainModel = $this->createMock(CommentDomainModel::class);
+        $mockCommentDomainModel->method('findByFields')
+            ->willReturn($domainId);
+
+        $mockCommentLocationModel = $this->createMock(CommentLocationModel::class);
+        $mockCommentLocationModel->method('findByFields')
+            ->willReturn(false);
+        $mockCommentLocationModel->expects($this->once())
+            ->method('create')
+            ->with(
+                $this->equalTo($domainId),
+                $this->equalTo($pathId),
+                $this->equalTo($threadId)
+            );
+
+        $mockCommentPathModel = $this->createMock(CommentPathModel::class);
+        $mockCommentPathModel->method('findByFields')
+            ->willReturn($pathId);
+
+        $mockCommentRequestModel = $this->createMock(CommentRequestModel::class);
+
+        $mockCommentThreadModel = $this->createMock(CommentThreadModel::class);
+        $mockCommentThreadModel->method('findByFields')
+            ->willReturn($threadId);
+
+        $mockCommentModel = $this->createMock(CommentModel::class);
+        $mockCommentModel->method('findById')
+            ->willReturn([]);
+
+        $mockCommentSerializer = $this->createMock(CommentSerializer::class);
+
+        $mockContainer = $this->createMock(Container::class);
+        $mockContainer->method('get')
+            ->will($this->returnValueMap([
+                [ 'commenterModel', $mockCommenterModel ],
+                [ 'commentModel', $mockCommentModel ],
+                [ 'commentBodyModel', $mockCommentBodyModel ],
+                [ 'commentDomainModel', $mockCommentDomainModel ],
+                [ 'commentLocationModel', $mockCommentLocationModel ],
+                [ 'commentPathModel', $mockCommentPathModel ],
+                [ 'commentRequestModel', $mockCommentRequestModel ],
+                [ 'commentThreadModel', $mockCommentThreadModel ],
+                [ 'commentSerializer', $mockCommentSerializer ],
+            ]));
+
+        $mockRequest = $this->createMock(Request::class);
+        $mockRequest->method('getParsedBody')
+            ->willReturn($body);
+
+        $mockResponse = $this->createMock(Response::class);
+        $mockResponse->method('getBody')
+            ->willReturn($this->createMock(Stream::class));
+
+        $controller = new Comment($mockContainer);
+        $controller->createComment($mockRequest, $mockResponse);
     }
 
     public function testCreateCommentSendsRequestData()
