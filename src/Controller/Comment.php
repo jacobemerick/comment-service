@@ -144,11 +144,9 @@ class Comment
             ->findById($commentId);
 
         if ($shouldDisplay) {
-            $notificationHandler = new NotificationHandler(
-                $this->container->get('dbal'),
-                $this->container->get('mail')
-            );
-            $notificationHandler($locationId, $comment);
+            $this->container
+                ->get('notificationHandler')
+                ->__invoke($locationId, $comment);
         }
 
         $comment = $this->container

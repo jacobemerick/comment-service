@@ -3,6 +3,7 @@
 namespace Jacobemerick\CommentService\Controller;
 
 use Interop\Container\ContainerInterface as Container;
+use Jacobemerick\CommentService\Helper\NotificationHandler;
 use Jacobemerick\CommentService\Model\Comment as CommentModel;
 use Jacobemerick\CommentService\Model\CommentBody as CommentBodyModel;
 use Jacobemerick\CommentService\Model\CommentDomain as CommentDomainModel;
@@ -1103,7 +1104,6 @@ class CommentTest extends PHPUnit_Framework_TestCase
                 $this->anything(),
                 $this->equalTo($requestId)
             );
-
         $mockCommentModel->method('findById')
             ->willReturn([]);
 
@@ -1191,7 +1191,6 @@ class CommentTest extends PHPUnit_Framework_TestCase
                 $this->anything(),
                 $this->equalTo($requestId)
             );
-
         $mockCommentModel->method('findById')
             ->willReturn([]);
 
@@ -1270,7 +1269,6 @@ class CommentTest extends PHPUnit_Framework_TestCase
                 $this->anything(),
                 $this->equalTo((int) $isTrusted)
             );
-
         $mockCommentModel->method('findById')
             ->willReturn([]);
 
@@ -1348,7 +1346,6 @@ class CommentTest extends PHPUnit_Framework_TestCase
                 $this->anything(),
                 $this->equalTo((int) $body['should_display'])
             );
-
         $mockCommentModel->method('findById')
             ->willReturn([]);
 
@@ -1421,7 +1418,6 @@ class CommentTest extends PHPUnit_Framework_TestCase
                 $this->anything(),
                 $this->equalTo(0)
             );
-
         $mockCommentModel->method('findById')
             ->willReturn([]);
 
@@ -1495,7 +1491,6 @@ class CommentTest extends PHPUnit_Framework_TestCase
                 $this->anything(),
                 $this->equalTo($body['reply_to'])
             );
-
         $mockCommentModel->method('findById')
             ->willReturn([]);
 
@@ -1590,7 +1585,6 @@ class CommentTest extends PHPUnit_Framework_TestCase
                 $this->equalTo(0),
                 time() // todo sigh
             );
-
         $mockCommentModel->method('findById')
             ->willReturn([]);
 
@@ -1624,7 +1618,86 @@ class CommentTest extends PHPUnit_Framework_TestCase
 
     public function testCreateCommentSendsNotificationsIfDisplayable()
     {
-        $this->markTestIncomplete('');
+        $body = [
+            'commenter' => [
+                'name' => 'Jack Black',
+                'email' => 'jack@black.tld',
+                'website' => 'black.tld',
+            ],
+            'body' => 'This is a comment',
+            'domain' => 'domain.tld',
+            'path' => 'directory/path',
+            'thread' => 'post_comments',
+            'ip_address' => '127.0.0.1',
+            'user_agent' => 'TARDIS',
+            'referrer' => 'http://the-google.com',
+            'url' => 'http://website.tld/path',
+            'should_notify' => false,
+        ];
+
+        $locationId = 783;
+        $comment = [
+            'id' => 478,
+            'body' => 'Im a comment',
+        ];
+
+        $mockCommenterModel = $this->createMock(CommenterModel::class);
+        $mockCommenterModel->method('findByFields')
+            ->willReturn([
+                'id' => 12,
+                'is_trusted' => true,
+            ]);
+
+        $mockCommentBodyModel = $this->createMock(CommentBodyModel::class);
+        $mockCommentDomainModel = $this->createMock(CommentDomainModel::class);
+
+        $mockCommentLocationModel = $this->createMock(CommentLocationModel::class);
+        $mockCommentLocationModel->method('findByFields')
+            ->willReturn($locationId);
+
+        $mockCommentPathModel = $this->createMock(CommentPathModel::class);
+        $mockCommentRequestModel = $this->createMock(CommentRequestModel::class);
+        $mockCommentThreadModel = $this->createMock(CommentThreadModel::class);
+
+        $mockCommentModel = $this->createMock(CommentModel::class);
+        $mockCommentModel->method('findById')
+            ->willReturn($comment);
+
+        $mockNotificationHandler = $this->createMock(NotificationHandler::class);
+        $mockNotificationHandler->expects($this->once())
+            ->method('__invoke')
+            ->with(
+                $this->equalTo($locationId),
+                $this->equalTo($comment)
+            );
+
+        $mockCommentSerializer = $this->createMock(CommentSerializer::class);
+
+        $mockContainer = $this->createMock(Container::class);
+        $mockContainer->method('get')
+            ->will($this->returnValueMap([
+                [ 'commenterModel', $mockCommenterModel ],
+                [ 'commentModel', $mockCommentModel ],
+                [ 'commentBodyModel', $mockCommentBodyModel ],
+                [ 'commentDomainModel', $mockCommentDomainModel ],
+                [ 'commentLocationModel', $mockCommentLocationModel ],
+                [ 'commentPathModel', $mockCommentPathModel ],
+                [ 'commentRequestModel', $mockCommentRequestModel ],
+                [ 'commentThreadModel', $mockCommentThreadModel ],
+                [ 'commentSerializer', $mockCommentSerializer ],
+                [ 'notificationHandler', $mockNotificationHandler ],
+            ]));
+
+        $mockRequest = $this->createMock(Request::class);
+        $mockRequest->method('getParsedBody')
+            ->willReturn($body);
+
+        $mockResponse = $this->createMock(Response::class);
+        $mockResponse->method('getBody')
+            ->willReturn($this->createMock(Stream::class));
+
+        $controller = new Comment($mockContainer);
+        $controller->createComment($mockRequest, $mockResponse);
     }
 
     public function testCreateCommentDoesNotSendNotificationIfNotDisplayable()
