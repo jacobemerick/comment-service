@@ -118,11 +118,11 @@ class Comment
         }
 
         $shouldDisplay = $commenter['is_trusted'];
-        if (!empty($body['should_display'])) {
+        if (array_key_exists('should_display', $body)) {
             $shouldDisplay = (int) $body['should_display'];
         }
         $replyTo = 0;
-        if (!empty($body['reply_to'])) {
+        if (array_key_exists('reply_to', $body)) {
             $replyTo = (int) $body['reply_to'];
         }
 
