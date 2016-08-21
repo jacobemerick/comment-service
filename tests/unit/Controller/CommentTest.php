@@ -2,6 +2,7 @@
 
 namespace Jacobemerick\CommentService\Controller;
 
+use DateTime;
 use Interop\Container\ContainerInterface as Container;
 use Jacobemerick\CommentService\Helper\NotificationHandler;
 use Jacobemerick\CommentService\Model\Comment as CommentModel;
@@ -92,6 +93,8 @@ class CommentTest extends PHPUnit_Framework_TestCase
 
         $mockCommentSerializer = $this->createMock(CommentSerializer::class);
 
+        $mockDateTime = $this->createMock(DateTime::class);
+
         $mockContainer = $this->createMock(Container::class);
         $mockContainer->method('get')
             ->will($this->returnValueMap([
@@ -104,6 +107,7 @@ class CommentTest extends PHPUnit_Framework_TestCase
                 [ 'commentRequestModel', $mockCommentRequestModel ],
                 [ 'commentThreadModel', $mockCommentThreadModel ],
                 [ 'commentSerializer', $mockCommentSerializer ],
+                [ 'datetime', $mockDateTime ],
             ]));
 
         $mockRequest = $this->createMock(Request::class);
@@ -172,6 +176,8 @@ class CommentTest extends PHPUnit_Framework_TestCase
 
         $mockCommentSerializer = $this->createMock(CommentSerializer::class);
 
+        $mockDateTime = $this->createMock(DateTime::class);
+
         $mockContainer = $this->createMock(Container::class);
         $mockContainer->method('get')
             ->will($this->returnValueMap([
@@ -184,6 +190,7 @@ class CommentTest extends PHPUnit_Framework_TestCase
                 [ 'commentRequestModel', $mockCommentRequestModel ],
                 [ 'commentThreadModel', $mockCommentThreadModel ],
                 [ 'commentSerializer', $mockCommentSerializer ],
+                [ 'datetime', $mockDateTime ],
             ]));
 
         $mockRequest = $this->createMock(Request::class);
@@ -251,6 +258,8 @@ class CommentTest extends PHPUnit_Framework_TestCase
 
         $mockCommentSerializer = $this->createMock(CommentSerializer::class);
 
+        $mockDateTime = $this->createMock(DateTime::class);
+
         $mockContainer = $this->createMock(Container::class);
         $mockContainer->method('get')
             ->will($this->returnValueMap([
@@ -263,6 +272,7 @@ class CommentTest extends PHPUnit_Framework_TestCase
                 [ 'commentRequestModel', $mockCommentRequestModel ],
                 [ 'commentThreadModel', $mockCommentThreadModel ],
                 [ 'commentSerializer', $mockCommentSerializer ],
+                [ 'datetime', $mockDateTime ],
             ]));
 
         $mockRequest = $this->createMock(Request::class);
@@ -330,6 +340,8 @@ class CommentTest extends PHPUnit_Framework_TestCase
 
         $mockCommentSerializer = $this->createMock(CommentSerializer::class);
 
+        $mockDateTime = $this->createMock(DateTime::class);
+
         $mockContainer = $this->createMock(Container::class);
         $mockContainer->method('get')
             ->will($this->returnValueMap([
@@ -342,6 +354,7 @@ class CommentTest extends PHPUnit_Framework_TestCase
                 [ 'commentRequestModel', $mockCommentRequestModel ],
                 [ 'commentThreadModel', $mockCommentThreadModel ],
                 [ 'commentSerializer', $mockCommentSerializer ],
+                [ 'datetime', $mockDateTime ],
             ]));
 
         $mockRequest = $this->createMock(Request::class);
@@ -412,6 +425,8 @@ class CommentTest extends PHPUnit_Framework_TestCase
 
         $mockCommentSerializer = $this->createMock(CommentSerializer::class);
 
+        $mockDateTime = $this->createMock(DateTime::class);
+
         $mockContainer = $this->createMock(Container::class);
         $mockContainer->method('get')
             ->will($this->returnValueMap([
@@ -424,6 +439,7 @@ class CommentTest extends PHPUnit_Framework_TestCase
                 [ 'commentRequestModel', $mockCommentRequestModel ],
                 [ 'commentThreadModel', $mockCommentThreadModel ],
                 [ 'commentSerializer', $mockCommentSerializer ],
+                [ 'datetime', $mockDateTime ],
             ]));
 
         $mockRequest = $this->createMock(Request::class);
@@ -494,6 +510,8 @@ class CommentTest extends PHPUnit_Framework_TestCase
 
         $mockCommentSerializer = $this->createMock(CommentSerializer::class);
 
+        $mockDateTime = $this->createMock(DateTime::class);
+
         $mockContainer = $this->createMock(Container::class);
         $mockContainer->method('get')
             ->will($this->returnValueMap([
@@ -506,6 +524,7 @@ class CommentTest extends PHPUnit_Framework_TestCase
                 [ 'commentRequestModel', $mockCommentRequestModel ],
                 [ 'commentThreadModel', $mockCommentThreadModel ],
                 [ 'commentSerializer', $mockCommentSerializer ],
+                [ 'datetime', $mockDateTime ],
             ]));
 
         $mockRequest = $this->createMock(Request::class);
@@ -577,6 +596,8 @@ class CommentTest extends PHPUnit_Framework_TestCase
 
         $mockCommentSerializer = $this->createMock(CommentSerializer::class);
 
+        $mockDateTime = $this->createMock(DateTime::class);
+
         $mockContainer = $this->createMock(Container::class);
         $mockContainer->method('get')
             ->will($this->returnValueMap([
@@ -589,6 +610,7 @@ class CommentTest extends PHPUnit_Framework_TestCase
                 [ 'commentRequestModel', $mockCommentRequestModel ],
                 [ 'commentThreadModel', $mockCommentThreadModel ],
                 [ 'commentSerializer', $mockCommentSerializer ],
+                [ 'datetime', $mockDateTime ],
             ]));
 
         $mockRequest = $this->createMock(Request::class);
@@ -660,6 +682,8 @@ class CommentTest extends PHPUnit_Framework_TestCase
 
         $mockCommentSerializer = $this->createMock(CommentSerializer::class);
 
+        $mockDateTime = $this->createMock(DateTime::class);
+
         $mockContainer = $this->createMock(Container::class);
         $mockContainer->method('get')
             ->will($this->returnValueMap([
@@ -672,6 +696,7 @@ class CommentTest extends PHPUnit_Framework_TestCase
                 [ 'commentRequestModel', $mockCommentRequestModel ],
                 [ 'commentThreadModel', $mockCommentThreadModel ],
                 [ 'commentSerializer', $mockCommentSerializer ],
+                [ 'datetime', $mockDateTime ],
             ]));
 
         $mockRequest = $this->createMock(Request::class);
@@ -744,6 +769,8 @@ class CommentTest extends PHPUnit_Framework_TestCase
 
         $mockCommentSerializer = $this->createMock(CommentSerializer::class);
 
+        $mockDateTime = $this->createMock(DateTime::class);
+
         $mockContainer = $this->createMock(Container::class);
         $mockContainer->method('get')
             ->will($this->returnValueMap([
@@ -756,6 +783,7 @@ class CommentTest extends PHPUnit_Framework_TestCase
                 [ 'commentRequestModel', $mockCommentRequestModel ],
                 [ 'commentThreadModel', $mockCommentThreadModel ],
                 [ 'commentSerializer', $mockCommentSerializer ],
+                [ 'datetime', $mockDateTime ],
             ]));
 
         $mockRequest = $this->createMock(Request::class);
@@ -828,6 +856,8 @@ class CommentTest extends PHPUnit_Framework_TestCase
 
         $mockCommentSerializer = $this->createMock(CommentSerializer::class);
 
+        $mockDateTime = $this->createMock(DateTime::class);
+
         $mockContainer = $this->createMock(Container::class);
         $mockContainer->method('get')
             ->will($this->returnValueMap([
@@ -840,6 +870,7 @@ class CommentTest extends PHPUnit_Framework_TestCase
                 [ 'commentRequestModel', $mockCommentRequestModel ],
                 [ 'commentThreadModel', $mockCommentThreadModel ],
                 [ 'commentSerializer', $mockCommentSerializer ],
+                [ 'datetime', $mockDateTime ],
             ]));
 
         $mockRequest = $this->createMock(Request::class);
@@ -925,6 +956,8 @@ class CommentTest extends PHPUnit_Framework_TestCase
 
         $mockCommentSerializer = $this->createMock(CommentSerializer::class);
 
+        $mockDateTime = $this->createMock(DateTime::class);
+
         $mockContainer = $this->createMock(Container::class);
         $mockContainer->method('get')
             ->will($this->returnValueMap([
@@ -937,6 +970,7 @@ class CommentTest extends PHPUnit_Framework_TestCase
                 [ 'commentRequestModel', $mockCommentRequestModel ],
                 [ 'commentThreadModel', $mockCommentThreadModel ],
                 [ 'commentSerializer', $mockCommentSerializer ],
+                [ 'datetime', $mockDateTime ],
             ]));
 
         $mockRequest = $this->createMock(Request::class);
@@ -1022,6 +1056,8 @@ class CommentTest extends PHPUnit_Framework_TestCase
 
         $mockCommentSerializer = $this->createMock(CommentSerializer::class);
 
+        $mockDateTime = $this->createMock(DateTime::class);
+
         $mockContainer = $this->createMock(Container::class);
         $mockContainer->method('get')
             ->will($this->returnValueMap([
@@ -1034,6 +1070,7 @@ class CommentTest extends PHPUnit_Framework_TestCase
                 [ 'commentRequestModel', $mockCommentRequestModel ],
                 [ 'commentThreadModel', $mockCommentThreadModel ],
                 [ 'commentSerializer', $mockCommentSerializer ],
+                [ 'datetime', $mockDateTime ],
             ]));
 
         $mockRequest = $this->createMock(Request::class);
@@ -1109,6 +1146,8 @@ class CommentTest extends PHPUnit_Framework_TestCase
 
         $mockCommentSerializer = $this->createMock(CommentSerializer::class);
 
+        $mockDateTime = $this->createMock(DateTime::class);
+
         $mockContainer = $this->createMock(Container::class);
         $mockContainer->method('get')
             ->will($this->returnValueMap([
@@ -1121,6 +1160,7 @@ class CommentTest extends PHPUnit_Framework_TestCase
                 [ 'commentRequestModel', $mockCommentRequestModel ],
                 [ 'commentThreadModel', $mockCommentThreadModel ],
                 [ 'commentSerializer', $mockCommentSerializer ],
+                [ 'datetime', $mockDateTime ],
             ]));
 
         $mockRequest = $this->createMock(Request::class);
@@ -1196,6 +1236,8 @@ class CommentTest extends PHPUnit_Framework_TestCase
 
         $mockCommentSerializer = $this->createMock(CommentSerializer::class);
 
+        $mockDateTime = $this->createMock(DateTime::class);
+
         $mockContainer = $this->createMock(Container::class);
         $mockContainer->method('get')
             ->will($this->returnValueMap([
@@ -1208,6 +1250,7 @@ class CommentTest extends PHPUnit_Framework_TestCase
                 [ 'commentRequestModel', $mockCommentRequestModel ],
                 [ 'commentThreadModel', $mockCommentThreadModel ],
                 [ 'commentSerializer', $mockCommentSerializer ],
+                [ 'datetime', $mockDateTime ],
             ]));
 
         $mockRequest = $this->createMock(Request::class);
@@ -1274,6 +1317,8 @@ class CommentTest extends PHPUnit_Framework_TestCase
 
         $mockCommentSerializer = $this->createMock(CommentSerializer::class);
 
+        $mockDateTime = $this->createMock(DateTime::class);
+
         $mockContainer = $this->createMock(Container::class);
         $mockContainer->method('get')
             ->will($this->returnValueMap([
@@ -1286,6 +1331,7 @@ class CommentTest extends PHPUnit_Framework_TestCase
                 [ 'commentRequestModel', $mockCommentRequestModel ],
                 [ 'commentThreadModel', $mockCommentThreadModel ],
                 [ 'commentSerializer', $mockCommentSerializer ],
+                [ 'datetime', $mockDateTime ],
             ]));
 
         $mockRequest = $this->createMock(Request::class);
@@ -1351,6 +1397,8 @@ class CommentTest extends PHPUnit_Framework_TestCase
 
         $mockCommentSerializer = $this->createMock(CommentSerializer::class);
 
+        $mockDateTime = $this->createMock(DateTime::class);
+
         $mockContainer = $this->createMock(Container::class);
         $mockContainer->method('get')
             ->will($this->returnValueMap([
@@ -1363,6 +1411,7 @@ class CommentTest extends PHPUnit_Framework_TestCase
                 [ 'commentRequestModel', $mockCommentRequestModel ],
                 [ 'commentThreadModel', $mockCommentThreadModel ],
                 [ 'commentSerializer', $mockCommentSerializer ],
+                [ 'datetime', $mockDateTime ],
             ]));
 
         $mockRequest = $this->createMock(Request::class);
@@ -1423,6 +1472,8 @@ class CommentTest extends PHPUnit_Framework_TestCase
 
         $mockCommentSerializer = $this->createMock(CommentSerializer::class);
 
+        $mockDateTime = $this->createMock(DateTime::class);
+
         $mockContainer = $this->createMock(Container::class);
         $mockContainer->method('get')
             ->will($this->returnValueMap([
@@ -1435,6 +1486,7 @@ class CommentTest extends PHPUnit_Framework_TestCase
                 [ 'commentRequestModel', $mockCommentRequestModel ],
                 [ 'commentThreadModel', $mockCommentThreadModel ],
                 [ 'commentSerializer', $mockCommentSerializer ],
+                [ 'datetime', $mockDateTime ],
             ]));
 
         $mockRequest = $this->createMock(Request::class);
@@ -1496,6 +1548,8 @@ class CommentTest extends PHPUnit_Framework_TestCase
 
         $mockCommentSerializer = $this->createMock(CommentSerializer::class);
 
+        $mockDateTime = $this->createMock(DateTime::class);
+
         $mockContainer = $this->createMock(Container::class);
         $mockContainer->method('get')
             ->will($this->returnValueMap([
@@ -1508,6 +1562,7 @@ class CommentTest extends PHPUnit_Framework_TestCase
                 [ 'commentRequestModel', $mockCommentRequestModel ],
                 [ 'commentThreadModel', $mockCommentThreadModel ],
                 [ 'commentSerializer', $mockCommentSerializer ],
+                [ 'datetime', $mockDateTime ],
             ]));
 
         $mockRequest = $this->createMock(Request::class);
@@ -1572,6 +1627,8 @@ class CommentTest extends PHPUnit_Framework_TestCase
 
         $mockCommentThreadModel = $this->createMock(CommentThreadModel::class);
 
+        $mockDateTime = $this->createMock(DateTime::class);
+
         $mockCommentModel = $this->createMock(CommentModel::class);
         $mockCommentModel->expects($this->once())
             ->method('create')
@@ -1584,7 +1641,7 @@ class CommentTest extends PHPUnit_Framework_TestCase
                 $this->equalTo($body['url']),
                 $this->equalTo((int) $body['should_notify']),
                 $this->equalTo(0),
-                time() // todo sigh
+                $this->equalTo($mockDateTime)
             )
             ->willReturn($commentId);
         $mockCommentModel->expects($this->once())
@@ -1608,6 +1665,7 @@ class CommentTest extends PHPUnit_Framework_TestCase
                 [ 'commentRequestModel', $mockCommentRequestModel ],
                 [ 'commentThreadModel', $mockCommentThreadModel ],
                 [ 'commentSerializer', $mockCommentSerializer ],
+                [ 'datetime', $mockDateTime ],
             ]));
 
         $mockRequest = $this->createMock(Request::class);
@@ -1686,6 +1744,8 @@ class CommentTest extends PHPUnit_Framework_TestCase
 
         $mockCommentSerializer = $this->createMock(CommentSerializer::class);
 
+        $mockDateTime = $this->createMock(DateTime::class);
+
         $mockContainer = $this->createMock(Container::class);
         $mockContainer->method('get')
             ->will($this->returnValueMap([
@@ -1698,6 +1758,7 @@ class CommentTest extends PHPUnit_Framework_TestCase
                 [ 'commentRequestModel', $mockCommentRequestModel ],
                 [ 'commentThreadModel', $mockCommentThreadModel ],
                 [ 'commentSerializer', $mockCommentSerializer ],
+                [ 'datetime', $mockDateTime ],
                 [ 'notificationHandler', $mockNotificationHandler ],
             ]));
 
@@ -1756,6 +1817,8 @@ class CommentTest extends PHPUnit_Framework_TestCase
 
         $mockCommentSerializer = $this->createMock(CommentSerializer::class);
 
+        $mockDateTime = $this->createMock(DateTime::class);
+
         $mockContainer = $this->createMock(Container::class);
         $mockContainer->method('get')
             ->will($this->returnValueMap([
@@ -1768,6 +1831,7 @@ class CommentTest extends PHPUnit_Framework_TestCase
                 [ 'commentRequestModel', $mockCommentRequestModel ],
                 [ 'commentThreadModel', $mockCommentThreadModel ],
                 [ 'commentSerializer', $mockCommentSerializer ],
+                [ 'datetime', $mockDateTime ],
                 [ 'notificationHandler', $mockNotificationHandler ],
             ]));
 
@@ -1841,6 +1905,8 @@ class CommentTest extends PHPUnit_Framework_TestCase
                 $this->equalTo($comment)
             );
 
+        $mockDateTime = $this->createMock(DateTime::class);
+
         $mockContainer = $this->createMock(Container::class);
         $mockContainer->method('get')
             ->will($this->returnValueMap([
@@ -1853,6 +1919,7 @@ class CommentTest extends PHPUnit_Framework_TestCase
                 [ 'commentRequestModel', $mockCommentRequestModel ],
                 [ 'commentThreadModel', $mockCommentThreadModel ],
                 [ 'commentSerializer', $mockCommentSerializer ],
+                [ 'datetime', $mockDateTime ],
             ]));
 
         $mockRequest = $this->createMock(Request::class);
@@ -1924,6 +1991,8 @@ class CommentTest extends PHPUnit_Framework_TestCase
         $mockCommentSerializer->method('__invoke')
             ->willReturn($comment);
 
+        $mockDateTime = $this->createMock(DateTime::class);
+
         $mockContainer = $this->createMock(Container::class);
         $mockContainer->method('get')
             ->will($this->returnValueMap([
@@ -1936,6 +2005,7 @@ class CommentTest extends PHPUnit_Framework_TestCase
                 [ 'commentRequestModel', $mockCommentRequestModel ],
                 [ 'commentThreadModel', $mockCommentThreadModel ],
                 [ 'commentSerializer', $mockCommentSerializer ],
+                [ 'datetime', $mockDateTime ],
             ]));
 
         $mockRequest = $this->createMock(Request::class);
@@ -1996,6 +2066,8 @@ class CommentTest extends PHPUnit_Framework_TestCase
 
         $mockCommentSerializer = $this->createMock(CommentSerializer::class);
 
+        $mockDateTime = $this->createMock(DateTime::class);
+
         $mockContainer = $this->createMock(Container::class);
         $mockContainer->method('get')
             ->will($this->returnValueMap([
@@ -2008,6 +2080,7 @@ class CommentTest extends PHPUnit_Framework_TestCase
                 [ 'commentRequestModel', $mockCommentRequestModel ],
                 [ 'commentThreadModel', $mockCommentThreadModel ],
                 [ 'commentSerializer', $mockCommentSerializer ],
+                [ 'datetime', $mockDateTime ],
             ]));
 
         $mockRequest = $this->createMock(Request::class);

@@ -3,6 +3,7 @@
 namespace Jacobemerick\CommentService\Model;
 
 use Aura\Sql\ExtendedPdo;
+use DateTime;
 use PHPUnit_Framework_TestCase;
 
 class CommentTest extends PHPUnit_Framework_TestCase
@@ -40,7 +41,12 @@ class CommentTest extends PHPUnit_Framework_TestCase
         $url = 'http://website.tld/path';
         $notify = 0;
         $display = 1;
-        $create_time = time();
+
+        $mockCreateTime = $this->createMock(DateTime::class);
+        $mockCreateTime->expects($this->once())
+            ->method('format')
+            ->with('Y-m-d H:i:s')
+            ->willReturn('some date, eh?');
 
         $mockPdo = $this->createMock(ExtendedPdo::class);
         $mockPdo->method('perform')
@@ -55,7 +61,7 @@ class CommentTest extends PHPUnit_Framework_TestCase
                     'url' => $url,
                     'notify' => $notify,
                     'display' => $display,
-                    'create_time' => date('Y-m-d H:i:s', $create_time),
+                    'create_time' => 'some date, eh?',
                 ])
             )
             ->willReturn(true);
@@ -70,7 +76,7 @@ class CommentTest extends PHPUnit_Framework_TestCase
             $url,
             $notify,
             $display,
-            $create_time
+            $mockCreateTime
         );
     }
 
@@ -78,12 +84,14 @@ class CommentTest extends PHPUnit_Framework_TestCase
     {
         $lastInsertId = 746;
 
+        $mockCreateTime = $this->createMock(DateTime::class);
+
         $mockPdo = $this->createMock(ExtendedPdo::class);
         $mockPdo->method('lastInsertId')
             ->willReturn($lastInsertId);
 
         $model = new Comment($mockPdo);
-        $result = $model->create(0, 0, 0, 0, 0, '', 0, 0, 0);
+        $result = $model->create(0, 0, 0, 0, 0, '', 0, 0, $mockCreateTime);
 
         $this->assertSame($lastInsertId, $result);
     }

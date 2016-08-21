@@ -3,6 +3,7 @@
 namespace Jacobemerick\CommentService\Model;
 
 use Aura\Sql\ExtendedPdo;
+use DateTimeInterface;
 
 class Comment
 {
@@ -27,7 +28,7 @@ class Comment
      * @param string $url
      * @param integer $notify
      * @param integer $display
-     * @param integer $createTime
+     * @param DateTimeInterface $createTime
      * @return integer
      */
     public function create(
@@ -39,7 +40,7 @@ class Comment
         $url,
         $notify,
         $display,
-        $createTime
+        DateTimeInterface $createTime
     ) {
         $query = "
             INSERT INTO
@@ -57,7 +58,7 @@ class Comment
             'url' => $url,
             'notify' => $notify,
             'display' => $display,
-            'create_time' => date('Y-m-d H:i:s', $createTime),
+            'create_time' => $createTime->format('Y-m-d H:i:s'),
         ];
 
         $this->extendedPdo->perform($query, $bindings);
