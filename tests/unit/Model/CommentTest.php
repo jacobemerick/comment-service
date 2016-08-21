@@ -36,7 +36,7 @@ class CommentTest extends PHPUnit_Framework_TestCase
         $commenter = 123;
         $body = 153;
         $location = 14;
-        $reply_to = 0;
+        $replyTo = 0;
         $request = 154;
         $url = 'http://website.tld/path';
         $notify = 0;
@@ -56,7 +56,7 @@ class CommentTest extends PHPUnit_Framework_TestCase
                     'commenter' => $commenter,
                     'body' => $body,
                     'location' => $location,
-                    'reply_to' => $reply_to,
+                    'reply_to' => $replyTo,
                     'request' => $request,
                     'url' => $url,
                     'notify' => $notify,
@@ -71,7 +71,7 @@ class CommentTest extends PHPUnit_Framework_TestCase
             $commenter,
             $body,
             $location,
-            $reply_to,
+            $replyTo,
             $request,
             $url,
             $notify,
