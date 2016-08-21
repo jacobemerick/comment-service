@@ -126,6 +126,9 @@ class Comment
             $replyTo = (int) $body['reply_to'];
         }
 
+        $dateTime = $this->container
+            ->get('datetime');
+
         $commentId = $this->container
             ->get('commentModel')
             ->create(
@@ -137,7 +140,7 @@ class Comment
                 $body['url'],
                 (int) $body['should_notify'],
                 $shouldDisplay,
-                time()
+                $dateTime
             );
         $comment = $this->container
             ->get('commentModel')
