@@ -63,7 +63,7 @@ $di->set('notificationHandler', $di->lazyNew(
 $di->set('logger', $di->lazyNew(
     'Monolog\Logger',
     [
-        'name' => 'default'
+        'name' => 'default',
     ],
     [
         'pushHandler' => $di->lazyNew(
@@ -72,7 +72,7 @@ $di->set('logger', $di->lazyNew(
                 'stream' => __DIR__ . '/logs/default.log',
                 'level' => Monolog\Logger::DEBUG,
             ]
-        ))
+        ),
     ]
 ));
 
