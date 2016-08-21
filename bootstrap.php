@@ -101,6 +101,7 @@ $talus = new Talus([
     'swagger' => $swagger,
 ]);
 
+// todo extract middleware to testable classes
 $auth = $config->auth;
 $talus->addMiddleware(function ($req, $res, $next) use ($auth) {
     if ($req->getUri()->getPath() == '/api-docs') {
@@ -109,10 +110,6 @@ $talus->addMiddleware(function ($req, $res, $next) use ($auth) {
 
     $authHeader = base64_encode("{$auth->username}:{$auth->password}");
     $authHeader = "Basic {$authHeader}";
-
-    if (!empty($_SERVER['REDIRECT_X_HTTP_AUTHORIZATION'])) {
-        $req = $req->withHeader('Authorization', $_SERVER['REDIRECT_X_HTTP_AUTHORIZATION']);
-    }
 
     if ($authHeader != current($req->getHeader('Authorization'))) {
         $res = $res->withStatus(403);
