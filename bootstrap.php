@@ -82,6 +82,20 @@ $di->set('mail', $di->lazyNew(
     ]
 ));
 
+// global time object
+$di->set('datetime', $di->lazyNew(
+    'DateTime',
+    [
+        'time' => 'now',
+        'timezone' => $di->lazyNew(
+            'DateTimezone',
+            [
+                'timezone' => 'America/Phoenix',
+            ]
+        ),
+    ]
+));
+
 // set up swagger
 $handle = fopen(__DIR__ . '/swagger.json', 'r');
 $swagger = '';
