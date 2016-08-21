@@ -66,9 +66,12 @@ $di->set('logger', $di->lazyNew(
         'name' => 'default'
     ],
     [
-        'pushHandler' => (new Monolog\Handler\StreamHandler(
-            __DIR__ . '/logs/default.log',
-            Monolog\Logger::DEBUG
+        'pushHandler' => $di->lazyNew(
+            'Monolog\Handler\StreamHandler',
+            [
+                'stream' => __DIR__ . '/logs/default.log',
+                'level' => Monolog\Logger::DEBUG,
+            ]
         ))
     ]
 ));
