@@ -180,12 +180,60 @@ class CommenterTest extends PHPUnit_Framework_TestCase
         $mockPdo = $this->createMock(ExtendedPdo::class);
         $mockPdo->method('fetchAll')
             ->with(
-                $this->equalTo($query)
+                $this->equalTo($query),
+                $this->equalTo([
+                    'trusted' => 1,
+                ])
             )
             ->willReturn(true);
 
         $model = new Commenter($mockPdo);
         $result = $model->getCommenters();
+
+        $this->assertNotEquals(null, $result);
+    }
+
+    public function testGetCommentersHandlesLimit()
+    {
+        $limit = 10;
+        $query = "
+            SELECT *
+            FROM `commenter`
+            WHERE `is_trusted` = :trusted
+                LIMIT 0, {$limit}";
+
+        $mockPdo = $this->createMock(ExtendedPdo::class);
+        $mockPdo->method('fetchAll')
+            ->with(
+                $this->equalTo($query)
+            )
+            ->willReturn(true);
+
+        $model = new Commenter($mockPdo);
+        $result = $model->getCommenters($limit);
+
+        $this->assertNotEquals(null, $result);
+    }
+
+    public function testGetCommentersHandlesLimitAndOffset()
+    {
+        $offset = 20;
+        $limit = 5;
+        $query = "
+            SELECT *
+            FROM `commenter`
+            WHERE `is_trusted` = :trusted
+                LIMIT {$offset}, {$limit}";
+
+        $mockPdo = $this->createMock(ExtendedPdo::class);
+        $mockPdo->method('fetchAll')
+            ->with(
+                $this->equalTo($query)
+            )
+            ->willReturn(true);
+
+        $model = new Commenter($mockPdo);
+        $result = $model->getCommenters($limit, $offset);
 
         $this->assertNotEquals(null, $result);
     }
