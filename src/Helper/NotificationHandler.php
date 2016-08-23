@@ -70,11 +70,11 @@ MESSAGE;
             return;
         }
 
-        list($pageType, $domainTitle) = $this->getTemplateParameters($comment['domain']);
-        $subject = $this->getSubject($domainTitle);
+        $templateParameters = $this->getTemplateParameters($comment['domain']);
+        $subject = $this->getSubject($templateParameters['domainTitle']);
         $message = $this->getMessage(
-            $pageType,
-            $domainTitle,
+            $templateParameters['pageType'],
+            $templateParameters['domainTitle'],
             new DateTime($comment['date']),
             $comment['commenter_name'],
             $comment['body'],
