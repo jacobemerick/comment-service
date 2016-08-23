@@ -2,7 +2,6 @@
 
 namespace Jacobemerick\CommentService\Helper;
 
-use Aura\Sql\ExtendedPdo;
 use DateTime;
 use Jacobemerick\Archangel\Archangel;
 use Jacobemerick\CommentService\Model\Commenter;
@@ -10,11 +9,11 @@ use Jacobemerick\CommentService\Model\Commenter;
 class NotificationHandler
 {
 
-    /** @var ExtendedPdo */
-    protected $dbal;
-
     /** @var Archangel */
     protected $archangel;
+
+    /** @var Commenter */
+    protected $commenterModel;
 
     /** @var array */
     protected static $from = [
@@ -44,13 +43,13 @@ Visit %s to view and reply. Have a good one!
 MESSAGE;
 
     /**
-     * @param ExtendedPdo $dbal
      * @param Archangel $mailer
+     * @param Commenter $commenterModel
      */
-    public function __construct(ExtendedPdo $dbal, Archangel $mailer)
+    public function __construct(Archangel $mailer, Commenter $commenterModel)
     {
-        $this->dbal = $dbal;
         $this->mailer = $mailer;
+        $this->commenterModel = $commenterModel;
     }
 
     /**
@@ -60,8 +59,8 @@ MESSAGE;
      */
     public function __invoke($locationId, array $comment)
     {
-        $commenter = new Commenter($this->dbal);
-        $recipientList = $commenter->getNotificationRecipients($locationId);
+        $recipientList = $this->commenterModel
+            ->getNotificationRecipients($locationId);
 
         $recipientList = array_filter($recipientList, function ($recipient) use ($comment) {
             return $recipient['id'] !== $comment['commenter_id'];

@@ -54,8 +54,8 @@ $di->set('commenterSerializer', $di->lazyNew('Jacobemerick\CommentService\Serial
 $di->set('notificationHandler', $di->lazyNew(
     'Jacobemerick\CommentService\Helper\NotificationHandler',
     [
-        'dbal' => $di->lazyGet('dbal'),
         'mail' => $di->lazyGet('mail'),
+        'commenterModel' => $di->lazyGet('commenterModel'),
     ]
 ));
 

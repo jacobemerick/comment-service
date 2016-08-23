@@ -2,9 +2,9 @@
 
 namespace Jacobemerick\CommentService\Helper;
 
-use Aura\Sql\ExtendedPdo;
 use DateTime;
 use Jacobemerick\Archangel\Archangel;
+use Jacobemerick\CommentService\Model\Commenter;
 use PHPUnit_Framework_TestCase;
 use ReflectionClass;
 
@@ -13,21 +13,21 @@ class NotificationHandlerTest extends PHPUnit_Framework_TestCase
 
     public function testIsInstanceOfNotificationHandler()
     {
-        $mockPdo = $this->createMock(ExtendedPdo::class);
         $mockArchangel = $this->createMock(Archangel::class);
-        $notificationHandler = new NotificationHandler($mockPdo, $mockArchangel);
+        $mockCommenterModel = $this->createMock(Commenter::class);
+        $notificationHandler = new NotificationHandler($mockArchangel, $mockCommenterModel);
 
         $this->assertInstanceOf(NotificationHandler::class, $notificationHandler);
     }
 
     public function testConstructSetsServices()
     {
-        $mockPdo = $this->createMock(ExtendedPdo::class);
         $mockArchangel = $this->createMock(Archangel::class);
-        $notificationHandler = new NotificationHandler($mockPdo, $mockArchangel);
+        $mockCommenterModel = $this->createMock(Commenter::class);
+        $notificationHandler = new NotificationHandler($mockArchangel, $mockCommenterModel);
 
-        $this->assertAttributeSame($mockPdo, 'dbal', $notificationHandler);
         $this->assertAttributeSame($mockArchangel, 'mailer', $notificationHandler);
+        $this->assertAttributeSame($mockCommenterModel, 'commenterModel', $notificationHandler);
     }
 
     public function testInvokeFetchesListOfNotificationRecipients()
@@ -67,9 +67,9 @@ class NotificationHandlerTest extends PHPUnit_Framework_TestCase
 
     public function testGetTemplateParametersForBlog()
     {
-        $mockPdo = $this->createMock(ExtendedPdo::class);
         $mockArchangel = $this->createMock(Archangel::class);
-        $notificationHandler = new NotificationHandler($mockPdo, $mockArchangel);
+        $mockCommenterModel = $this->createMock(Commenter::class);
+        $notificationHandler = new NotificationHandler($mockArchangel, $mockCommenterModel);
 
         $reflectedGetTemplateParameters = (new ReflectionClass($notificationHandler))
             ->getMethod('getTemplateParameters');
@@ -91,9 +91,9 @@ class NotificationHandlerTest extends PHPUnit_Framework_TestCase
 
     public function testGetTemplateParametersForWaterfalls()
     {
-        $mockPdo = $this->createMock(ExtendedPdo::class);
         $mockArchangel = $this->createMock(Archangel::class);
-        $notificationHandler = new NotificationHandler($mockPdo, $mockArchangel);
+        $mockCommenterModel = $this->createMock(Commenter::class);
+        $notificationHandler = new NotificationHandler($mockArchangel, $mockCommenterModel);
 
         $reflectedGetTemplateParameters = (new ReflectionClass($notificationHandler))
             ->getMethod('getTemplateParameters');
@@ -117,9 +117,9 @@ class NotificationHandlerTest extends PHPUnit_Framework_TestCase
     {
         $undefinedDomain = 'domain.tld';
 
-        $mockPdo = $this->createMock(ExtendedPdo::class);
         $mockArchangel = $this->createMock(Archangel::class);
-        $notificationHandler = new NotificationHandler($mockPdo, $mockArchangel);
+        $mockCommenterModel = $this->createMock(Commenter::class);
+        $notificationHandler = new NotificationHandler($mockArchangel, $mockCommenterModel);
 
         $reflectedGetTemplateParameters = (new ReflectionClass($notificationHandler))
             ->getMethod('getTemplateParameters');
@@ -143,9 +143,9 @@ class NotificationHandlerTest extends PHPUnit_Framework_TestCase
     {
         $domainTitle = 'Waterfalls of the Keweenaw';
 
-        $mockPdo = $this->createMock(ExtendedPdo::class);
         $mockArchangel = $this->createMock(Archangel::class);
-        $notificationHandler = new NotificationHandler($mockPdo, $mockArchangel);
+        $mockCommenterModel = $this->createMock(Commenter::class);
+        $notificationHandler = new NotificationHandler($mockArchangel, $mockCommenterModel);
 
         $reflectedNotificationHandler = new ReflectionClass($notificationHandler);
         $reflectedSubjectTemplate = $reflectedNotificationHandler->getProperty('subjectTemplate');
@@ -170,9 +170,9 @@ class NotificationHandlerTest extends PHPUnit_Framework_TestCase
         $comment = 'this is a comment';
         $commentUrl = 'blog.tld/path';
  
-        $mockPdo = $this->createMock(ExtendedPdo::class);
         $mockArchangel = $this->createMock(Archangel::class);
-        $notificationHandler = new NotificationHandler($mockPdo, $mockArchangel);
+        $mockCommenterModel = $this->createMock(Commenter::class);
+        $notificationHandler = new NotificationHandler($mockArchangel, $mockCommenterModel);
 
         $reflectedNotificationHandler = new ReflectionClass($notificationHandler);
         $reflectedMessageTemplate = $reflectedNotificationHandler->getProperty('messageTemplate');
