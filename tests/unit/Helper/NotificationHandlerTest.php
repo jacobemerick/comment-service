@@ -103,17 +103,154 @@ class NotificationHandlerTest extends PHPUnit_Framework_TestCase
 
     public function testInvokeBailsIfNotificationRecipientsIsEmpty()
     {
-        $this->markTestIncomplete();
+        $comment = [
+            'commenter_id' => 34,
+        ];
+
+        $recipientList = [
+            [
+                'id' => 34,
+                'name' => 'Jack Black',
+                'email' => 'jack@black.tld',
+            ],
+        ];
+
+        $mockArchangel = $this->createMock(Archangel::class);
+        $mockArchangel->expects($this->never())
+            ->method('setFrom');
+
+        $mockCommenterModel = $this->createMock(Commenter::class);
+        $mockCommenterModel->method('getNotificationRecipients')
+            ->willReturn($recipientList);
+
+        $notificationHandler = new NotificationHandler($mockArchangel, $mockCommenterModel);
+        $result = $notificationHandler->__invoke(123, $comment);
+
+        $this->assertNull($result);
     }
 
     public function testInvokeHydratesSubject()
     {
-        $this->markTestIncomplete();
+        $comment = [
+            'id' => 341,
+            'commenter_id' => 34,
+            'commenter_name' => 'Jack Black',
+            'body' => 'this is a comment',
+            'domain' => 'blog.jacobemerick.com',
+            'date' => date('Y-m-d H:i:s'),
+            'url' => 'http://domain.tld/comment-{{id}}',
+        ];
+
+        $recipientList = [
+            [
+                'id' => 12,
+                'name' => 'Jane Black',
+                'email' => 'jane@black.tld',
+            ],
+        ];
+
+        $mockArchangel = $this->createMock(Archangel::class);
+        $mockArchangel->method('setFrom')
+            ->will($this->returnSelf());
+        $mockArchangel->method('setReplyTo')
+            ->will($this->returnSelf());
+        $mockArchangel->method('addTo')
+            ->will($this->returnSelf());
+
+        $mockCommenterModel = $this->createMock(Commenter::class);
+        $mockCommenterModel->method('getNotificationRecipients')
+            ->willReturn($recipientList);
+
+        $notificationHandler = new NotificationHandler($mockArchangel, $mockCommenterModel);
+
+        $reflectedNotificationHandler = new ReflectionClass($notificationHandler);
+        $reflectedGetTemplateParameters = $reflectedNotificationHandler->getMethod('getTemplateParameters');
+        $reflectedGetTemplateParameters->setAccessible(true);
+        $templateParameters = $reflectedGetTemplateParameters->invokeArgs(
+            $notificationHandler,
+            [ $comment['domain'] ]
+        );
+        $reflectedGetSubject = $reflectedNotificationHandler->getMethod('getSubject');
+        $reflectedGetSubject->setAccessible(true);
+        $subject = $reflectedGetSubject->invokeArgs(
+            $notificationHandler,
+            [ $templateParameters['domainTitle'] ]
+        );
+
+        $mockArchangel->expects($this->once())
+            ->method('setSubject')
+            ->with(
+                $this->equalTo($subject)
+            )
+            ->will($this->returnSelf());
+
+        $notificationHandler->__invoke(123, $comment);
     }
 
     public function testInvokeHydratesMessage()
     {
-        $this->markTestIncomplete();
+        $comment = [
+            'id' => 341,
+            'commenter_id' => 34,
+            'commenter_name' => 'Jack Black',
+            'body' => 'this is a comment',
+            'domain' => 'blog.jacobemerick.com',
+            'date' => date('Y-m-d H:i:s'),
+            'url' => 'http://domain.tld/comment-{{id}}',
+        ];
+
+        $recipientList = [
+            [
+                'id' => 12,
+                'name' => 'Jane Black',
+                'email' => 'jane@black.tld',
+            ],
+        ];
+
+        $mockArchangel = $this->createMock(Archangel::class);
+        $mockArchangel->method('setFrom')
+            ->will($this->returnSelf());
+        $mockArchangel->method('setReplyTo')
+            ->will($this->returnSelf());
+        $mockArchangel->method('setSubject')
+            ->will($this->returnSelf());
+        $mockArchangel->method('addTo')
+            ->will($this->returnSelf());
+
+        $mockCommenterModel = $this->createMock(Commenter::class);
+        $mockCommenterModel->method('getNotificationRecipients')
+            ->willReturn($recipientList);
+
+        $notificationHandler = new NotificationHandler($mockArchangel, $mockCommenterModel);
+
+        $reflectedNotificationHandler = new ReflectionClass($notificationHandler);
+        $reflectedGetTemplateParameters = $reflectedNotificationHandler->getMethod('getTemplateParameters');
+        $reflectedGetTemplateParameters->setAccessible(true);
+        $templateParameters = $reflectedGetTemplateParameters->invokeArgs(
+            $notificationHandler,
+            [ $comment['domain'] ]
+        );
+        $reflectedGetMessage = $reflectedNotificationHandler->getMethod('getMessage');
+        $reflectedGetMessage->setAccessible(true);
+        $message = $reflectedGetMessage->invokeArgs(
+            $notificationHandler,
+            [
+                $templateParameters['pageType'],
+                $templateParameters['domainTitle'],
+                new DateTime($comment['date']),
+                $comment['commenter_name'],
+                $comment['body'],
+                str_replace('{{id}}', $comment['id'], $comment['url']),
+            ]
+        );
+
+        $mockArchangel->expects($this->once())
+            ->method('setPlainMessage')
+            ->with(
+                $this->equalTo($message)
+            );
+
+        $notificationHandler->__invoke(123, $comment);
     }
 
     public function testInvokeSetsUpEmail()
