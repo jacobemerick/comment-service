@@ -30,7 +30,40 @@ class NotificationHandlerTest extends PHPUnit_Framework_TestCase
         $this->assertAttributeSame($mockArchangel, 'mailer', $notificationHandler);
     }
 
-    // __invoke tests
+    public function testInvokeFetchesListOfNotificationRecipients()
+    {
+        $this->markTestIncomplete();
+    }
+
+    public function testInvokeFiltersNotificationRecipients()
+    {
+        $this->markTestIncomplete();
+    }
+
+    public function testInvokeBailsIfNotificationRecipientsIsEmpty()
+    {
+        $this->markTestIncomplete();
+    }
+
+    public function testInvokeHydratesSubject()
+    {
+        $this->markTestIncomplete();
+    }
+
+    public function testInvokeHydratesMessage()
+    {
+        $this->markTestIncomplete();
+    }
+
+    public function testInvokeSetsUpEmail()
+    {
+        $this->markTestIncomplete();
+    }
+
+    public function testInvokeSendsEmailForEachRecipient()
+    {
+        $this->markTestIncomplete();
+    }
 
     public function testGetTemplateParametersForBlog()
     {
