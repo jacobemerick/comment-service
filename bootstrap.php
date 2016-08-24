@@ -59,6 +59,15 @@ $di->set('notificationHandler', $di->lazyNew(
     ]
 ));
 
+// set up middlewares
+$di->set('authenticationMiddleware', $di->lazyNew(
+    'Jacobemerick\CommentService\Middleware\Authentication',
+    [
+        'username' => $config->auth->username,
+        'password' => $config->auth->password,
+    ]
+));
+
 // set up logger
 $di->set('logger', $di->lazyNew(
     'Monolog\Logger',
@@ -110,23 +119,7 @@ $talus = new Talus([
     'swagger' => $swagger,
 ]);
 
-// todo extract middleware to testable classes
-$auth = $config->auth;
-$talus->addMiddleware(function ($req, $res, $next) use ($auth) {
-    if ($req->getUri()->getPath() == '/api-docs') {
-        return $next($req, $res);
-    }
-
-    $authHeader = base64_encode("{$auth->username}:{$auth->password}");
-    $authHeader = "Basic {$authHeader}";
-
-    if ($authHeader != current($req->getHeader('Authorization'))) {
-        $res = $res->withStatus(403);
-        return $res;
-    }
-
-    return $next($req, $res);
-});
+$talus->addMiddleware($di->get('authenticationMiddleware'));
 
 // todo does this belong in talus?
 $talus->addMiddleware(function ($req, $res, $next) {
