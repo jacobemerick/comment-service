@@ -59,15 +59,6 @@ $di->set('notificationHandler', $di->lazyNew(
     ]
 ));
 
-// set up middlewares
-$di->set('authenticationMiddleware', $di->lazyNew(
-    'Jacobemerick\CommentService\Middleware\Authentication',
-    [
-        'username' => $config->auth->username,
-        'password' => $config->auth->password,
-    ]
-));
-
 // set up logger
 $di->set('logger', $di->lazyNew(
     'Monolog\Logger',
@@ -119,7 +110,12 @@ $talus = new Talus([
     'swagger' => $swagger,
 ]);
 
-$talus->addMiddleware($di->get('authenticationMiddleware'));
+//middleware
+use Jacobemerick\CommentService\Middleware;
+
+$talus->addMiddleware(
+    new Middleware\Authentication($config->auth->username, $config->auth->password)
+);
 
 // todo does this belong in talus?
 $talus->addMiddleware(function ($req, $res, $next) {
