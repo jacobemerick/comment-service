@@ -86,17 +86,9 @@ $di->set('mail', $di->lazyNew(
 ));
 
 // global time object
-$di->set('datetime', $di->lazyNew(
-    'DateTime',
-    [
-        'time' => 'now',
-        'timezone' => $di->lazyNew(
-            'DateTimezone',
-            [
-                'timezone' => 'America/Phoenix',
-            ]
-        ),
-    ]
+$di->set('datetime', new DateTime(
+    'now',
+    new DateTimeZone('America/Phoenix')
 ));
 
 // set up swagger
