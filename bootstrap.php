@@ -113,36 +113,12 @@ $talus = new Talus([
 //middleware
 use Jacobemerick\CommentService\Middleware;
 
-$talus->addMiddleware(
-    new Middleware\Authentication($config->auth->username, $config->auth->password)
-);
-
-// todo does this belong in talus?
-$talus->addMiddleware(function ($req, $res, $next) {
-    $res = $next($req, $res);
-    $res = $res->withAddedHeader('Content-Type', 'application/json');
-    return $res; 
-});
-
-// todo add check so this only toggles when needed
-$talus->addMiddleware(function ($req, $res, $next) {
-    if (!$req->getBody()->isReadable()) {
-        return;
-    }
-
-    $body = (string) $req->getBody();
-    if (empty($body)) {
-        return $next($req, $res);
-    }
-
-    $body = json_decode($body, true);
-    if (json_last_error() !== JSON_ERROR_NONE) {
-        return;
-    }
-
-    $req = $req->withParsedBody($body);
-    return $next($req, $res);
-});
+$talus->addMiddleware(new Middleware\Authentication(
+    $config->auth->username,
+    $config->auth->password
+));
+$talus->addMiddleware(new Middleware\JsonHeader());
+$talus->addMiddleware(new Middleware\ParseJsonBody());
 
 $talus->setErrorHandler(function ($req, $res, $e) {
     $body = json_encode([
