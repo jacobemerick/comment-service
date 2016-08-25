@@ -11,10 +11,10 @@ class ParseJsonBody
     /**
      * @param Request $req
      * @param Response $res
-     * @param Closure $next
+     * @param callable $next
      * @return Response $res
      */
-    public function __invoke(Request $req, Response $res, $next)
+    public function __invoke(Request $req, Response $res, callable $next)
     {
         if (!$req->getBody()->isReadable()) {
             return;
