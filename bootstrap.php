@@ -110,7 +110,7 @@ $talus = new Talus([
     'swagger' => $swagger,
 ]);
 
-//middleware
+// middleware
 use Jacobemerick\CommentService\Middleware;
 
 $talus->addMiddleware(new Middleware\Authentication(
@@ -120,14 +120,8 @@ $talus->addMiddleware(new Middleware\Authentication(
 $talus->addMiddleware(new Middleware\JsonHeader());
 $talus->addMiddleware(new Middleware\ParseJsonBody());
 
-$talus->setErrorHandler(function ($req, $res, $e) {
-    $body = json_encode([
-        'error' => $e->getMessage(),
-    ]);
-
-    $res->getBody()->write($body);
-    return $res;
-});
+// error handler
+$talus->setErrorHandler(new Jacobemerick\CommentService\ErrorHandler\JsonResponse());
 
 $talus->run();
 
