@@ -17,4 +17,9 @@ class JsonHeaderTest extends PHPUnit_Framework_TestCase
     {
         $this->markTestIncomplete('todo');
     }
+
+    public function testInvokeReturnsResponse()
+    {
+        $this->markTestIncomplete('todo');
+    }
 }

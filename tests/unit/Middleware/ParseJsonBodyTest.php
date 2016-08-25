@@ -32,4 +32,9 @@ class ParseJsonBodyTest extends PHPUnit_Framework_TestCase
     {
         $this->markTestIncomplete('todo');
     }
+
+    public function testInvokeReturnsCallback()
+    {
+        $this->markTestIncomplete('todo');
+    }
 }
