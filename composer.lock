@@ -111,16 +111,16 @@
         },
         {
             "name": "avalanche-development/talus",
-            "version": "0.3.2",
+            "version": "0.3.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/avalanche-development/talus.git",
-                "reference": "04c3f3340627e5d3dc1fc84c22f62d97da87eb88"
+                "reference": "cd6f4b011c01120cce3baef4a1939467f338887d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/avalanche-development/talus/zipball/04c3f3340627e5d3dc1fc84c22f62d97da87eb88",
-                "reference": "04c3f3340627e5d3dc1fc84c22f62d97da87eb88",
+                "url": "https://api.github.com/repos/avalanche-development/talus/zipball/cd6f4b011c01120cce3baef4a1939467f338887d",
+                "reference": "cd6f4b011c01120cce3baef4a1939467f338887d",
                 "shasum": ""
             },
             "require": {
@@ -152,7 +152,7 @@
                 }
             ],
             "description": "Microframework with Swagger routing",
-            "time": "2016-08-12 12:30:28"
+            "time": "2016-08-25 21:45:44"
         },
         {
             "name": "container-interop/container-interop",
