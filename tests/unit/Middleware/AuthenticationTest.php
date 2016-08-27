@@ -40,17 +40,15 @@ class AuthenticationTest extends PHPUnit_Framework_TestCase
         $mockRequest->expects($this->never())
             ->method('getHeader');
 
-        $mockResponseReturn = $this->createMock(Response::class);
-
         $mockResponse = $this->createMock(Response::class);
 
-        $callable = function ($req, $res) use ($mockResponseReturn) {
-            return $mockResponseReturn;
+        $callable = function ($req, $res) {
+            return $res;
         };
 
         $response = (new Authentication('', ''))($mockRequest, $mockResponse, $callable);
 
-        $this->assertSame($mockResponseReturn, $response);
+        $this->assertSame($mockResponse, $response);
     }
 
     public function testInvokeReturns403ForNoCredentials()
@@ -107,7 +105,7 @@ class AuthenticationTest extends PHPUnit_Framework_TestCase
             ->willReturn($mockResponseReturn);
 
         $callable = function ($req, $res) {
-            return $mockResponseReturn;
+            throw new Exception('callable was called');
         };
 
         $response = (new Authentication('', ''))($mockRequest, $mockResponse, $callable);
@@ -133,19 +131,17 @@ class AuthenticationTest extends PHPUnit_Framework_TestCase
         $mockRequest->method('getHeader')
             ->willReturn([ $authHeader ]);
 
-        $mockResponseReturn = $this->createMock(Response::class);
-
         $mockResponse = $this->createMock(Response::class);
         $mockResponse->expects($this->never())
             ->method('withStatus');
 
-        $callable = function ($req, $res) use ($mockResponseReturn) {
-            return $mockResponseReturn;
+        $callable = function ($req, $res) {
+            return $res;
         };
 
         $response = (new Authentication($username, $password))($mockRequest, $mockResponse, $callable);
 
-        $this->assertSame($mockResponseReturn, $response);
+        $this->assertSame($mockResponse, $response);
     }
 
     public function testGetAuthHeaderReturnsEncodedHeader()
