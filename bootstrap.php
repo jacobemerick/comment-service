@@ -110,59 +110,18 @@ $talus = new Talus([
     'swagger' => $swagger,
 ]);
 
-// todo extract middleware to testable classes
-$auth = $config->auth;
-$talus->addMiddleware(function ($req, $res, $next) use ($auth) {
-    if ($req->getUri()->getPath() == '/api-docs') {
-        return $next($req, $res);
-    }
+// middleware
+use Jacobemerick\CommentService\Middleware;
 
-    $authHeader = base64_encode("{$auth->username}:{$auth->password}");
-    $authHeader = "Basic {$authHeader}";
+$talus->addMiddleware(new Middleware\Authentication(
+    $config->auth->username,
+    $config->auth->password
+));
+$talus->addMiddleware(new Middleware\JsonHeader());
+$talus->addMiddleware(new Middleware\ParseJsonBody());
 
-    if ($authHeader != current($req->getHeader('Authorization'))) {
-        $res = $res->withStatus(403);
-        return $res;
-    }
-
-    return $next($req, $res);
-});
-
-// todo does this belong in talus?
-$talus->addMiddleware(function ($req, $res, $next) {
-    $res = $next($req, $res);
-    $res = $res->withAddedHeader('Content-Type', 'application/json');
-    return $res; 
-});
-
-// todo add check so this only toggles when needed
-$talus->addMiddleware(function ($req, $res, $next) {
-    if (!$req->getBody()->isReadable()) {
-        return;
-    }
-
-    $body = (string) $req->getBody();
-    if (empty($body)) {
-        return $next($req, $res);
-    }
-
-    $body = json_decode($body, true);
-    if (json_last_error() !== JSON_ERROR_NONE) {
-        return;
-    }
-
-    $req = $req->withParsedBody($body);
-    return $next($req, $res);
-});
-
-$talus->setErrorHandler(function ($req, $res, $e) {
-    $body = json_encode([
-        'error' => $e->getMessage(),
-    ]);
-
-    $res->getBody()->write($body);
-    return $res;
-});
+// error handler
+$talus->setErrorHandler(new Jacobemerick\CommentService\ErrorHandler\JsonResponse());
 
 $talus->run();
 
