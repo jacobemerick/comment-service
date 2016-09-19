@@ -99,7 +99,7 @@ while (!feof($handle)) {
 }
 fclose($handle);
 
-$swagger = json_decode($swagger);
+$swagger = json_decode($swagger, true);
 if (json_last_error() !== JSON_ERROR_NONE) {
     var_dump('oh noes the swagz is badz');
     exit;
