@@ -170,7 +170,7 @@ class Comment
         $commentId = array_filter($req->getAttribute('swagger')['params'], function ($param) {
             return $param['name'] == 'comment_id';
         });
-        $commentId = current($commentId);
+        $commentId = reset($commentId);
 
         $comment = $this->container
             ->get('commentModel')

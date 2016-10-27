@@ -30,7 +30,7 @@ class Commenter
         $commenterId = array_filter($req->getAttribute('swagger')['params'], function ($param) {
             return $param['name'] == 'commenter_id';
         });
-        $commenterId = current($commenterId);
+        $commenterId = reset($commenterId);
 
         $commenter = $this->container
             ->get('commenterModel')

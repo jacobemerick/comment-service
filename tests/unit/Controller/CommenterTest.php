@@ -50,7 +50,15 @@ class CommenterTest extends PHPUnit_Framework_TestCase
 
         $mockRequest = $this->createMock(Request::class);
         $mockRequest->method('getAttribute')
-            ->willReturn($commenterId);
+            ->with('swagger')
+            ->willReturn([
+                'params' => [
+                    [
+                        'name' => 'commenter_id',
+                        'value' => $commenterId,
+                    ]
+                ]
+            ]);
 
         $mockResponse = $this->createMock(Response::class);
         $mockResponse->method('getBody')
@@ -85,6 +93,16 @@ class CommenterTest extends PHPUnit_Framework_TestCase
             ]));
 
         $mockRequest = $this->createMock(Request::class);
+        $mockRequest->method('getAttribute')
+            ->with('swagger')
+            ->willReturn([
+                'params' => [
+                    [
+                        'name' => 'commenter_id',
+                        'value' => 123,
+                    ]
+                ]
+            ]);
 
         $mockResponse = $this->createMock(Response::class);
         $mockResponse->method('getBody')
@@ -120,6 +138,16 @@ class CommenterTest extends PHPUnit_Framework_TestCase
             ]));
 
         $mockRequest = $this->createMock(Request::class);
+        $mockRequest->method('getAttribute')
+            ->with('swagger')
+            ->willReturn([
+                'params' => [
+                    [
+                        'name' => 'commenter_id',
+                        'value' => 123,
+                    ]
+                ]
+            ]);
 
         $mockStream = $this->createMock(Stream::class);
         $mockStream->expects($this->once())
@@ -150,6 +178,17 @@ class CommenterTest extends PHPUnit_Framework_TestCase
             ]));
 
         $mockRequest = $this->createMock(Request::class);
+        $mockRequest->method('getAttribute')
+            ->with('swagger')
+            ->willReturn([
+                'params' => [
+                    [
+                        'name' => 'commenter_id',
+                        'value' => 123,
+                    ]
+                ]
+            ]);
+
         $mockResponse = $this->createMock(Response::class);
         $mockResponse->method('getBody')
             ->willReturn($this->createMock(Stream::class));
