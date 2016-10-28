@@ -27,9 +27,14 @@ class Commenter
      */
     public function getCommenter(Request $req, Response $res)
     {
+        $commenterId = array_filter($req->getAttribute('swagger')['params'], function ($param) {
+            return $param['name'] == 'commenter_id';
+        });
+        $commenterId = reset($commenterId);
+
         $commenter = $this->container
             ->get('commenterModel')
-            ->findById($req->getAttribute('commenter_id'));
+            ->findById($commenterId['value']);
 
         $commenter = $this->container
             ->get('commenterSerializer')

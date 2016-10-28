@@ -167,9 +167,14 @@ class Comment
      */
     public function getComment(Request $req, Response $res)
     {
+        $commentId = array_filter($req->getAttribute('swagger')['params'], function ($param) {
+            return $param['name'] == 'comment_id';
+        });
+        $commentId = reset($commentId);
+
         $comment = $this->container
             ->get('commentModel')
-            ->findById($req->getAttribute('comment_id'));
+            ->findById($commentId['value']);
 
         $comment = $this->container
             ->get('commentSerializer')

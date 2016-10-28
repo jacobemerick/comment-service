@@ -13,7 +13,7 @@ class JsonResponse
      * @param Request $req
      * @param Response $res
      * @param Exception $e
-     * @returns Response
+     * @return Response
      */
     public function __invoke(Request $req, Response $res, Exception $e)
     {
