@@ -120,9 +120,6 @@ $talus->addMiddleware(new Middleware\Authentication(
 $talus->addMiddleware(new Middleware\JsonHeader());
 $talus->addMiddleware(new Middleware\ParseJsonBody());
 
-// error handler
-$talus->setErrorHandler(new Jacobemerick\CommentService\ErrorHandler\JsonResponse());
-
 $talus->run();
 
 $di->get('logger')->addInfo('Runtime stats', [
