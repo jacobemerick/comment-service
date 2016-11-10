@@ -20,7 +20,6 @@
     },
     "paths": {
         "/comments": {
-            "x-swagger-router-controller": "Jacobemerick\\CommentService\\Controller\\Comment",
             "get": {
                 "operationId": "getComments",
                 "description": "Gets Comment resources.",
@@ -98,7 +97,6 @@
             }
         },
         "/comments/{comment_id}": {
-            "x-swagger-router-controller": "Jacobemerick\\CommentService\\Controller\\Comment",
             "get": {
                 "operationId": "getComment",
                 "description": "Gets a single Comment resource.",
@@ -127,7 +125,6 @@
             }
         },
         "/commenters": {
-            "x-swagger-router-controller": "Jacobemerick\\CommentService\\Controller\\Commenter",
             "get": {
                 "operationId": "getCommenters",
                 "description": "Gets Commenter resources.",
@@ -161,7 +158,6 @@
             }
         },
         "/commenters/{commenter_id}": {
-            "x-swagger-router-controller": "Jacobemerick\\CommentService\\Controller\\Commenter",
             "get": {
                 "operationId": "getCommenter",
                 "description": "Gets a Commenter resource.",
