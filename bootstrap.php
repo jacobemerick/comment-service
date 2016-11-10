@@ -30,6 +30,14 @@ if ($last_json_error !== JSON_ERROR_NONE) {
 $builder = new ContainerBuilder();
 $di = $builder->newInstance($builder::AUTO_RESOLVE);
 
+// set up controllers
+$di->set('swaggerOperation/getComments', function () use ($di) {
+  return $di->lazyCallable([
+    $di->lazyNew(Jacobemerick\CommentService\Controller\Comment::class, [ $di ]),
+    'getComments'
+  ]);
+});
+
 // set up db and models
 $di->set('dbal', $di->lazyNew(
     'Aura\Sql\ExtendedPdo',
@@ -105,10 +113,7 @@ if (json_last_error() !== JSON_ERROR_NONE) {
     exit;
 }
 
-$talus = new Talus([
-    'container' => $di,
-    'swagger' => $swagger,
-]);
+$talus = new Talus($swagger, $di);
 
 // middleware
 use Jacobemerick\CommentService\Middleware;
