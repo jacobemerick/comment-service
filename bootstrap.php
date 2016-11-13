@@ -105,10 +105,27 @@ if (json_last_error() !== JSON_ERROR_NONE) {
     exit;
 }
 
-$talus = new Talus([
-    'container' => $di,
-    'swagger' => $swagger,
-]);
+$talus = new Talus($swagger);
+
+// controllers
+use Jacobemerick\CommentService\Controller;
+
+$talus->addController('createComment', function ($req, $res) use ($di) {
+    return (new Controller\Comment($di))->createComment($req, $res);
+});
+$talus->addController('getComment', function ($req, $res) use ($di) {
+    return (new Controller\Comment($di))->getComment($req, $res);
+});
+$talus->addController('getComments', function ($req, $res) use ($di) {
+    return (new Controller\Comment($di))->getComments($req, $res);
+});
+
+$talus->addController('getCommenter', function ($req, $res) use ($di) {
+    return (new Controller\Commenter($di))->getCommenter($req, $res);
+});
+$talus->addController('getCommenters', function ($req, $res) use ($di) {
+    return (new Controller\Commenter($di))->getCommenters($req, $res);
+});
 
 // middleware
 use Jacobemerick\CommentService\Middleware;
@@ -118,7 +135,6 @@ $talus->addMiddleware(new Middleware\Authentication(
     $config->auth->password
 ));
 $talus->addMiddleware(new Middleware\JsonHeader());
-$talus->addMiddleware(new Middleware\ParseJsonBody());
 
 $talus->run();
 

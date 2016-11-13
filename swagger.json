@@ -20,7 +20,6 @@
     },
     "paths": {
         "/comments": {
-            "x-swagger-router-controller": "Jacobemerick\\CommentService\\Controller\\Comment",
             "get": {
                 "operationId": "getComments",
                 "description": "Gets Comment resources.",
@@ -83,7 +82,53 @@
                         "name": "body",
                         "in": "body",
                         "schema": {
-                            "type": "object"
+                            "type": "object",
+                            "properties": {
+                                "commenter": {
+                                    "type": "object",
+                                    "properties": {
+                                        "name": {
+                                            "type": "string"
+                                        },
+                                        "email": {
+                                            "type": "string"
+                                        },
+                                        "website": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "body": {
+                                    "type": "string"
+                                },
+                                "should_notify": {
+                                    "type": "boolean"
+                                },
+                                "should_display": {
+                                    "type": "boolean"
+                                },
+                                "domain": {
+                                    "type": "string"
+                                },
+                                "path": {
+                                    "type": "string"
+                                },
+                                "url": {
+                                    "type": "string"
+                                },
+                                "thread": {
+                                    "type": "string"
+                                },
+                                "ip_address": {
+                                    "type": "string"
+                                },
+                                "user_agent": {
+                                    "type": "string"
+                                },
+                                "referrer": {
+                                    "type": "string"
+                                }
+                            }
                         }
                     }
                 ],
@@ -98,7 +143,6 @@
             }
         },
         "/comments/{comment_id}": {
-            "x-swagger-router-controller": "Jacobemerick\\CommentService\\Controller\\Comment",
             "get": {
                 "operationId": "getComment",
                 "description": "Gets a single Comment resource.",
@@ -127,7 +171,6 @@
             }
         },
         "/commenters": {
-            "x-swagger-router-controller": "Jacobemerick\\CommentService\\Controller\\Commenter",
             "get": {
                 "operationId": "getCommenters",
                 "description": "Gets Commenter resources.",
@@ -161,7 +204,6 @@
             }
         },
         "/commenters/{commenter_id}": {
-            "x-swagger-router-controller": "Jacobemerick\\CommentService\\Controller\\Commenter",
             "get": {
                 "operationId": "getCommenter",
                 "description": "Gets a Commenter resource.",

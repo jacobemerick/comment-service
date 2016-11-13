@@ -2,6 +2,7 @@
 
 namespace Jacobemerick\CommentService\Controller;
 
+use AvalancheDevelopment\Peel\HttpError\NotFound;
 use Interop\Container\ContainerInterface as Container;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
@@ -27,14 +28,15 @@ class Commenter
      */
     public function getCommenter(Request $req, Response $res)
     {
-        $commenterId = array_filter($req->getAttribute('swagger')['params'], function ($param) {
-            return $param['name'] == 'commenter_id';
-        });
-        $commenterId = reset($commenterId);
+        $commenterId = $req->getAttribute('swagger')['params']['commenter_id']['value'];
 
         $commenter = $this->container
             ->get('commenterModel')
-            ->findById($commenterId['value']);
+            ->findById($commenterId);
+
+        if (!$commenter) {
+            throw new NotFound('No commenter found under that id');
+        }
 
         $commenter = $this->container
             ->get('commenterSerializer')
@@ -55,6 +57,7 @@ class Commenter
         $limit = 0;
         $offset = 0;
 
+        // todo use swagger params instead
         $query = $req->getQueryParams();
         if (array_key_exists('per_page', $query)) {
             $limit = $query['per_page'];
@@ -67,6 +70,7 @@ class Commenter
             ->get('commenterModel')
             ->getCommenters($limit, $offset);
 
+        // todo what if the array is empty?
         $commenters = array_map(
             $this->container->get('commenterSerializer'),
             $commenters

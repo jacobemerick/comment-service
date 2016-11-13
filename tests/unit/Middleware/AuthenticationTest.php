@@ -51,7 +51,11 @@ class AuthenticationTest extends PHPUnit_Framework_TestCase
         $this->assertSame($mockResponse, $response);
     }
 
-    public function testInvokeReturns403ForNoCredentials()
+    /**
+     * @expectedException AvalancheDevelopment\Peel\HttpError\Unauthorized
+     * @expectedExceptionMessage Basic auth required
+     */
+    public function testInvokeBailsForNoCredentials()
     {
         $mockUri = $this->createMock(Uri::class);
         $mockUri->method('getPath')
@@ -63,26 +67,20 @@ class AuthenticationTest extends PHPUnit_Framework_TestCase
         $mockRequest->method('getHeader')
             ->willReturn([]);
 
-        $mockResponseReturn = $this->createMock(Response::class);
-
         $mockResponse = $this->createMock(Response::class);
-        $mockResponse->expects($this->once())
-            ->method('withStatus')
-            ->with(
-                $this->equalTo(403)
-            )
-            ->willReturn($mockResponseReturn);
 
         $callable = function ($req, $res) {
             throw new Exception('callable was called');
         };
 
-        $response = (new Authentication('', ''))($mockRequest, $mockResponse, $callable);
-
-        $this->assertSame($mockResponseReturn, $response);
+        (new Authentication('', ''))($mockRequest, $mockResponse, $callable);
     }
 
-    public function testInvokeReturns403ForInvalidCredentials()
+    /**
+     * @expectedException AvalancheDevelopment\Peel\HttpError\Unauthorized
+     * @expectedExceptionMessage Invalid credentials passed in
+     */
+    public function testInvokeBailsForInvalidCredentials()
     {
         $mockUri = $this->createMock(Uri::class);
         $mockUri->method('getPath')
@@ -94,23 +92,13 @@ class AuthenticationTest extends PHPUnit_Framework_TestCase
         $mockRequest->method('getHeader')
             ->willReturn([ 'Invalid Auth' ]);
 
-        $mockResponseReturn = $this->createMock(Response::class);
-
         $mockResponse = $this->createMock(Response::class);
-        $mockResponse->expects($this->once())
-            ->method('withStatus')
-            ->with(
-                $this->equalTo(403)
-            )
-            ->willReturn($mockResponseReturn);
 
         $callable = function ($req, $res) {
             throw new Exception('callable was called');
         };
 
-        $response = (new Authentication('', ''))($mockRequest, $mockResponse, $callable);
-
-        $this->assertSame($mockResponseReturn, $response);
+        (new Authentication('', ''))($mockRequest, $mockResponse, $callable);
     }
 
     public function testInvokeReturnsCallbackForValidCredentials()

@@ -37,7 +37,7 @@ class CommenterTest extends PHPUnit_Framework_TestCase
         $mockCommenterModel->expects($this->once())
             ->method('findById')
             ->with($this->equalTo($commenterId))
-            ->willReturn([]);
+            ->willReturn([ 'some value' ]);
 
         $mockCommenterSerializer = $this->createMock(CommenterSerializer::class);
 
@@ -53,8 +53,7 @@ class CommenterTest extends PHPUnit_Framework_TestCase
             ->with('swagger')
             ->willReturn([
                 'params' => [
-                    [
-                        'name' => 'commenter_id',
+                    'commenter_id' => [
                         'value' => $commenterId,
                     ]
                 ]
@@ -63,6 +62,45 @@ class CommenterTest extends PHPUnit_Framework_TestCase
         $mockResponse = $this->createMock(Response::class);
         $mockResponse->method('getBody')
             ->willReturn($this->createMock(Stream::class));
+
+        $controller = new Commenter($mockContainer);
+        $controller->getCommenter($mockRequest, $mockResponse);
+    }
+
+    /**
+     * @expectedException AvalancheDevelopment\Peel\HttpError\NotFound
+     * @expectedExceptionMessage No commenter found under that id
+     */
+    public function testGetCommenterBailsOnInvalidCommenter()
+    {
+        $commenterId = 127;
+
+        $mockCommenterModel = $this->createMock(CommenterModel::class);
+        $mockCommenterModel->method('findById')
+            ->willReturn(false);
+
+        $mockCommenterSerializer = $this->createMock(CommenterSerializer::class);
+        $mockCommenterSerializer->expects($this->never())
+            ->method('__invoke');
+
+        $mockContainer = $this->createMock(Container::class);
+        $mockContainer->method('get')
+            ->will($this->returnValueMap([
+                [ 'commenterModel', $mockCommenterModel ],
+            ]));
+
+        $mockRequest = $this->createMock(Request::class);
+        $mockRequest->method('getAttribute')
+            ->with('swagger')
+            ->willReturn([
+                'params' => [
+                    'commenter_id' => [
+                        'value' => $commenterId,
+                    ]
+                ]
+            ]);
+
+        $mockResponse = $this->createMock(Response::class);
 
         $controller = new Commenter($mockContainer);
         $controller->getCommenter($mockRequest, $mockResponse);
@@ -97,8 +135,7 @@ class CommenterTest extends PHPUnit_Framework_TestCase
             ->with('swagger')
             ->willReturn([
                 'params' => [
-                    [
-                        'name' => 'commenter_id',
+                    'commenter_id' => [
                         'value' => 123,
                     ]
                 ]
@@ -124,7 +161,7 @@ class CommenterTest extends PHPUnit_Framework_TestCase
 
         $mockCommenterModel = $this->createMock(CommenterModel::class);
         $mockCommenterModel->method('findById')
-            ->willReturn([]);
+            ->willReturn([ 'some value' ]);
 
         $mockCommenterSerializer = $this->createMock(CommenterSerializer::class);
         $mockCommenterSerializer->method('__invoke')
@@ -142,8 +179,7 @@ class CommenterTest extends PHPUnit_Framework_TestCase
             ->with('swagger')
             ->willReturn([
                 'params' => [
-                    [
-                        'name' => 'commenter_id',
+                    'commenter_id' => [
                         'value' => 123,
                     ]
                 ]
@@ -166,7 +202,7 @@ class CommenterTest extends PHPUnit_Framework_TestCase
     {
         $mockCommenterModel = $this->createMock(CommenterModel::class);
         $mockCommenterModel->method('findById')
-            ->willReturn([]);
+            ->willReturn([ 'some value' ]);
 
         $mockCommenterSerializer = $this->createMock(CommenterSerializer::class);
 
@@ -182,8 +218,7 @@ class CommenterTest extends PHPUnit_Framework_TestCase
             ->with('swagger')
             ->willReturn([
                 'params' => [
-                    [
-                        'name' => 'commenter_id',
+                    'commenter_id' => [
                         'value' => 123,
                     ]
                 ]

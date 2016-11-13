@@ -2,6 +2,7 @@
 
 namespace Jacobemerick\CommentService\Middleware;
 
+use AvalancheDevelopment\Peel\HttpError\Unauthorized;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 
@@ -36,10 +37,12 @@ class Authentication
             return $next($req, $res);
         }
 
-        $authHeader = $this->getAuthHeader();
-        if ($authHeader != current($req->getHeader('Authorization'))) {
-            $res = $res->withStatus(403);
-            return $res;
+        $authHeader = current($req->getHeader('Authorization'));
+        if (!$authHeader) {
+            throw new Unauthorized('Basic auth required');
+        }
+        if ($this->getAuthHeader() !== $authHeader) {
+            throw new Unauthorized('Invalid credentials passed in');
         }
 
         return $next($req, $res);
