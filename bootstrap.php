@@ -30,14 +30,6 @@ if ($last_json_error !== JSON_ERROR_NONE) {
 $builder = new ContainerBuilder();
 $di = $builder->newInstance($builder::AUTO_RESOLVE);
 
-// set up controllers
-$di->set('swaggerOperation/getComments', function () use ($di) {
-  return $di->lazyCallable([
-    $di->lazyNew(Jacobemerick\CommentService\Controller\Comment::class, [ $di ]),
-    'getComments'
-  ]);
-});
-
 // set up db and models
 $di->set('dbal', $di->lazyNew(
     'Aura\Sql\ExtendedPdo',
@@ -115,6 +107,26 @@ if (json_last_error() !== JSON_ERROR_NONE) {
 
 $talus = new Talus($swagger, $di);
 
+// controllers
+use Jacobemerick\CommentService\Controller;
+
+$talus->addController('createComment', function ($req, $res) use ($di) {
+    return (new Controller\Comment($di))->createComment($req, $res);
+});
+$talus->addController('getComment', function ($req, $res) use ($di) {
+    return (new Controller\Comment($di))->getComment($req, $res);
+});
+$talus->addController('getComments', function ($req, $res) use ($di) {
+    return (new Controller\Comment($di))->getComments($req, $res);
+});
+
+$talus->addController('getCommenter', function ($req, $res) use ($di) {
+    return (new Controller\Commenter($di))->getCommenter($req, $res);
+});
+$talus->addController('getCommenters', function ($req, $res) use ($di) {
+    return (new Controller\Commenter($di))->getCommenters($req, $res);
+});
+
 // middleware
 use Jacobemerick\CommentService\Middleware;
 
@@ -123,7 +135,6 @@ $talus->addMiddleware(new Middleware\Authentication(
     $config->auth->password
 ));
 $talus->addMiddleware(new Middleware\JsonHeader());
-$talus->addMiddleware(new Middleware\ParseJsonBody());
 
 $talus->run();
 
