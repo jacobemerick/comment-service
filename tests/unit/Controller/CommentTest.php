@@ -41,8 +41,8 @@ class CommentTest extends PHPUnit_Framework_TestCase
 
     public function testCreateCommentSendsCommenterData()
     {
-        $body = [
-            'commenter' => [
+        $body = (object) [
+            'commenter' => (object) [
                 'name' => 'Jack Black',
                 'email' => 'jack@black.tld',
                 'website' => 'black.tld',
@@ -64,9 +64,9 @@ class CommentTest extends PHPUnit_Framework_TestCase
         $mockCommenterModel->expects($this->once())
             ->method('findByFields')
             ->with(
-                $this->equalTo($body['commenter']['name']),
-                $this->equalTo($body['commenter']['email']),
-                $this->equalTo($body['commenter']['website'])
+                $this->equalTo($body->commenter->name),
+                $this->equalTo($body->commenter->email),
+                $this->equalTo($body->commenter->website)
             )
             ->willReturn([
                 'id' => $commenterId,
@@ -111,8 +111,14 @@ class CommentTest extends PHPUnit_Framework_TestCase
             ]));
 
         $mockRequest = $this->createMock(Request::class);
-        $mockRequest->method('getParsedBody')
-            ->willReturn($body);
+        $mockRequest->method('getAttribute')
+            ->willReturn([
+                'params' => [
+                    'body' => [
+                        'value' => $body,
+                    ],
+                ],
+            ]);
 
         $mockResponse = $this->createMock(Response::class);
         $mockResponse->method('getBody')
@@ -124,8 +130,8 @@ class CommentTest extends PHPUnit_Framework_TestCase
 
     public function testCreateCommentCreatesCommenterIfNotFound()
     {
-        $body = [
-            'commenter' => [
+        $body = (object) [
+            'commenter' => (object) [
                 'name' => 'Jack Black',
                 'email' => 'jack@black.tld',
                 'website' => 'black.tld',
@@ -149,9 +155,9 @@ class CommentTest extends PHPUnit_Framework_TestCase
         $mockCommenterModel->expects($this->once())
             ->method('create')
             ->with(
-                $this->equalTo($body['commenter']['name']),
-                $this->equalTo($body['commenter']['email']),
-                $this->equalTo($body['commenter']['website'])
+                $this->equalTo($body->commenter->name),
+                $this->equalTo($body->commenter->email),
+                $this->equalTo($body->commenter->website)
             );
         $mockCommenterModel->method('findById')
             ->willReturn([
@@ -194,8 +200,14 @@ class CommentTest extends PHPUnit_Framework_TestCase
             ]));
 
         $mockRequest = $this->createMock(Request::class);
-        $mockRequest->method('getParsedBody')
-            ->willReturn($body);
+        $mockRequest->method('getAttribute')
+            ->willReturn([
+                'params' => [
+                    'body' => [
+                        'value' => $body,
+                    ],
+                ],
+            ]);
 
         $mockResponse = $this->createMock(Response::class);
         $mockResponse->method('getBody')
@@ -207,8 +219,8 @@ class CommentTest extends PHPUnit_Framework_TestCase
 
     public function testCreateCommentPullsNewlyCreatedCommenter()
     {
-        $body = [
-            'commenter' => [
+        $body = (object) [
+            'commenter' => (object) [
                 'name' => 'Jack Black',
                 'email' => 'jack@black.tld',
                 'website' => 'black.tld',
@@ -276,8 +288,14 @@ class CommentTest extends PHPUnit_Framework_TestCase
             ]));
 
         $mockRequest = $this->createMock(Request::class);
-        $mockRequest->method('getParsedBody')
-            ->willReturn($body);
+        $mockRequest->method('getAttribute')
+            ->willReturn([
+                'params' => [
+                    'body' => [
+                        'value' => $body,
+                    ],
+                ],
+            ]);
 
         $mockResponse = $this->createMock(Response::class);
         $mockResponse->method('getBody')
@@ -289,8 +307,8 @@ class CommentTest extends PHPUnit_Framework_TestCase
 
     public function testCreateCommentSendsBodyData()
     {
-        $body = [
-            'commenter' => [
+        $body = (object) [
+            'commenter' => (object) [
                 'name' => 'Jack Black',
                 'email' => 'jack@black.tld',
                 'website' => 'black.tld',
@@ -319,7 +337,7 @@ class CommentTest extends PHPUnit_Framework_TestCase
         $mockCommentBodyModel->expects($this->once())
             ->method('create')
             ->with(
-                $this->equalTo($body['body'])
+                $this->equalTo($body->body)
             )
             ->willReturn($bodyId);
 
@@ -358,8 +376,14 @@ class CommentTest extends PHPUnit_Framework_TestCase
             ]));
 
         $mockRequest = $this->createMock(Request::class);
-        $mockRequest->method('getParsedBody')
-            ->willReturn($body);
+        $mockRequest->method('getAttribute')
+            ->willReturn([
+                'params' => [
+                    'body' => [
+                        'value' => $body,
+                    ],
+                ],
+            ]);
 
         $mockResponse = $this->createMock(Response::class);
         $mockResponse->method('getBody')
@@ -371,8 +395,8 @@ class CommentTest extends PHPUnit_Framework_TestCase
 
     public function testCreateCommentSendsDomainData()
     {
-        $body = [
-            'commenter' => [
+        $body = (object) [
+            'commenter' => (object) [
                 'name' => 'Jack Black',
                 'email' => 'jack@black.tld',
                 'website' => 'black.tld',
@@ -403,7 +427,7 @@ class CommentTest extends PHPUnit_Framework_TestCase
         $mockCommentDomainModel->expects($this->once())
             ->method('findByFields')
             ->with(
-                $this->equalTo($body['domain'])
+                $this->equalTo($body->domain)
             )
             ->willReturn($domainId);
         $mockCommentDomainModel->expects($this->never())
@@ -443,8 +467,14 @@ class CommentTest extends PHPUnit_Framework_TestCase
             ]));
 
         $mockRequest = $this->createMock(Request::class);
-        $mockRequest->method('getParsedBody')
-            ->willReturn($body);
+        $mockRequest->method('getAttribute')
+            ->willReturn([
+                'params' => [
+                    'body' => [
+                        'value' => $body,
+                    ],
+                ],
+            ]);
 
         $mockResponse = $this->createMock(Response::class);
         $mockResponse->method('getBody')
@@ -456,8 +486,8 @@ class CommentTest extends PHPUnit_Framework_TestCase
 
     public function testCreateCommentCreatesDomainIfNotFound()
     {
-        $body = [
-            'commenter' => [
+        $body = (object) [
+            'commenter' => (object) [
                 'name' => 'Jack Black',
                 'email' => 'jack@black.tld',
                 'website' => 'black.tld',
@@ -490,7 +520,7 @@ class CommentTest extends PHPUnit_Framework_TestCase
         $mockCommentDomainModel->expects($this->once())
             ->method('create')
             ->with(
-                $this->equalTo($body['domain'])
+                $this->equalTo($body->domain)
             )
             ->willReturn($domainId);
 
@@ -528,8 +558,14 @@ class CommentTest extends PHPUnit_Framework_TestCase
             ]));
 
         $mockRequest = $this->createMock(Request::class);
-        $mockRequest->method('getParsedBody')
-            ->willReturn($body);
+        $mockRequest->method('getAttribute')
+            ->willReturn([
+                'params' => [
+                    'body' => [
+                        'value' => $body,
+                    ],
+                ],
+            ]);
 
         $mockResponse = $this->createMock(Response::class);
         $mockResponse->method('getBody')
@@ -541,8 +577,8 @@ class CommentTest extends PHPUnit_Framework_TestCase
 
     public function testCreateCommentSendsPathData()
     {
-        $body = [
-            'commenter' => [
+        $body = (object) [
+            'commenter' => (object) [
                 'name' => 'Jack Black',
                 'email' => 'jack@black.tld',
                 'website' => 'black.tld',
@@ -581,7 +617,7 @@ class CommentTest extends PHPUnit_Framework_TestCase
         $mockCommentPathModel->expects($this->once())
             ->method('findByFields')
             ->with(
-                $this->equalTo($body['path'])
+                $this->equalTo($body->path)
             )
             ->willReturn($pathId);
         $mockCommentPathModel->expects($this->never())
@@ -614,8 +650,14 @@ class CommentTest extends PHPUnit_Framework_TestCase
             ]));
 
         $mockRequest = $this->createMock(Request::class);
-        $mockRequest->method('getParsedBody')
-            ->willReturn($body);
+        $mockRequest->method('getAttribute')
+            ->willReturn([
+                'params' => [
+                    'body' => [
+                        'value' => $body,
+                    ],
+                ],
+            ]);
 
         $mockResponse = $this->createMock(Response::class);
         $mockResponse->method('getBody')
@@ -627,8 +669,8 @@ class CommentTest extends PHPUnit_Framework_TestCase
 
     public function testCreateCommentCreatesPathIfNotFound()
     {
-        $body = [
-            'commenter' => [
+        $body = (object) [
+            'commenter' => (object) [
                 'name' => 'Jack Black',
                 'email' => 'jack@black.tld',
                 'website' => 'black.tld',
@@ -669,7 +711,7 @@ class CommentTest extends PHPUnit_Framework_TestCase
         $mockCommentPathModel->expects($this->once())
             ->method('create')
             ->with(
-                $this->equalTo($body['path'])
+                $this->equalTo($body->path)
             )
             ->willReturn($pathId);
 
@@ -700,8 +742,14 @@ class CommentTest extends PHPUnit_Framework_TestCase
             ]));
 
         $mockRequest = $this->createMock(Request::class);
-        $mockRequest->method('getParsedBody')
-            ->willReturn($body);
+        $mockRequest->method('getAttribute')
+            ->willReturn([
+                'params' => [
+                    'body' => [
+                        'value' => $body,
+                    ],
+                ],
+            ]);
 
         $mockResponse = $this->createMock(Response::class);
         $mockResponse->method('getBody')
@@ -713,8 +761,8 @@ class CommentTest extends PHPUnit_Framework_TestCase
 
     public function testCreateCommentSendsThreadData()
     {
-        $body = [
-            'commenter' => [
+        $body = (object) [
+            'commenter' => (object) [
                 'name' => 'Jack Black',
                 'email' => 'jack@black.tld',
                 'website' => 'black.tld',
@@ -757,7 +805,7 @@ class CommentTest extends PHPUnit_Framework_TestCase
         $mockCommentThreadModel->expects($this->once())
             ->method('findByFields')
             ->with(
-                $this->equalTo($body['thread'])
+                $this->equalTo($body->thread)
             )
             ->willReturn($threadId);
         $mockCommentThreadModel->expects($this->never())
@@ -787,8 +835,14 @@ class CommentTest extends PHPUnit_Framework_TestCase
             ]));
 
         $mockRequest = $this->createMock(Request::class);
-        $mockRequest->method('getParsedBody')
-            ->willReturn($body);
+        $mockRequest->method('getAttribute')
+            ->willReturn([
+                'params' => [
+                    'body' => [
+                        'value' => $body,
+                    ],
+                ],
+            ]);
 
         $mockResponse = $this->createMock(Response::class);
         $mockResponse->method('getBody')
@@ -800,8 +854,8 @@ class CommentTest extends PHPUnit_Framework_TestCase
 
     public function testCreateCommentCreatesThreadIfNotFound()
     {
-        $body = [
-            'commenter' => [
+        $body = (object) [
+            'commenter' => (object) [
                 'name' => 'Jack Black',
                 'email' => 'jack@black.tld',
                 'website' => 'black.tld',
@@ -846,7 +900,7 @@ class CommentTest extends PHPUnit_Framework_TestCase
         $mockCommentThreadModel->expects($this->once())
             ->method('create')
             ->with(
-                $this->equalTo($body['thread'])
+                $this->equalTo($body->thread)
             )
             ->willReturn($threadId);
 
@@ -874,8 +928,14 @@ class CommentTest extends PHPUnit_Framework_TestCase
             ]));
 
         $mockRequest = $this->createMock(Request::class);
-        $mockRequest->method('getParsedBody')
-            ->willReturn($body);
+        $mockRequest->method('getAttribute')
+            ->willReturn([
+                'params' => [
+                    'body' => [
+                        'value' => $body,
+                    ],
+                ],
+            ]);
 
         $mockResponse = $this->createMock(Response::class);
         $mockResponse->method('getBody')
@@ -887,8 +947,8 @@ class CommentTest extends PHPUnit_Framework_TestCase
 
     public function testCreateCommentSendsLocationData()
     {
-        $body = [
-            'commenter' => [
+        $body = (object) [
+            'commenter' => (object) [
                 'name' => 'Jack Black',
                 'email' => 'jack@black.tld',
                 'website' => 'black.tld',
@@ -974,8 +1034,14 @@ class CommentTest extends PHPUnit_Framework_TestCase
             ]));
 
         $mockRequest = $this->createMock(Request::class);
-        $mockRequest->method('getParsedBody')
-            ->willReturn($body);
+        $mockRequest->method('getAttribute')
+            ->willReturn([
+                'params' => [
+                    'body' => [
+                        'value' => $body,
+                    ],
+                ],
+            ]);
 
         $mockResponse = $this->createMock(Response::class);
         $mockResponse->method('getBody')
@@ -987,8 +1053,8 @@ class CommentTest extends PHPUnit_Framework_TestCase
 
     public function testCreateCommentCreatesLocationIfNotFound()
     {
-        $body = [
-            'commenter' => [
+        $body = (object) [
+            'commenter' => (object) [
                 'name' => 'Jack Black',
                 'email' => 'jack@black.tld',
                 'website' => 'black.tld',
@@ -1074,8 +1140,14 @@ class CommentTest extends PHPUnit_Framework_TestCase
             ]));
 
         $mockRequest = $this->createMock(Request::class);
-        $mockRequest->method('getParsedBody')
-            ->willReturn($body);
+        $mockRequest->method('getAttribute')
+            ->willReturn([
+                'params' => [
+                    'body' => [
+                        'value' => $body,
+                    ],
+                ],
+            ]);
 
         $mockResponse = $this->createMock(Response::class);
         $mockResponse->method('getBody')
@@ -1087,8 +1159,8 @@ class CommentTest extends PHPUnit_Framework_TestCase
 
     public function testCreateCommentSendsRequestData()
     {
-        $body = [
-            'commenter' => [
+        $body = (object) [
+            'commenter' => (object) [
                 'name' => 'Jack Black',
                 'email' => 'jack@black.tld',
                 'website' => 'black.tld',
@@ -1122,9 +1194,9 @@ class CommentTest extends PHPUnit_Framework_TestCase
         $mockCommentRequestModel->expects($this->once())
             ->method('findByFields')
             ->with(
-                $this->equalTo($body['ip_address']),
-                $this->equalTo($body['user_agent']),
-                $this->equalTo($body['referrer'])
+                $this->equalTo($body->ip_address),
+                $this->equalTo($body->user_agent),
+                $this->equalTo($body->referrer)
             )
             ->willReturn($requestId);
         $mockCommentRequestModel->expects($this->never())
@@ -1164,8 +1236,14 @@ class CommentTest extends PHPUnit_Framework_TestCase
             ]));
 
         $mockRequest = $this->createMock(Request::class);
-        $mockRequest->method('getParsedBody')
-            ->willReturn($body);
+        $mockRequest->method('getAttribute')
+            ->willReturn([
+                'params' => [
+                    'body' => [
+                        'value' => $body,
+                    ],
+                ],
+            ]);
 
         $mockResponse = $this->createMock(Response::class);
         $mockResponse->method('getBody')
@@ -1177,8 +1255,8 @@ class CommentTest extends PHPUnit_Framework_TestCase
 
     public function testCreateCommentCreatesRequestIfNotFound()
     {
-        $body = [
-            'commenter' => [
+        $body = (object) [
+            'commenter' => (object) [
                 'name' => 'Jack Black',
                 'email' => 'jack@black.tld',
                 'website' => 'black.tld',
@@ -1214,9 +1292,9 @@ class CommentTest extends PHPUnit_Framework_TestCase
         $mockCommentRequestModel->expects($this->once())
             ->method('create')
             ->with(
-                $this->equalTo($body['ip_address']),
-                $this->equalTo($body['user_agent']),
-                $this->equalTo($body['referrer'])
+                $this->equalTo($body->ip_address),
+                $this->equalTo($body->user_agent),
+                $this->equalTo($body->referrer)
             )
             ->willReturn($requestId);
 
@@ -1254,8 +1332,14 @@ class CommentTest extends PHPUnit_Framework_TestCase
             ]));
 
         $mockRequest = $this->createMock(Request::class);
-        $mockRequest->method('getParsedBody')
-            ->willReturn($body);
+        $mockRequest->method('getAttribute')
+            ->willReturn([
+                'params' => [
+                    'body' => [
+                        'value' => $body,
+                    ],
+                ],
+            ]);
 
         $mockResponse = $this->createMock(Response::class);
         $mockResponse->method('getBody')
@@ -1267,8 +1351,8 @@ class CommentTest extends PHPUnit_Framework_TestCase
 
     public function testCreateCommentUsesCommenterTrustToDetermineDisplay()
     {
-        $body = [
-            'commenter' => [
+        $body = (object) [
+            'commenter' => (object) [
                 'name' => 'Jack Black',
                 'email' => 'jack@black.tld',
                 'website' => 'black.tld',
@@ -1335,8 +1419,14 @@ class CommentTest extends PHPUnit_Framework_TestCase
             ]));
 
         $mockRequest = $this->createMock(Request::class);
-        $mockRequest->method('getParsedBody')
-            ->willReturn($body);
+        $mockRequest->method('getAttribute')
+            ->willReturn([
+                'params' => [
+                    'body' => [
+                        'value' => $body,
+                    ],
+                ],
+            ]);
 
         $mockResponse = $this->createMock(Response::class);
         $mockResponse->method('getBody')
@@ -1348,8 +1438,8 @@ class CommentTest extends PHPUnit_Framework_TestCase
 
     public function testCreateCommentOverridesDisplayWithInput()
     {
-        $body = [
-            'commenter' => [
+        $body = (object) [
+            'commenter' => (object) [
                 'name' => 'Jack Black',
                 'email' => 'jack@black.tld',
                 'website' => 'black.tld',
@@ -1390,7 +1480,7 @@ class CommentTest extends PHPUnit_Framework_TestCase
                 $this->anything(),
                 $this->anything(),
                 $this->anything(),
-                $this->equalTo((int) $body['should_display'])
+                $this->equalTo((int) $body->should_display)
             );
         $mockCommentModel->method('findById')
             ->willReturn([]);
@@ -1415,8 +1505,14 @@ class CommentTest extends PHPUnit_Framework_TestCase
             ]));
 
         $mockRequest = $this->createMock(Request::class);
-        $mockRequest->method('getParsedBody')
-            ->willReturn($body);
+        $mockRequest->method('getAttribute')
+            ->willReturn([
+                'params' => [
+                    'body' => [
+                        'value' => $body,
+                    ],
+                ],
+            ]);
 
         $mockResponse = $this->createMock(Response::class);
         $mockResponse->method('getBody')
@@ -1428,8 +1524,8 @@ class CommentTest extends PHPUnit_Framework_TestCase
 
     public function testCreateCommentDefaultsReplyTo()
     {
-        $body = [
-            'commenter' => [
+        $body = (object) [
+            'commenter' => (object) [
                 'name' => 'Jack Black',
                 'email' => 'jack@black.tld',
                 'website' => 'black.tld',
@@ -1490,8 +1586,14 @@ class CommentTest extends PHPUnit_Framework_TestCase
             ]));
 
         $mockRequest = $this->createMock(Request::class);
-        $mockRequest->method('getParsedBody')
-            ->willReturn($body);
+        $mockRequest->method('getAttribute')
+            ->willReturn([
+                'params' => [
+                    'body' => [
+                        'value' => $body,
+                    ],
+                ],
+            ]);
 
         $mockResponse = $this->createMock(Response::class);
         $mockResponse->method('getBody')
@@ -1503,8 +1605,8 @@ class CommentTest extends PHPUnit_Framework_TestCase
 
     public function testCreateCommentOverridesReplyToWithInput()
     {
-        $body = [
-            'commenter' => [
+        $body = (object) [
+            'commenter' => (object) [
                 'name' => 'Jack Black',
                 'email' => 'jack@black.tld',
                 'website' => 'black.tld',
@@ -1541,7 +1643,7 @@ class CommentTest extends PHPUnit_Framework_TestCase
                 $this->anything(),
                 $this->anything(),
                 $this->anything(),
-                $this->equalTo($body['reply_to'])
+                $this->equalTo($body->reply_to)
             );
         $mockCommentModel->method('findById')
             ->willReturn([]);
@@ -1566,8 +1668,14 @@ class CommentTest extends PHPUnit_Framework_TestCase
             ]));
 
         $mockRequest = $this->createMock(Request::class);
-        $mockRequest->method('getParsedBody')
-            ->willReturn($body);
+        $mockRequest->method('getAttribute')
+            ->willReturn([
+                'params' => [
+                    'body' => [
+                        'value' => $body,
+                    ],
+                ],
+            ]);
 
         $mockResponse = $this->createMock(Response::class);
         $mockResponse->method('getBody')
@@ -1579,8 +1687,8 @@ class CommentTest extends PHPUnit_Framework_TestCase
 
     public function testCreateCommentCreatesComment()
     {
-        $body = [
-            'commenter' => [
+        $body = (object) [
+            'commenter' => (object) [
                 'name' => 'Jack Black',
                 'email' => 'jack@black.tld',
                 'website' => 'black.tld',
@@ -1638,8 +1746,8 @@ class CommentTest extends PHPUnit_Framework_TestCase
                 $this->equalTo($locationId),
                 $this->equalTo(0),
                 $this->equalTo($requestId),
-                $this->equalTo($body['url']),
-                $this->equalTo((int) $body['should_notify']),
+                $this->equalTo($body->url),
+                $this->equalTo((int) $body->should_notify),
                 $this->equalTo(0),
                 $this->equalTo($mockDateTime)
             )
@@ -1669,8 +1777,14 @@ class CommentTest extends PHPUnit_Framework_TestCase
             ]));
 
         $mockRequest = $this->createMock(Request::class);
-        $mockRequest->method('getParsedBody')
-            ->willReturn($body);
+        $mockRequest->method('getAttribute')
+            ->willReturn([
+                'params' => [
+                    'body' => [
+                        'value' => $body,
+                    ],
+                ],
+            ]);
 
         $mockResponse = $this->createMock(Response::class);
         $mockResponse->method('getBody')
@@ -1682,8 +1796,8 @@ class CommentTest extends PHPUnit_Framework_TestCase
 
     public function testCreateCommentSendsNotificationsIfDisplayable()
     {
-        $body = [
-            'commenter' => [
+        $body = (object) [
+            'commenter' => (object) [
                 'name' => 'Jack Black',
                 'email' => 'jack@black.tld',
                 'website' => 'black.tld',
@@ -1763,8 +1877,14 @@ class CommentTest extends PHPUnit_Framework_TestCase
             ]));
 
         $mockRequest = $this->createMock(Request::class);
-        $mockRequest->method('getParsedBody')
-            ->willReturn($body);
+        $mockRequest->method('getAttribute')
+            ->willReturn([
+                'params' => [
+                    'body' => [
+                        'value' => $body,
+                    ],
+                ],
+            ]);
 
         $mockResponse = $this->createMock(Response::class);
         $mockResponse->method('getBody')
@@ -1776,8 +1896,8 @@ class CommentTest extends PHPUnit_Framework_TestCase
 
     public function testCreateCommentDoesNotSendNotificationIfNotDisplayable()
     {
-        $body = [
-            'commenter' => [
+        $body = (object) [
+            'commenter' => (object) [
                 'name' => 'Jack Black',
                 'email' => 'jack@black.tld',
                 'website' => 'black.tld',
@@ -1836,8 +1956,14 @@ class CommentTest extends PHPUnit_Framework_TestCase
             ]));
 
         $mockRequest = $this->createMock(Request::class);
-        $mockRequest->method('getParsedBody')
-            ->willReturn($body);
+        $mockRequest->method('getAttribute')
+            ->willReturn([
+                'params' => [
+                    'body' => [
+                        'value' => $body,
+                    ],
+                ],
+            ]);
 
         $mockResponse = $this->createMock(Response::class);
         $mockResponse->method('getBody')
@@ -1849,8 +1975,8 @@ class CommentTest extends PHPUnit_Framework_TestCase
 
     public function testCreateCommentPassesResultToSerializer()
     {
-        $body = [
-            'commenter' => [
+        $body = (object) [
+            'commenter' => (object) [
                 'name' => 'Jack Black',
                 'email' => 'jack@black.tld',
                 'website' => 'black.tld',
@@ -1923,8 +2049,14 @@ class CommentTest extends PHPUnit_Framework_TestCase
             ]));
 
         $mockRequest = $this->createMock(Request::class);
-        $mockRequest->method('getParsedBody')
-            ->willReturn($body);
+        $mockRequest->method('getAttribute')
+            ->willReturn([
+                'params' => [
+                    'body' => [
+                        'value' => $body,
+                    ],
+                ],
+            ]);
 
         $mockResponse = $this->createMock(Response::class);
         $mockResponse->method('getBody')
@@ -1936,8 +2068,8 @@ class CommentTest extends PHPUnit_Framework_TestCase
 
     public function testCreateCommentWritesToResponse()
     {
-        $body = [
-            'commenter' => [
+        $body = (object) [
+            'commenter' => (object) [
                 'name' => 'Jack Black',
                 'email' => 'jack@black.tld',
                 'website' => 'black.tld',
@@ -2009,8 +2141,14 @@ class CommentTest extends PHPUnit_Framework_TestCase
             ]));
 
         $mockRequest = $this->createMock(Request::class);
-        $mockRequest->method('getParsedBody')
-            ->willReturn($body);
+        $mockRequest->method('getAttribute')
+            ->willReturn([
+                'params' => [
+                    'body' => [
+                        'value' => $body,
+                    ],
+                ],
+            ]);
 
         $mockStream = $this->createMock(Stream::class);
         $mockStream->expects($this->once())
@@ -2029,8 +2167,8 @@ class CommentTest extends PHPUnit_Framework_TestCase
 
     public function testCreateCommentReturnsResponse()
     {
-        $body = [
-            'commenter' => [
+        $body = (object) [
+            'commenter' => (object) [
                 'name' => 'Jack Black',
                 'email' => 'jack@black.tld',
                 'website' => 'black.tld',
@@ -2084,8 +2222,14 @@ class CommentTest extends PHPUnit_Framework_TestCase
             ]));
 
         $mockRequest = $this->createMock(Request::class);
-        $mockRequest->method('getParsedBody')
-            ->willReturn($body);
+        $mockRequest->method('getAttribute')
+            ->willReturn([
+                'params' => [
+                    'body' => [
+                        'value' => $body,
+                    ],
+                ],
+            ]);
 
         $mockResponse = $this->createMock(Response::class);
         $mockResponse->method('getBody')
@@ -2106,7 +2250,7 @@ class CommentTest extends PHPUnit_Framework_TestCase
             ->with(
                 $this->equalTo($commentId)
             )
-            ->willReturn([]);
+            ->willReturn([ 'some value' ]);
 
         $mockCommentSerializer = $this->createMock(CommentSerializer::class);
 
@@ -2122,8 +2266,7 @@ class CommentTest extends PHPUnit_Framework_TestCase
             ->with('swagger')
             ->willReturn([
                 'params' => [
-                    [
-                        'name' => 'comment_id',
+                    'comment_id' => [
                         'value' => $commentId,
                     ]
                 ]
@@ -2132,6 +2275,45 @@ class CommentTest extends PHPUnit_Framework_TestCase
         $mockResponse = $this->createMock(Response::class);
         $mockResponse->method('getBody')
             ->willReturn($this->createMock(Stream::class));
+
+        $controller = new Comment($mockContainer);
+        $controller->getComment($mockRequest, $mockResponse);
+    }
+
+    /**
+     * @expectedException AvalancheDevelopment\Peel\HttpError\NotFound
+     * @expectedExceptionMessage No comment found under that id
+     */
+    public function testGetCommentBailsOnInvalidComment()
+    {
+        $commentId = 4536;
+
+        $mockCommentModel = $this->createMock(CommentModel::class);
+        $mockCommentModel->method('findById')
+            ->willReturn(false);
+
+        $mockCommentSerializer = $this->createMock(CommentSerializer::class);
+        $mockCommentSerializer->expects($this->never())
+            ->method('__invoke');
+
+        $mockContainer = $this->createMock(Container::class);
+        $mockContainer->method('get')
+            ->will($this->returnValueMap([
+                [ 'commentModel', $mockCommentModel ],
+            ]));
+
+        $mockRequest = $this->createMock(Request::class);
+        $mockRequest->method('getAttribute')
+            ->with('swagger')
+            ->willReturn([
+                'params' => [
+                    'comment_id' => [
+                        'value' => $commentId,
+                    ]
+                ]
+            ]);
+
+        $mockResponse = $this->createMock(Response::class);
 
         $controller = new Comment($mockContainer);
         $controller->getComment($mockRequest, $mockResponse);
@@ -2172,8 +2354,7 @@ class CommentTest extends PHPUnit_Framework_TestCase
             ->with('swagger')
             ->willReturn([
                 'params' => [
-                    [
-                        'name' => 'comment_id',
+                    'comment_id' => [
                         'value' => 1234,
                     ]
                 ]
@@ -2207,7 +2388,7 @@ class CommentTest extends PHPUnit_Framework_TestCase
 
         $mockCommentModel = $this->createMock(CommentModel::class);
         $mockCommentModel->method('findById')
-            ->willReturn([]);
+            ->willReturn([ 'some value' ]);
 
         $mockCommentSerializer = $this->createMock(CommentSerializer::class);
         $mockCommentSerializer->method('__invoke')
@@ -2225,8 +2406,7 @@ class CommentTest extends PHPUnit_Framework_TestCase
             ->with('swagger')
             ->willReturn([
                 'params' => [
-                    [
-                        'name' => 'comment_id',
+                    'comment_id' => [
                         'value' => 1234,
                     ]
                 ]
@@ -2251,7 +2431,7 @@ class CommentTest extends PHPUnit_Framework_TestCase
     {
         $mockCommentModel = $this->createMock(CommentModel::class);
         $mockCommentModel->method('findById')
-            ->willReturn([]);
+            ->willReturn([ 'some value' ]);
 
         $mockCommentSerializer = $this->createMock(CommentSerializer::class);
 
@@ -2267,8 +2447,7 @@ class CommentTest extends PHPUnit_Framework_TestCase
             ->with('swagger')
             ->willReturn([
                 'params' => [
-                    [
-                        'name' => 'comment_id',
+                    'comment_id' => [
                         'value' => 1234,
                     ]
                 ]
