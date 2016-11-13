@@ -119,6 +119,9 @@
                                 "thread": {
                                     "type": "string"
                                 },
+                                "reply_to": {
+                                    "type": "string"
+                                },
                                 "ip_address": {
                                     "type": "string"
                                 },
