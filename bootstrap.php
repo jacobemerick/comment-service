@@ -105,7 +105,7 @@ if (json_last_error() !== JSON_ERROR_NONE) {
     exit;
 }
 
-$talus = new Talus($swagger, $di);
+$talus = new Talus($swagger);
 
 // controllers
 use Jacobemerick\CommentService\Controller;
