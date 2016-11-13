@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "887f886fa7cf3d06e7ba2b53b3df1d8e",
-    "content-hash": "4ac2e42b705d8a58e6fdcb3f1769d029",
+    "hash": "05168a9e3db6019af1b7db782deb0268",
+    "content-hash": "d61c645fac9050fece04eb4a43338200",
     "packages": [
         {
             "name": "aura/di",
@@ -114,20 +114,20 @@
         },
         {
             "name": "avalanche-development/crash-pad",
-            "version": "0.1.1",
+            "version": "0.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/avalanche-development/crash-pad.git",
-                "reference": "746568a40bfef0ae54630d49607bb5e0cc1ee7ea"
+                "reference": "d8657fa0c89755ce52c8fca35510889a408d4a60"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/avalanche-development/crash-pad/zipball/746568a40bfef0ae54630d49607bb5e0cc1ee7ea",
-                "reference": "746568a40bfef0ae54630d49607bb5e0cc1ee7ea",
+                "url": "https://api.github.com/repos/avalanche-development/crash-pad/zipball/d8657fa0c89755ce52c8fca35510889a408d4a60",
+                "reference": "d8657fa0c89755ce52c8fca35510889a408d4a60",
                 "shasum": ""
             },
             "require": {
-                "avalanche-development/peel": "^0.1",
+                "avalanche-development/peel": "^0.2",
                 "php": ">=5.6.0",
                 "psr/http-message": "^1.0"
             },
@@ -151,20 +151,20 @@
                     "email": "jpemeric@gmail.com"
                 }
             ],
-            "time": "2016-11-02 11:41:40"
+            "time": "2016-11-12 18:06:32"
         },
         {
             "name": "avalanche-development/peel",
-            "version": "0.1.1",
+            "version": "0.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/avalanche-development/peel.git",
-                "reference": "69868da98b121c29878c9fb5bfd8e8ed9bb1ca8f"
+                "reference": "77b0cac07af981bb180477f94b80e4fc40a760bd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/avalanche-development/peel/zipball/69868da98b121c29878c9fb5bfd8e8ed9bb1ca8f",
-                "reference": "69868da98b121c29878c9fb5bfd8e8ed9bb1ca8f",
+                "url": "https://api.github.com/repos/avalanche-development/peel/zipball/77b0cac07af981bb180477f94b80e4fc40a760bd",
+                "reference": "77b0cac07af981bb180477f94b80e4fc40a760bd",
                 "shasum": ""
             },
             "require": {
@@ -190,24 +190,24 @@
                     "email": "jpemeric@gmail.com"
                 }
             ],
-            "time": "2016-11-02 02:38:15"
+            "time": "2016-11-12 18:03:35"
         },
         {
             "name": "avalanche-development/swagger-router-middleware",
-            "version": "0.3.3",
+            "version": "0.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/avalanche-development/swagger-router-middleware.git",
-                "reference": "f69e74227bcd3d5cb17a7d4bf96bddd65cb14c74"
+                "reference": "2f0524cd3b04062a197c76d583a66fbfd5d265de"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/avalanche-development/swagger-router-middleware/zipball/f69e74227bcd3d5cb17a7d4bf96bddd65cb14c74",
-                "reference": "f69e74227bcd3d5cb17a7d4bf96bddd65cb14c74",
+                "url": "https://api.github.com/repos/avalanche-development/swagger-router-middleware/zipball/2f0524cd3b04062a197c76d583a66fbfd5d265de",
+                "reference": "2f0524cd3b04062a197c76d583a66fbfd5d265de",
                 "shasum": ""
             },
             "require": {
-                "avalanche-development/peel": "^0.1.0",
+                "avalanche-development/peel": "^0.2",
                 "php": ">=5.6.0",
                 "psr/http-message": "^1.0",
                 "psr/log": "^1.0"
@@ -232,27 +232,26 @@
                     "email": "jpemeric@gmail.com"
                 }
             ],
-            "time": "2016-11-04 12:38:47"
+            "time": "2016-11-13 01:40:23"
         },
         {
             "name": "avalanche-development/talus",
-            "version": "0.6.0",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/avalanche-development/talus.git",
-                "reference": "2478c5d92b1892aec535fde73de419dde21ee886"
+                "reference": "45d475d51c49874342ce5cc96ff03cffc6bca46a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/avalanche-development/talus/zipball/2478c5d92b1892aec535fde73de419dde21ee886",
-                "reference": "2478c5d92b1892aec535fde73de419dde21ee886",
+                "url": "https://api.github.com/repos/avalanche-development/talus/zipball/45d475d51c49874342ce5cc96ff03cffc6bca46a",
+                "reference": "45d475d51c49874342ce5cc96ff03cffc6bca46a",
                 "shasum": ""
             },
             "require": {
-                "avalanche-development/crash-pad": "^0.1",
-                "avalanche-development/peel": "^0.1",
-                "avalanche-development/swagger-router-middleware": "^0.3",
-                "container-interop/container-interop": "^1.1",
+                "avalanche-development/crash-pad": "^0.2",
+                "avalanche-development/peel": "^0.2",
+                "avalanche-development/swagger-router-middleware": "^0.4",
                 "php": ">=5.6.0",
                 "psr/http-message": "^1.0",
                 "psr/log": "^1.0",
@@ -279,7 +278,7 @@
                 }
             ],
             "description": "Microframework with Swagger routing",
-            "time": "2016-11-03 12:58:50"
+            "time": "2016-11-13 15:29:06"
         },
         {
             "name": "container-interop/container-interop",
