@@ -51,6 +51,32 @@ class AuthenticationTest extends PHPUnit_Framework_TestCase
         $this->assertSame($mockResponse, $response);
     }
 
+    public function testInvokeSkipsIfNoSecurity()
+    {
+        $mockUri = $this->createMock(Uri::class);
+        $mockUri->method('getPath')
+            ->willReturn('/path');
+
+        $mockRequest = $this->createMock(Request::class);
+        $mockRequest->method('getUri')
+            ->willReturn($mockUri);
+        $mockRequest->expects($this->never())
+            ->method('getHeader');
+        $mockRequest->method('getAttribute')
+            ->with('swagger')
+            ->willReturn([ 'security' => [] ]);
+
+        $mockResponse = $this->createMock(Response::class);
+
+        $callable = function ($req, $res) {
+            return $res;
+        };
+
+        $response = (new Authentication('', ''))($mockRequest, $mockResponse, $callable);
+
+        $this->assertSame($mockResponse, $response);
+    }
+
     /**
      * @expectedException AvalancheDevelopment\Peel\HttpError\Unauthorized
      * @expectedExceptionMessage Basic auth required
@@ -66,6 +92,16 @@ class AuthenticationTest extends PHPUnit_Framework_TestCase
             ->willReturn($mockUri);
         $mockRequest->method('getHeader')
             ->willReturn([]);
+        $mockRequest->method('getAttribute')
+            ->with('swagger')
+            ->willReturn([
+                'security' => [
+                    'basicAuth' => [
+                        'type' => 'basic',
+                        'operationScopes' => [],
+                    ],
+                ],
+            ]);
 
         $mockResponse = $this->createMock(Response::class);
 
@@ -91,6 +127,16 @@ class AuthenticationTest extends PHPUnit_Framework_TestCase
             ->willReturn($mockUri);
         $mockRequest->method('getHeader')
             ->willReturn([ 'Invalid Auth' ]);
+        $mockRequest->method('getAttribute')
+            ->with('swagger')
+            ->willReturn([
+                'security' => [
+                    'basicAuth' => [
+                        'type' => 'basic',
+                        'operationScopes' => [],
+                    ],
+                ],
+            ]);
 
         $mockResponse = $this->createMock(Response::class);
 
@@ -118,6 +164,16 @@ class AuthenticationTest extends PHPUnit_Framework_TestCase
             ->willReturn($mockUri);
         $mockRequest->method('getHeader')
             ->willReturn([ $authHeader ]);
+        $mockRequest->method('getAttribute')
+            ->with('swagger')
+            ->willReturn([
+                'security' => [
+                    'basicAuth' => [
+                        'type' => 'basic',
+                        'operationScopes' => [],
+                    ],
+                ],
+            ]);
 
         $mockResponse = $this->createMock(Response::class);
         $mockResponse->expects($this->never())

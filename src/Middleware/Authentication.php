@@ -37,6 +37,13 @@ class Authentication
             return $next($req, $res);
         }
 
+        $basicAuth = array_filter($req->getAttribute('swagger')['security'], function ($security) {
+            return $security['type'] == 'basic';
+        });
+        if (empty($basicAuth)) {
+            return $next($req, $res);
+        }
+
         $authHeader = current($req->getHeader('Authorization'));
         if (!$authHeader) {
             throw new Unauthorized('Basic auth required');
