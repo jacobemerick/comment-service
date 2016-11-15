@@ -194,16 +194,16 @@
         },
         {
             "name": "avalanche-development/swagger-router-middleware",
-            "version": "0.4.1",
+            "version": "0.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/avalanche-development/swagger-router-middleware.git",
-                "reference": "903e896d358d2cf94328b53a4fc647ecf7be67b8"
+                "reference": "d1447c324dc4efbfe8165cf6872a3b11a57895e0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/avalanche-development/swagger-router-middleware/zipball/903e896d358d2cf94328b53a4fc647ecf7be67b8",
-                "reference": "903e896d358d2cf94328b53a4fc647ecf7be67b8",
+                "url": "https://api.github.com/repos/avalanche-development/swagger-router-middleware/zipball/d1447c324dc4efbfe8165cf6872a3b11a57895e0",
+                "reference": "d1447c324dc4efbfe8165cf6872a3b11a57895e0",
                 "shasum": ""
             },
             "require": {
@@ -232,20 +232,20 @@
                     "email": "jpemeric@gmail.com"
                 }
             ],
-            "time": "2016-11-15 02:27:14"
+            "time": "2016-11-15 12:38:23"
         },
         {
             "name": "avalanche-development/talus",
-            "version": "1.0.1",
+            "version": "1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/avalanche-development/talus.git",
-                "reference": "d039d83ae608dbc34d39f9d6a4c046b42219f4fe"
+                "reference": "a44e6f11e834ceb043e51ff9e25994cd6e1eda0b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/avalanche-development/talus/zipball/d039d83ae608dbc34d39f9d6a4c046b42219f4fe",
-                "reference": "d039d83ae608dbc34d39f9d6a4c046b42219f4fe",
+                "url": "https://api.github.com/repos/avalanche-development/talus/zipball/a44e6f11e834ceb043e51ff9e25994cd6e1eda0b",
+                "reference": "a44e6f11e834ceb043e51ff9e25994cd6e1eda0b",
                 "shasum": ""
             },
             "require": {
@@ -278,7 +278,7 @@
                 }
             ],
             "description": "Microframework with Swagger routing",
-            "time": "2016-11-15 02:32:07"
+            "time": "2016-11-15 12:40:08"
         },
         {
             "name": "container-interop/container-interop",
@@ -1858,16 +1858,16 @@
         },
         {
             "name": "sebastian/recursion-context",
-            "version": "1.0.3",
+            "version": "1.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/recursion-context.git",
-                "reference": "79860854756415e1cec8d186c9cf261cafd87dfc"
+                "reference": "938df7a6478e72795e5f8266cff24d06e3136f2e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/recursion-context/zipball/79860854756415e1cec8d186c9cf261cafd87dfc",
-                "reference": "79860854756415e1cec8d186c9cf261cafd87dfc",
+                "url": "https://api.github.com/repos/sebastianbergmann/recursion-context/zipball/938df7a6478e72795e5f8266cff24d06e3136f2e",
+                "reference": "938df7a6478e72795e5f8266cff24d06e3136f2e",
                 "shasum": ""
             },
             "require": {
@@ -1907,7 +1907,7 @@
             ],
             "description": "Provides functionality to recursively process PHP variables",
             "homepage": "http://www.github.com/sebastianbergmann/recursion-context",
-            "time": "2016-11-14 15:54:23"
+            "time": "2016-11-15 06:55:36"
         },
         {
             "name": "sebastian/resource-operations",
