@@ -18,16 +18,16 @@
             "type": "basic"
         }
     },
+    "security": [
+        {
+            "basicAuth": []
+        }
+    ],
     "paths": {
         "/comments": {
             "get": {
                 "operationId": "getComments",
                 "description": "Gets Comment resources.",
-                "security": [
-                    {
-                        "basicAuth": []
-                    }
-                ],
                 "parameters": [
                     {
                         "name": "page",
@@ -72,11 +72,6 @@
             "post": {
                 "operationId": "createComment",
                 "description": "Create a new Comment resource.",
-                "security": [
-                    {
-                        "basicAuth": []
-                    }
-                ],
                 "parameters": [
                     {
                         "name": "body",
@@ -149,11 +144,6 @@
             "get": {
                 "operationId": "getComment",
                 "description": "Gets a single Comment resource.",
-                "security": [
-                    {
-                        "basicAuth": []
-                    }
-                ],
                 "parameters": [
                     {
                         "name": "comment_id",
@@ -177,11 +167,6 @@
             "get": {
                 "operationId": "getCommenters",
                 "description": "Gets Commenter resources.",
-                "security": [
-                    {
-                        "basicAuth": []
-                    }
-                ],
                 "parameters": [
                     {
                         "name": "page",
@@ -210,11 +195,6 @@
             "get": {
                 "operationId": "getCommenter",
                 "description": "Gets a Commenter resource.",
-                "security": [
-                    {
-                        "basicAuth": []
-                    }
-                ],
                 "parameters": [
                     {
                         "name": "commenter_id",
