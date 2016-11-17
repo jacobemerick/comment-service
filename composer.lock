@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "05168a9e3db6019af1b7db782deb0268",
-    "content-hash": "d61c645fac9050fece04eb4a43338200",
+    "hash": "b760e85a10513b57e76dd52f1c9e1e14",
+    "content-hash": "5238f73e81c948cb770ceb64649511e7",
     "packages": [
         {
             "name": "aura/di",
@@ -114,22 +114,23 @@
         },
         {
             "name": "avalanche-development/crash-pad",
-            "version": "0.2.1",
+            "version": "0.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/avalanche-development/crash-pad.git",
-                "reference": "d8657fa0c89755ce52c8fca35510889a408d4a60"
+                "reference": "0fe99bddc7d50d2a67a5f0f38d504eae1b38ce4a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/avalanche-development/crash-pad/zipball/d8657fa0c89755ce52c8fca35510889a408d4a60",
-                "reference": "d8657fa0c89755ce52c8fca35510889a408d4a60",
+                "url": "https://api.github.com/repos/avalanche-development/crash-pad/zipball/0fe99bddc7d50d2a67a5f0f38d504eae1b38ce4a",
+                "reference": "0fe99bddc7d50d2a67a5f0f38d504eae1b38ce4a",
                 "shasum": ""
             },
             "require": {
                 "avalanche-development/peel": "^0.2",
                 "php": ">=5.6.0",
-                "psr/http-message": "^1.0"
+                "psr/http-message": "^1.0",
+                "psr/log": "^1.0"
             },
             "require-dev": {
                 "codeclimate/php-test-reporter": "^0.3.2",
@@ -151,7 +152,7 @@
                     "email": "jpemeric@gmail.com"
                 }
             ],
-            "time": "2016-11-12 18:06:32"
+            "time": "2016-11-15 23:44:58"
         },
         {
             "name": "avalanche-development/peel",
@@ -194,16 +195,16 @@
         },
         {
             "name": "avalanche-development/swagger-router-middleware",
-            "version": "0.4.2",
+            "version": "0.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/avalanche-development/swagger-router-middleware.git",
-                "reference": "d1447c324dc4efbfe8165cf6872a3b11a57895e0"
+                "reference": "e6e6818af98f910efd79d3bb2dc0d6b6ab242d3f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/avalanche-development/swagger-router-middleware/zipball/d1447c324dc4efbfe8165cf6872a3b11a57895e0",
-                "reference": "d1447c324dc4efbfe8165cf6872a3b11a57895e0",
+                "url": "https://api.github.com/repos/avalanche-development/swagger-router-middleware/zipball/e6e6818af98f910efd79d3bb2dc0d6b6ab242d3f",
+                "reference": "e6e6818af98f910efd79d3bb2dc0d6b6ab242d3f",
                 "shasum": ""
             },
             "require": {
@@ -232,26 +233,26 @@
                     "email": "jpemeric@gmail.com"
                 }
             ],
-            "time": "2016-11-15 12:38:23"
+            "time": "2016-11-17 12:19:26"
         },
         {
             "name": "avalanche-development/talus",
-            "version": "1.0.2",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/avalanche-development/talus.git",
-                "reference": "a44e6f11e834ceb043e51ff9e25994cd6e1eda0b"
+                "reference": "a942c45950df431a81cc70f06546dd1e6afb946f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/avalanche-development/talus/zipball/a44e6f11e834ceb043e51ff9e25994cd6e1eda0b",
-                "reference": "a44e6f11e834ceb043e51ff9e25994cd6e1eda0b",
+                "url": "https://api.github.com/repos/avalanche-development/talus/zipball/a942c45950df431a81cc70f06546dd1e6afb946f",
+                "reference": "a942c45950df431a81cc70f06546dd1e6afb946f",
                 "shasum": ""
             },
             "require": {
-                "avalanche-development/crash-pad": "^0.2",
+                "avalanche-development/crash-pad": "^0.3",
                 "avalanche-development/peel": "^0.2",
-                "avalanche-development/swagger-router-middleware": "^0.4",
+                "avalanche-development/swagger-router-middleware": "^0.5",
                 "php": ">=5.6.0",
                 "psr/http-message": "^1.0",
                 "psr/log": "^1.0",
@@ -278,7 +279,7 @@
                 }
             ],
             "description": "Microframework with Swagger routing",
-            "time": "2016-11-15 12:40:08"
+            "time": "2016-11-17 12:38:18"
         },
         {
             "name": "container-interop/container-interop",
@@ -1235,16 +1236,16 @@
         },
         {
             "name": "phpunit/php-token-stream",
-            "version": "1.4.8",
+            "version": "1.4.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-token-stream.git",
-                "reference": "3144ae21711fb6cac0b1ab4cbe63b75ce3d4e8da"
+                "reference": "3b402f65a4cc90abf6e1104e388b896ce209631b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-token-stream/zipball/3144ae21711fb6cac0b1ab4cbe63b75ce3d4e8da",
-                "reference": "3144ae21711fb6cac0b1ab4cbe63b75ce3d4e8da",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-token-stream/zipball/3b402f65a4cc90abf6e1104e388b896ce209631b",
+                "reference": "3b402f65a4cc90abf6e1104e388b896ce209631b",
                 "shasum": ""
             },
             "require": {
@@ -1280,7 +1281,7 @@
             "keywords": [
                 "tokenizer"
             ],
-            "time": "2015-09-15 10:49:45"
+            "time": "2016-11-15 14:06:22"
         },
         {
             "name": "phpunit/phpunit",
@@ -1812,21 +1813,21 @@
         },
         {
             "name": "sebastian/object-enumerator",
-            "version": "1.0.0",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/object-enumerator.git",
-                "reference": "d4ca2fb70344987502567bc50081c03e6192fb26"
+                "reference": "12dc92be4c9b1286fd37c15d54f7c9d8524f29e0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/object-enumerator/zipball/d4ca2fb70344987502567bc50081c03e6192fb26",
-                "reference": "d4ca2fb70344987502567bc50081c03e6192fb26",
+                "url": "https://api.github.com/repos/sebastianbergmann/object-enumerator/zipball/12dc92be4c9b1286fd37c15d54f7c9d8524f29e0",
+                "reference": "12dc92be4c9b1286fd37c15d54f7c9d8524f29e0",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.6",
-                "sebastian/recursion-context": "~1.0"
+                "sebastian/recursion-context": "~1.0.4"
             },
             "require-dev": {
                 "phpunit/phpunit": "~5"
@@ -1854,7 +1855,7 @@
             ],
             "description": "Traverses array structures and object graphs to enumerate all referenced objects",
             "homepage": "https://github.com/sebastianbergmann/object-enumerator/",
-            "time": "2016-01-28 13:25:10"
+            "time": "2016-11-16 07:17:31"
         },
         {
             "name": "sebastian/recursion-context",
