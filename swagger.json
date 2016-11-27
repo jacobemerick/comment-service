@@ -4,9 +4,6 @@
         "version": "0.1.0",
         "title": "Comment Service"
     },
-    "consumes": [
-        "application/json"
-    ],
     "produces": [
         "application/json"
     ],
@@ -69,6 +66,9 @@
                     }
                 }
             },
+            "consumes": [
+                "application/json"
+            ],
             "post": {
                 "operationId": "createComment",
                 "description": "Create a new Comment resource.",
