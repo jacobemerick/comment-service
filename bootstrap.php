@@ -134,7 +134,6 @@ $talus->addMiddleware(new Middleware\Authentication(
     $config->auth->username,
     $config->auth->password
 ));
-$talus->addMiddleware(new Middleware\JsonHeader());
 
 $talus->run();
 
