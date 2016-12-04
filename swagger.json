@@ -27,34 +27,19 @@
                 "description": "Gets Comment resources.",
                 "parameters": [
                     {
-                        "name": "page",
-                        "in": "query",
-                        "description": "Results page to return",
-                        "type": "integer"
+                        "$ref": "#/parameters/PageNumber"
                     },
                     {
-                        "name": "per_page",
-                        "in": "query",
-                        "description": "Results per response",
-                        "type": "integer"
+                        "$ref": "#/parameters/PageSize"
                     },
                     {
-                        "name": "order",
-                        "in": "query",
-                        "description": "Comma-separated list of order options",
-                        "type": "string"
+                        "$ref": "#/parameters/SortOrder"
                     },
                     {
-                        "name": "domain",
-                        "in": "query",
-                        "description": "Domain to restrict comments to",
-                        "type": "string"
+                        "$ref": "#/parameters/DomainFilter"
                     },
                     {
-                        "name": "path",
-                        "in": "query",
-                        "description": "Path to restrict comments to",
-                        "type": "string"
+                        "$ref": "#/parameters/PathFilter"
                     }
                 ],
                 "responses": {
@@ -66,69 +51,16 @@
                     }
                 }
             },
-            "consumes": [
-                "application/json"
-            ],
             "post": {
                 "operationId": "createComment",
                 "description": "Create a new Comment resource.",
                 "parameters": [
                     {
-                        "name": "body",
-                        "in": "body",
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                                "commenter": {
-                                    "type": "object",
-                                    "properties": {
-                                        "name": {
-                                            "type": "string"
-                                        },
-                                        "email": {
-                                            "type": "string"
-                                        },
-                                        "website": {
-                                            "type": "string"
-                                        }
-                                    }
-                                },
-                                "body": {
-                                    "type": "string"
-                                },
-                                "should_notify": {
-                                    "type": "boolean"
-                                },
-                                "should_display": {
-                                    "type": "boolean"
-                                },
-                                "domain": {
-                                    "type": "string"
-                                },
-                                "path": {
-                                    "type": "string"
-                                },
-                                "url": {
-                                    "type": "string"
-                                },
-                                "thread": {
-                                    "type": "string"
-                                },
-                                "reply_to": {
-                                    "type": "string"
-                                },
-                                "ip_address": {
-                                    "type": "string"
-                                },
-                                "user_agent": {
-                                    "type": "string"
-                                },
-                                "referrer": {
-                                    "type": "string"
-                                }
-                            }
-                        }
+                        "$ref": "#/parameters/CreateCommentBody"
                     }
+                ],
+                "consumes": [
+                    "application/json"
                 ],
                 "responses": {
                     "201": {
@@ -141,18 +73,14 @@
             }
         },
         "/comments/{comment_id}": {
+            "parameters": [
+                {
+                    "$ref": "#/parameters/CommentIdentifier"
+                }
+            ],
             "get": {
                 "operationId": "getComment",
                 "description": "Gets a single Comment resource.",
-                "parameters": [
-                    {
-                        "name": "comment_id",
-                        "in": "path",
-                        "description": "Comment identifier.",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
                 "responses": {
                     "200": {
                         "$ref": "#/responses/Comment"
@@ -169,16 +97,10 @@
                 "description": "Gets Commenter resources.",
                 "parameters": [
                     {
-                        "name": "page",
-                        "in": "query",
-                        "description": "Results page to return",
-                        "type": "integer"
+                        "$ref": "#/parameters/PageNumber"
                     },
                     {
-                        "name": "per_page",
-                        "in": "query",
-                        "description": "Results per response",
-                        "type": "integer"
+                        "$ref": "#/parameters/PageSize"
                     }
                 ],
                 "responses": {
@@ -192,18 +114,14 @@
             }
         },
         "/commenters/{commenter_id}": {
+            "parameters": [
+                {
+                    "$ref": "#/parameters/CommenterIdentifier"
+                }
+            ],
             "get": {
                 "operationId": "getCommenter",
                 "description": "Gets a Commenter resource.",
-                "parameters": [
-                    {
-                        "name": "commenter_id",
-                        "in": "path",
-                        "description": "Commenter identifier.",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
                 "responses": {
                     "200": {
                         "$ref": "#/responses/Commenter"
@@ -299,6 +217,122 @@
                     "type": "object"
                 }
             }
+        }
+    },
+    "parameters": {
+        "CommenterIdentifier": {
+            "name": "commenter_id",
+            "in": "path",
+            "description": "Commenter identifier.",
+            "required": true,
+            "type": "string"
+        },
+        "CommentIdentifier": {
+            "name": "comment_id",
+            "in": "path",
+            "description": "Comment identifier.",
+            "required": true,
+            "type": "string"
+        },
+        "CreateCommentBody": {
+            "name": "body",
+            "in": "body",
+            "schema": {
+                "type": "object",
+                "required": [
+                    "commenter",
+                    "body",
+                    "domain",
+                    "path",
+                    "url",
+                    "thread",
+                    "ip_address",
+                    "user_agent",
+                    "referrer"
+                ],
+                "properties": {
+                    "commenter": {
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "integer"
+                            },
+                            "name": {
+                                "type": "string"
+                            },
+                            "email": {
+                                "type": "string"
+                            },
+                            "website": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "body": {
+                        "type": "string"
+                    },
+                    "should_notify": {
+                        "type": "boolean"
+                    },
+                    "should_display": {
+                        "type": "boolean"
+                    },
+                    "domain": {
+                        "type": "string"
+                    },
+                    "path": {
+                        "type": "string"
+                    },
+                    "url": {
+                        "type": "string"
+                    },
+                    "thread": {
+                        "type": "string"
+                    },
+                    "reply_to": {
+                        "type": "string"
+                    },
+                    "ip_address": {
+                        "type": "string"
+                    },
+                    "user_agent": {
+                        "type": "string"
+                    },
+                    "referrer": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "DomainFilter": {
+            "name": "domain",
+            "in": "query",
+            "description": "Domain to restrict comments to",
+            "type": "string"
+        },
+        "PageNumber": {
+            "name": "page",
+            "in": "query",
+            "description": "Results page to return",
+            "type": "integer"
+        },
+        "PageSize": {
+            "name": "per_page",
+            "in": "query",
+            "description": "Results per response",
+            "type": "integer"
+        },
+        "PathFilter": {
+            "name": "path",
+            "in": "query",
+            "description": "Path to restrict comments to",
+            "type": "string"
+        },
+        "SortOrder": {
+            "name": "order",
+            "in": "query",
+            "description": "Comma-separated list of order options",
+            "type": "string"
         }
     },
     "responses": {
