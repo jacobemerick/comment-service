@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "d86dd6736dc7c1c590aa3bc011afb614",
-    "content-hash": "6e0e89fadf2926945420593810988ac8",
+    "hash": "5db258163f83d7958ac355792eac8336",
+    "content-hash": "6387fd45ab8781916dee345b9cd52c4c",
     "packages": [
         {
             "name": "aura/di",
@@ -114,27 +114,27 @@
         },
         {
             "name": "avalanche-development/crash-pad",
-            "version": "0.4.0",
+            "version": "0.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/avalanche-development/crash-pad.git",
-                "reference": "8f76fba1b493123e2bf201b65726967530a1406a"
+                "reference": "ea567951f16b865710f42be6b2f51c03ae73abf7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/avalanche-development/crash-pad/zipball/8f76fba1b493123e2bf201b65726967530a1406a",
-                "reference": "8f76fba1b493123e2bf201b65726967530a1406a",
+                "url": "https://api.github.com/repos/avalanche-development/crash-pad/zipball/ea567951f16b865710f42be6b2f51c03ae73abf7",
+                "reference": "ea567951f16b865710f42be6b2f51c03ae73abf7",
                 "shasum": ""
             },
             "require": {
-                "avalanche-development/peel": "^0.2",
+                "avalanche-development/peel": "^0.3",
                 "guzzlehttp/psr7": "^1.3",
                 "php": ">=5.6.0",
                 "psr/http-message": "^1.0",
                 "psr/log": "^1.0"
             },
             "require-dev": {
-                "codeclimate/php-test-reporter": "^0.3.2",
+                "codeclimate/php-test-reporter": "^0.3",
                 "phpunit/phpunit": "^5.5"
             },
             "type": "library",
@@ -153,20 +153,20 @@
                     "email": "jpemeric@gmail.com"
                 }
             ],
-            "time": "2016-11-27 21:01:37"
+            "time": "2016-12-29 11:49:36"
         },
         {
             "name": "avalanche-development/peel",
-            "version": "0.2.1",
+            "version": "0.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/avalanche-development/peel.git",
-                "reference": "77b0cac07af981bb180477f94b80e4fc40a760bd"
+                "reference": "b9efda6e1f866cb68fe54e5a62a3a5c245a2b50f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/avalanche-development/peel/zipball/77b0cac07af981bb180477f94b80e4fc40a760bd",
-                "reference": "77b0cac07af981bb180477f94b80e4fc40a760bd",
+                "url": "https://api.github.com/repos/avalanche-development/peel/zipball/b9efda6e1f866cb68fe54e5a62a3a5c245a2b50f",
+                "reference": "b9efda6e1f866cb68fe54e5a62a3a5c245a2b50f",
                 "shasum": ""
             },
             "require": {
@@ -192,31 +192,31 @@
                     "email": "jpemeric@gmail.com"
                 }
             ],
-            "time": "2016-11-12 18:03:35"
+            "time": "2016-12-29 11:39:16"
         },
         {
             "name": "avalanche-development/swagger-header-middleware",
-            "version": "0.1.2",
+            "version": "0.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/avalanche-development/swagger-header-middleware.git",
-                "reference": "5b940e17637107737d4c504dba5609340a0cf9b7"
+                "reference": "77e5a9c3c8119aa072c1b7eae2116c14a420fc16"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/avalanche-development/swagger-header-middleware/zipball/5b940e17637107737d4c504dba5609340a0cf9b7",
-                "reference": "5b940e17637107737d4c504dba5609340a0cf9b7",
+                "url": "https://api.github.com/repos/avalanche-development/swagger-header-middleware/zipball/77e5a9c3c8119aa072c1b7eae2116c14a420fc16",
+                "reference": "77e5a9c3c8119aa072c1b7eae2116c14a420fc16",
                 "shasum": ""
             },
             "require": {
-                "avalanche-development/peel": "^0.2.1",
+                "avalanche-development/peel": "^0.3",
                 "php": ">=5.6.0",
                 "psr/http-message": "^1.0",
                 "psr/log": "^1.0"
             },
             "require-dev": {
-                "codeclimate/php-test-reporter": "^0.3.2",
-                "phpunit/phpunit": "^5.5"
+                "codeclimate/php-test-reporter": "^0.3",
+                "phpunit/phpunit": "^5.7"
             },
             "type": "library",
             "autoload": {
@@ -234,30 +234,30 @@
                     "email": "jpemeric@gmail.com"
                 }
             ],
-            "time": "2016-11-28 22:05:03"
+            "time": "2017-01-08 11:22:50"
         },
         {
             "name": "avalanche-development/swagger-router-middleware",
-            "version": "0.8.1",
+            "version": "0.11.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/avalanche-development/swagger-router-middleware.git",
-                "reference": "ca75e1c0b37d992ee773d0c0acab43a2aec8a082"
+                "reference": "bf8bbf2369a0d97e7d121309aea83c5c4b2beed1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/avalanche-development/swagger-router-middleware/zipball/ca75e1c0b37d992ee773d0c0acab43a2aec8a082",
-                "reference": "ca75e1c0b37d992ee773d0c0acab43a2aec8a082",
+                "url": "https://api.github.com/repos/avalanche-development/swagger-router-middleware/zipball/bf8bbf2369a0d97e7d121309aea83c5c4b2beed1",
+                "reference": "bf8bbf2369a0d97e7d121309aea83c5c4b2beed1",
                 "shasum": ""
             },
             "require": {
-                "avalanche-development/peel": "^0.2",
+                "avalanche-development/peel": "^0.3",
                 "php": ">=5.6.0",
                 "psr/http-message": "^1.0",
                 "psr/log": "^1.0"
             },
             "require-dev": {
-                "codeclimate/php-test-reporter": "^0.3.2",
+                "codeclimate/php-test-reporter": "^0.3",
                 "phpunit/phpunit": "^5.5"
             },
             "type": "library",
@@ -276,35 +276,79 @@
                     "email": "jpemeric@gmail.com"
                 }
             ],
-            "time": "2016-12-02 01:44:01"
+            "time": "2017-01-03 12:00:54"
         },
         {
-            "name": "avalanche-development/talus",
-            "version": "1.3.0",
+            "name": "avalanche-development/swagger-validation-middleware",
+            "version": "0.1.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/avalanche-development/talus.git",
-                "reference": "1bddeaa5c65c005083c70a4be6e11771674d0c7f"
+                "url": "https://github.com/avalanche-development/swagger-validation-middleware.git",
+                "reference": "0b2068955dee28b10d26cae43b2186f5b05c1c25"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/avalanche-development/talus/zipball/1bddeaa5c65c005083c70a4be6e11771674d0c7f",
-                "reference": "1bddeaa5c65c005083c70a4be6e11771674d0c7f",
+                "url": "https://api.github.com/repos/avalanche-development/swagger-validation-middleware/zipball/0b2068955dee28b10d26cae43b2186f5b05c1c25",
+                "reference": "0b2068955dee28b10d26cae43b2186f5b05c1c25",
                 "shasum": ""
             },
             "require": {
-                "avalanche-development/crash-pad": "^0.4",
-                "avalanche-development/peel": "^0.2",
-                "avalanche-development/swagger-header-middleware": "^0.1",
-                "avalanche-development/swagger-router-middleware": "^0.8",
+                "avalanche-development/peel": "^0.3.0",
+                "php": ">=5.6.0",
+                "psr/http-message": "^1.0",
+                "psr/log": "^1.0"
+            },
+            "require-dev": {
+                "codeclimate/php-test-reporter": "^0.3",
+                "phpunit/phpunit": "^5.7"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "AvalancheDevelopment\\SwaggerValidationMiddleware\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "jacobemerick",
+                    "email": "jpemeric@gmail.com"
+                }
+            ],
+            "time": "2017-01-17 12:25:06"
+        },
+        {
+            "name": "avalanche-development/talus",
+            "version": "1.6.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/avalanche-development/talus.git",
+                "reference": "01c66248630aa60fbe3892ac2770437d5466291c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/avalanche-development/talus/zipball/01c66248630aa60fbe3892ac2770437d5466291c",
+                "reference": "01c66248630aa60fbe3892ac2770437d5466291c",
+                "shasum": ""
+            },
+            "require": {
+                "avalanche-development/crash-pad": "^0.5",
+                "avalanche-development/peel": "^0.3",
+                "avalanche-development/swagger-header-middleware": "^0.3",
+                "avalanche-development/swagger-router-middleware": "^0.11",
+                "avalanche-development/swagger-validation-middleware": "^0.1",
                 "php": ">=5.6.0",
                 "psr/http-message": "^1.0",
                 "psr/log": "^1.0",
                 "zendframework/zend-diactoros": "^1.3"
             },
             "require-dev": {
-                "codeclimate/php-test-reporter": "^0.3.2",
-                "phpunit/phpunit": "^5.4"
+                "codeclimate/php-test-reporter": "^0.3",
+                "php-mock/php-mock-phpunit": "^1.1",
+                "phpunit/phpunit": "^5.7"
             },
             "type": "library",
             "autoload": {
@@ -323,7 +367,7 @@
                 }
             ],
             "description": "Microframework with Swagger routing",
-            "time": "2016-12-02 01:45:55"
+            "time": "2017-01-17 12:28:15"
         },
         {
             "name": "container-interop/container-interop",
@@ -633,16 +677,16 @@
         },
         {
             "name": "zendframework/zend-diactoros",
-            "version": "1.3.7",
+            "version": "1.3.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-diactoros.git",
-                "reference": "969ff423d3f201da3ff718a5831bb999bb0669b0"
+                "reference": "d9c1fd7c4b024179d49faf367da544b4eef7cfe8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-diactoros/zipball/969ff423d3f201da3ff718a5831bb999bb0669b0",
-                "reference": "969ff423d3f201da3ff718a5831bb999bb0669b0",
+                "url": "https://api.github.com/repos/zendframework/zend-diactoros/zipball/d9c1fd7c4b024179d49faf367da544b4eef7cfe8",
+                "reference": "d9c1fd7c4b024179d49faf367da544b4eef7cfe8",
                 "shasum": ""
             },
             "require": {
@@ -654,7 +698,7 @@
             },
             "require-dev": {
                 "phpunit/phpunit": "^4.6 || ^5.5",
-                "squizlabs/php_codesniffer": "^2.3.1"
+                "zendframework/zend-coding-standard": "~1.0.0"
             },
             "type": "library",
             "extra": {
@@ -679,7 +723,7 @@
                 "psr",
                 "psr-7"
             ],
-            "time": "2016-10-11 13:25:21"
+            "time": "2017-01-05 21:44:28"
         }
     ],
     "packages-dev": [
@@ -1144,16 +1188,16 @@
         },
         {
             "name": "phpunit/php-code-coverage",
-            "version": "4.0.3",
+            "version": "4.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "903fd6318d0a90b4770a009ff73e4a4e9c437929"
+                "reference": "c14196e64a78570034afd0b7a9f3757ba71c2a0a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/903fd6318d0a90b4770a009ff73e4a4e9c437929",
-                "reference": "903fd6318d0a90b4770a009ff73e4a4e9c437929",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/c14196e64a78570034afd0b7a9f3757ba71c2a0a",
+                "reference": "c14196e64a78570034afd0b7a9f3757ba71c2a0a",
                 "shasum": ""
             },
             "require": {
@@ -1203,7 +1247,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2016-11-28 16:00:31"
+            "time": "2016-12-20 15:22:42"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -1388,16 +1432,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "5.6.7",
+            "version": "5.7.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "38810e97481723ef918f6e35c03cb1014a645bd5"
+                "reference": "50fd2be8f3e23e91da825f36f08e5f9633076ffe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/38810e97481723ef918f6e35c03cb1014a645bd5",
-                "reference": "38810e97481723ef918f6e35c03cb1014a645bd5",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/50fd2be8f3e23e91da825f36f08e5f9633076ffe",
+                "reference": "50fd2be8f3e23e91da825f36f08e5f9633076ffe",
                 "shasum": ""
             },
             "require": {
@@ -1408,7 +1452,7 @@
                 "ext-xml": "*",
                 "myclabs/deep-copy": "~1.3",
                 "php": "^5.6 || ^7.0",
-                "phpspec/prophecy": "^1.3.1",
+                "phpspec/prophecy": "^1.6.2",
                 "phpunit/php-code-coverage": "^4.0.3",
                 "phpunit/php-file-iterator": "~1.4",
                 "phpunit/php-text-template": "~1.2",
@@ -1416,9 +1460,9 @@
                 "phpunit/phpunit-mock-objects": "^3.2",
                 "sebastian/comparator": "~1.2.2",
                 "sebastian/diff": "~1.2",
-                "sebastian/environment": "^1.3 || ^2.0",
+                "sebastian/environment": "^1.3.4 || ^2.0",
                 "sebastian/exporter": "~2.0",
-                "sebastian/global-state": "~1.0",
+                "sebastian/global-state": "^1.0 || ^2.0",
                 "sebastian/object-enumerator": "~2.0",
                 "sebastian/resource-operations": "~1.0",
                 "sebastian/version": "~1.0|~2.0",
@@ -1440,7 +1484,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "5.6.x-dev"
+                    "dev-master": "5.7.x-dev"
                 }
             },
             "autoload": {
@@ -1466,20 +1510,20 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2016-11-28 16:04:24"
+            "time": "2016-12-28 07:18:51"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
-            "version": "3.4.2",
+            "version": "3.4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit-mock-objects.git",
-                "reference": "90a08f5deed5f7ac35463c161f2e8fa0e5652faf"
+                "reference": "3ab72b65b39b491e0c011e2e09bb2206c2aa8e24"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit-mock-objects/zipball/90a08f5deed5f7ac35463c161f2e8fa0e5652faf",
-                "reference": "90a08f5deed5f7ac35463c161f2e8fa0e5652faf",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit-mock-objects/zipball/3ab72b65b39b491e0c011e2e09bb2206c2aa8e24",
+                "reference": "3ab72b65b39b491e0c011e2e09bb2206c2aa8e24",
                 "shasum": ""
             },
             "require": {
@@ -1525,7 +1569,7 @@
                 "mock",
                 "xunit"
             ],
-            "time": "2016-11-27 07:52:03"
+            "time": "2016-12-08 20:27:08"
         },
         {
             "name": "satooshi/php-coveralls",
@@ -2100,16 +2144,16 @@
         },
         {
             "name": "symfony/config",
-            "version": "v3.2.0",
+            "version": "v3.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/config.git",
-                "reference": "4a68f8953180bf77ea65f585020f4db0b18600b4"
+                "reference": "c5ea878b5a7f6a01b9a2f182f905831711b9ff3f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/config/zipball/4a68f8953180bf77ea65f585020f4db0b18600b4",
-                "reference": "4a68f8953180bf77ea65f585020f4db0b18600b4",
+                "url": "https://api.github.com/repos/symfony/config/zipball/c5ea878b5a7f6a01b9a2f182f905831711b9ff3f",
+                "reference": "c5ea878b5a7f6a01b9a2f182f905831711b9ff3f",
                 "shasum": ""
             },
             "require": {
@@ -2152,20 +2196,20 @@
             ],
             "description": "Symfony Config Component",
             "homepage": "https://symfony.com",
-            "time": "2016-11-29 11:12:32"
+            "time": "2017-01-02 20:32:22"
         },
         {
             "name": "symfony/console",
-            "version": "v3.2.0",
+            "version": "v3.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "09d0fd33560e3573185a2ea17614e37ba38716c5"
+                "reference": "4f9e449e76996adf310498a8ca955c6deebe29dd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/09d0fd33560e3573185a2ea17614e37ba38716c5",
-                "reference": "09d0fd33560e3573185a2ea17614e37ba38716c5",
+                "url": "https://api.github.com/repos/symfony/console/zipball/4f9e449e76996adf310498a8ca955c6deebe29dd",
+                "reference": "4f9e449e76996adf310498a8ca955c6deebe29dd",
                 "shasum": ""
             },
             "require": {
@@ -2215,20 +2259,20 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-            "time": "2016-11-16 22:18:16"
+            "time": "2017-01-08 20:47:33"
         },
         {
             "name": "symfony/debug",
-            "version": "v3.2.0",
+            "version": "v3.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/debug.git",
-                "reference": "9f923e68d524a3095c5a2ae5fc7220c7cbc12231"
+                "reference": "810ba5c1c5352a4ddb15d4719e8936751dff0b05"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/debug/zipball/9f923e68d524a3095c5a2ae5fc7220c7cbc12231",
-                "reference": "9f923e68d524a3095c5a2ae5fc7220c7cbc12231",
+                "url": "https://api.github.com/repos/symfony/debug/zipball/810ba5c1c5352a4ddb15d4719e8936751dff0b05",
+                "reference": "810ba5c1c5352a4ddb15d4719e8936751dff0b05",
                 "shasum": ""
             },
             "require": {
@@ -2272,20 +2316,20 @@
             ],
             "description": "Symfony Debug Component",
             "homepage": "https://symfony.com",
-            "time": "2016-11-16 22:18:16"
+            "time": "2017-01-02 20:32:22"
         },
         {
             "name": "symfony/event-dispatcher",
-            "version": "v2.8.14",
+            "version": "v2.8.16",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/event-dispatcher.git",
-                "reference": "25c576abd4e0f212e678fe8b2bd9a9a98c7ea934"
+                "reference": "74877977f90fb9c3e46378d5764217c55f32df34"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/25c576abd4e0f212e678fe8b2bd9a9a98c7ea934",
-                "reference": "25c576abd4e0f212e678fe8b2bd9a9a98c7ea934",
+                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/74877977f90fb9c3e46378d5764217c55f32df34",
+                "reference": "74877977f90fb9c3e46378d5764217c55f32df34",
                 "shasum": ""
             },
             "require": {
@@ -2332,20 +2376,20 @@
             ],
             "description": "Symfony EventDispatcher Component",
             "homepage": "https://symfony.com",
-            "time": "2016-10-13 01:43:15"
+            "time": "2017-01-02 20:30:24"
         },
         {
             "name": "symfony/filesystem",
-            "version": "v3.2.0",
+            "version": "v3.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/filesystem.git",
-                "reference": "8d4cf7561a5b17e5eb7a02b80d0b8f014a3796d4"
+                "reference": "a0c6ef2dc78d33b58d91d3a49f49797a184d06f4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/filesystem/zipball/8d4cf7561a5b17e5eb7a02b80d0b8f014a3796d4",
-                "reference": "8d4cf7561a5b17e5eb7a02b80d0b8f014a3796d4",
+                "url": "https://api.github.com/repos/symfony/filesystem/zipball/a0c6ef2dc78d33b58d91d3a49f49797a184d06f4",
+                "reference": "a0c6ef2dc78d33b58d91d3a49f49797a184d06f4",
                 "shasum": ""
             },
             "require": {
@@ -2381,7 +2425,7 @@
             ],
             "description": "Symfony Filesystem Component",
             "homepage": "https://symfony.com",
-            "time": "2016-11-24 00:46:43"
+            "time": "2017-01-08 20:47:33"
         },
         {
             "name": "symfony/polyfill-mbstring",
@@ -2444,16 +2488,16 @@
         },
         {
             "name": "symfony/stopwatch",
-            "version": "v3.2.0",
+            "version": "v3.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/stopwatch.git",
-                "reference": "5b139e1c4290e6c7640ba80d9c9b5e49ef22b841"
+                "reference": "9aa0b51889c01bca474853ef76e9394b02264464"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/stopwatch/zipball/5b139e1c4290e6c7640ba80d9c9b5e49ef22b841",
-                "reference": "5b139e1c4290e6c7640ba80d9c9b5e49ef22b841",
+                "url": "https://api.github.com/repos/symfony/stopwatch/zipball/9aa0b51889c01bca474853ef76e9394b02264464",
+                "reference": "9aa0b51889c01bca474853ef76e9394b02264464",
                 "shasum": ""
             },
             "require": {
@@ -2489,20 +2533,20 @@
             ],
             "description": "Symfony Stopwatch Component",
             "homepage": "https://symfony.com",
-            "time": "2016-06-29 05:43:10"
+            "time": "2017-01-02 20:32:22"
         },
         {
             "name": "symfony/yaml",
-            "version": "v3.2.0",
+            "version": "v3.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "f2300ba8fbb002c028710b92e1906e7457410693"
+                "reference": "50eadbd7926e31842893c957eca362b21592a97d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/f2300ba8fbb002c028710b92e1906e7457410693",
-                "reference": "f2300ba8fbb002c028710b92e1906e7457410693",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/50eadbd7926e31842893c957eca362b21592a97d",
+                "reference": "50eadbd7926e31842893c957eca362b21592a97d",
                 "shasum": ""
             },
             "require": {
@@ -2544,7 +2588,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2016-11-18 21:17:59"
+            "time": "2017-01-03 13:51:32"
         },
         {
             "name": "webmozart/assert",
