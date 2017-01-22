@@ -2,6 +2,7 @@
 
 namespace Jacobemerick\CommentService\Controller;
 
+use AvalancheDevelopment\SwaggerRouterMiddleware\ParsedSwaggerInterface;
 use Interop\Container\ContainerInterface as Container;
 use Jacobemerick\CommentService\Model\Commenter as CommenterModel;
 use Jacobemerick\CommentService\Serializer\Commenter as CommenterSerializer;
@@ -48,16 +49,18 @@ class CommenterTest extends PHPUnit_Framework_TestCase
                 [ 'commenterSerializer', $mockCommenterSerializer ],
             ]));
 
+        $mockSwagger = $this->createMock(ParsedSwaggerInterface::class);
+        $mockSwagger->method('getParams')
+            ->willReturn([
+                'commenter_id' => [
+                    'value' => $commenterId,
+                ],
+            ]);
+
         $mockRequest = $this->createMock(Request::class);
         $mockRequest->method('getAttribute')
             ->with('swagger')
-            ->willReturn([
-                'params' => [
-                    'commenter_id' => [
-                        'value' => $commenterId,
-                    ]
-                ]
-            ]);
+            ->willReturn($mockSwagger);
 
         $mockResponse = $this->createMock(Response::class);
         $mockResponse->method('getBody')
@@ -89,16 +92,18 @@ class CommenterTest extends PHPUnit_Framework_TestCase
                 [ 'commenterModel', $mockCommenterModel ],
             ]));
 
+        $mockSwagger = $this->createMock(ParsedSwaggerInterface::class);
+        $mockSwagger->method('getParams')
+            ->willReturn([
+                'commenter_id' => [
+                    'value' => $commenterId,
+                ],
+            ]);
+
         $mockRequest = $this->createMock(Request::class);
         $mockRequest->method('getAttribute')
             ->with('swagger')
-            ->willReturn([
-                'params' => [
-                    'commenter_id' => [
-                        'value' => $commenterId,
-                    ]
-                ]
-            ]);
+            ->willReturn($mockSwagger);
 
         $mockResponse = $this->createMock(Response::class);
 
@@ -130,16 +135,18 @@ class CommenterTest extends PHPUnit_Framework_TestCase
                 [ 'commenterSerializer', $mockCommenterSerializer ],
             ]));
 
+        $mockSwagger = $this->createMock(ParsedSwaggerInterface::class);
+        $mockSwagger->method('getParams')
+            ->willReturn([
+                'commenter_id' => [
+                    'value' => 123,
+                ],
+            ]);
+
         $mockRequest = $this->createMock(Request::class);
         $mockRequest->method('getAttribute')
             ->with('swagger')
-            ->willReturn([
-                'params' => [
-                    'commenter_id' => [
-                        'value' => 123,
-                    ]
-                ]
-            ]);
+            ->willReturn($mockSwagger);
 
         $mockResponse = $this->createMock(Response::class);
         $mockResponse->method('getBody')
@@ -174,16 +181,18 @@ class CommenterTest extends PHPUnit_Framework_TestCase
                 [ 'commenterSerializer', $mockCommenterSerializer ],
             ]));
 
+        $mockSwagger = $this->createMock(ParsedSwaggerInterface::class);
+        $mockSwagger->method('getParams')
+            ->willReturn([
+                'commenter_id' => [
+                    'value' => 123,
+                ],
+            ]);
+
         $mockRequest = $this->createMock(Request::class);
         $mockRequest->method('getAttribute')
             ->with('swagger')
-            ->willReturn([
-                'params' => [
-                    'commenter_id' => [
-                        'value' => 123,
-                    ]
-                ]
-            ]);
+            ->willReturn($mockSwagger);
 
         $mockStream = $this->createMock(Stream::class);
         $mockStream->expects($this->once())
@@ -213,16 +222,18 @@ class CommenterTest extends PHPUnit_Framework_TestCase
                 [ 'commenterSerializer', $mockCommenterSerializer ],
             ]));
 
+        $mockSwagger = $this->createMock(ParsedSwaggerInterface::class);
+        $mockSwagger->method('getParams')
+            ->willReturn([
+                'commenter_id' => [
+                    'value' => 123,
+                ],
+            ]);
+
         $mockRequest = $this->createMock(Request::class);
         $mockRequest->method('getAttribute')
             ->with('swagger')
-            ->willReturn([
-                'params' => [
-                    'commenter_id' => [
-                        'value' => 123,
-                    ]
-                ]
-            ]);
+            ->willReturn($mockSwagger);
 
         $mockResponse = $this->createMock(Response::class);
         $mockResponse->method('getBody')

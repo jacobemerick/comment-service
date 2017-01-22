@@ -29,7 +29,7 @@ class Comment
      */
     public function createComment(Request $req, Response $res)
     {
-        $body = $req->getAttribute('swagger')['params']['body']['value'];
+        $body = $req->getAttribute('swagger')->getParams()['body']['value'];
 
         // todo option to pass in by commenter id
         $commenter = $this->container
@@ -168,7 +168,7 @@ class Comment
      */
     public function getComment(Request $req, Response $res)
     {
-        $commentId = $req->getAttribute('swagger')['params']['comment_id']['value'];
+        $commentId = $req->getAttribute('swagger')->getParams()['comment_id']['value'];
 
         $comment = $this->container
             ->get('commentModel')

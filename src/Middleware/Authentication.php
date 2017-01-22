@@ -37,7 +37,7 @@ class Authentication
             return $next($req, $res);
         }
 
-        $basicAuth = array_filter($req->getAttribute('swagger')['security'], function ($security) {
+        $basicAuth = array_filter($req->getAttribute('swagger')->getSecurity(), function ($security) {
             return $security['type'] == 'basic';
         });
         if (empty($basicAuth)) {

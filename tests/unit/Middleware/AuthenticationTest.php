@@ -2,6 +2,7 @@
 
 namespace Jacobemerick\CommentService\Middleware;
 
+use AvalancheDevelopment\SwaggerRouterMiddleware\ParsedSwaggerInterface;
 use Exception;
 use PHPUnit_Framework_TestCase;
 use Psr\Http\Message\ResponseInterface as Response;
@@ -57,6 +58,11 @@ class AuthenticationTest extends PHPUnit_Framework_TestCase
         $mockUri->method('getPath')
             ->willReturn('/path');
 
+        $mockSwagger = $this->createMock(ParsedSwaggerInterface::class);
+        $mockSwagger->expects($this->once())
+            ->method('getSecurity')
+            ->willReturn([]);
+
         $mockRequest = $this->createMock(Request::class);
         $mockRequest->method('getUri')
             ->willReturn($mockUri);
@@ -64,7 +70,7 @@ class AuthenticationTest extends PHPUnit_Framework_TestCase
             ->method('getHeader');
         $mockRequest->method('getAttribute')
             ->with('swagger')
-            ->willReturn([ 'security' => [] ]);
+            ->willReturn($mockSwagger);
 
         $mockResponse = $this->createMock(Response::class);
 
@@ -87,6 +93,16 @@ class AuthenticationTest extends PHPUnit_Framework_TestCase
         $mockUri->method('getPath')
             ->willReturn('/path');
 
+        $mockSwagger = $this->createMock(ParsedSwaggerInterface::class);
+        $mockSwagger->expects($this->once())
+            ->method('getSecurity')
+            ->willReturn([
+                'basicAuth' => [
+                    'type' => 'basic',
+                    'operationScopes' => [],
+                ],
+            ]);
+
         $mockRequest = $this->createMock(Request::class);
         $mockRequest->method('getUri')
             ->willReturn($mockUri);
@@ -94,14 +110,7 @@ class AuthenticationTest extends PHPUnit_Framework_TestCase
             ->willReturn([]);
         $mockRequest->method('getAttribute')
             ->with('swagger')
-            ->willReturn([
-                'security' => [
-                    'basicAuth' => [
-                        'type' => 'basic',
-                        'operationScopes' => [],
-                    ],
-                ],
-            ]);
+            ->willReturn($mockSwagger);
 
         $mockResponse = $this->createMock(Response::class);
 
@@ -122,6 +131,16 @@ class AuthenticationTest extends PHPUnit_Framework_TestCase
         $mockUri->method('getPath')
             ->willReturn('/path');
 
+        $mockSwagger = $this->createMock(ParsedSwaggerInterface::class);
+        $mockSwagger->expects($this->once())
+            ->method('getSecurity')
+            ->willReturn([
+                'basicAuth' => [
+                    'type' => 'basic',
+                    'operationScopes' => [],
+                ],
+            ]);
+
         $mockRequest = $this->createMock(Request::class);
         $mockRequest->method('getUri')
             ->willReturn($mockUri);
@@ -129,14 +148,7 @@ class AuthenticationTest extends PHPUnit_Framework_TestCase
             ->willReturn([ 'Invalid Auth' ]);
         $mockRequest->method('getAttribute')
             ->with('swagger')
-            ->willReturn([
-                'security' => [
-                    'basicAuth' => [
-                        'type' => 'basic',
-                        'operationScopes' => [],
-                    ],
-                ],
-            ]);
+            ->willReturn($mockSwagger);
 
         $mockResponse = $this->createMock(Response::class);
 
@@ -159,6 +171,16 @@ class AuthenticationTest extends PHPUnit_Framework_TestCase
         $mockUri->method('getPath')
             ->willReturn('/path');
 
+        $mockSwagger = $this->createMock(ParsedSwaggerInterface::class);
+        $mockSwagger->expects($this->once())
+            ->method('getSecurity')
+            ->willReturn([
+                'basicAuth' => [
+                    'type' => 'basic',
+                    'operationScopes' => [],
+                ],
+            ]);
+
         $mockRequest = $this->createMock(Request::class);
         $mockRequest->method('getUri')
             ->willReturn($mockUri);
@@ -166,14 +188,7 @@ class AuthenticationTest extends PHPUnit_Framework_TestCase
             ->willReturn([ $authHeader ]);
         $mockRequest->method('getAttribute')
             ->with('swagger')
-            ->willReturn([
-                'security' => [
-                    'basicAuth' => [
-                        'type' => 'basic',
-                        'operationScopes' => [],
-                    ],
-                ],
-            ]);
+            ->willReturn($mockSwagger);
 
         $mockResponse = $this->createMock(Response::class);
         $mockResponse->expects($this->never())

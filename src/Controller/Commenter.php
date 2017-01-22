@@ -28,7 +28,7 @@ class Commenter
      */
     public function getCommenter(Request $req, Response $res)
     {
-        $commenterId = $req->getAttribute('swagger')['params']['commenter_id']['value'];
+        $commenterId = $req->getAttribute('swagger')->getParams()['commenter_id']['value'];
 
         $commenter = $this->container
             ->get('commenterModel')

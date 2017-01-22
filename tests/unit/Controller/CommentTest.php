@@ -2,6 +2,7 @@
 
 namespace Jacobemerick\CommentService\Controller;
 
+use AvalancheDevelopment\SwaggerRouterMiddleware\ParsedSwaggerInterface;
 use DateTime;
 use Interop\Container\ContainerInterface as Container;
 use Jacobemerick\CommentService\Helper\NotificationHandler;
@@ -110,15 +111,17 @@ class CommentTest extends PHPUnit_Framework_TestCase
                 [ 'datetime', $mockDateTime ],
             ]));
 
-        $mockRequest = $this->createMock(Request::class);
-        $mockRequest->method('getAttribute')
+        $mockSwagger = $this->createMock(ParsedSwaggerInterface::class);
+        $mockSwagger->method('getParams')
             ->willReturn([
-                'params' => [
-                    'body' => [
-                        'value' => $body,
-                    ],
+                'body' => [
+                    'value' => $body,
                 ],
             ]);
+
+        $mockRequest = $this->createMock(Request::class);
+        $mockRequest->method('getAttribute')
+            ->willReturn($mockSwagger);
 
         $mockResponse = $this->createMock(Response::class);
         $mockResponse->method('getBody')
@@ -199,15 +202,17 @@ class CommentTest extends PHPUnit_Framework_TestCase
                 [ 'datetime', $mockDateTime ],
             ]));
 
-        $mockRequest = $this->createMock(Request::class);
-        $mockRequest->method('getAttribute')
+        $mockSwagger = $this->createMock(ParsedSwaggerInterface::class);
+        $mockSwagger->method('getParams')
             ->willReturn([
-                'params' => [
-                    'body' => [
-                        'value' => $body,
-                    ],
+                'body' => [
+                    'value' => $body,
                 ],
             ]);
+
+        $mockRequest = $this->createMock(Request::class);
+        $mockRequest->method('getAttribute')
+            ->willReturn($mockSwagger);
 
         $mockResponse = $this->createMock(Response::class);
         $mockResponse->method('getBody')
@@ -287,15 +292,17 @@ class CommentTest extends PHPUnit_Framework_TestCase
                 [ 'datetime', $mockDateTime ],
             ]));
 
-        $mockRequest = $this->createMock(Request::class);
-        $mockRequest->method('getAttribute')
+        $mockSwagger = $this->createMock(ParsedSwaggerInterface::class);
+        $mockSwagger->method('getParams')
             ->willReturn([
-                'params' => [
-                    'body' => [
-                        'value' => $body,
-                    ],
+                'body' => [
+                    'value' => $body,
                 ],
             ]);
+
+        $mockRequest = $this->createMock(Request::class);
+        $mockRequest->method('getAttribute')
+            ->willReturn($mockSwagger);
 
         $mockResponse = $this->createMock(Response::class);
         $mockResponse->method('getBody')
@@ -375,15 +382,17 @@ class CommentTest extends PHPUnit_Framework_TestCase
                 [ 'datetime', $mockDateTime ],
             ]));
 
-        $mockRequest = $this->createMock(Request::class);
-        $mockRequest->method('getAttribute')
+        $mockSwagger = $this->createMock(ParsedSwaggerInterface::class);
+        $mockSwagger->method('getParams')
             ->willReturn([
-                'params' => [
-                    'body' => [
-                        'value' => $body,
-                    ],
+                'body' => [
+                    'value' => $body,
                 ],
             ]);
+
+        $mockRequest = $this->createMock(Request::class);
+        $mockRequest->method('getAttribute')
+            ->willReturn($mockSwagger);
 
         $mockResponse = $this->createMock(Response::class);
         $mockResponse->method('getBody')
@@ -466,15 +475,17 @@ class CommentTest extends PHPUnit_Framework_TestCase
                 [ 'datetime', $mockDateTime ],
             ]));
 
-        $mockRequest = $this->createMock(Request::class);
-        $mockRequest->method('getAttribute')
+        $mockSwagger = $this->createMock(ParsedSwaggerInterface::class);
+        $mockSwagger->method('getParams')
             ->willReturn([
-                'params' => [
-                    'body' => [
-                        'value' => $body,
-                    ],
+                'body' => [
+                    'value' => $body,
                 ],
             ]);
+
+        $mockRequest = $this->createMock(Request::class);
+        $mockRequest->method('getAttribute')
+            ->willReturn($mockSwagger);
 
         $mockResponse = $this->createMock(Response::class);
         $mockResponse->method('getBody')
@@ -557,15 +568,17 @@ class CommentTest extends PHPUnit_Framework_TestCase
                 [ 'datetime', $mockDateTime ],
             ]));
 
-        $mockRequest = $this->createMock(Request::class);
-        $mockRequest->method('getAttribute')
+        $mockSwagger = $this->createMock(ParsedSwaggerInterface::class);
+        $mockSwagger->method('getParams')
             ->willReturn([
-                'params' => [
-                    'body' => [
-                        'value' => $body,
-                    ],
+                'body' => [
+                    'value' => $body,
                 ],
             ]);
+
+        $mockRequest = $this->createMock(Request::class);
+        $mockRequest->method('getAttribute')
+            ->willReturn($mockSwagger);
 
         $mockResponse = $this->createMock(Response::class);
         $mockResponse->method('getBody')
@@ -649,15 +662,17 @@ class CommentTest extends PHPUnit_Framework_TestCase
                 [ 'datetime', $mockDateTime ],
             ]));
 
-        $mockRequest = $this->createMock(Request::class);
-        $mockRequest->method('getAttribute')
+        $mockSwagger = $this->createMock(ParsedSwaggerInterface::class);
+        $mockSwagger->method('getParams')
             ->willReturn([
-                'params' => [
-                    'body' => [
-                        'value' => $body,
-                    ],
+                'body' => [
+                    'value' => $body,
                 ],
             ]);
+
+        $mockRequest = $this->createMock(Request::class);
+        $mockRequest->method('getAttribute')
+            ->willReturn($mockSwagger);
 
         $mockResponse = $this->createMock(Response::class);
         $mockResponse->method('getBody')
@@ -741,15 +756,17 @@ class CommentTest extends PHPUnit_Framework_TestCase
                 [ 'datetime', $mockDateTime ],
             ]));
 
-        $mockRequest = $this->createMock(Request::class);
-        $mockRequest->method('getAttribute')
+        $mockSwagger = $this->createMock(ParsedSwaggerInterface::class);
+        $mockSwagger->method('getParams')
             ->willReturn([
-                'params' => [
-                    'body' => [
-                        'value' => $body,
-                    ],
+                'body' => [
+                    'value' => $body,
                 ],
             ]);
+
+        $mockRequest = $this->createMock(Request::class);
+        $mockRequest->method('getAttribute')
+            ->willReturn($mockSwagger);
 
         $mockResponse = $this->createMock(Response::class);
         $mockResponse->method('getBody')
@@ -834,15 +851,17 @@ class CommentTest extends PHPUnit_Framework_TestCase
                 [ 'datetime', $mockDateTime ],
             ]));
 
-        $mockRequest = $this->createMock(Request::class);
-        $mockRequest->method('getAttribute')
+        $mockSwagger = $this->createMock(ParsedSwaggerInterface::class);
+        $mockSwagger->method('getParams')
             ->willReturn([
-                'params' => [
-                    'body' => [
-                        'value' => $body,
-                    ],
+                'body' => [
+                    'value' => $body,
                 ],
             ]);
+
+        $mockRequest = $this->createMock(Request::class);
+        $mockRequest->method('getAttribute')
+            ->willReturn($mockSwagger);
 
         $mockResponse = $this->createMock(Response::class);
         $mockResponse->method('getBody')
@@ -927,15 +946,17 @@ class CommentTest extends PHPUnit_Framework_TestCase
                 [ 'datetime', $mockDateTime ],
             ]));
 
-        $mockRequest = $this->createMock(Request::class);
-        $mockRequest->method('getAttribute')
+        $mockSwagger = $this->createMock(ParsedSwaggerInterface::class);
+        $mockSwagger->method('getParams')
             ->willReturn([
-                'params' => [
-                    'body' => [
-                        'value' => $body,
-                    ],
+                'body' => [
+                    'value' => $body,
                 ],
             ]);
+
+        $mockRequest = $this->createMock(Request::class);
+        $mockRequest->method('getAttribute')
+            ->willReturn($mockSwagger);
 
         $mockResponse = $this->createMock(Response::class);
         $mockResponse->method('getBody')
@@ -1033,15 +1054,17 @@ class CommentTest extends PHPUnit_Framework_TestCase
                 [ 'datetime', $mockDateTime ],
             ]));
 
-        $mockRequest = $this->createMock(Request::class);
-        $mockRequest->method('getAttribute')
+        $mockSwagger = $this->createMock(ParsedSwaggerInterface::class);
+        $mockSwagger->method('getParams')
             ->willReturn([
-                'params' => [
-                    'body' => [
-                        'value' => $body,
-                    ],
+                'body' => [
+                    'value' => $body,
                 ],
             ]);
+
+        $mockRequest = $this->createMock(Request::class);
+        $mockRequest->method('getAttribute')
+            ->willReturn($mockSwagger);
 
         $mockResponse = $this->createMock(Response::class);
         $mockResponse->method('getBody')
@@ -1139,15 +1162,17 @@ class CommentTest extends PHPUnit_Framework_TestCase
                 [ 'datetime', $mockDateTime ],
             ]));
 
-        $mockRequest = $this->createMock(Request::class);
-        $mockRequest->method('getAttribute')
+        $mockSwagger = $this->createMock(ParsedSwaggerInterface::class);
+        $mockSwagger->method('getParams')
             ->willReturn([
-                'params' => [
-                    'body' => [
-                        'value' => $body,
-                    ],
+                'body' => [
+                    'value' => $body,
                 ],
             ]);
+
+        $mockRequest = $this->createMock(Request::class);
+        $mockRequest->method('getAttribute')
+            ->willReturn($mockSwagger);
 
         $mockResponse = $this->createMock(Response::class);
         $mockResponse->method('getBody')
@@ -1235,15 +1260,17 @@ class CommentTest extends PHPUnit_Framework_TestCase
                 [ 'datetime', $mockDateTime ],
             ]));
 
-        $mockRequest = $this->createMock(Request::class);
-        $mockRequest->method('getAttribute')
+        $mockSwagger = $this->createMock(ParsedSwaggerInterface::class);
+        $mockSwagger->method('getParams')
             ->willReturn([
-                'params' => [
-                    'body' => [
-                        'value' => $body,
-                    ],
+                'body' => [
+                    'value' => $body,
                 ],
             ]);
+
+        $mockRequest = $this->createMock(Request::class);
+        $mockRequest->method('getAttribute')
+            ->willReturn($mockSwagger);
 
         $mockResponse = $this->createMock(Response::class);
         $mockResponse->method('getBody')
@@ -1331,15 +1358,17 @@ class CommentTest extends PHPUnit_Framework_TestCase
                 [ 'datetime', $mockDateTime ],
             ]));
 
-        $mockRequest = $this->createMock(Request::class);
-        $mockRequest->method('getAttribute')
+        $mockSwagger = $this->createMock(ParsedSwaggerInterface::class);
+        $mockSwagger->method('getParams')
             ->willReturn([
-                'params' => [
-                    'body' => [
-                        'value' => $body,
-                    ],
+                'body' => [
+                    'value' => $body,
                 ],
             ]);
+
+        $mockRequest = $this->createMock(Request::class);
+        $mockRequest->method('getAttribute')
+            ->willReturn($mockSwagger);
 
         $mockResponse = $this->createMock(Response::class);
         $mockResponse->method('getBody')
@@ -1418,15 +1447,17 @@ class CommentTest extends PHPUnit_Framework_TestCase
                 [ 'datetime', $mockDateTime ],
             ]));
 
-        $mockRequest = $this->createMock(Request::class);
-        $mockRequest->method('getAttribute')
+        $mockSwagger = $this->createMock(ParsedSwaggerInterface::class);
+        $mockSwagger->method('getParams')
             ->willReturn([
-                'params' => [
-                    'body' => [
-                        'value' => $body,
-                    ],
+                'body' => [
+                    'value' => $body,
                 ],
             ]);
+
+        $mockRequest = $this->createMock(Request::class);
+        $mockRequest->method('getAttribute')
+            ->willReturn($mockSwagger);
 
         $mockResponse = $this->createMock(Response::class);
         $mockResponse->method('getBody')
@@ -1504,15 +1535,17 @@ class CommentTest extends PHPUnit_Framework_TestCase
                 [ 'datetime', $mockDateTime ],
             ]));
 
-        $mockRequest = $this->createMock(Request::class);
-        $mockRequest->method('getAttribute')
+        $mockSwagger = $this->createMock(ParsedSwaggerInterface::class);
+        $mockSwagger->method('getParams')
             ->willReturn([
-                'params' => [
-                    'body' => [
-                        'value' => $body,
-                    ],
+                'body' => [
+                    'value' => $body,
                 ],
             ]);
+
+        $mockRequest = $this->createMock(Request::class);
+        $mockRequest->method('getAttribute')
+            ->willReturn($mockSwagger);
 
         $mockResponse = $this->createMock(Response::class);
         $mockResponse->method('getBody')
@@ -1585,15 +1618,17 @@ class CommentTest extends PHPUnit_Framework_TestCase
                 [ 'datetime', $mockDateTime ],
             ]));
 
-        $mockRequest = $this->createMock(Request::class);
-        $mockRequest->method('getAttribute')
+        $mockSwagger = $this->createMock(ParsedSwaggerInterface::class);
+        $mockSwagger->method('getParams')
             ->willReturn([
-                'params' => [
-                    'body' => [
-                        'value' => $body,
-                    ],
+                'body' => [
+                    'value' => $body,
                 ],
             ]);
+
+        $mockRequest = $this->createMock(Request::class);
+        $mockRequest->method('getAttribute')
+            ->willReturn($mockSwagger);
 
         $mockResponse = $this->createMock(Response::class);
         $mockResponse->method('getBody')
@@ -1667,15 +1702,17 @@ class CommentTest extends PHPUnit_Framework_TestCase
                 [ 'datetime', $mockDateTime ],
             ]));
 
-        $mockRequest = $this->createMock(Request::class);
-        $mockRequest->method('getAttribute')
+        $mockSwagger = $this->createMock(ParsedSwaggerInterface::class);
+        $mockSwagger->method('getParams')
             ->willReturn([
-                'params' => [
-                    'body' => [
-                        'value' => $body,
-                    ],
+                'body' => [
+                    'value' => $body,
                 ],
             ]);
+
+        $mockRequest = $this->createMock(Request::class);
+        $mockRequest->method('getAttribute')
+            ->willReturn($mockSwagger);
 
         $mockResponse = $this->createMock(Response::class);
         $mockResponse->method('getBody')
@@ -1776,15 +1813,17 @@ class CommentTest extends PHPUnit_Framework_TestCase
                 [ 'datetime', $mockDateTime ],
             ]));
 
-        $mockRequest = $this->createMock(Request::class);
-        $mockRequest->method('getAttribute')
+        $mockSwagger = $this->createMock(ParsedSwaggerInterface::class);
+        $mockSwagger->method('getParams')
             ->willReturn([
-                'params' => [
-                    'body' => [
-                        'value' => $body,
-                    ],
+                'body' => [
+                    'value' => $body,
                 ],
             ]);
+
+        $mockRequest = $this->createMock(Request::class);
+        $mockRequest->method('getAttribute')
+            ->willReturn($mockSwagger);
 
         $mockResponse = $this->createMock(Response::class);
         $mockResponse->method('getBody')
@@ -1876,15 +1915,17 @@ class CommentTest extends PHPUnit_Framework_TestCase
                 [ 'notificationHandler', $mockNotificationHandler ],
             ]));
 
-        $mockRequest = $this->createMock(Request::class);
-        $mockRequest->method('getAttribute')
+        $mockSwagger = $this->createMock(ParsedSwaggerInterface::class);
+        $mockSwagger->method('getParams')
             ->willReturn([
-                'params' => [
-                    'body' => [
-                        'value' => $body,
-                    ],
+                'body' => [
+                    'value' => $body,
                 ],
             ]);
+
+        $mockRequest = $this->createMock(Request::class);
+        $mockRequest->method('getAttribute')
+            ->willReturn($mockSwagger);
 
         $mockResponse = $this->createMock(Response::class);
         $mockResponse->method('getBody')
@@ -1955,15 +1996,17 @@ class CommentTest extends PHPUnit_Framework_TestCase
                 [ 'notificationHandler', $mockNotificationHandler ],
             ]));
 
-        $mockRequest = $this->createMock(Request::class);
-        $mockRequest->method('getAttribute')
+        $mockSwagger = $this->createMock(ParsedSwaggerInterface::class);
+        $mockSwagger->method('getParams')
             ->willReturn([
-                'params' => [
-                    'body' => [
-                        'value' => $body,
-                    ],
+                'body' => [
+                    'value' => $body,
                 ],
             ]);
+
+        $mockRequest = $this->createMock(Request::class);
+        $mockRequest->method('getAttribute')
+            ->willReturn($mockSwagger);
 
         $mockResponse = $this->createMock(Response::class);
         $mockResponse->method('getBody')
@@ -2048,15 +2091,17 @@ class CommentTest extends PHPUnit_Framework_TestCase
                 [ 'datetime', $mockDateTime ],
             ]));
 
-        $mockRequest = $this->createMock(Request::class);
-        $mockRequest->method('getAttribute')
+        $mockSwagger = $this->createMock(ParsedSwaggerInterface::class);
+        $mockSwagger->method('getParams')
             ->willReturn([
-                'params' => [
-                    'body' => [
-                        'value' => $body,
-                    ],
+                'body' => [
+                    'value' => $body,
                 ],
             ]);
+
+        $mockRequest = $this->createMock(Request::class);
+        $mockRequest->method('getAttribute')
+            ->willReturn($mockSwagger);
 
         $mockResponse = $this->createMock(Response::class);
         $mockResponse->method('getBody')
@@ -2140,15 +2185,17 @@ class CommentTest extends PHPUnit_Framework_TestCase
                 [ 'datetime', $mockDateTime ],
             ]));
 
-        $mockRequest = $this->createMock(Request::class);
-        $mockRequest->method('getAttribute')
+        $mockSwagger = $this->createMock(ParsedSwaggerInterface::class);
+        $mockSwagger->method('getParams')
             ->willReturn([
-                'params' => [
-                    'body' => [
-                        'value' => $body,
-                    ],
+                'body' => [
+                    'value' => $body,
                 ],
             ]);
+
+        $mockRequest = $this->createMock(Request::class);
+        $mockRequest->method('getAttribute')
+            ->willReturn($mockSwagger);
 
         $mockStream = $this->createMock(Stream::class);
         $mockStream->expects($this->once())
@@ -2221,15 +2268,17 @@ class CommentTest extends PHPUnit_Framework_TestCase
                 [ 'datetime', $mockDateTime ],
             ]));
 
-        $mockRequest = $this->createMock(Request::class);
-        $mockRequest->method('getAttribute')
+        $mockSwagger = $this->createMock(ParsedSwaggerInterface::class);
+        $mockSwagger->method('getParams')
             ->willReturn([
-                'params' => [
-                    'body' => [
-                        'value' => $body,
-                    ],
+                'body' => [
+                    'value' => $body,
                 ],
             ]);
+
+        $mockRequest = $this->createMock(Request::class);
+        $mockRequest->method('getAttribute')
+            ->willReturn($mockSwagger);
 
         $mockResponse = $this->createMock(Response::class);
         $mockResponse->method('getBody')
@@ -2261,16 +2310,19 @@ class CommentTest extends PHPUnit_Framework_TestCase
                 [ 'commentSerializer', $mockCommentSerializer ],
             ]));
 
+        $mockSwagger = $this->createMock(ParsedSwaggerInterface::class);
+        $mockSwagger->expects($this->once())
+            ->method('getParams')
+            ->willReturn([
+                'comment_id' => [
+                    'value' => $commentId,
+                ],
+            ]);
+
         $mockRequest = $this->createMock(Request::class);
         $mockRequest->method('getAttribute')
             ->with('swagger')
-            ->willReturn([
-                'params' => [
-                    'comment_id' => [
-                        'value' => $commentId,
-                    ]
-                ]
-            ]);
+            ->willReturn($mockSwagger);
 
         $mockResponse = $this->createMock(Response::class);
         $mockResponse->method('getBody')
@@ -2302,16 +2354,19 @@ class CommentTest extends PHPUnit_Framework_TestCase
                 [ 'commentModel', $mockCommentModel ],
             ]));
 
+        $mockSwagger = $this->createMock(ParsedSwaggerInterface::class);
+        $mockSwagger->expects($this->once())
+            ->method('getParams')
+            ->willReturn([
+                'comment_id' => [
+                    'value' => $commentId,
+                ],
+            ]);
+
         $mockRequest = $this->createMock(Request::class);
         $mockRequest->method('getAttribute')
             ->with('swagger')
-            ->willReturn([
-                'params' => [
-                    'comment_id' => [
-                        'value' => $commentId,
-                    ]
-                ]
-            ]);
+            ->willReturn($mockSwagger);
 
         $mockResponse = $this->createMock(Response::class);
 
@@ -2349,16 +2404,19 @@ class CommentTest extends PHPUnit_Framework_TestCase
                 [ 'commentSerializer', $mockCommentSerializer ],
             ]));
 
+        $mockSwagger = $this->createMock(ParsedSwaggerInterface::class);
+        $mockSwagger->expects($this->once())
+            ->method('getParams')
+            ->willReturn([
+                'comment_id' => [
+                    'value' => 1234,
+                ],
+            ]);
+
         $mockRequest = $this->createMock(Request::class);
         $mockRequest->method('getAttribute')
             ->with('swagger')
-            ->willReturn([
-                'params' => [
-                    'comment_id' => [
-                        'value' => 1234,
-                    ]
-                ]
-            ]);
+            ->willReturn($mockSwagger);
 
         $mockResponse = $this->createMock(Response::class);
         $mockResponse->method('getBody')
@@ -2401,16 +2459,19 @@ class CommentTest extends PHPUnit_Framework_TestCase
                 [ 'commentSerializer', $mockCommentSerializer ],
             ]));
 
+        $mockSwagger = $this->createMock(ParsedSwaggerInterface::class);
+        $mockSwagger->expects($this->once())
+            ->method('getParams')
+            ->willReturn([
+                'comment_id' => [
+                    'value' => 1234,
+                ],
+            ]);
+
         $mockRequest = $this->createMock(Request::class);
         $mockRequest->method('getAttribute')
             ->with('swagger')
-            ->willReturn([
-                'params' => [
-                    'comment_id' => [
-                        'value' => 1234,
-                    ]
-                ]
-            ]);
+            ->willReturn($mockSwagger);
 
         $mockStream = $this->createMock(Stream::class);
         $mockStream->expects($this->once())
@@ -2442,16 +2503,19 @@ class CommentTest extends PHPUnit_Framework_TestCase
                 [ 'commentSerializer', $mockCommentSerializer ],
             ]));
 
+        $mockSwagger = $this->createMock(ParsedSwaggerInterface::class);
+        $mockSwagger->expects($this->once())
+            ->method('getParams')
+            ->willReturn([
+                'comment_id' => [
+                    'value' => 1234,
+                ],
+            ]);
+
         $mockRequest = $this->createMock(Request::class);
         $mockRequest->method('getAttribute')
             ->with('swagger')
-            ->willReturn([
-                'params' => [
-                    'comment_id' => [
-                        'value' => 1234,
-                    ]
-                ]
-            ]);
+            ->willReturn($mockSwagger);
 
         $mockResponse = $this->createMock(Response::class);
         $mockResponse->method('getBody')
