@@ -280,16 +280,16 @@
         },
         {
             "name": "avalanche-development/swagger-validation-middleware",
-            "version": "0.2.1",
+            "version": "0.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/avalanche-development/swagger-validation-middleware.git",
-                "reference": "b6b6e276e234a595b379ea0999167b202924a138"
+                "reference": "e9d86ec48179dfc311aed0a27ee60f87484f1ec5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/avalanche-development/swagger-validation-middleware/zipball/b6b6e276e234a595b379ea0999167b202924a138",
-                "reference": "b6b6e276e234a595b379ea0999167b202924a138",
+                "url": "https://api.github.com/repos/avalanche-development/swagger-validation-middleware/zipball/e9d86ec48179dfc311aed0a27ee60f87484f1ec5",
+                "reference": "e9d86ec48179dfc311aed0a27ee60f87484f1ec5",
                 "shasum": ""
             },
             "require": {
@@ -319,20 +319,20 @@
                     "email": "jpemeric@gmail.com"
                 }
             ],
-            "time": "2017-01-29 19:49:27"
+            "time": "2017-02-05 19:25:18"
         },
         {
             "name": "avalanche-development/talus",
-            "version": "1.7.1",
+            "version": "1.7.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/avalanche-development/talus.git",
-                "reference": "2d2fd46c0f192d9bb08f7d640ab9b85082cc4207"
+                "reference": "ce72ed4f1e8d0a40e3ae5fb6d55c70a08479381b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/avalanche-development/talus/zipball/2d2fd46c0f192d9bb08f7d640ab9b85082cc4207",
-                "reference": "2d2fd46c0f192d9bb08f7d640ab9b85082cc4207",
+                "url": "https://api.github.com/repos/avalanche-development/talus/zipball/ce72ed4f1e8d0a40e3ae5fb6d55c70a08479381b",
+                "reference": "ce72ed4f1e8d0a40e3ae5fb6d55c70a08479381b",
                 "shasum": ""
             },
             "require": {
@@ -368,7 +368,7 @@
                 }
             ],
             "description": "Microframework with Swagger routing",
-            "time": "2017-01-30 11:45:48"
+            "time": "2017-02-05 19:29:47"
         },
         {
             "name": "container-interop/container-interop",
