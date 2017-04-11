@@ -5,7 +5,7 @@ install:
 - composer self-update
 - composer install --dev --no-interaction
 script:
-- phpunit --testsuite unit --tap --coverage-clover build/logs/clover.xml
+- phpunit --testsuite unit --coverage-clover build/logs/clover.xml
 - bash bin/codeclimate.sh
 after_success:
 - bash bin/deploy.sh
