@@ -35,17 +35,17 @@ class Comment
         $commenter = $this->container
             ->get('commenterModel')
             ->findByFields(
-                $body->commenter->name,
-                $body->commenter->email,
-                $body->commenter->website
+                $body['commenter']['name'],
+                $body['commenter']['email'],
+                $body['commenter']['website']
             );
         if (!$commenter) {
             $commenterId = $this->container
                 ->get('commenterModel')
                 ->create(
-                    $body->commenter->name,
-                    $body->commenter->email,
-                    $body->commenter->website
+                    $body['commenter']['name'],
+                    $body['commenter']['email'],
+                    $body['commenter']['website']
                 );
             $commenter = $this->container
                 ->get('commenterModel')
@@ -54,33 +54,33 @@ class Comment
 
         $bodyId = $this->container
             ->get('commentBodyModel')
-            ->create($body->body);
+            ->create($body['body']);
 
         $domainId = $this->container
             ->get('commentDomainModel')
-            ->findByFields($body->domain);
+            ->findByFields($body['domain']);
         if (!$domainId) {
             $domainId = $this->container
                 ->get('commentDomainModel')
-                ->create($body->domain);
+                ->create($body['domain']);
         }
 
         $pathId = $this->container
             ->get('commentPathModel')
-            ->findByFields($body->path);
+            ->findByFields($body['path']);
         if (!$pathId) {
             $pathId = $this->container
                 ->get('commentPathModel')
-                ->create($body->path);
+                ->create($body['path']);
         }
 
         $threadId = $this->container
             ->get('commentThreadModel')
-            ->findByFields($body->thread);
+            ->findByFields($body['thread']);
         if (!$threadId) {
             $threadId = $this->container
                 ->get('commentThreadModel')
-                ->create($body->thread);
+                ->create($body['thread']);
         }
 
         $locationId = $this->container
@@ -103,27 +103,27 @@ class Comment
         $commentRequestId = $this->container
             ->get('commentRequestModel')
             ->findByFields(
-                $body->ip_address,
-                $body->user_agent,
-                $body->referrer
+                $body['ip_address'],
+                $body['user_agent'],
+                $body['referrer']
             );
         if (!$commentRequestId) {
             $commentRequestId = $this->container
                 ->get('commentRequestModel')
                 ->create(
-                    $body->ip_address,
-                    $body->user_agent,
-                    $body->referrer
+                    $body['ip_address'],
+                    $body['user_agent'],
+                    $body['referrer']
                 );
         }
 
         $shouldDisplay = $commenter['is_trusted'];
         if (array_key_exists('should_display', $body)) {
-            $shouldDisplay = (int) $body->should_display;
+            $shouldDisplay = (int) $body['should_display'];
         }
         $replyTo = 0;
         if (array_key_exists('reply_to', $body)) {
-            $replyTo = (int) $body->reply_to;
+            $replyTo = (int) $body['reply_to'];
         }
 
         $dateTime = $this->container
@@ -137,8 +137,8 @@ class Comment
                 $locationId,
                 $replyTo,
                 $commentRequestId,
-                $body->url,
-                (int) $body->should_notify,
+                $body['url'],
+                (int) $body['should_notify'],
                 $shouldDisplay,
                 $dateTime
             );

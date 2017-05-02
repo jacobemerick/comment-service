@@ -13,7 +13,7 @@
         "aura/di": "^3.1",
         "aura/sql": "^2.5",
         "avalanche-development/peel": "^0.3",
-        "avalanche-development/swagger-router-middleware": "^1.0",
+        "avalanche-development/swagger-router-middleware": "^1.2",
         "avalanche-development/talus": "^1.7",
         "container-interop/container-interop": "^1.1",
         "jacobemerick/archangel": "^2.1",
