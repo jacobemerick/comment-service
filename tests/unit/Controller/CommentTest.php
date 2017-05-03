@@ -42,8 +42,8 @@ class CommentTest extends PHPUnit_Framework_TestCase
 
     public function testCreateCommentSendsCommenterData()
     {
-        $body = (object) [
-            'commenter' => (object) [
+        $body = [
+            'commenter' => [
                 'name' => 'Jack Black',
                 'email' => 'jack@black.tld',
                 'website' => 'black.tld',
@@ -65,9 +65,9 @@ class CommentTest extends PHPUnit_Framework_TestCase
         $mockCommenterModel->expects($this->once())
             ->method('findByFields')
             ->with(
-                $this->equalTo($body->commenter->name),
-                $this->equalTo($body->commenter->email),
-                $this->equalTo($body->commenter->website)
+                $this->equalTo($body['commenter']['name']),
+                $this->equalTo($body['commenter']['email']),
+                $this->equalTo($body['commenter']['website'])
             )
             ->willReturn([
                 'id' => $commenterId,
@@ -133,8 +133,8 @@ class CommentTest extends PHPUnit_Framework_TestCase
 
     public function testCreateCommentCreatesCommenterIfNotFound()
     {
-        $body = (object) [
-            'commenter' => (object) [
+        $body = [
+            'commenter' => [
                 'name' => 'Jack Black',
                 'email' => 'jack@black.tld',
                 'website' => 'black.tld',
@@ -158,9 +158,9 @@ class CommentTest extends PHPUnit_Framework_TestCase
         $mockCommenterModel->expects($this->once())
             ->method('create')
             ->with(
-                $this->equalTo($body->commenter->name),
-                $this->equalTo($body->commenter->email),
-                $this->equalTo($body->commenter->website)
+                $this->equalTo($body['commenter']['name']),
+                $this->equalTo($body['commenter']['email']),
+                $this->equalTo($body['commenter']['website'])
             );
         $mockCommenterModel->method('findById')
             ->willReturn([
@@ -224,8 +224,8 @@ class CommentTest extends PHPUnit_Framework_TestCase
 
     public function testCreateCommentPullsNewlyCreatedCommenter()
     {
-        $body = (object) [
-            'commenter' => (object) [
+        $body = [
+            'commenter' => [
                 'name' => 'Jack Black',
                 'email' => 'jack@black.tld',
                 'website' => 'black.tld',
@@ -314,8 +314,8 @@ class CommentTest extends PHPUnit_Framework_TestCase
 
     public function testCreateCommentSendsBodyData()
     {
-        $body = (object) [
-            'commenter' => (object) [
+        $body = [
+            'commenter' => [
                 'name' => 'Jack Black',
                 'email' => 'jack@black.tld',
                 'website' => 'black.tld',
@@ -344,7 +344,7 @@ class CommentTest extends PHPUnit_Framework_TestCase
         $mockCommentBodyModel->expects($this->once())
             ->method('create')
             ->with(
-                $this->equalTo($body->body)
+                $this->equalTo($body['body'])
             )
             ->willReturn($bodyId);
 
@@ -404,8 +404,8 @@ class CommentTest extends PHPUnit_Framework_TestCase
 
     public function testCreateCommentSendsDomainData()
     {
-        $body = (object) [
-            'commenter' => (object) [
+        $body = [
+            'commenter' => [
                 'name' => 'Jack Black',
                 'email' => 'jack@black.tld',
                 'website' => 'black.tld',
@@ -436,7 +436,7 @@ class CommentTest extends PHPUnit_Framework_TestCase
         $mockCommentDomainModel->expects($this->once())
             ->method('findByFields')
             ->with(
-                $this->equalTo($body->domain)
+                $this->equalTo($body['domain'])
             )
             ->willReturn($domainId);
         $mockCommentDomainModel->expects($this->never())
@@ -497,8 +497,8 @@ class CommentTest extends PHPUnit_Framework_TestCase
 
     public function testCreateCommentCreatesDomainIfNotFound()
     {
-        $body = (object) [
-            'commenter' => (object) [
+        $body = [
+            'commenter' => [
                 'name' => 'Jack Black',
                 'email' => 'jack@black.tld',
                 'website' => 'black.tld',
@@ -531,7 +531,7 @@ class CommentTest extends PHPUnit_Framework_TestCase
         $mockCommentDomainModel->expects($this->once())
             ->method('create')
             ->with(
-                $this->equalTo($body->domain)
+                $this->equalTo($body['domain'])
             )
             ->willReturn($domainId);
 
@@ -590,8 +590,8 @@ class CommentTest extends PHPUnit_Framework_TestCase
 
     public function testCreateCommentSendsPathData()
     {
-        $body = (object) [
-            'commenter' => (object) [
+        $body = [
+            'commenter' => [
                 'name' => 'Jack Black',
                 'email' => 'jack@black.tld',
                 'website' => 'black.tld',
@@ -630,7 +630,7 @@ class CommentTest extends PHPUnit_Framework_TestCase
         $mockCommentPathModel->expects($this->once())
             ->method('findByFields')
             ->with(
-                $this->equalTo($body->path)
+                $this->equalTo($body['path'])
             )
             ->willReturn($pathId);
         $mockCommentPathModel->expects($this->never())
@@ -684,8 +684,8 @@ class CommentTest extends PHPUnit_Framework_TestCase
 
     public function testCreateCommentCreatesPathIfNotFound()
     {
-        $body = (object) [
-            'commenter' => (object) [
+        $body = [
+            'commenter' => [
                 'name' => 'Jack Black',
                 'email' => 'jack@black.tld',
                 'website' => 'black.tld',
@@ -726,7 +726,7 @@ class CommentTest extends PHPUnit_Framework_TestCase
         $mockCommentPathModel->expects($this->once())
             ->method('create')
             ->with(
-                $this->equalTo($body->path)
+                $this->equalTo($body['path'])
             )
             ->willReturn($pathId);
 
@@ -778,8 +778,8 @@ class CommentTest extends PHPUnit_Framework_TestCase
 
     public function testCreateCommentSendsThreadData()
     {
-        $body = (object) [
-            'commenter' => (object) [
+        $body = [
+            'commenter' => [
                 'name' => 'Jack Black',
                 'email' => 'jack@black.tld',
                 'website' => 'black.tld',
@@ -822,7 +822,7 @@ class CommentTest extends PHPUnit_Framework_TestCase
         $mockCommentThreadModel->expects($this->once())
             ->method('findByFields')
             ->with(
-                $this->equalTo($body->thread)
+                $this->equalTo($body['thread'])
             )
             ->willReturn($threadId);
         $mockCommentThreadModel->expects($this->never())
@@ -873,8 +873,8 @@ class CommentTest extends PHPUnit_Framework_TestCase
 
     public function testCreateCommentCreatesThreadIfNotFound()
     {
-        $body = (object) [
-            'commenter' => (object) [
+        $body = [
+            'commenter' => [
                 'name' => 'Jack Black',
                 'email' => 'jack@black.tld',
                 'website' => 'black.tld',
@@ -919,7 +919,7 @@ class CommentTest extends PHPUnit_Framework_TestCase
         $mockCommentThreadModel->expects($this->once())
             ->method('create')
             ->with(
-                $this->equalTo($body->thread)
+                $this->equalTo($body['thread'])
             )
             ->willReturn($threadId);
 
@@ -968,8 +968,8 @@ class CommentTest extends PHPUnit_Framework_TestCase
 
     public function testCreateCommentSendsLocationData()
     {
-        $body = (object) [
-            'commenter' => (object) [
+        $body = [
+            'commenter' => [
                 'name' => 'Jack Black',
                 'email' => 'jack@black.tld',
                 'website' => 'black.tld',
@@ -1076,8 +1076,8 @@ class CommentTest extends PHPUnit_Framework_TestCase
 
     public function testCreateCommentCreatesLocationIfNotFound()
     {
-        $body = (object) [
-            'commenter' => (object) [
+        $body = [
+            'commenter' => [
                 'name' => 'Jack Black',
                 'email' => 'jack@black.tld',
                 'website' => 'black.tld',
@@ -1184,8 +1184,8 @@ class CommentTest extends PHPUnit_Framework_TestCase
 
     public function testCreateCommentSendsRequestData()
     {
-        $body = (object) [
-            'commenter' => (object) [
+        $body = [
+            'commenter' => [
                 'name' => 'Jack Black',
                 'email' => 'jack@black.tld',
                 'website' => 'black.tld',
@@ -1219,9 +1219,9 @@ class CommentTest extends PHPUnit_Framework_TestCase
         $mockCommentRequestModel->expects($this->once())
             ->method('findByFields')
             ->with(
-                $this->equalTo($body->ip_address),
-                $this->equalTo($body->user_agent),
-                $this->equalTo($body->referrer)
+                $this->equalTo($body['ip_address']),
+                $this->equalTo($body['user_agent']),
+                $this->equalTo($body['referrer'])
             )
             ->willReturn($requestId);
         $mockCommentRequestModel->expects($this->never())
@@ -1282,8 +1282,8 @@ class CommentTest extends PHPUnit_Framework_TestCase
 
     public function testCreateCommentCreatesRequestIfNotFound()
     {
-        $body = (object) [
-            'commenter' => (object) [
+        $body = [
+            'commenter' => [
                 'name' => 'Jack Black',
                 'email' => 'jack@black.tld',
                 'website' => 'black.tld',
@@ -1319,9 +1319,9 @@ class CommentTest extends PHPUnit_Framework_TestCase
         $mockCommentRequestModel->expects($this->once())
             ->method('create')
             ->with(
-                $this->equalTo($body->ip_address),
-                $this->equalTo($body->user_agent),
-                $this->equalTo($body->referrer)
+                $this->equalTo($body['ip_address']),
+                $this->equalTo($body['user_agent']),
+                $this->equalTo($body['referrer'])
             )
             ->willReturn($requestId);
 
@@ -1380,8 +1380,8 @@ class CommentTest extends PHPUnit_Framework_TestCase
 
     public function testCreateCommentUsesCommenterTrustToDetermineDisplay()
     {
-        $body = (object) [
-            'commenter' => (object) [
+        $body = [
+            'commenter' => [
                 'name' => 'Jack Black',
                 'email' => 'jack@black.tld',
                 'website' => 'black.tld',
@@ -1469,8 +1469,8 @@ class CommentTest extends PHPUnit_Framework_TestCase
 
     public function testCreateCommentOverridesDisplayWithInput()
     {
-        $body = (object) [
-            'commenter' => (object) [
+        $body = [
+            'commenter' => [
                 'name' => 'Jack Black',
                 'email' => 'jack@black.tld',
                 'website' => 'black.tld',
@@ -1511,7 +1511,7 @@ class CommentTest extends PHPUnit_Framework_TestCase
                 $this->anything(),
                 $this->anything(),
                 $this->anything(),
-                $this->equalTo((int) $body->should_display)
+                $this->equalTo((int) $body['should_display'])
             );
         $mockCommentModel->method('findById')
             ->willReturn([]);
@@ -1557,8 +1557,8 @@ class CommentTest extends PHPUnit_Framework_TestCase
 
     public function testCreateCommentDefaultsReplyTo()
     {
-        $body = (object) [
-            'commenter' => (object) [
+        $body = [
+            'commenter' => [
                 'name' => 'Jack Black',
                 'email' => 'jack@black.tld',
                 'website' => 'black.tld',
@@ -1640,8 +1640,8 @@ class CommentTest extends PHPUnit_Framework_TestCase
 
     public function testCreateCommentOverridesReplyToWithInput()
     {
-        $body = (object) [
-            'commenter' => (object) [
+        $body = [
+            'commenter' => [
                 'name' => 'Jack Black',
                 'email' => 'jack@black.tld',
                 'website' => 'black.tld',
@@ -1678,7 +1678,7 @@ class CommentTest extends PHPUnit_Framework_TestCase
                 $this->anything(),
                 $this->anything(),
                 $this->anything(),
-                $this->equalTo($body->reply_to)
+                $this->equalTo($body['reply_to'])
             );
         $mockCommentModel->method('findById')
             ->willReturn([]);
@@ -1724,8 +1724,8 @@ class CommentTest extends PHPUnit_Framework_TestCase
 
     public function testCreateCommentCreatesComment()
     {
-        $body = (object) [
-            'commenter' => (object) [
+        $body = [
+            'commenter' => [
                 'name' => 'Jack Black',
                 'email' => 'jack@black.tld',
                 'website' => 'black.tld',
@@ -1783,8 +1783,8 @@ class CommentTest extends PHPUnit_Framework_TestCase
                 $this->equalTo($locationId),
                 $this->equalTo(0),
                 $this->equalTo($requestId),
-                $this->equalTo($body->url),
-                $this->equalTo((int) $body->should_notify),
+                $this->equalTo($body['url']),
+                $this->equalTo((int) $body['should_notify']),
                 $this->equalTo(0),
                 $this->equalTo($mockDateTime)
             )
@@ -1835,8 +1835,8 @@ class CommentTest extends PHPUnit_Framework_TestCase
 
     public function testCreateCommentSendsNotificationsIfDisplayable()
     {
-        $body = (object) [
-            'commenter' => (object) [
+        $body = [
+            'commenter' => [
                 'name' => 'Jack Black',
                 'email' => 'jack@black.tld',
                 'website' => 'black.tld',
@@ -1937,8 +1937,8 @@ class CommentTest extends PHPUnit_Framework_TestCase
 
     public function testCreateCommentDoesNotSendNotificationIfNotDisplayable()
     {
-        $body = (object) [
-            'commenter' => (object) [
+        $body = [
+            'commenter' => [
                 'name' => 'Jack Black',
                 'email' => 'jack@black.tld',
                 'website' => 'black.tld',
@@ -2018,8 +2018,8 @@ class CommentTest extends PHPUnit_Framework_TestCase
 
     public function testCreateCommentPassesResultToSerializer()
     {
-        $body = (object) [
-            'commenter' => (object) [
+        $body = [
+            'commenter' => [
                 'name' => 'Jack Black',
                 'email' => 'jack@black.tld',
                 'website' => 'black.tld',
@@ -2113,8 +2113,8 @@ class CommentTest extends PHPUnit_Framework_TestCase
 
     public function testCreateCommentWritesToResponse()
     {
-        $body = (object) [
-            'commenter' => (object) [
+        $body = [
+            'commenter' => [
                 'name' => 'Jack Black',
                 'email' => 'jack@black.tld',
                 'website' => 'black.tld',
@@ -2214,8 +2214,8 @@ class CommentTest extends PHPUnit_Framework_TestCase
 
     public function testCreateCommentReturnsResponse()
     {
-        $body = (object) [
-            'commenter' => (object) [
+        $body = [
+            'commenter' => [
                 'name' => 'Jack Black',
                 'email' => 'jack@black.tld',
                 'website' => 'black.tld',
